@@ -1,0 +1,191 @@
+{
+    "add_hover_pressed": false,
+    "add_is_visible": true,
+    "autobinding_value": "text",
+    "can_fit_height": true,
+    "can_fit_width": true,
+    "category": "visual elements",
+    "default_dim": {
+        "height": 40,
+        "width": 40
+    },
+    "display": "tiptap",
+    "fields": {
+        "AAK": {
+            "caption": "Content",
+            "doc": "Content in HTML format",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "content",
+            "rank": 0,
+            "value": "text"
+        }
+    },
+    "icon": "ion-chatbox-working",
+    "property_applications": {
+        "Background": false,
+        "Border": false,
+        "BoxShadow": false,
+        "Font": false,
+        "MinWidth": true,
+        "Padding": false,
+        "resizable": true
+    },
+    "states": {
+        "AAJ": {
+            "caption": "HTML content",
+            "doc": "Returns the current editor document as HTML",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "contentHTML",
+            "value": "text"
+        },
+        "AAS": {
+            "caption": "bold",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "bold",
+            "value": "boolean"
+        },
+        "AAk": {
+            "caption": "italic",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "italic",
+            "value": "boolean"
+        },
+        "AAl": {
+            "caption": "strike",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "strike",
+            "value": "boolean"
+        },
+        "AAn": {
+            "caption": "h1",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "h1",
+            "value": "boolean"
+        },
+        "AAq": {
+            "caption": "h2",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "h2",
+            "value": "boolean"
+        },
+        "AAr": {
+            "caption": "h3",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "h3",
+            "value": "boolean"
+        },
+        "AAs": {
+            "caption": "h4",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "h4",
+            "value": "boolean"
+        },
+        "AAt": {
+            "caption": "h5",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "h5",
+            "value": "boolean"
+        },
+        "AAu": {
+            "caption": "h6",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "h6",
+            "value": "boolean"
+        },
+        "ABB": {
+            "caption": "bullet list",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "bulletList",
+            "value": "boolean"
+        },
+        "ABD": {
+            "caption": "orderedList",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "orderedList",
+            "value": "boolean"
+        },
+        "ABF": {
+            "caption": "sinkListItem",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "sinkListItem",
+            "value": "boolean"
+        },
+        "ABJ": {
+            "caption": "liftlistitem",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "liftListItem",
+            "value": "boolean"
+        },
+        "ABL": {
+            "caption": "blockQuote",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "blockquote",
+            "value": "boolean"
+        },
+        "ABM": {
+            "caption": "codeBlock",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "codeBlock",
+            "value": "boolean"
+        },
+        "ABP": {
+            "caption": "Content Text",
+            "doc": "Content in plain text",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "contentText",
+            "value": "text"
+        },
+        "ABQ": {
+            "caption": "taskList",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "taskList",
+            "value": "boolean"
+        },
+        "ABR": {
+            "caption": "taskItem",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "taskItem",
+            "value": "boolean"
+        }
+    },
+    "support_autobinding": true
+}

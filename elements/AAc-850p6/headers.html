@@ -1,0 +1,23 @@
+<script type="module">
+
+import { Editor } from "https://esm.sh/@tiptap/core";
+import StarterKit from "https://esm.sh/@tiptap/starter-kit";
+import { WebrtcProvider } from "https://esm.sh/y-webrtc";
+import * as Y from "https://esm.sh/yjs@13.5.42";
+import Collaboration from "https://esm.sh/@tiptap/extension-collaboration";
+import CollaborationCursor from 'https://esm.sh/@tiptap/extension-collaboration-cursor';
+    
+window.tiptapEditor = Editor;
+window.tiptapStarterKit = StarterKit;
+window.tiptapCollaboration = Collaboration;
+window.yjsY = Y;
+window.webrtc = WebrtcProvider;
+window.tiptapCollaborationCursor = CollaborationCursor;
+
+</script>
+<link rel=stylesheet href="https://prosemirror.net/css/editor.css">
+<style>
+    .menu-item:is-active {
+        background-color: red;
+    }
+</style>

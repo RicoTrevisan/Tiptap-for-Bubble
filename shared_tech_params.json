@@ -1,0 +1,6 @@
+{
+    "dependencies": {
+        "plugin_api_version": 3,
+        "use_jquery": true
+    }
+}

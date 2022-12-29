@@ -1,0 +1,93 @@
+{
+    "add_hover_pressed": false,
+    "add_is_visible": true,
+    "autobinding_value": "text",
+    "can_fit_height": true,
+    "can_fit_width": true,
+    "category": "visual elements",
+    "default_dim": {
+        "height": 40,
+        "width": 40
+    },
+    "display": "tiptap collab",
+    "events": {
+        "AAT": {
+            "caption": "ydoc updated",
+            "name": "ydoc_updated"
+        }
+    },
+    "fields": {
+        "AAU": {
+            "caption": "Content",
+            "doc": "Content in HTML format",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "content",
+            "rank": 0,
+            "value": "text"
+        },
+        "AAV": {
+            "caption": "id",
+            "doc": "The document's unique ID.",
+            "editor": "DynamicValue",
+            "name": "id",
+            "rank": 1,
+            "value": "text"
+        },
+        "AAW": {
+            "caption": "ydoc",
+            "editor": "DynamicValue",
+            "name": "ydoc",
+            "rank": 2,
+            "value": "text"
+        }
+    },
+    "icon": "ion-chatbox-working",
+    "property_applications": {
+        "Background": true,
+        "Border": true,
+        "BoxShadow": true,
+        "Font": true,
+        "MinWidth": true,
+        "Padding": true,
+        "resizable": true
+    },
+    "states": {
+        "AAX": {
+            "caption": "HTML content",
+            "doc": "Returns the current editor document as HTML",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "contentHTML",
+            "value": "text"
+        },
+        "AAY": {
+            "caption": "JSON content",
+            "doc": "Returns the current editor document as JSON",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "contentJSON",
+            "value": "text"
+        },
+        "AAZ": {
+            "caption": "Text content",
+            "doc": "Returns the current editor document as plain text.",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "contentText",
+            "value": "text"
+        },
+        "AAd": {
+            "caption": "ydoc",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "ydoc",
+            "value": "text"
+        }
+    },
+    "support_autobinding": true
+}
