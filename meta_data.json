@@ -1,7 +1,8 @@
 {
     "categories": {
         "0": "blog",
-        "1": "productivity"
+        "1": "productivity",
+        "2": "email"
     },
     "description": "TipTap is a headless editor. Tiptap gives you full control about every single aspect of your text editor experience. It’s customizable, comes with a ton of extensions, is open source and has an extensive documentation. Join our welcoming community and start building cool things!",
     "image": "//s3.amazonaws.com/appforest_uf/f1671049405494x906508617350303200/tiptap%20logo%20400x400.jpg",

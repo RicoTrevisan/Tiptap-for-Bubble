@@ -1,39 +1,59 @@
 function(instance, context) {
   
-
-    const randomId = (Math.random() + 1).toString(36).substring(3);
-    instance.data.randomId = randomId;    
+    instance.data.isEditorSetup = false;
+    instance.publishState('contentHTML', null);
     
-	instance.canvas.append(`<div id="tiptapEditor-` + randomId + `"></div>`);
-
-//    instance.data.tiptapEditor = document.getElementById('#tiptapEditor-' + randomId);
+    // create the editor div
+	const randomId = (Math.random() + 1).toString(36).substring(3);
+	var d = document.createElement("div");
+    d.id = 'tiptapEditor-' + randomId;
+    instance.canvas.append(d)
 
     
     const Editor = window.tiptapEditor;
     const StarterKit = window.tiptapStarterKit;
-//    const TaskList = window.tiptapTaskList;
-//    const TaskItem	= window.tiptapTaskItem;
+    const TaskList = window.tiptapTaskList;
+    const TaskItem	= window.tiptapTaskItem;
 
 	instance.data.editor = new Editor({      
-      element: document.querySelector('#tiptapEditor-' + randomId + ''),
+      element: d,
       extensions: [      
           StarterKit,
-//          TaskList,
-//          TaskItem.configure({
-//	        nested: true,
-//    	  }),
+          TaskList,
+          TaskItem.configure({
+	        nested: true,
+    	  }),
       ],
         editorProps: {
             attributes: {
-//                class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl m-5 focus:outline-none',
-                class: 'prose prose-sm sm:prose focus:outline-none',                
+                class: 'prose prose-sm sm:prose focus:outline-none',
+                style: 'font-family: var(--font_default)'
             },
         },
+		onBeforeCreate({ editor }) {
+    		// Before the view is created.
+            console.log("onBeforeCreate");
+		},
+		onCreate({ editor }) {
+			// The editor is ready.
+            console.log("onCreate");
+            
+		},
       onUpdate: ({ editor }) => {
     	instance.publishState('contentHTML', instance.data.editor.getHTML());
         instance.publishState('contentText', instance.data.editor.getText());
-        instance.publishAutobinding(instance.data.editor.getHTML());
+//        instance.publishAutobinding(instance.data.editor.getHTML());
+
       },
+	  onFocus({ editor, event }) {
+          instance.triggerEvent('isFocused');
+          instance.publishState('focus', true);
+  	  },
+  	  onBlur({ editor, event }) {
+          instance.triggerEvent('isntFocused');
+          instance.publishState('focus', false);
+          
+  	  },
       onTransaction({ editor, transaction }) {
 		instance.publishState('bold', editor.isActive('bold'));
         instance.publishState('italic', editor.isActive('italic'));
@@ -50,15 +70,19 @@ function(instance, context) {
 		instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
 		instance.publishState('blockquote', editor.isActive('blockquote'));
         instance.publishState('codeBlock', editor.isActive('codeBlock'));
-//        instance.publishState('taskList', editor.isActive('taskList'));
-//        instance.publishState('taskItem', editor.isActive('taskItem'));          
-
+        instance.publishState('taskList', editor.isActive('taskList'));
+        instance.publishState('taskItem', editor.isActive('taskItem'));
       },
+        onDestroy() {
+			instance.triggerEvent('onDestroy');
+            console.log("onDestroy");
+        },
+
     });
     
     
 	// put the editor on the window. to make it easier to troubleshoot.    
-    window.editor = instance.data.editor;
+    // window.editor = instance.data.editor;
 
 
 }

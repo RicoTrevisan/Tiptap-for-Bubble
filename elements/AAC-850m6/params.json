@@ -1,15 +1,29 @@
 {
-    "add_hover_pressed": false,
+    "add_hover_pressed": true,
     "add_is_visible": true,
     "autobinding_value": "text",
     "can_fit_height": true,
     "can_fit_width": true,
     "category": "visual elements",
     "default_dim": {
-        "height": 40,
-        "width": 40
+        "height": 100,
+        "width": 600
     },
     "display": "tiptap",
+    "events": {
+        "ABl": {
+            "caption": "is focused",
+            "name": "isFocused"
+        },
+        "ABm": {
+            "caption": "isn't focused",
+            "name": "isntFocused"
+        },
+        "ABo": {
+            "caption": "onDestroy",
+            "name": "onDestroy"
+        }
+    },
     "fields": {
         "AAK": {
             "caption": "Content",
@@ -21,14 +35,15 @@
             "value": "text"
         }
     },
+    "has_reset_fn": true,
     "icon": "ion-chatbox-working",
     "property_applications": {
-        "Background": false,
-        "Border": false,
+        "Background": true,
+        "Border": true,
         "BoxShadow": false,
         "Font": false,
         "MinWidth": true,
-        "Padding": false,
+        "Padding": true,
         "resizable": true
     },
     "states": {
@@ -42,7 +57,7 @@
             "value": "text"
         },
         "AAS": {
-            "caption": "bold",
+            "caption": "text is bold",
             "initialization_code": {
                 "fn": "function(properties, context) {\n\n\n\n}"
             },
@@ -185,7 +200,15 @@
             },
             "name": "taskItem",
             "value": "boolean"
+        },
+        "ABn": {
+            "caption": "focus",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "focus",
+            "value": "boolean"
         }
     },
-    "support_autobinding": true
+    "support_autobinding": false
 }

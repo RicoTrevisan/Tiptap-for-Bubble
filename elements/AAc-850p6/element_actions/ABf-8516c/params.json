@@ -1,0 +1,12 @@
+{
+    "caption": "load_ydoc",
+    "fields": {
+        "ABg": {
+            "caption": "ydoc string",
+            "editor": "DynamicValue",
+            "name": "ydoc_string",
+            "rank": 0,
+            "value": "text"
+        }
+    }
+}

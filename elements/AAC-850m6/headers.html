@@ -2,18 +2,60 @@
 
 import { Editor } from "https://esm.sh/@tiptap/core@2.0.0-beta.209";
 import StarterKit from "https://esm.sh/@tiptap/starter-kit@2.0.0-beta.209";
-// import TaskList from "https://esm.sh/@tiptap/extension-task-list@2.0.0-beta.209";
-// import TaskItem from "https://esm.sh/@tiptap/extension-task-item@2.0.0-beta.209";
+import TaskList from "https://esm.sh/@tiptap/extension-task-list@2.0.0-beta.209";
+import TaskItem from "https://esm.sh/@tiptap/extension-task-item@2.0.0-beta.209";
     
 window.tiptapEditor = Editor;
 window.tiptapStarterKit = StarterKit;
-// window.tiptapTaskList = TaskList;
-// window.tiptapTaskItem = TaskItem;
+window.tiptapTaskList = TaskList;
+window.tiptapTaskItem = TaskItem;
 
 </script>
-
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography/dist/typography.min.css" />
-<!--
-<link rel=stylesheet href="https://prosemirror.net/css/editor.css"> 
--->
+<!-- <link rel=stylesheet href="https://prosemirror.net/css/editor.css"> -->
+<style>
+    <!-- fix for checkbox -->
+ul[data-type="taskList"] {
+  list-style: none;
+  padding: 0;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+ul[data-type="taskList"]>p {
+    margin: 0;
+  }
+
+ul[data-type="taskList"]>li {
+    display: flex;
+    padding-left: 0 !important;
+  margin-bottom: 0;
+  }
+
+ul[data-type="taskList"]>li::before {
+   background-color: red !important;
+  height: unset !important;
+width: unset !important;
+  top: unset !important;
+  left: unset !important;
+  }
+
+ul[data-type="taskList"]>li>label {
+      flex: 0 0 auto;
+      margin-right: 0.5rem;
+      margin-top: 0 !important;
+      user-select: none;
+    }
+
+ul[data-type="taskList"]>li>div {
+      flex: 1 1 auto;
+      margin-bottom: 0 !important;
+    }
+
+ul[data-type="taskList"]>li>div>p {
+      margin-top: 0;
+      margin-bottom: 0 !important;
+    }
+
+</style>
