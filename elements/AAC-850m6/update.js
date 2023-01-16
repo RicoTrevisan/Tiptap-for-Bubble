@@ -1,22 +1,6 @@
 function(instance, properties, context) {
 
-    // load the content
-    let content = properties.content;
-
+if(!instance.data.isEditorSetup){let t=properties.initialContent;if(properties.bubble.auto_binding()){properties.autobinding}let e=properties.placeholder;properties.bubbleMenu,properties.floatingMenu;const i=(Math.random()+1).toString(36).substring(3);var d=document.createElement("div");d.id="tiptapEditor-"+i,instance.canvas.append(d);const n=window.tiptapEditor,a=window.tiptapStarterKit,s=window.tiptapTaskList,o=window.tiptapTaskItem,c=window.tiptapPlaceholder,r=window.tiptapCharacterCount,l=window.tiptapImage,p=window.tiptapBubbleMenu,u=window.tiptapFloatingMenu,b=window.tiptapLink;let h={element:d,editable:!0,content:t,extensions:[a,s,o.configure({nested:!0}),c.configure({placeholder:e}),r,l.configure({inline:!0,allowBase64:!0,HTMLAttributes:{class:"rounded-xl shadow-lg"}}),b],injectCSS:!0,editorProps:{attributes:{class:"prose max-w-none",style:"font-family: var(--font_default)"}},onBeforeCreate({editor:t}){},onCreate({editor:t}){instance.data.editor_is_ready=!0,instance.triggerEvent("is_ready")},onUpdate:({editor:t})=>{instance.publishState("contentHTML",t.getHTML()),instance.publishState("contentText",t.getText()),instance.publishState("contentJSON",JSON.stringify(t.getJSON())),instance.publishState("isEditable",t.isEditable),instance.publishState("characterCount",t.storage.characterCount.characters()),instance.publishState("wordCount",t.storage.characterCount.words()),instance.triggerEvent("contentUpdated"),properties.bubble.auto_binding()&&instance.data.editor_is_ready&&!instance.data.autobinding_processing&&(instance.data.autobinding_processing=!0,setTimeout((()=>{instance.publishAutobinding(t.getHTML()),instance.data.autobinding_processing=!1}),2e3))},onFocus({editor:t,event:e}){instance.triggerEvent("isFocused"),instance.publishState("isFocused",!0)},onBlur({editor:t,event:e}){instance.triggerEvent("isntFocused"),instance.publishState("isFocused",!1)},onTransaction({editor:t,transaction:e}){instance.publishState("bold",t.isActive("bold")),instance.publishState("italic",t.isActive("italic")),instance.publishState("strike",t.isActive("strike")),instance.publishState("h1",t.isActive("heading",{level:1})),instance.publishState("h2",t.isActive("heading",{level:2})),instance.publishState("h3",t.isActive("heading",{level:3})),instance.publishState("h4",t.isActive("heading",{level:4})),instance.publishState("h5",t.isActive("heading",{level:5})),instance.publishState("h6",t.isActive("heading",{level:6})),instance.publishState("orderedList",t.isActive("orderedList")),instance.publishState("bulletList",t.isActive("bulletList")),instance.publishState("sinkListItem",t.can().sinkListItem("listItem")),instance.publishState("liftListItem",t.can().liftListItem("listItem")),instance.publishState("blockquote",t.isActive("blockquote")),instance.publishState("codeBlock",t.isActive("codeBlock")),instance.publishState("taskList",t.isActive("taskList")),instance.publishState("taskItem",t.isActive("taskItem")),instance.publishState("link",t.isActive("link")),instance.publishState("url",t.getAttributes("link").href)}};if(""!=properties.bubbleMenu){let t=document.querySelector("#"+properties.bubbleMenu);h.extensions.push(p.configure({element:t}))}if(""!=properties.floatingMenu){let t=document.querySelector("#"+properties.floatingMenu);h.extensions.push(u.configure({element:t}))}instance.data.editor=new n(h),window.editor=instance.data.editor,instance.publishState("contentHTML",instance.data.editor.getHTML()),instance.publishState("contentText",instance.data.editor.getText()),instance.publishState("contentJSON",JSON.stringify(instance.data.editor.getJSON())),instance.publishState("isEditable",instance.data.editor.isEditable),instance.publishState("characterCount",instance.data.editor.storage.characterCount.characters()),instance.publishState("wordCount",instance.data.editor.storage.characterCount.words()),instance.data.isEditorSetup=!0}let isEditable=properties.isEditable;if(instance.data.editor_is_ready&&properties.initialContent!=instance.data.initialContent&&!properties.bubble.auto_binding()){let t=properties.initialContent;instance.data.initialContent=t,instance.data.editor.commands.setContent(t,!0)}
     
-	// load content if the editor is empty
-    // and the editor is not focused, meaning, the user has erased the content.
-    if (instance.data.editor.isEmpty && !instance.data.editor.isFocused) {
-        instance.data.editor.commands.setContent(content);
-    }
-    
-    
-
-	    // load once
-    if (!instance.data.isEditorSetup) {
-        
-		instance.data.isEditorSetup = true;
-	}    
-                       
 
 }

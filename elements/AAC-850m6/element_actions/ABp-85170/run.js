@@ -1,13 +1,8 @@
 function(instance, properties, context) {
 
 
-  //Load any data 
-//	instance.data.editor.commands.clearContent(true);
-        instance.data.editor.chain().focus().clearContent().run();
-
-
-  //Do the operation
-
+	instance.data.editor.chain().clearContent(true).run();
+//	instance.data.editor.commands.setContent('<p></p><p></p>');
 
 
 }

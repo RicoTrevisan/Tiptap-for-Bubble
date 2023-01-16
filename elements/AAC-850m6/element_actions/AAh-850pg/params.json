@@ -1,3 +1,4 @@
 {
-    "caption": "bold"
+    "caption": "Bold",
+    "doc": "Applies bold to current selection. Ctrl + B / Opt + B"
 }

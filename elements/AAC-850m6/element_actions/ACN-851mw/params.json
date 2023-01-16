@@ -1,0 +1,13 @@
+{
+    "caption": "Set link",
+    "fields": {
+        "ACO": {
+            "caption": "url",
+            "editor": "DynamicValue",
+            "name": "url",
+            "optional": true,
+            "rank": 0,
+            "value": "text"
+        }
+    }
+}

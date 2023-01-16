@@ -1,0 +1,29 @@
+{
+    "caption": "Insert image",
+    "fields": {
+        "ACE": {
+            "caption": "Image",
+            "doc": "Should be a valid URL. Accepts Base64.",
+            "editor": "DynamicValue",
+            "name": "image",
+            "rank": 0,
+            "value": "image"
+        },
+        "ACF": {
+            "caption": "Alt text",
+            "editor": "DynamicValue",
+            "name": "alt_text",
+            "optional": true,
+            "rank": 2,
+            "value": "text"
+        },
+        "ACG": {
+            "caption": "Title",
+            "editor": "DynamicValue",
+            "name": "title",
+            "optional": true,
+            "rank": 1,
+            "value": "text"
+        }
+    }
+}

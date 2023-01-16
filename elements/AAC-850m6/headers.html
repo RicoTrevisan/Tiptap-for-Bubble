@@ -1,14 +1,27 @@
 <script type="module">
 
+import Image from 'https://esm.sh/@tiptap/extension-image';
+import Link from "https://esm.sh/@tiptap/extension-link";
 import { Editor } from "https://esm.sh/@tiptap/core@2.0.0-beta.209";
 import StarterKit from "https://esm.sh/@tiptap/starter-kit@2.0.0-beta.209";
 import TaskList from "https://esm.sh/@tiptap/extension-task-list@2.0.0-beta.209";
 import TaskItem from "https://esm.sh/@tiptap/extension-task-item@2.0.0-beta.209";
+import Placeholder from "https://esm.sh/@tiptap/extension-placeholder@2.0.0-beta.209";
+import CharacterCount from "https://esm.sh/@tiptap/extension-character-count@2.0.0-beta.209";
+import BubbleMenu from "https://esm.sh/@tiptap/extension-bubble-menu";
+import FloatingMenu from "https://esm.sh/@tiptap/extension-floating-menu";
+
     
 window.tiptapEditor = Editor;
 window.tiptapStarterKit = StarterKit;
 window.tiptapTaskList = TaskList;
 window.tiptapTaskItem = TaskItem;
+window.tiptapPlaceholder = Placeholder;
+window.tiptapCharacterCount = CharacterCount;
+window.tiptapImage = Image;
+window.tiptapBubbleMenu = BubbleMenu;
+window.tiptapLink = Link;
+window.tiptapFloatingMenu = FloatingMenu;
 
 </script>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -23,6 +36,14 @@ ul[data-type="taskList"] {
   margin-bottom: 0 !important;
 }
 
+ul[data-type="taskList"]>li>div>ul[data-type="taskList"] {
+  list-style: none;
+  padding: 0;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+    
+    
 ul[data-type="taskList"]>p {
     margin: 0;
   }
@@ -57,5 +78,20 @@ ul[data-type="taskList"]>li>div>p {
       margin-top: 0;
       margin-bottom: 0 !important;
     }
+    
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
+}
+
+.mention {
+  border: 1px solid #000;
+  border-radius: 0.4rem;
+  padding: 0.1rem 0.3rem;
+  box-decoration-break: clone;
+}
 
 </style>
