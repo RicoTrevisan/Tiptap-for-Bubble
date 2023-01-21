@@ -1,6 +1,179 @@
 function(instance, properties, context) {
 
-if(!instance.data.isEditorSetup){let t=properties.initialContent;if(properties.bubble.auto_binding()){properties.autobinding}let e=properties.placeholder;properties.bubbleMenu,properties.floatingMenu;const i=(Math.random()+1).toString(36).substring(3);var d=document.createElement("div");d.id="tiptapEditor-"+i,instance.canvas.append(d);const n=window.tiptapEditor,a=window.tiptapStarterKit,s=window.tiptapTaskList,o=window.tiptapTaskItem,c=window.tiptapPlaceholder,r=window.tiptapCharacterCount,l=window.tiptapImage,p=window.tiptapBubbleMenu,u=window.tiptapFloatingMenu,b=window.tiptapLink;let h={element:d,editable:!0,content:t,extensions:[a,s,o.configure({nested:!0}),c.configure({placeholder:e}),r,l.configure({inline:!0,allowBase64:!0,HTMLAttributes:{class:"rounded-xl shadow-lg"}}),b],injectCSS:!0,editorProps:{attributes:{class:"prose max-w-none",style:"font-family: var(--font_default)"}},onBeforeCreate({editor:t}){},onCreate({editor:t}){instance.data.editor_is_ready=!0,instance.triggerEvent("is_ready")},onUpdate:({editor:t})=>{instance.publishState("contentHTML",t.getHTML()),instance.publishState("contentText",t.getText()),instance.publishState("contentJSON",JSON.stringify(t.getJSON())),instance.publishState("isEditable",t.isEditable),instance.publishState("characterCount",t.storage.characterCount.characters()),instance.publishState("wordCount",t.storage.characterCount.words()),instance.triggerEvent("contentUpdated"),properties.bubble.auto_binding()&&instance.data.editor_is_ready&&!instance.data.autobinding_processing&&(instance.data.autobinding_processing=!0,setTimeout((()=>{instance.publishAutobinding(t.getHTML()),instance.data.autobinding_processing=!1}),2e3))},onFocus({editor:t,event:e}){instance.triggerEvent("isFocused"),instance.publishState("isFocused",!0)},onBlur({editor:t,event:e}){instance.triggerEvent("isntFocused"),instance.publishState("isFocused",!1)},onTransaction({editor:t,transaction:e}){instance.publishState("bold",t.isActive("bold")),instance.publishState("italic",t.isActive("italic")),instance.publishState("strike",t.isActive("strike")),instance.publishState("h1",t.isActive("heading",{level:1})),instance.publishState("h2",t.isActive("heading",{level:2})),instance.publishState("h3",t.isActive("heading",{level:3})),instance.publishState("h4",t.isActive("heading",{level:4})),instance.publishState("h5",t.isActive("heading",{level:5})),instance.publishState("h6",t.isActive("heading",{level:6})),instance.publishState("orderedList",t.isActive("orderedList")),instance.publishState("bulletList",t.isActive("bulletList")),instance.publishState("sinkListItem",t.can().sinkListItem("listItem")),instance.publishState("liftListItem",t.can().liftListItem("listItem")),instance.publishState("blockquote",t.isActive("blockquote")),instance.publishState("codeBlock",t.isActive("codeBlock")),instance.publishState("taskList",t.isActive("taskList")),instance.publishState("taskItem",t.isActive("taskItem")),instance.publishState("link",t.isActive("link")),instance.publishState("url",t.getAttributes("link").href)}};if(""!=properties.bubbleMenu){let t=document.querySelector("#"+properties.bubbleMenu);h.extensions.push(p.configure({element:t}))}if(""!=properties.floatingMenu){let t=document.querySelector("#"+properties.floatingMenu);h.extensions.push(u.configure({element:t}))}instance.data.editor=new n(h),window.editor=instance.data.editor,instance.publishState("contentHTML",instance.data.editor.getHTML()),instance.publishState("contentText",instance.data.editor.getText()),instance.publishState("contentJSON",JSON.stringify(instance.data.editor.getJSON())),instance.publishState("isEditable",instance.data.editor.isEditable),instance.publishState("characterCount",instance.data.editor.storage.characterCount.characters()),instance.publishState("wordCount",instance.data.editor.storage.characterCount.words()),instance.data.isEditorSetup=!0}let isEditable=properties.isEditable;if(instance.data.editor_is_ready&&properties.initialContent!=instance.data.initialContent&&!properties.bubble.auto_binding()){let t=properties.initialContent;instance.data.initialContent=t,instance.data.editor.commands.setContent(t,!0)}
+
+// load once
+ if (!instance.data.isEditorSetup) {
+    let content = properties.initialContent;
+    if (properties.bubble.auto_binding()) {
+        let content = properties.autobinding;
+    };
+    let placeholder = properties.placeholder;
+	let bubbleMenu = properties.bubbleMenu;
+    let floatingMenu = properties.floatingMenu;
+
+        
+        
+    // create the editor div
+	const randomId = (Math.random() + 1).toString(36).substring(3);
+	var d = document.createElement("div");
+    d.id = 'tiptapEditor-' + randomId;
+    instance.canvas.append(d)
     
+    
+	// pull the libraries that were loaded on Header
+    const Editor = window.tiptapEditor;
+    const StarterKit = window.tiptapStarterKit;
+    const TaskList = window.tiptapTaskList;
+    const TaskItem	= window.tiptapTaskItem;
+	const Placeholder = window.tiptapPlaceholder;
+    const CharacterCount = window.tiptapCharacterCount;
+	const Image = window.tiptapImage;
+    const BubbleMenu = window.tiptapBubbleMenu;
+	const FloatingMenu = window.tiptapFloatingMenu;
+    const Link = window.tiptapLink;
+     
+        
+    // create the options object    
+	let options = {
+		element: d,
+        editable: true,
+        content: content,
+        extensions: [      
+            StarterKit,
+            TaskList,
+            TaskItem.configure({ nested: true, }),
+            Placeholder.configure({ placeholder: placeholder, }),
+            CharacterCount,
+            Image.configure({
+                inline: true,
+                allowBase64: true,
+                HTMLAttributes: {
+					class: 'rounded-xl shadow-lg',
+                },
+            }),
+            Link,
+      	],
+		injectCSS: true,
+        editorProps: {
+            attributes: {
+                class: 'prose max-w-none',
+                style: 'font-family: var(--font_default)'
+            },
+        },
+		onBeforeCreate({ editor }) {
+    		// Before the view is created.
+		},
+		onCreate({ editor }) {
+			// The editor is ready.
+            instance.data.editor_is_ready = true;
+            instance.triggerEvent('is_ready');
+            
+		},
+		onUpdate: ({ editor }) => {
+			instance.publishState('contentHTML', editor.getHTML());
+        	instance.publishState('contentText', editor.getText());
+			instance.publishState('contentJSON', JSON.stringify(editor.getJSON()));
+        	instance.publishState('isEditable', editor.isEditable);
+            instance.publishState('characterCount', editor.storage.characterCount.characters());
+            instance.publishState('wordCount', editor.storage.characterCount.words());
+            instance.triggerEvent('contentUpdated');
+            if (properties.bubble.auto_binding() && instance.data.editor_is_ready && !instance.data.autobinding_processing) {
+                instance.data.autobinding_processing = true
+                setTimeout(() => {
+					instance.publishAutobinding(editor.getHTML());
+                    instance.data.autobinding_processing = false;
+                }, 2000);
+
+            };
+          
+//		instance.publishAutobinding(editor.getHTML());
+
+      },
+	  onFocus({ editor, event }) {
+          instance.triggerEvent('isFocused');
+          instance.publishState('isFocused', true);
+		  instance.data.is_focused = true;
+  	  },
+  	  onBlur({ editor, event }) {
+          instance.triggerEvent('isntFocused');
+          instance.publishState('isFocused', false);
+          instance.data.is_focused = false;
+          
+  	  },
+      onTransaction({ editor, transaction }) {
+		instance.publishState('bold', editor.isActive('bold'));
+        instance.publishState('italic', editor.isActive('italic'));
+        instance.publishState('strike', editor.isActive('strike'));
+        instance.publishState('h1', editor.isActive('heading', { level: 1 }));
+		instance.publishState('h2', editor.isActive('heading', { level: 2 }));
+		instance.publishState('h3', editor.isActive('heading', { level: 3 }));
+		instance.publishState('h4', editor.isActive('heading', { level: 4 }));
+		instance.publishState('h5', editor.isActive('heading', { level: 5 }));
+		instance.publishState('h6', editor.isActive('heading', { level: 6 }));
+		instance.publishState('orderedList', editor.isActive('orderedList'));
+        instance.publishState('bulletList', editor.isActive('bulletList'));
+		instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));  
+		instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
+		instance.publishState('blockquote', editor.isActive('blockquote'));
+        instance.publishState('codeBlock', editor.isActive('codeBlock'));
+        instance.publishState('taskList', editor.isActive('taskList'));
+        instance.publishState('taskItem', editor.isActive('taskItem'));
+        instance.publishState('link', editor.isActive('link'));
+        instance.publishState('url', editor.getAttributes('link').href);
+
+      },
+
+
+    } // end of options
+
+
+	if (properties.bubbleMenu != '') {
+        let bubbleMenuDiv = document.querySelector("#" + properties.bubbleMenu);
+        options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, }) );
+    }
+     
+     if (properties.floatingMenu != '') {
+         let floatingMenuDiv = document.querySelector("#" + properties.floatingMenu);
+         options.extensions.push( FloatingMenu.configure({ element: floatingMenuDiv }) );
+     }
+     
+
+
+    
+    // create the editor    
+	instance.data.editor = new Editor(options);        
+    window.editor = instance.data.editor;
+        
+    
+    // initialize exposed states
+    instance.publishState('contentHTML', instance.data.editor.getHTML());
+    instance.publishState('contentText', instance.data.editor.getText());
+	instance.publishState('contentJSON', JSON.stringify(instance.data.editor.getJSON()));
+    instance.publishState('isEditable', instance.data.editor.isEditable);
+    instance.publishState('characterCount', instance.data.editor.storage.characterCount.characters());
+    instance.publishState('wordCount', instance.data.editor.storage.characterCount.words());
+     instance.data.initialContent = instance.data.editor.getHTML();
+        
+		instance.data.isEditorSetup = true;
+	} // end load once
+
+    //
+    // run when the editor is ready
+    //
+	if (instance.data.editor_is_ready) {    
+		let isEditable = properties.isEditable;
+        instance.data.editor.setEditable(isEditable);
+    }
+    
+    if (instance.data.editor_is_ready && properties.initialContent != instance.data.initialContent && !properties.bubble.auto_binding()) {
+        let content = properties.initialContent;
+        instance.data.initialContent = content;
+        instance.data.editor.commands.setContent(content, true);
+    }
+
+	if (instance.data.editor_is_ready && !instance.data.is_focused && !!properties.bubble.auto_binding()) {
+        let content = properties.autobinding;
+        instance.data.editor.commands.setContent(content, true);
+    };
 
 }
