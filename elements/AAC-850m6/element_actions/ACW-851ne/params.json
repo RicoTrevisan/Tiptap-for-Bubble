@@ -1,0 +1,23 @@
+{
+    "caption": "Set content",
+    "fields": {
+        "ACX": {
+            "caption": "Content",
+            "doc": "Content to display in the editor. Can be HTML, plain text.",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "content",
+            "rank": 0,
+            "value": "text"
+        },
+        "ACY": {
+            "caption": "Is JSON?",
+            "default_val": false,
+            "editor": "DynamicValue",
+            "name": "is_json",
+            "optional": true,
+            "rank": 1,
+            "value": "boolean"
+        }
+    }
+}

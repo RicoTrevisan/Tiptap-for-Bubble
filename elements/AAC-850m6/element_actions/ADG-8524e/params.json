@@ -1,0 +1,15 @@
+{
+    "caption": "insertContent",
+    "doc": "adds the passed value to the document. https://tiptap.dev/api/commands/insert-content",
+    "fields": {
+        "ADH": {
+            "caption": "Content to be added",
+            "doc": "The command is pretty flexible and takes plain text, HTML or even JSON as a value. ",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "content",
+            "rank": 0,
+            "value": "text"
+        }
+    }
+}

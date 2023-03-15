@@ -3,10 +3,12 @@ function(instance, properties, context) {
 
 // load once
  if (!instance.data.isEditorSetup) {
-    let content = properties.initialContent;
-    if (properties.bubble.auto_binding()) {
-        let content = properties.autobinding;
-    };
+
+	let initialContent = (properties.bubble.auto_binding()) ? properties.autobinding : properties.initialContent;
+	let content = (properties.content_is_json) ? JSON.parse(initialContent) : initialContent;
+     
+
+    
     let placeholder = properties.placeholder;
 	let bubbleMenu = properties.bubbleMenu;
     let floatingMenu = properties.floatingMenu;
@@ -31,7 +33,13 @@ function(instance, properties, context) {
     const BubbleMenu = window.tiptapBubbleMenu;
 	const FloatingMenu = window.tiptapFloatingMenu;
     const Link = window.tiptapLink;
-     
+    const TextAlign = window.tiptapTextAlign;
+   	const Highlight = window.tiptapHighlight;
+	const Table = window.tiptapTable;
+	const TableCell = window.tiptapTableCell;
+	const TableHeader = window.tiptapTableHeader;
+	const TableRow = window.tiptapTableRow;
+	const Underline = window.tiptapUnderline;     
         
     // create the options object    
 	let options = {
@@ -41,6 +49,9 @@ function(instance, properties, context) {
         extensions: [      
             StarterKit,
             TaskList,
+            Highlight,
+            Underline,
+            TextAlign.configure({ types: ['heading', 'paragraph'], }),
             TaskItem.configure({ nested: true, }),
             Placeholder.configure({ placeholder: placeholder, }),
             CharacterCount,
@@ -52,11 +63,21 @@ function(instance, properties, context) {
                 },
             }),
             Link,
+			Table.configure({
+				resizable: true,
+                style: '',
+			}),
+			TableRow,
+			TableHeader,
+            TableCell.configure({
+                style: 'background-color: black',
+            }),
+
       	],
 		injectCSS: true,
         editorProps: {
             attributes: {
-                class: 'prose max-w-none',
+                class: 'prose max-w-none prose-a:cursor-pointer prose-table:divide-y-2 prose-table:divide-black prose-th:font-bold prose-td:p-2 prose-tr:p-2 prose-th:p-2 prose-th:bg-gray-50',
                 style: 'font-family: var(--font_default)'
             },
         },
@@ -67,6 +88,8 @@ function(instance, properties, context) {
 			// The editor is ready.
             instance.data.editor_is_ready = true;
             instance.triggerEvent('is_ready');
+            instance.publishState('is_ready', true);
+            console.log("editor is ready");
             
 		},
 		onUpdate: ({ editor }) => {
@@ -77,7 +100,7 @@ function(instance, properties, context) {
             instance.publishState('characterCount', editor.storage.characterCount.characters());
             instance.publishState('wordCount', editor.storage.characterCount.words());
             instance.triggerEvent('contentUpdated');
-            if (properties.bubble.auto_binding() && instance.data.editor_is_ready && !instance.data.autobinding_processing) {
+            if (!!properties.bubble.auto_binding() && !!instance.data.editor_is_ready && !instance.data.autobinding_processing) {
                 instance.data.autobinding_processing = true
                 setTimeout(() => {
 					instance.publishAutobinding(editor.getHTML());
@@ -120,8 +143,19 @@ function(instance, properties, context) {
         instance.publishState('taskItem', editor.isActive('taskItem'));
         instance.publishState('link', editor.isActive('link'));
         instance.publishState('url', editor.getAttributes('link').href);
-
+        instance.publishState('align_left', editor.isActive({ textAlign: 'left' }) );
+		instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
+		instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
+        instance.publishState('highlight', editor.isActive('highlight'));
+		instance.publishState('underline', editor.isActive('underline'));
+		instance.publishState('table', editor.isActive('table'));
       },
+    onSelectionUpdate({ editor }) {
+        const { view, state } = editor;
+		const { from, to } = view.state.selection;
+		const text = state.doc.textBetween(from, to, '');
+        instance.publishState('selected_text', text);
+  },
 
 
     } // end of options
@@ -157,23 +191,31 @@ function(instance, properties, context) {
 		instance.data.isEditorSetup = true;
 	} // end load once
 
+    
+    
     //
     // run when the editor is ready
     //
-	if (instance.data.editor_is_ready) {    
+	if (!!instance.data.editor_is_ready && (properties.isEditable != instance.data.editor.isEditable) ) {
 		let isEditable = properties.isEditable;
         instance.data.editor.setEditable(isEditable);
     }
     
-    if (instance.data.editor_is_ready && properties.initialContent != instance.data.initialContent && !properties.bubble.auto_binding()) {
-        let content = properties.initialContent;
-        instance.data.initialContent = content;
-        instance.data.editor.commands.setContent(content, true);
-    }
-
 	if (instance.data.editor_is_ready && !instance.data.is_focused && !!properties.bubble.auto_binding()) {
         let content = properties.autobinding;
         instance.data.editor.commands.setContent(content, true);
     };
+    
+
+/*  intent was to guess when the initialContent changed and do something with it
+	but that goes against the idea of initialContent. 
+    Removing it.
+    if (instance.data.editor_is_ready && properties.initialContent != instance.data.initialContent && !properties.bubble.auto_binding()) {
+        console.log("sequence has run");
+        let content = properties.initialContent;
+        instance.data.initialContent = content;
+        instance.data.editor.commands.setContent(content, true);
+    }
+*/
 
 }

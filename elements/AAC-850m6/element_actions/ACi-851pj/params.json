@@ -1,0 +1,13 @@
+{
+    "caption": "Highlight",
+    "doc": "Toggles highlight on or off",
+    "fields": {
+        "ACk": {
+            "caption": "Color",
+            "default_val": "rgba(255, 204, 0, 1)",
+            "editor": "Color",
+            "name": "color",
+            "rank": 0
+        }
+    }
+}
