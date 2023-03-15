@@ -1,15 +1,22 @@
 <script type="module">
 
-import Image from 'https://esm.sh/@tiptap/extension-image';
-import Link from "https://esm.sh/@tiptap/extension-link";
+import Underline from "https://esm.sh/@tiptap/extension-underline@2.0.0-beta.209";
+import Table from "https://esm.sh/@tiptap/extension-table@2.0.0-beta.209";
+import TableCell from "https://esm.sh/@tiptap/extension-table-cell@2.0.0-beta.209";
+import TableHeader from "https://esm.sh/@tiptap/extension-table-header@2.0.0-beta.209";
+import TableRow from "https://esm.sh/@tiptap/extension-table-row@2.0.0-beta.209";
+import Image from 'https://esm.sh/@tiptap/extension-image@2.0.0-beta.209';
+import Link from "https://esm.sh/@tiptap/extension-link@2.0.0-beta.209";
 import { Editor } from "https://esm.sh/@tiptap/core@2.0.0-beta.209";
 import StarterKit from "https://esm.sh/@tiptap/starter-kit@2.0.0-beta.209";
 import TaskList from "https://esm.sh/@tiptap/extension-task-list@2.0.0-beta.209";
 import TaskItem from "https://esm.sh/@tiptap/extension-task-item@2.0.0-beta.209";
 import Placeholder from "https://esm.sh/@tiptap/extension-placeholder@2.0.0-beta.209";
 import CharacterCount from "https://esm.sh/@tiptap/extension-character-count@2.0.0-beta.209";
-import BubbleMenu from "https://esm.sh/@tiptap/extension-bubble-menu";
-import FloatingMenu from "https://esm.sh/@tiptap/extension-floating-menu";
+import BubbleMenu from "https://esm.sh/@tiptap/extension-bubble-menu@2.0.0-beta.209";
+import FloatingMenu from "https://esm.sh/@tiptap/extension-floating-menu@2.0.0-beta.209";
+import TextAlign from "https://esm.sh/@tiptap/extension-text-align@2.0.0-beta.209";
+import Highlight from 'https://esm.sh/@tiptap/extension-highlight@2.0.0-beta.209';
 
     
 window.tiptapEditor = Editor;
@@ -22,6 +29,13 @@ window.tiptapImage = Image;
 window.tiptapBubbleMenu = BubbleMenu;
 window.tiptapLink = Link;
 window.tiptapFloatingMenu = FloatingMenu;
+window.tiptapTextAlign = TextAlign;
+window.tiptapHighlight = Highlight;
+window.tiptapTable = Table;
+window.tiptapTableCell = TableCell;
+window.tiptapTableHeader = TableHeader;
+window.tiptapTableRow = TableRow;
+window.tiptapUnderline = Underline;
 
 </script>
 

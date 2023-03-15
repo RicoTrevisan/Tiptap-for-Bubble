@@ -31,10 +31,11 @@
     "fields": {
         "AAK": {
             "caption": "Initial content",
-            "doc": "Content in Plain Text or HTML format.",
+            "doc": "Content in Plain Text or HTML format. If JSON make sure the \"Content is JSON?\" is set to \"yes\".",
             "editor": "DynamicValue",
             "long_text": true,
             "name": "initialContent",
+            "optional": true,
             "rank": 1,
             "value": "text"
         },
@@ -45,7 +46,7 @@
             "in_style": true,
             "name": "isEditable",
             "optional": false,
-            "rank": 2,
+            "rank": 3,
             "value": "boolean"
         },
         "ACA": {
@@ -64,15 +65,24 @@
             "editor": "StaticText",
             "name": "bubbleMenu",
             "optional": true,
-            "rank": 3
+            "rank": 4
         },
         "ACS": {
-            "caption": "Floating menu",
+            "caption": "Floating meny",
             "doc": "ID of the group that holds the Floating Menu. This menu shows up on an empty line.",
             "editor": "StaticText",
             "name": "floatingMenu",
             "optional": true,
-            "rank": 4
+            "rank": 5
+        },
+        "ACZ": {
+            "caption": "Content is JSON?",
+            "default_val": false,
+            "doc": "In case your initial content is in JSON format. It needs to be a valid Tiptap JSON format. More info: https://tiptap.dev/guide/output#option-2-generate-html-from-prosemirror-json",
+            "editor": "DynamicValue",
+            "name": "content_is_json",
+            "rank": 2,
+            "value": "boolean"
         }
     },
     "has_reset_fn": false,
@@ -80,7 +90,7 @@
     "property_applications": {
         "Background": true,
         "Border": true,
-        "BoxShadow": false,
+        "BoxShadow": true,
         "Font": false,
         "MinWidth": true,
         "Padding": true,
@@ -300,6 +310,71 @@
             },
             "name": "url",
             "value": "text"
+        },
+        "ACa": {
+            "caption": "Is ready",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "is_ready",
+            "value": "boolean"
+        },
+        "ACc": {
+            "caption": "Selected text",
+            "doc": "The current selected text",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "selected_text",
+            "value": "text"
+        },
+        "ACf": {
+            "caption": "Text is left aligned",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "align_left",
+            "value": "boolean"
+        },
+        "ACg": {
+            "caption": "Text is center aligned",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "align_center",
+            "value": "boolean"
+        },
+        "ACh": {
+            "caption": "Text is right aligned",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "align_right",
+            "value": "boolean"
+        },
+        "ACj": {
+            "caption": "Text is highlighted",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "highlight",
+            "value": "boolean"
+        },
+        "ADD": {
+            "caption": "Text is underlined",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "underline",
+            "value": "boolean"
+        },
+        "ADE": {
+            "caption": "Is a table",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "table",
+            "value": "boolean"
         }
     },
     "support_autobinding": true

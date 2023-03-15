@@ -1,0 +1,13 @@
+{
+    "caption": "Align text",
+    "fields": {
+        "ACe": {
+            "caption": "Alignment",
+            "default_val": "left",
+            "editor": "Dropdown",
+            "name": "alignment",
+            "options": "left,center,right,justify,reset",
+            "rank": 0
+        }
+    }
+}

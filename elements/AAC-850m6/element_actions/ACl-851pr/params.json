@@ -1,0 +1,30 @@
+{
+    "caption": "Insert table",
+    "fields": {
+        "ACm": {
+            "caption": "Rows",
+            "default_val": 3,
+            "editor": "DynamicValue",
+            "name": "rows",
+            "rank": 0,
+            "value": "number"
+        },
+        "ACn": {
+            "caption": "Columns",
+            "default_val": 3,
+            "editor": "DynamicValue",
+            "name": "columns",
+            "rank": 1,
+            "value": "number"
+        },
+        "ACo": {
+            "caption": "With header row?",
+            "default_val": true,
+            "editor": "DynamicValue",
+            "name": "with_header_row",
+            "optional": false,
+            "rank": 2,
+            "value": "boolean"
+        }
+    }
+}
