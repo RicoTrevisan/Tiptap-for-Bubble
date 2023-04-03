@@ -1,5 +1,5 @@
 {
-    "caption": "insertContent",
+    "caption": "Insert content",
     "doc": "adds the passed value to the document. https://tiptap.dev/api/commands/insert-content",
     "fields": {
         "ADH": {

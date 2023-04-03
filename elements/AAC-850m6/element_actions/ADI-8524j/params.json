@@ -1,0 +1,30 @@
+{
+    "caption": "Add YouTube",
+    "fields": {
+        "ADJ": {
+            "caption": "url",
+            "default_val": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "doc": "The YouTube url of the video",
+            "editor": "DynamicValue",
+            "name": "url",
+            "rank": 0,
+            "value": "text"
+        },
+        "ADK": {
+            "caption": "width",
+            "default_val": 640,
+            "editor": "DynamicValue",
+            "name": "width",
+            "rank": 1,
+            "value": "number"
+        },
+        "ADL": {
+            "caption": "height",
+            "default_val": 480,
+            "editor": "DynamicValue",
+            "name": "height",
+            "rank": 2,
+            "value": "number"
+        }
+    }
+}

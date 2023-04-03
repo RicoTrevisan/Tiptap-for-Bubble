@@ -11,6 +11,6 @@ function(instance, context) {
     instance.data.autobinding_processing = false;
     instance.publishState('is_ready', false);
     
-    instance.canvas.css({'overflow':'scroll'});;
+//    instance.canvas.css({'overflow':'scroll'});
 
 }

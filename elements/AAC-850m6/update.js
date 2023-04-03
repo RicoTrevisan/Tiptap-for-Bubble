@@ -39,7 +39,8 @@ function(instance, properties, context) {
 	const TableCell = window.tiptapTableCell;
 	const TableHeader = window.tiptapTableHeader;
 	const TableRow = window.tiptapTableRow;
-	const Underline = window.tiptapUnderline;     
+	const Underline = window.tiptapUnderline;    
+    const Youtube = window.tiptapYoutube;
         
     // create the options object    
 	let options = {
@@ -71,6 +72,9 @@ function(instance, properties, context) {
 			TableHeader,
             TableCell.configure({
                 style: 'background-color: black',
+            }),
+            Youtube.configure({
+  				nocookie: true,
             }),
 
       	],
@@ -201,10 +205,20 @@ function(instance, properties, context) {
         instance.data.editor.setEditable(isEditable);
     }
     
-	if (instance.data.editor_is_ready && !instance.data.is_focused && !!properties.bubble.auto_binding()) {
+	if (!!instance.data.editor_is_ready && !instance.data.is_focused && !!properties.bubble.auto_binding()) {
         let content = properties.autobinding;
         instance.data.editor.commands.setContent(content, true);
     };
+
+    
+    // switch between scrolling the editor or stretching it.
+    if (!!instance.data.editor_is_ready) {
+        if (!properties.bubble.fit_height()) {
+            instance.canvas.css({'overflow':'scroll'});
+        } else {
+            instance.canvas.css({'overflow':'auto'});
+        }
+    }
     
 
 /*  intent was to guess when the initialContent changed and do something with it

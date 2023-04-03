@@ -83,6 +83,15 @@
             "name": "content_is_json",
             "rank": 2,
             "value": "boolean"
+        },
+        "ADM": {
+            "caption": "Scroll on overflow",
+            "default_val": false,
+            "doc": "Turn on to allow it to overflow on scroll",
+            "editor": "Checkbox",
+            "in_style": true,
+            "name": "overflowScroll",
+            "rank": 6
         }
     },
     "has_reset_fn": false,
