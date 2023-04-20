@@ -41,6 +41,7 @@ function(instance, properties, context) {
 	const TableRow = window.tiptapTableRow;
 	const Underline = window.tiptapUnderline;    
     const Youtube = window.tiptapYoutube;
+    const generateHTML = window.tiptapGenerateHTML;
         
     // create the options object    
 	let options = {
@@ -159,6 +160,17 @@ function(instance, properties, context) {
 		const { from, to } = view.state.selection;
 		const text = state.doc.textBetween(from, to, '');
         instance.publishState('selected_text', text);
+        
+        // try to export the HTML
+        const selection = editor.view.state.selection;
+		editor.view.state.doc.nodesBetween(selection.from, selection.to, node => {
+            window.selectedNode = node;
+//            console.log(generateHTML(node));
+            if (node.type.name === 'text' && node.marks.length > 0) {
+             // do something with node.marks
+                console.log(node.marks);
+            }
+          })
   },
 
 
@@ -167,12 +179,16 @@ function(instance, properties, context) {
 
 	if (properties.bubbleMenu != '') {
         let bubbleMenuDiv = document.querySelector("#" + properties.bubbleMenu);
-        options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, }) );
+        options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, tippyOptions: {
+            theme: 'translucent',
+        } }) );
     }
      
      if (properties.floatingMenu != '') {
          let floatingMenuDiv = document.querySelector("#" + properties.floatingMenu);
-         options.extensions.push( FloatingMenu.configure({ element: floatingMenuDiv }) );
+         options.extensions.push( FloatingMenu.configure({ element: floatingMenuDiv, tippyOptions: {
+             theme: 'translucent',
+         } }) );
      }
      
 

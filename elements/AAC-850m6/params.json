@@ -384,6 +384,15 @@
             },
             "name": "table",
             "value": "boolean"
+        },
+        "ADO": {
+            "caption": "selected_html",
+            "doc": "",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "selected_html",
+            "value": "text"
         }
     },
     "support_autobinding": true

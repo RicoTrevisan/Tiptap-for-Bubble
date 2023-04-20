@@ -18,6 +18,7 @@ import BubbleMenu from "https://esm.sh/@tiptap/extension-bubble-menu@2.0.2";
 import FloatingMenu from "https://esm.sh/@tiptap/extension-floating-menu@2.0.2";
 import TextAlign from "https://esm.sh/@tiptap/extension-text-align@2.0.2";
 import Highlight from 'https://esm.sh/@tiptap/extension-highlight@2.0.2';
+import { generateHTML } from 'https://esm.sh/@tiptap/html@2.0.2';
 
     
 window.tiptapYoutube = Youtube;    
@@ -38,8 +39,16 @@ window.tiptapTableCell = TableCell;
 window.tiptapTableHeader = TableHeader;
 window.tiptapTableRow = TableRow;
 window.tiptapUnderline = Underline;
+window.tiptapGenerateHTML = generateHTML;
 
 </script>
+
+<!-- add Tippy stylesheets -->
+<link rel="stylesheet" title="tippy-translucent" href="https://esm.sh/tippy.js@6.3.7/themes/translucent.css">
+<link rel="stylesheet" title="tippy-light" href="https://esm.sh/tippy.js@6.3.7/themes/light.css">
+<link rel="stylesheet" title="tippy-light-border" href="https://esm.sh/tippy.js@6.3.7/themes/light-border.css">
+<link rel="stylesheet" title="tippy-material" href="https://esm.sh/tippy.js@6.3.7/themes/material.css">
+
 
 <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
 <!-- <link rel=stylesheet href="https://prosemirror.net/css/editor.css"> -->
