@@ -22,9 +22,9 @@ function(instance, properties, context) {
 }
 .ProseMirror h2 {
   font-size: ${properties.h2_size};
-  color: #111;
-  margin: 2.5rem 0;
-  font-weight: 800;
+  color: ${properties.h2_color};
+  margin: ${properties.h2_margin};
+  font-weight: ${properties.h2_font_weight};
 }
 .ProseMirror h3 {
   font-size: 2rem;
