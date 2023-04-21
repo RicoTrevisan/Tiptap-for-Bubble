@@ -125,7 +125,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h1_margin",
-            "rank": 12
+            "rank": 13
         },
         "ADU": {
             "caption": "H1 font-weight",
@@ -134,7 +134,7 @@
             "editor": "StaticNumber",
             "in_style": true,
             "name": "h1_font_weight",
-            "rank": 130
+            "rank": 12
         },
         "ADV": {
             "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
