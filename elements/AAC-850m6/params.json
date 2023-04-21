@@ -150,7 +150,7 @@
         },
         "h2_color": {
             "caption": "H2 Color",
-            "default_val": "rgba(17, 17, 17, 1)",
+            "default_val": "rgba(17,17,17,10)",
             "editor": "Color",
             "in_style": true,
             "name": "h2_color",

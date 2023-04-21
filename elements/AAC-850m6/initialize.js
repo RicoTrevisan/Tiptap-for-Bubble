@@ -12,5 +12,9 @@ function(instance, context) {
     instance.publishState('is_ready', false);
     
 //    instance.canvas.css({'overflow':'scroll'});
-
+	
+    instance.data.stylesheet = document.createElement('style');
+    instance.canvas.append(instance.data.stylesheet);
+    
+    
 }
