@@ -102,18 +102,6 @@
             "options": "translucent,light,light-border,material",
             "rank": 7
         },
-        "ADV": {
-            "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
-            "editor": "Label",
-            "name": "info",
-            "rank": 8
-        },
-        "ADW": {
-            "caption": "h1 info",
-            "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 9
-        },
         "ADR": {
             "caption": "H1 Size",
             "default_val": "4rem",
@@ -148,11 +136,17 @@
             "name": "h1_font_weight",
             "rank": 12
         },
-        "h2_info": {
-            "caption": "h2",
+        "ADV": {
+            "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
+            "editor": "Label",
+            "name": "info",
+            "rank": 8
+        },
+        "ADW": {
+            "caption": "h1 info",
             "editor": "Label",
             "name": "stylesheet_info",
-            "rank": 13
+            "rank": 9
         },
         "h2_size": {
             "caption": "H2 Size",
