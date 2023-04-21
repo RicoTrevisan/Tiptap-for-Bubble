@@ -148,13 +148,19 @@
             "name": "stylesheet_info",
             "rank": 9
         },
+        "h2_info": {
+            "caption": "h2 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 14
+        },
         "h2_size": {
             "caption": "H2 Size",
             "default_val": "3rem",
             "editor": "StaticText",
             "in_style": true,
             "name": "h2_size",
-            "rank": 14
+            "rank": 15
         }
     },
     "has_reset_fn": false,
