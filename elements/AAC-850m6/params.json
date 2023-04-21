@@ -101,6 +101,52 @@
             "name": "floatingMenuTheme",
             "options": "translucent,light,light-border,material",
             "rank": 7
+        },
+        "ADR": {
+            "caption": "H1 Size",
+            "default_val": "4rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h1_size",
+            "rank": 10
+        },
+        "ADS": {
+            "caption": "H1 Color",
+            "default_val": "rgba(17, 17, 17, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "h1_color",
+            "rank": 11
+        },
+        "ADT": {
+            "caption": "H1 margin",
+            "default_val": "3rem 0",
+            "doc": "e.g.: \"3rem 0\" means top & bottom 3rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h1_margin",
+            "rank": 12
+        },
+        "ADU": {
+            "caption": "H1 font-weight",
+            "default_val": 900,
+            "doc": "",
+            "editor": "StaticNumber",
+            "in_style": true,
+            "name": "h1_font_weight",
+            "rank": 13
+        },
+        "ADV": {
+            "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
+            "editor": "Label",
+            "name": "info",
+            "rank": 8
+        },
+        "ADW": {
+            "caption": "h1 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 9
         }
     },
     "has_reset_fn": false,

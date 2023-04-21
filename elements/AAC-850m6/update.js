@@ -1,8 +1,63 @@
 function(instance, properties, context) {
-
-
+    
 // load once
  if (!instance.data.isEditorSetup) {
+     
+	const baseStyleTag = document.createElement('style');
+     baseStyleTag.id = "stylesheet"
+     baseStyleTag.innerHTML = `
+.ProseMirror {
+  --color_text_default: #111111;
+  font-family: var(--font_default);
+  color: var(--color_text_default);
+  line-height: 1.5;
+  
+}
+
+.ProseMirror h1 {
+  font-size: ${properties.h1_size};
+  color: ${properties.h1_color};
+  margin: ${properties.h1_margin};
+  font-weight: ${properties.h1_font_weight};
+}
+.ProseMirror h2 {
+  font-size: 3rem;
+  color: #111;
+  margin: 2.5rem 0;
+  font-weight: 800;
+}
+.ProseMirror h3 {
+  font-size: 2rem;
+  color: #111;
+  margin: 2rem 0;
+  font-weight: 700;
+}
+.ProseMirror h4 {
+  font-size: 1.5rem;
+  color: #111;
+  margin: 1.5rem 0;
+  font-weight: 600;
+}
+.ProseMirror h5 {
+  font-size: 1rem;
+  color: #111;
+  margin: 1rem 0;
+  font-weight: 500;
+}
+.ProseMirror h6 {
+  font-size: 1rem;
+  color: #111;
+  margin: 1rem 0;
+  font-weight: 500;
+}
+.ProseMirror p {
+  font-size: 1rem;
+  color: gray;
+  margin: 1rem 0;
+  font-weight: 400;
+}  
+`
+	instance.canvas.append(baseStyleTag);
 
 	let initialContent = (properties.bubble.auto_binding()) ? properties.autobinding : properties.initialContent;
 	let content = (properties.content_is_json) ? JSON.parse(initialContent) : initialContent;
@@ -19,7 +74,8 @@ function(instance, properties, context) {
 	const randomId = (Math.random() + 1).toString(36).substring(3);
 	var d = document.createElement("div");
     d.id = 'tiptapEditor-' + randomId;
-    instance.canvas.append(d)
+    instance.canvas.append(d);
+
     
     
 	// pull the libraries that were loaded on Header
@@ -83,7 +139,8 @@ function(instance, properties, context) {
         editorProps: {
             attributes: {
                 class: 'prose max-w-none prose-a:cursor-pointer prose-table:divide-y-2 prose-table:divide-black prose-th:font-bold prose-td:p-2 prose-tr:p-2 prose-th:p-2 prose-th:bg-gray-50',
-                style: 'font-family: var(--font_default)'
+//                style: 'font-family: var(--font_default)'
+                style: baseStyleTag,
             },
         },
 		onBeforeCreate({ editor }) {
