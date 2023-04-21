@@ -161,6 +161,32 @@
             "in_style": true,
             "name": "h2_size",
             "rank": 15
+        },
+        "h2_color": {
+            "caption": "H2 Color",
+            "default_val": "rgba(17, 17, 17, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "h2_color",
+            "rank": 16
+        },
+        "h2_margin": {
+            "caption": "H2 margin",
+            "default_val": "2.5rem 0",
+            "doc": "e.g.: \"2.5rem 0\" means top & bottom 2.5rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h2_margin",
+            "rank": 17
+        },
+        "h2_font_weight": {
+            "caption": "H2 font-weight",
+            "default_val": 800,
+            "doc": "",
+            "editor": "StaticNumber",
+            "in_style": true,
+            "name": "h2_font_weight",
+            "rank": 18
         }
     },
     "has_reset_fn": false,
