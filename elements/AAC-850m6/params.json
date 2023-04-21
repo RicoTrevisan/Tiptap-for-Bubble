@@ -155,7 +155,7 @@
             "in_style": true,
             "name": "h2_size",
             "rank": 13
-        },
+        }
     },
     "has_reset_fn": false,
     "icon": "ion-chatbox-working",
