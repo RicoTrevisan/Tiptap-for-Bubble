@@ -160,7 +160,8 @@
             "caption": "H2 font-weight",
             "default_val": 800,
             "doc": "",
-            "editor": "StaticNumber",
+            "editor": "Dropdown",
+            "options": "900,800,700,600,500,400",
             "in_style": true,
             "name": "h2_font_weight",
             "rank": 18
