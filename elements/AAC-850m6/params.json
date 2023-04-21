@@ -148,20 +148,6 @@
             "name": "stylesheet_info",
             "rank": 9
         },
-        "h2_info": {
-            "caption": "h2 info",
-            "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 14
-        },
-        "h2_size": {
-            "caption": "H2 Size",
-            "default_val": "3rem",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h2_size",
-            "rank": 15
-        },
         "h2_color": {
             "caption": "H2 Color",
             "default_val": "rgba(17, 17, 17, 1)",
@@ -169,6 +155,21 @@
             "in_style": true,
             "name": "h2_color",
             "rank": 16
+        },
+        "h2_font_weight": {
+            "caption": "H2 font-weight",
+            "default_val": 800,
+            "doc": "",
+            "editor": "StaticNumber",
+            "in_style": true,
+            "name": "h2_font_weight",
+            "rank": 18
+        },
+        "h2_info": {
+            "caption": "h2 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 14
         },
         "h2_margin": {
             "caption": "H2 margin",
@@ -179,14 +180,13 @@
             "name": "h2_margin",
             "rank": 17
         },
-        "h2_font_weight": {
-            "caption": "H2 font-weight",
-            "default_val": 800,
-            "doc": "",
-            "editor": "StaticNumber",
+        "h2_size": {
+            "caption": "H2 Size",
+            "default_val": "3rem",
+            "editor": "StaticText",
             "in_style": true,
-            "name": "h2_font_weight",
-            "rank": 18
+            "name": "h2_size",
+            "rank": 15
         }
     },
     "has_reset_fn": false,
