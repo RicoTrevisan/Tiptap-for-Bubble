@@ -158,12 +158,12 @@
         },
         "h2_font_weight": {
             "caption": "H2 font-weight",
-            "default_val": 800,
+            "default_val": "800",
             "doc": "",
             "editor": "Dropdown",
-            "options": "900,800,700,600,500,400",
             "in_style": true,
             "name": "h2_font_weight",
+            "options": "900,800,700,600,500,400",
             "rank": 18
         },
         "h2_info": {
