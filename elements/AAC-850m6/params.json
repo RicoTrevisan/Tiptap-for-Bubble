@@ -144,10 +144,16 @@
             "rank": 8
         },
         "ADW": {
-            "caption": "h1 info",
+            "caption": "",
             "editor": "Label",
             "name": "stylesheet_info",
             "rank": 9
+        },
+        "info": {
+            "caption": "h1 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 9.1
         },
         "h2_color": {
             "caption": "H2 Color",
