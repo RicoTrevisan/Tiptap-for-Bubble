@@ -178,17 +178,25 @@ function(instance, properties, context) {
 
 
 	if (properties.bubbleMenu != '') {
+        let bubbleMenuTheme = properties.bubbleMenuTheme;
+        console.log(`setting bubble menu to: ${properties.bubbleMenuTheme}`);
         let bubbleMenuDiv = document.querySelector("#" + properties.bubbleMenu);
         options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, tippyOptions: {
-            theme: 'translucent',
+            theme: bubbleMenuTheme,
         } }) );
     }
      
      if (properties.floatingMenu != '') {
+		 let floatingMenuTheme = properties.floatingMenuTheme;
+         console.log(`setting floating menu to: ${properties.floatingMenuTheme}`);
          let floatingMenuDiv = document.querySelector("#" + properties.floatingMenu);
-         options.extensions.push( FloatingMenu.configure({ element: floatingMenuDiv, tippyOptions: {
-             theme: 'translucent',
-         } }) );
+         options.extensions.push( FloatingMenu.configure({ 
+             element: floatingMenuDiv, 
+             tippyOptions: {
+                 theme: floatingMenuTheme,
+             }
+         }) );
+        
      }
      
 

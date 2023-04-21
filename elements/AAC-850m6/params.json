@@ -83,6 +83,24 @@
             "name": "content_is_json",
             "rank": 2,
             "value": "boolean"
+        },
+        "ADP": {
+            "caption": "Bubble menu theme",
+            "default_val": "translucent",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "bubbleMenuTheme",
+            "options": "translucent,light,light-border,material",
+            "rank": 6
+        },
+        "ADQ": {
+            "caption": "Floating Menu Theme",
+            "default_val": "translucent",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "floatingMenuTheme",
+            "options": "translucent,light,light-border,material",
+            "rank": 7
         }
     },
     "has_reset_fn": false,
