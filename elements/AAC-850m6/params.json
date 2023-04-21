@@ -102,6 +102,18 @@
             "options": "translucent,light,light-border,material",
             "rank": 7
         },
+        "ADV": {
+            "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
+            "editor": "Label",
+            "name": "info",
+            "rank": 8
+        },
+        "ADW": {
+            "caption": "h1 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 9
+        },
         "ADR": {
             "caption": "H1 Size",
             "default_val": "4rem",
@@ -136,18 +148,14 @@
             "name": "h1_font_weight",
             "rank": 12
         },
-        "ADV": {
-            "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
-            "editor": "Label",
-            "name": "info",
-            "rank": 8
+        "h2_size": {
+            "caption": "H2 Size",
+            "default_val": "3rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h2_size",
+            "rank": 13
         },
-        "ADW": {
-            "caption": "h1 info",
-            "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 9
-        }
     },
     "has_reset_fn": false,
     "icon": "ion-chatbox-working",
