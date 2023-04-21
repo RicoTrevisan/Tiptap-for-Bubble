@@ -268,10 +268,10 @@ function(instance, properties, context) {
   font-weight: ${properties.h2_font_weight};
 }
 .ProseMirror h3 {
-  font-size: 2rem;
-  color: #111;
-  margin: 2rem 0;
-  font-weight: 700;
+  font-size: ${properties.h3_size};
+  color: ${properties.h3_color};
+  margin: ${properties.h3_margin};
+  font-weight: ${properties.h3_font_weight};
 }
 .ProseMirror h4 {
   font-size: 1.5rem;

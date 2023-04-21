@@ -187,7 +187,50 @@
             "in_style": true,
             "name": "h2_size",
             "rank": 15
+        },
+        
+        "h3_info": {
+            "caption": "h3 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 19
+        },
+        "h3_size": {
+            "caption": "H3 Size",
+            "default_val": "2rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h3_size",
+            "rank": 20
+        },
+        "h3_color": {
+            "caption": "H3 Color",
+            "default_val": "rgba(17, 17, 17, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "h3_color",
+            "rank": 21
+        },
+        "h3_font_weight": {
+            "caption": "H3 font-weight",
+            "default_val": 700,
+            "doc": "",
+            "editor": "StaticNumber",
+            "in_style": true,
+            "name": "h3_font_weight",
+            "rank": 22
+        },
+
+        "h3_margin": {
+            "caption": "H3 margin",
+            "default_val": "2rem 0",
+            "doc": "e.g.: \"2rem 0\" means top & bottom 2rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h3_margin",
+            "rank": 23
         }
+
     },
     "has_reset_fn": false,
     "icon": "ion-chatbox-working",
