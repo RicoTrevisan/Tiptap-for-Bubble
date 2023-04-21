@@ -127,11 +127,12 @@
             "name": "h1_margin",
             "rank": 13
         },
-        "ADU": {
+        "h1_font_weight": {
             "caption": "H1 font-weight",
-            "default_val": 900,
+            "default_val": "900",
             "doc": "",
-            "editor": "StaticNumber",
+            "editor": "Dropdown",
+            "options": "900,800,700,600,500,400",
             "in_style": true,
             "name": "h1_font_weight",
             "rank": 12
