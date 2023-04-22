@@ -139,12 +139,6 @@
             "name": "stylesheet_info",
             "rank": 9
         },
-        "ADX": {
-            "caption": "h4_info",
-            "editor": "Label",
-            "name": "h4_info",
-            "rank": 25
-        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",
@@ -242,7 +236,13 @@
             "editor": "Label",
             "name": "stylesheet_info",
             "rank": 10
-        }
+        },
+            "h4_info": {
+            "caption": "h4_info",
+            "editor": "Label",
+            "name": "h4_info",
+            "rank": 25
+        },
     },
     "has_reset_fn": false,
     "icon": "ion-chatbox-working",
