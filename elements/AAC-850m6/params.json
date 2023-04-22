@@ -223,7 +223,7 @@
             "name": "h3_margin",
             "rank": 24
         },
-        "h3_size": {
+        "21_h3_size": {
             "caption": "H3 Size",
             "default_val": "2rem",
             "editor": "StaticText",
@@ -231,7 +231,7 @@
             "name": "h3_size",
             "rank": 21
         },
-        "info": {
+        "10_h1_info": {
             "caption": "h1 info",
             "editor": "Label",
             "name": "stylesheet_info",
