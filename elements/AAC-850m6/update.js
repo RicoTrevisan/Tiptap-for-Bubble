@@ -278,16 +278,16 @@ function(instance, properties, context) {
   font-weight: ${properties.h4_font_weight};
 }
 .ProseMirror h5 {
-  font-size: 1rem;
-  color: #111;
-  margin: 1rem 0;
-  font-weight: 500;
+    font-size: ${properties.h5_size};
+    color: ${properties.h5_color};
+    margin: ${properties.h5_margin};
+    font-weight: ${properties.h5_font_weight};
 }
 .ProseMirror h6 {
-  font-size: 1rem;
-  color: #111;
-  margin: 1rem 0;
-  font-weight: 500;
+    font-size: ${properties.h6_size};
+    color: ${properties.h6_color};
+    margin: ${properties.h6_margin};
+    font-weight: ${properties.h6_font_weight};
 }
 .ProseMirror p {
   font-size: ${properties.bubble.font_size()};
