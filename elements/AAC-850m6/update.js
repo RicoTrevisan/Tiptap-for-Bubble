@@ -246,12 +246,10 @@ function(instance, properties, context) {
     }
     
 
+    //  color: var(--color_text_default); font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
+    console.log(properties.bubble.font_face().match(/^(.*?):/)[1]);
      instance.data.stylesheet.innerHTML = `
 .ProseMirror {
-  --color_text_default: #111111;
-  font-family: var(--font_default);
-  color: var(--color_text_default);
-  line-height: 1.5;
   
 }
 
@@ -292,13 +290,13 @@ function(instance, properties, context) {
   font-weight: 500;
 }
 .ProseMirror p {
-  font-size: 1rem;
-  color: gray;
+  font-size: ${properties.bubble.font_size()};
+	color: ${properties.bubble.font_color()};
+font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
   margin: 1rem 0;
   font-weight: 400;
 }  
-`    
-    
+`      
     
 
 /*  intent was to guess when the initialContent changed and do something with it

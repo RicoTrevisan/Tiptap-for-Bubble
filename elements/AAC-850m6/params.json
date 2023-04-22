@@ -108,7 +108,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h1_size",
-            "rank": 10
+            "rank": 11
         },
         "ADS": {
             "caption": "H1 Color",
@@ -116,7 +116,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h1_color",
-            "rank": 11
+            "rank": 12
         },
         "ADT": {
             "caption": "H1 margin",
@@ -125,17 +125,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h1_margin",
-            "rank": 13
-        },
-        "h1_font_weight": {
-            "caption": "H1 font-weight",
-            "default_val": "900",
-            "doc": "",
-            "editor": "Dropdown",
-            "options": "900,800,700,600,500,400",
-            "in_style": true,
-            "name": "h1_font_weight",
-            "rank": 12
+            "rank": 14
         },
         "ADV": {
             "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
@@ -149,11 +139,15 @@
             "name": "stylesheet_info",
             "rank": 9
         },
-        "info": {
-            "caption": "h1 info",
-            "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 9.1
+        "h1_font_weight": {
+            "caption": "H1 font-weight",
+            "default_val": "900",
+            "doc": "",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "h1_font_weight",
+            "options": "900,800,700,600,500,400",
+            "rank": 13
         },
         "h2_color": {
             "caption": "H2 Color",
@@ -161,7 +155,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h2_color",
-            "rank": 16
+            "rank": 17
         },
         "h2_font_weight": {
             "caption": "H2 font-weight",
@@ -171,13 +165,13 @@
             "in_style": true,
             "name": "h2_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 18
+            "rank": 19
         },
         "h2_info": {
             "caption": "h2 info",
             "editor": "Label",
             "name": "stylesheet_info",
-            "rank": 14
+            "rank": 15
         },
         "h2_margin": {
             "caption": "H2 margin",
@@ -186,7 +180,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h2_margin",
-            "rank": 17
+            "rank": 18
         },
         "h2_size": {
             "caption": "H2 Size",
@@ -194,7 +188,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h2_size",
-            "rank": 15
+            "rank": 16
         },
         "h3_color": {
             "caption": "H3 Color",
@@ -202,7 +196,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h3_color",
-            "rank": 21
+            "rank": 22
         },
         "h3_font_weight": {
             "caption": "H3 font-weight",
@@ -212,13 +206,13 @@
             "in_style": true,
             "name": "h3_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 22
+            "rank": 23
         },
         "h3_info": {
             "caption": "h3 info",
             "editor": "Label",
             "name": "stylesheet_info",
-            "rank": 19
+            "rank": 20
         },
         "h3_margin": {
             "caption": "H3 margin",
@@ -227,7 +221,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h3_margin",
-            "rank": 23
+            "rank": 24
         },
         "h3_size": {
             "caption": "H3 Size",
@@ -235,7 +229,13 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h3_size",
-            "rank": 20
+            "rank": 21
+        },
+        "info": {
+            "caption": "h1 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 10
         }
     },
     "has_reset_fn": false,
@@ -244,7 +244,7 @@
         "Background": true,
         "Border": true,
         "BoxShadow": true,
-        "Font": false,
+        "Font": true,
         "MinWidth": true,
         "Padding": true,
         "resizable": true
