@@ -242,7 +242,7 @@
             "editor": "Label",
             "name": "h4_info",
             "rank": 25
-        },
+        }
     },
     "has_reset_fn": false,
     "icon": "ion-chatbox-working",
