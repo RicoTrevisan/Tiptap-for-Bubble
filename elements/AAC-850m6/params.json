@@ -134,7 +134,7 @@
             "rank": 8
         },
         "ADW": {
-            "caption": "",
+            "caption": "info",
             "editor": "Label",
             "name": "stylesheet_info",
             "rank": 9
@@ -231,26 +231,6 @@
             "name": "h3_size",
             "rank": 21
         },
-        "info": {
-            "caption": "h1 info",
-            "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 10
-        },
-        "h4_info": {
-            "caption": "h4_info",
-            "editor": "Label",
-            "name": "h4_info",
-            "rank": 25
-        },
-        "h4_size": {
-            "caption": "H4 Size",
-            "default_val": "1.5rem",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h4_size",
-            "rank": 26
-        },
         "h4_color": {
             "caption": "H4 Color",
             "default_val": "rgba(17, 17, 17, 1)",
@@ -269,6 +249,12 @@
             "options": "900,800,700,600,500,400",
             "rank": 28
         },
+        "h4_info": {
+            "caption": "h4_info",
+            "editor": "Label",
+            "name": "h4_info",
+            "rank": 25
+        },
         "h4_margin": {
             "caption": "H4 margin",
             "default_val": "1.5rem 0",
@@ -278,89 +264,20 @@
             "name": "h4_margin",
             "rank": 29
         },
-        "h5_info": {
-            "caption": "h5_info",
+        "h4_size": {
+            "caption": "H4 Size",
+            "default_val": "1.5rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h4_size",
+            "rank": 26
+        },
+        "info": {
+            "caption": "h1 info",
             "editor": "Label",
-            "name": "h5_info",
-            "rank": 30
-        },
-        "h5_size": {
-            "caption": "H5 Size",
-            "default_val": "1rem",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h5_size",
-            "rank": 31
-        },
-        "h5_color": {
-            "caption": "H5 Color",
-            "default_val": "rgba(17, 17, 17, 1)",
-            "editor": "Color",
-            "in_style": true,
-            "name": "h5_color",
-            "rank": 32
-        },
-        "h5_font_weight": {
-            "caption": "H5 font-weight",
-            "default_val": "500",
-            "doc": "",
-            "editor": "Dropdown",
-            "in_style": true,
-            "name": "h5_font_weight",
-            "options": "900,800,700,600,500,400",
-            "rank": 33
-        },
-        "h5_margin": {
-            "caption": "H5 margin",
-            "default_val": "1rem 0",
-            "doc": "e.g.: \"1rem 0\" means top & bottom 1rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h5_margin",
-            "rank": 34
-        },
-        "h6_info": {
-            "caption": "h6_info",
-            "editor": "Label",
-            "name": "h6_info",
-            "rank": 35
-        },
-        "h6_size": {
-            "caption": "H6 Size",
-            "default_val": "1rem",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h6_size",
-            "rank": 36
-        },
-        "h6_color": {
-            "caption": "H6 Color",
-            "default_val": "rgba(17, 17, 17, 1)",
-            "editor": "Color",
-            "in_style": true,
-            "name": "h6_color",
-            "rank": 37
-        },
-        "h6_font_weight": {
-            "caption": "H6 font-weight",
-            "default_val": "500",
-            "doc": "",
-            "editor": "Dropdown",
-            "in_style": true,
-            "name": "h6_font_weight",
-            "options": "900,800,700,600,500,400",
-            "rank": 38
-        },
-        "h6_margin": {
-            "caption": "H6 margin",
-            "default_val": "1rem 0",
-            "doc": "e.g.: \"1rem 0\" means top & bottom 1rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h6_margin",
-            "rank": 39
+            "name": "stylesheet_info",
+            "rank": 10
         }
-
     },
     "has_reset_fn": false,
     "icon": "ion-chatbox-working",
