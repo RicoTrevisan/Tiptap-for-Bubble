@@ -274,7 +274,7 @@ function(instance, properties, context) {
 .ProseMirror h4 {
   font-size: ${properties.h4_size};
   color: ${properties.h4_color};
-  margin: ${h4_margin};
+  margin: ${properties.h4_margin};
   font-weight: ${properties.h4_font_weight};
 }
 .ProseMirror h5 {
