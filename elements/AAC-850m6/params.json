@@ -236,6 +236,47 @@
             "editor": "Label",
             "name": "stylesheet_info",
             "rank": 10
+        },    
+        "h4_color": {
+            "caption": "H4 Color",
+            "default_val": "rgba(17, 17, 17, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "h4_color",
+            "rank": 27
+        },
+        "h4_font_weight": {
+            "caption": "H4 font-weight",
+            "default_val": "600",
+            "doc": "",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "h4_font_weight",
+            "options": "900,800,700,600,500,400",
+            "rank": 29
+        },
+        "h4_info": {
+            "caption": "h4 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 25
+        },
+        "h4_margin": {
+            "caption": "H4 margin",
+            "default_val": "1.5rem 0",
+            "doc": "e.g.: \"1.5rem 0\" means top & bottom 1.5rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h4_margin",
+            "rank": 28
+        },
+        "h4_size": {
+            "caption": "H4 Size",
+            "default_val": "1.5rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h4_size",
+            "rank": 26
         }
     },
     "has_reset_fn": false,
