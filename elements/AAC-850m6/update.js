@@ -295,7 +295,82 @@ function(instance, properties, context) {
 font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
   margin: 1rem 0;
   font-weight: 400;
-}  
+}
+.ProseMirror table {
+  /*   background: hsl(0 0% 0% / 0.05); */
+  width: 100%;
+  padding: 1rem;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-indent: 0;
+  /*   display: flex 1; */
+  /*   overflow-x: auto; */
+}
+.ProseMirror th,
+td {
+  padding: 1rem;
+  text-align: start;
+  border-bottom: 1px solid gray;
+}
+.ProseMirror th {
+  font-weight: 800;
+  text-align: left;
+  background: hsl(0 0% 0% / 0.5);
+}
+.ProseMirror th * {
+  color: white;
+  font-weight: 700;
+}
+.ProseMirror tr:nth-of-type(odd) {
+  background: hsl(0 0% 0% / 0.1);
+}
+.ProseMirror table .selectedCell:after {
+  z-index: 2;
+  position: absolute;
+  content: "";
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(200, 200, 255, 0.4);
+  pointer-events: none;
+}
+.ProseMirror table .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: -2px;
+  width: 4px;
+  background-color: #adf;
+  pointer-events: none;
+}
+
+.tableWrapper {
+  padding: 1rem 0;
+  overflow-x: auto;
+}
+
+.resize-cursor {
+  cursor: ew-resize;
+  cursor: col-resize;
+}
+@media (max-width: 650px) {
+  .ProseMirror th {
+    display: none;
+  }
+  .ProseMirror td {
+    display: block;
+  }
+  .ProseMirror td:first-child {
+    padding-top: 1rem;
+  }
+  .ProseMirror td:last-child {
+    padding-bottom: 1rem;
+  }
+  .ProseMirror td::before {
+    content: "ehllo";
+  }
+}
 `      
     
 

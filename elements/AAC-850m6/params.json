@@ -149,6 +149,12 @@
             "options": "900,800,700,600,500,400",
             "rank": 13
         },
+        "h1_info1": {
+            "caption": "h1 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 10
+        },
         "h2_color": {
             "caption": "H2 Color",
             "default_val": "rgba(17,17,17,10)",
@@ -272,26 +278,6 @@
             "name": "h4_size",
             "rank": 26
         },
-        "h1_info1": {
-            "caption": "h1 info",
-            "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 10
-        },
-        "h5_info": {
-            "caption": "h5_info",
-            "editor": "Label",
-            "name": "h5_info",
-            "rank": 30
-        },
-        "h5_size": {
-            "caption": "H5 Size",
-            "default_val": "1rem",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h5_size",
-            "rank": 31
-        },
         "h5_color": {
             "caption": "H5 Color",
             "default_val": "rgba(17, 17, 17, 1)",
@@ -310,6 +296,12 @@
             "options": "900,800,700,600,500,400",
             "rank": 33
         },
+        "h5_info": {
+            "caption": "h5_info",
+            "editor": "Label",
+            "name": "h5_info",
+            "rank": 30
+        },
         "h5_margin": {
             "caption": "H5 margin",
             "default_val": "1rem 0",
@@ -319,19 +311,13 @@
             "name": "h5_margin",
             "rank": 34
         },
-        "h6_info": {
-            "caption": "h6_info",
-            "editor": "Label",
-            "name": "h6_info",
-            "rank": 35
-        },
-        "h6_size": {
-            "caption": "H6 Size",
+        "h5_size": {
+            "caption": "H5 Size",
             "default_val": "1rem",
             "editor": "StaticText",
             "in_style": true,
-            "name": "h6_size",
-            "rank": 36
+            "name": "h5_size",
+            "rank": 31
         },
         "h6_color": {
             "caption": "H6 Color",
@@ -351,6 +337,12 @@
             "options": "900,800,700,600,500,400",
             "rank": 38
         },
+        "h6_info": {
+            "caption": "h6_info",
+            "editor": "Label",
+            "name": "h6_info",
+            "rank": 35
+        },
         "h6_margin": {
             "caption": "H6 margin",
             "default_val": "1rem 0",
@@ -359,6 +351,14 @@
             "in_style": true,
             "name": "h6_margin",
             "rank": 39
+        },
+        "h6_size": {
+            "caption": "H6 Size",
+            "default_val": "1rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h6_size",
+            "rank": 36
         }
     },
     "has_reset_fn": false,
