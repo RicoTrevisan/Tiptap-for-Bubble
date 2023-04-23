@@ -139,6 +139,62 @@
             "name": "stylesheet_info",
             "rank": 9
         },
+        "ADY": {
+            "caption": "table settings",
+            "editor": "Label",
+            "name": "table",
+            "rank": 40
+        },
+        "ADZ": {
+            "caption": "Cell padding",
+            "default_val": "0 1rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "table_th_td_padding",
+            "rank": 41
+        },
+        "ADa": {
+            "caption": "Row bottom border",
+            "default_val": "1px solid",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "table_th_td_border_bottom",
+            "rank": 42
+        },
+        "ADb": {
+            "caption": "Header font weight",
+            "default_val": "800",
+            "doc": "",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "table_th_font_weight",
+            "options": "900,800,700,600,500,400",
+            "rank": 44
+        },
+        "ADc": {
+            "caption": "Header background",
+            "default_val": "rgba(0,0,0,1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "table_th_background",
+            "rank": 46
+        },
+        "ADd": {
+            "caption": "Row border color",
+            "default_val": "rgba(0,0,0,1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "table_row_border_color",
+            "rank": 43
+        },
+        "ADe": {
+            "caption": "Header font color",
+            "default_val": "rgba(255,255,255,1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "table_header_font_color",
+            "rank": 45
+        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",

@@ -290,41 +290,37 @@ function(instance, properties, context) {
     font-weight: ${properties.h6_font_weight};
 }
 .ProseMirror p {
-  font-size: ${properties.bubble.font_size()};
-	color: ${properties.bubble.font_color()};
-font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
-  margin: 1rem 0;
-  font-weight: 400;
+    font-size: ${properties.bubble.font_size()};
+    color: ${properties.bubble.font_color()};
+    font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
+    margin: 1rem 0;
+    font-weight: 400;
 }
 .ProseMirror table {
-  /*   background: hsl(0 0% 0% / 0.05); */
   width: 100%;
-  padding: 1rem;
   border-collapse: collapse;
   border-spacing: 0;
   text-indent: 0;
-  /*   display: flex 1; */
-  /*   overflow-x: auto; */
 }
 .ProseMirror th,
 td {
-  padding: 1rem;
+  padding: ${properties.table_th_td_padding};
   text-align: start;
-  border-bottom: 1px solid gray;
+  border-bottom: ${properties.table_th_td_border_bottom} ${properties.table_row_border_color};
 }
 .ProseMirror th {
-  font-weight: 800;
+  font-weight: ${properties.table_th_font_weight};
   text-align: left;
-  background: hsl(0 0% 0% / 0.5);
+  background: ${properties.table_th_background};
 }
 .ProseMirror th * {
-  color: white;
-  font-weight: 700;
+  color: ${properties.table_header_font_color};
+  font-weight: ${properties.table_header_font_weight};
 }
 .ProseMirror tr:nth-of-type(odd) {
-  background: hsl(0 0% 0% / 0.1);
+  background: ${properties.table_zebra_background};
 }
-.ProseMirror table .selectedCell:after {
+.selectedCell:after {
   z-index: 2;
   position: absolute;
   content: "";
@@ -335,7 +331,7 @@ td {
   background: rgba(200, 200, 255, 0.4);
   pointer-events: none;
 }
-.ProseMirror table .column-resize-handle {
+.column-resize-handle {
   position: absolute;
   right: -2px;
   top: 0;
@@ -346,30 +342,12 @@ td {
 }
 
 .tableWrapper {
-  padding: 1rem 0;
   overflow-x: auto;
 }
 
 .resize-cursor {
   cursor: ew-resize;
   cursor: col-resize;
-}
-@media (max-width: 650px) {
-  .ProseMirror th {
-    display: none;
-  }
-  .ProseMirror td {
-    display: block;
-  }
-  .ProseMirror td:first-child {
-    padding-top: 1rem;
-  }
-  .ProseMirror td:last-child {
-    padding-bottom: 1rem;
-  }
-  .ProseMirror td::before {
-    content: "ehllo";
-  }
 }
 `      
     
