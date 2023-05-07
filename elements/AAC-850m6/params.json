@@ -195,6 +195,15 @@
             "name": "table_header_font_color",
             "rank": 45
         },
+        "ADf": {
+            "caption": "Zebra background",
+            "default_val": "rgba(238,238,238,1)",
+            "doc": "Background color for odd rows",
+            "editor": "Color",
+            "in_style": true,
+            "name": "table_zebra_background",
+            "rank": 47
+        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",

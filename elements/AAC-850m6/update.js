@@ -315,7 +315,7 @@ td {
 }
 .ProseMirror th * {
   color: ${properties.table_header_font_color};
-  font-weight: ${properties.table_header_font_weight};
+  font-weight: ${properties.table_th_font_weight}; 
 }
 .ProseMirror tr:nth-of-type(odd) {
   background: ${properties.table_zebra_background};
