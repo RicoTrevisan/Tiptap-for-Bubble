@@ -72,9 +72,7 @@ function(instance, properties, context) {
 			}),
 			TableRow,
 			TableHeader,
-            TableCell.configure({
-                style: 'background-color: black',
-            }),
+            TableCell,
             Youtube.configure({
   				nocookie: true,
             }),
@@ -348,6 +346,28 @@ td {
 .resize-cursor {
   cursor: ew-resize;
   cursor: col-resize;
+}
+.ProseMirror a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.ProseMirror a:link {
+  color: ${properties.link_color};
+}
+
+.ProseMirror a:visited {
+  color: ${properties.link_color_visited};
+}
+
+.ProseMirror a:focus {
+}
+
+.ProseMirror a:hover {
+   color: ${properties.link_color_hover};
+   ${properties.link_hover_adv};
+}
+
+.ProseMirror a:active {
 }
 `      
     

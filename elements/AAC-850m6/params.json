@@ -204,6 +204,46 @@
             "name": "table_zebra_background",
             "rank": 47
         },
+        "ADg": {
+            "caption": "Link color",
+            "default_val": "rgba(79, 70, 229, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "link_color",
+            "rank": 49
+        },
+        "ADk": {
+            "caption": "Link color hover",
+            "default_val": "rgba(147, 51, 234, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "link_color_hover",
+            "rank": 50
+        },
+        "ADl": {
+            "caption": "Link color visited",
+            "default_val": "rgba(75, 85, 99, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "link_color_visited",
+            "rank": 52
+        },
+        "ADm": {
+            "caption": "Link hover adv",
+            "default_val": "/*   text-decoration: wavy underline red;  */  /*   background: greenyellow; */",
+            "doc": "ADVANCED FEATURE: Here you can enter any valid CSS to apply to hovered links.",
+            "editor": "StaticText",
+            "in_style": true,
+            "long_text": true,
+            "name": "link_hover_adv",
+            "rank": 51
+        },
+        "ADn": {
+            "caption": "link settings",
+            "editor": "Label",
+            "name": "link_settings",
+            "rank": 48
+        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",
