@@ -5,6 +5,7 @@ function(instance, properties, context) {
     
 
 	let initialContent = (properties.bubble.auto_binding()) ? properties.autobinding : properties.initialContent;
+	instance.data.initialContent = initialContent; // a string to keep track of what's currently in the initialContent so that the editor can change when the initialContent changes
 	let content = (properties.content_is_json) ? JSON.parse(initialContent) : initialContent;
      
 
@@ -44,6 +45,8 @@ function(instance, properties, context) {
     const Youtube = window.tiptapYoutube;
     const generateHTML = window.tiptapGenerateHTML;
         
+     
+     
     // create the options object    
 	let options = {
 		element: d,
@@ -228,11 +231,24 @@ function(instance, properties, context) {
         instance.data.editor.setEditable(isEditable);
     }
     
+    
+    
 	if (!!instance.data.editor_is_ready && !instance.data.is_focused && !!properties.bubble.auto_binding()) {
         let content = properties.autobinding;
         instance.data.editor.commands.setContent(content, true);
     };
 
+    
+
+    // handing changing of initial content
+    if (!!instance.data.editor_is_ready && (instance.data.initialContent !== properties.initialContent) && !properties.bubble.auto_binding()) {
+        console.log("initialContent has changed");
+        instance.data.initialContent = properties.initialContent;
+        instance.data.editor.commands.setContent(instance.data.initialContent, true);
+    };
+
+    
+    
     
     // switch between scrolling the editor or stretching it.
     if (!!instance.data.editor_is_ready) {
