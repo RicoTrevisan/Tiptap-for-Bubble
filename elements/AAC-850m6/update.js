@@ -45,15 +45,27 @@ function(instance, properties, context) {
     const Youtube = window.tiptapYoutube;
     const generateHTML = window.tiptapGenerateHTML;
         
-     
-     
+             
+
+     instance.data.headings = [];
+     properties.headings.split(",").map(item => {
+         instance.data.headings.push(parseInt(item));
+
+     });
+    console.log(instance.data.headings); 
     // create the options object    
 	let options = {
 		element: d,
         editable: true,
         content: content,
         extensions: [      
-            StarterKit,
+            StarterKit
+                 .configure({
+                    heading: {
+                        levels: instance.data.headings,
+
+                    },
+                }),
             TaskList,
             Highlight,
             Underline,
@@ -84,7 +96,6 @@ function(instance, properties, context) {
 		injectCSS: true,
         editorProps: {
             attributes: {
-//                class: 'prose max-w-none prose-a:cursor-pointer prose-table:divide-y-2 prose-table:divide-black prose-th:font-bold prose-td:p-2 prose-tr:p-2 prose-th:p-2 prose-th:bg-gray-50',
                 style: instance.data.stylesheet,
             },
         },
@@ -99,7 +110,7 @@ function(instance, properties, context) {
             console.log("editor is ready");
             
 		},
-		onUpdate: ({ editor }) => {
+		onUpdate({ editor }) {
 			instance.publishState('contentHTML', editor.getHTML());
         	instance.publishState('contentText', editor.getText());
 			instance.publishState('contentJSON', JSON.stringify(editor.getJSON()));
@@ -115,8 +126,6 @@ function(instance, properties, context) {
                 }, 2000);
 
             };
-          
-//		instance.publishAutobinding(editor.getHTML());
 
       },
 	  onFocus({ editor, event }) {
@@ -163,17 +172,32 @@ function(instance, properties, context) {
 		const text = state.doc.textBetween(from, to, '');
         instance.publishState('selected_text', text);
         
-        // try to export the HTML
-        const selection = editor.view.state.selection;
-		editor.view.state.doc.nodesBetween(selection.from, selection.to, node => {
-            window.selectedNode = node;
-//            console.log(generateHTML(node));
-            if (node.type.name === 'text' && node.marks.length > 0) {
-             // do something with node.marks
-                console.log(node.marks);
-            }
-          })
-  },
+		instance.publishState('bold', editor.isActive('bold'));
+        instance.publishState('italic', editor.isActive('italic'));
+        instance.publishState('strike', editor.isActive('strike'));
+        instance.publishState('h1', editor.isActive('heading', { level: 1 }));
+		instance.publishState('h2', editor.isActive('heading', { level: 2 }));
+		instance.publishState('h3', editor.isActive('heading', { level: 3 }));
+		instance.publishState('h4', editor.isActive('heading', { level: 4 }));
+		instance.publishState('h5', editor.isActive('heading', { level: 5 }));
+		instance.publishState('h6', editor.isActive('heading', { level: 6 }));
+		instance.publishState('orderedList', editor.isActive('orderedList'));
+        instance.publishState('bulletList', editor.isActive('bulletList'));
+		instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));  
+		instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
+		instance.publishState('blockquote', editor.isActive('blockquote'));
+        instance.publishState('codeBlock', editor.isActive('codeBlock'));
+        instance.publishState('taskList', editor.isActive('taskList'));
+        instance.publishState('taskItem', editor.isActive('taskItem'));
+        instance.publishState('link', editor.isActive('link'));
+        instance.publishState('url', editor.getAttributes('link').href);
+        instance.publishState('align_left', editor.isActive({ textAlign: 'left' }) );
+		instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
+		instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
+        instance.publishState('highlight', editor.isActive('highlight'));
+		instance.publishState('underline', editor.isActive('underline'));
+		instance.publishState('table', editor.isActive('table'));
+	},
 
 
     } // end of options
@@ -261,7 +285,7 @@ function(instance, properties, context) {
     
 
     //  color: var(--color_text_default); font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
-    console.log(properties.bubble.font_face().match(/^(.*?):/)[1]);
+//    console.log(properties.bubble.font_face().match(/^(.*?):/)[1]);
      instance.data.stylesheet.innerHTML = `
 .ProseMirror {
   

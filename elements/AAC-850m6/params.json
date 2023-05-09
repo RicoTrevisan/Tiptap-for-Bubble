@@ -244,6 +244,21 @@
             "name": "link_settings",
             "rank": 48
         },
+        "ADo": {
+            "caption": "options",
+            "editor": "Label",
+            "name": "options",
+            "rank": 53
+        },
+        "ADp": {
+            "caption": "headings",
+            "default_val": "1,2,3,4,5,6",
+            "doc": "Enable headings. 𝟏,𝟐 will allow only heading 1 and heading 2, etc. Comma separated list of numbers from 1 to 6.",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "headings",
+            "rank": 54
+        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",
