@@ -1,7 +1,10 @@
 function(instance, properties, context) {
     
+   
+    
 // load once
  if (!instance.data.isEditorSetup) {
+        
     
 
 	let initialContent = (properties.bubble.auto_binding()) ? properties.autobinding : properties.initialContent;
@@ -118,7 +121,7 @@ function(instance, properties, context) {
             instance.publishState('characterCount', editor.storage.characterCount.characters());
             instance.publishState('wordCount', editor.storage.characterCount.words());
             instance.triggerEvent('contentUpdated');
-            if (!!properties.bubble.auto_binding() && !!instance.data.editor_is_ready && !instance.data.autobinding_processing) {
+            if (!!properties.bubble.auto_binding() && !!instance.data.editor_is_ready && !instance.data.autobinding_processing && ( ( properties.auto_binding !== editor.getHTML() ) ) ) {
                 instance.data.autobinding_processing = true
                 setTimeout(() => {
 					instance.publishAutobinding(editor.getHTML());
@@ -250,6 +253,8 @@ function(instance, properties, context) {
     //
     // run when the editor is ready
     //
+    
+    
 	if (!!instance.data.editor_is_ready && (properties.isEditable != instance.data.editor.isEditable) ) {
 		let isEditable = properties.isEditable;
         instance.data.editor.setEditable(isEditable);
