@@ -8,8 +8,8 @@ function(instance, properties, context) {
 	instance.data.editor.chain().focus().
     setYoutubeVideo({
         src: url,
-		width: width,
-		height: height,
+//		width: width,
+//		height: height,
     })
     .run();
 

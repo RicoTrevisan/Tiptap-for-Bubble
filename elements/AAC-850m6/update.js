@@ -414,6 +414,13 @@ td {
 
 .ProseMirror a:active {
 }
+
+.ProseMirror iframe {
+	${properties.iframe}
+}
+.ProseMirror img {
+    ${properties.image}
+}
 `      
     
 

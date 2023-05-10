@@ -143,7 +143,7 @@
             "caption": "table settings",
             "editor": "Label",
             "name": "table",
-            "rank": 40
+            "rank": 41
         },
         "ADZ": {
             "caption": "Cell padding",
@@ -151,7 +151,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "table_th_td_padding",
-            "rank": 41
+            "rank": 42
         },
         "ADa": {
             "caption": "Row bottom border",
@@ -159,7 +159,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "table_th_td_border_bottom",
-            "rank": 42
+            "rank": 43
         },
         "ADb": {
             "caption": "Header font weight",
@@ -169,7 +169,7 @@
             "in_style": true,
             "name": "table_th_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 44
+            "rank": 45
         },
         "ADc": {
             "caption": "Header background",
@@ -177,7 +177,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_th_background",
-            "rank": 46
+            "rank": 47
         },
         "ADd": {
             "caption": "Row border color",
@@ -185,7 +185,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_row_border_color",
-            "rank": 43
+            "rank": 44
         },
         "ADe": {
             "caption": "Header font color",
@@ -193,7 +193,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_header_font_color",
-            "rank": 45
+            "rank": 46
         },
         "ADf": {
             "caption": "Zebra background",
@@ -202,7 +202,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_zebra_background",
-            "rank": 47
+            "rank": 48
         },
         "ADg": {
             "caption": "Link color",
@@ -210,7 +210,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color",
-            "rank": 49
+            "rank": 50
         },
         "ADk": {
             "caption": "Link color hover",
@@ -218,7 +218,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color_hover",
-            "rank": 50
+            "rank": 51
         },
         "ADl": {
             "caption": "Link color visited",
@@ -226,7 +226,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color_visited",
-            "rank": 52
+            "rank": 53
         },
         "ADm": {
             "caption": "Link hover adv",
@@ -236,19 +236,19 @@
             "in_style": true,
             "long_text": true,
             "name": "link_hover_adv",
-            "rank": 51
+            "rank": 52
         },
         "ADn": {
             "caption": "link settings",
             "editor": "Label",
             "name": "link_settings",
-            "rank": 48
+            "rank": 49
         },
         "ADo": {
             "caption": "options",
             "editor": "Label",
             "name": "options",
-            "rank": 53
+            "rank": 54
         },
         "ADp": {
             "caption": "headings",
@@ -256,8 +256,30 @@
             "doc": "Enable headings. 𝟏,𝟐 will allow only heading 1 and heading 2, etc. Comma separated list of numbers from 1 to 6.",
             "editor": "StaticText",
             "in_style": true,
+            "long_text": false,
             "name": "headings",
-            "rank": 54
+            "rank": 55
+        },
+        "ADq": {
+            "caption": "YouTube",
+            "default_val": "width: 100%; //overrides the default 640px",
+            "doc": "Add any CSS properties. FYI: The underlying item is an iFrame.",
+            "editor": "StaticText",
+            "in_style": true,
+            "long_text": true,
+            "name": "iframe",
+            "rank": 56,
+            "value": "text"
+        },
+        "ADr": {
+            "caption": "Image properties",
+            "default_val": "width: 100%;",
+            "doc": "Add any CSS properties.",
+            "editor": "StaticText",
+            "in_style": true,
+            "long_text": true,
+            "name": "image",
+            "rank": 40
         },
         "h1_font_weight": {
             "caption": "H1 font-weight",

@@ -12,7 +12,8 @@
         },
         "ADK": {
             "caption": "width",
-            "default_val": 640,
+            "default_val": 320,
+            "doc": "If you set the width at 100% on the Tiptap element on the editor, this will serve as min width.",
             "editor": "DynamicValue",
             "name": "width",
             "rank": 1,
@@ -20,7 +21,8 @@
         },
         "ADL": {
             "caption": "height",
-            "default_val": 480,
+            "default_val": 240,
+            "doc": "If you set the width at 100% on the Tiptap element on the editor, this will serve as min height.",
             "editor": "DynamicValue",
             "name": "height",
             "rank": 2,
