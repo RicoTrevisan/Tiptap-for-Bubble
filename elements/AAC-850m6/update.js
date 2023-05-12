@@ -28,6 +28,26 @@ function(instance, properties, context) {
     
     
 	// pull the libraries that were loaded on Header
+
+    const Document = window.tiptapDocument;
+    const HardBreak = window.tiptapHardBreak;
+    const Heading = window.tiptapHeading;
+    const Paragraph = window.tiptapParagraph;
+    const Text = window.tiptapText;
+    const Bold = window.tiptapBold;
+    const Code = window.tiptapCode;
+    const Italic = window.tiptapItalic;
+    const Strike = window.tiptapStrike;
+    const Dropcursor = window.tiptapDropcursor;
+    const Gapcursor = window.tiptapGapcursor;
+    const History = window.tiptapHistory;
+    const Blockquote = window.tiptapBlockquote;
+    const BulletList = window.tiptapBulletList;
+    const CodeBlock = window.tiptapCodeBlock;
+    const HorizontalRule = window.tiptapHorizontalRule;
+    const ListItem = window.tiptapListItem;
+    const OrderedList = window.tiptapOrderedList;
+
     const Editor = window.tiptapEditor;
     const StarterKit = window.tiptapStarterKit;
     const TaskList = window.tiptapTaskList;
@@ -61,32 +81,46 @@ function(instance, properties, context) {
      const active_nodes = properties.nodes.split(",").map(item => item.trim());
      instance.data.active_nodes = active_nodes;
      
-     const extensions = [      
-            StarterKit
-				.configure({
-                    heading: {
-                        levels: instance.data.headings,
-					},
-				}),
-            TextAlign.configure({ types: ['heading', 'paragraph'], }),
-            Placeholder.configure({ placeholder: placeholder, }),
-            CharacterCount,
-            Image.configure({
-                inline: true,
-                allowBase64: true,
-            }),
-            Link,
-			Table.configure({
-				resizable: true,
-			}),
-			TableRow,
-			TableHeader,
-            TableCell,
-            Youtube.configure({
-  				nocookie: true,
-            }),
+     const extensions = [
+        Document,
+        HardBreak,
+        Heading.configure({
+            levels: instance.data.headings,
+        }),
+        Paragraph,
+        Text,
+        Bold,
+        Code,
+        Italic,
+        Strike,
+        Dropcursor,
+        Gapcursor,
+        History,
+        Blockquote,
+        BulletList,
+        CodeBlock,
+        HorizontalRule,
+        ListItem,
+        OrderedList,
+        TextAlign.configure({ types: ['heading', 'paragraph'], }),
+        Placeholder.configure({ placeholder: placeholder, }),
+        CharacterCount,
+        Image.configure({
+            inline: true,
+            allowBase64: true,
+        }),
+        Link,
+        Table.configure({
+            resizable: true,
+        }),
+        TableRow,
+        TableHeader,
+        TableCell,
+        Youtube.configure({
+            nocookie: true,
+        }),
 
-      	]
+    ]
 
      if (active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
      if (active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
