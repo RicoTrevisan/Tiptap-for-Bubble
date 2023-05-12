@@ -281,16 +281,6 @@
             "name": "image",
             "rank": 40
         },
-        "nodes": {
-            "caption": "nodes",
-            "default_val": "Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, TableCell, TableHeader, TableRow, Image, Link, TaskList, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign, Highlight",
-            "doc": "Active nodes. If you remove an item, the editor will not allow or render that node type. Possible options: Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, TableCell, TableHeader, TableRow, Image, Link, TaskList, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign, Highlight",
-            "editor": "StaticText",
-            "in_style": true,
-            "long_text": true,
-            "name": "nodes",
-            "rank": 57
-        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",
@@ -511,6 +501,16 @@
             "in_style": true,
             "name": "h6_size",
             "rank": 36
+        },
+        "nodes": {
+            "caption": "nodes",
+            "default_val": "Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, TableCell, TableHeader, TableRow, Image, Link, TaskList, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign, Highlight",
+            "doc": "Active nodes. If you remove an item, the editor will not allow or render that node type. Possible options: Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, TableCell, TableHeader, TableRow, Image, Link, TaskList, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign, Highlight",
+            "editor": "StaticText",
+            "in_style": true,
+            "long_text": true,
+            "name": "nodes",
+            "rank": 57
         }
     },
     "has_reset_fn": false,
