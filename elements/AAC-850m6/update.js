@@ -119,10 +119,38 @@ function(instance, properties, context) {
 
     ]
 
-     if (instance.data.active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
-     if (instance.data.active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
-     if (instance.data.active_nodes.includes("Underline")) { extensions.push( Underline ) };
-	 if (instance.data.active_nodes.includes("HardBreak")) { extensions.push( HardBreak ) };
+    if (instance.data.active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
+    if (instance.data.active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
+    if (instance.data.active_nodes.includes("Underline")) { extensions.push( Underline ) };
+    if (instance.data.active_nodes.includes("HardBreak")) { extensions.push( HardBreak ) };
+
+    if (instance.data.active_nodes.includes("Heading")) {extensions.push ( Heading )}
+    if (instance.data.active_nodes.includes("Bold")) {extensions.push ( Bold )}
+    if (instance.data.active_nodes.includes("Code")) {extensions.push ( Code )}
+    if (instance.data.active_nodes.includes("Italic")) {extensions.push ( Italic )}
+    if (instance.data.active_nodes.includes("Strike")) {extensions.push ( Strike )}
+    if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )}
+    if (instance.data.active_nodes.includes("Gapcursor")) {extensions.push ( Gapcursor )}
+    if (instance.data.active_nodes.includes("History")) {extensions.push ( History )}
+    if (instance.data.active_nodes.includes("Blockquote")) {extensions.push ( Blockquote )}
+    if (instance.data.active_nodes.includes("BulletList")) {extensions.push ( BulletList )}
+    if (instance.data.active_nodes.includes("CodeBlock")) {extensions.push ( CodeBlock )}
+    if (instance.data.active_nodes.includes("HorizontalRule")) {extensions.push ( HorizontalRule )}
+    if (instance.data.active_nodes.includes("ListItem")) {extensions.push ( ListItem )}
+    if (instance.data.active_nodes.includes("OrderedList")) {extensions.push ( OrderedList )}
+    if (instance.data.active_nodes.includes("Youtube")) {extensions.push ( Youtube )}
+    if (instance.data.active_nodes.includes("Underline")) {extensions.push ( Underline )}
+    if (instance.data.active_nodes.includes("Table")) {extensions.push ( Table )}
+    if (instance.data.active_nodes.includes("TableCell")) {extensions.push ( TableCell )}
+    if (instance.data.active_nodes.includes("TableHeader")) {extensions.push ( TableHeader )}
+    if (instance.data.active_nodes.includes("TableRow")) {extensions.push ( TableRow )}
+    if (instance.data.active_nodes.includes("Image")) {extensions.push ( Image )}
+    if (instance.data.active_nodes.includes("Link")) {extensions.push ( Link )}
+    if (instance.data.active_nodes.includes("Placeholder")) {extensions.push ( Placeholder )}
+    if (instance.data.active_nodes.includes("CharacterCount")) {extensions.push ( CharacterCount )}
+    if (instance.data.active_nodes.includes("BubbleMenu")) {extensions.push ( BubbleMenu )}
+    if (instance.data.active_nodes.includes("FloatingMenu")) {extensions.push ( FloatingMenu )}
+    if (instance.data.active_nodes.includes("TextAlign")) {extensions.push ( TextAlign )}
                                              
 	console.log("extensions", extensions);
 	const options_v2 = { extensions };
