@@ -28,7 +28,6 @@ function(instance, properties, context) {
     
     
 	// pull the libraries that were loaded on Header
-
     const Document = window.tiptapDocument;
     const HardBreak = window.tiptapHardBreak;
     const Heading = window.tiptapHeading;
