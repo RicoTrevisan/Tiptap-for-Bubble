@@ -281,6 +281,16 @@
             "name": "image",
             "rank": 40
         },
+        "ADs": {
+            "caption": "nodes",
+            "default_val": "TaskList, Highlight, Underline, Blockquote, BulletList, CodeBlock, HardBreak, HorizontalRule, ListItem, OrderedList, Paragraph, Text",
+            "doc": "Active nodes. If you remove an item, the editor will not allow or render that node type.",
+            "editor": "StaticText",
+            "in_style": true,
+            "long_text": true,
+            "name": "nodes",
+            "rank": 57
+        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",

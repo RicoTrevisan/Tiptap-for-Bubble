@@ -47,6 +47,7 @@ function(instance, properties, context) {
 	const Underline = window.tiptapUnderline;    
     const Youtube = window.tiptapYoutube;
     const generateHTML = window.tiptapGenerateHTML;
+     
         
              
 
@@ -55,38 +56,28 @@ function(instance, properties, context) {
          instance.data.headings.push(parseInt(item));
 
      });
-    console.log(instance.data.headings); 
-    // create the options object    
-	let options = {
-		element: d,
-        editable: true,
-        content: content,
-        extensions: [      
+
+     
+     const active_nodes = properties.nodes.split(",").map(item => item.trim());
+     instance.data.active_nodes = active_nodes;
+     
+     const extensions = [      
             StarterKit
-                 .configure({
+				.configure({
                     heading: {
                         levels: instance.data.headings,
-
-                    },
-                }),
-            TaskList,
-            Highlight,
-            Underline,
+					},
+				}),
             TextAlign.configure({ types: ['heading', 'paragraph'], }),
-            TaskItem.configure({ nested: true, }),
             Placeholder.configure({ placeholder: placeholder, }),
             CharacterCount,
             Image.configure({
                 inline: true,
                 allowBase64: true,
-                HTMLAttributes: {
-					class: 'rounded-xl shadow-lg',
-                },
             }),
             Link,
 			Table.configure({
 				resizable: true,
-                style: '',
 			}),
 			TableRow,
 			TableHeader,
@@ -95,7 +86,55 @@ function(instance, properties, context) {
   				nocookie: true,
             }),
 
-      	],
+      	]
+
+     if (active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
+     if (active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
+     if (active_nodes.includes("Underline")) { extensions.push( Underline ) };
+                                             
+	console.log("extensions", extensions);
+	const options_v2 = { extensions };
+	console.log("options_v2", options_v2);
+     
+     
+    // 
+    // create the options object    
+    // 
+	let options = {
+		element: d,
+        editable: true,
+        content: content,
+        extensions: extensions,
+/*        extensions: [      
+            StarterKit
+				.configure({
+                    heading: {
+                        levels: instance.data.headings,
+					},
+				}),
+            TaskList,
+			TaskItem.configure({ nested: true, }),
+            Highlight,
+            Underline,
+            TextAlign.configure({ types: ['heading', 'paragraph'], }),
+            Placeholder.configure({ placeholder: placeholder, }),
+            CharacterCount,
+            Image.configure({
+                inline: true,
+                allowBase64: true,
+            }),
+            Link,
+			Table.configure({
+				resizable: true,
+			}),
+			TableRow,
+			TableHeader,
+            TableCell,
+            Youtube.configure({
+  				nocookie: true,
+            }),
+
+      	], */
 		injectCSS: true,
         editorProps: {
             attributes: {
