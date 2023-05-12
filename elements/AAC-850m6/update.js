@@ -48,7 +48,6 @@ function(instance, properties, context) {
     const OrderedList = window.tiptapOrderedList;
 
     const Editor = window.tiptapEditor;
-    const StarterKit = window.tiptapStarterKit;
     const TaskList = window.tiptapTaskList;
     const TaskItem	= window.tiptapTaskItem;
 	const Placeholder = window.tiptapPlaceholder;
@@ -77,12 +76,11 @@ function(instance, properties, context) {
      });
 
      
-     const active_nodes = properties.nodes.split(",").map(item => item.trim());
-     instance.data.active_nodes = active_nodes;
+     instance.data.active_nodes = properties.nodes.split(",").map(item => item.trim());
+     const active_nodes = instance.data.active_nodes;
      
      const extensions = [
         Document,
-        HardBreak,
         Heading.configure({
             levels: instance.data.headings,
         }),
@@ -121,9 +119,10 @@ function(instance, properties, context) {
 
     ]
 
-     if (active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
-     if (active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
-     if (active_nodes.includes("Underline")) { extensions.push( Underline ) };
+     if (instance.data.active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
+     if (instance.data.active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
+     if (instance.data.active_nodes.includes("Underline")) { extensions.push( Underline ) };
+	 if (instance.data.active_nodes.includes("HardBreak")) { extensions.push( HardBreak ) };
                                              
 	console.log("extensions", extensions);
 	const options_v2 = { extensions };
