@@ -1,5 +1,6 @@
 function(instance, properties, context) {
     
+        
    
     
 // load once
@@ -66,6 +67,11 @@ function(instance, properties, context) {
     const Youtube = window.tiptapYoutube;
     const generateHTML = window.tiptapGenerateHTML;
      
+     // load collab-related libraries
+     const Collaboration = window.tiptapCollaboration;
+     const CollaborationCursor = window.tiptapCollaborationCursor;
+     const TiptapCollabProvider = window.TiptapCollabProvider;
+     
         
              
 
@@ -79,11 +85,38 @@ function(instance, properties, context) {
      instance.data.active_nodes = properties.nodes.split(",").map(item => item.trim());
      const active_nodes = instance.data.active_nodes;
      
+
+     // Collaboration setup
+     /*
+     let user_name = properties.user_name;
+     let cursor_color = properties.cursor_color
+     */
+                                               
+     instance.data.jwt_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODQwODk4NDEsIm5iZiI6MTY4NDA4OTg0MSwiZXhwIjoxNjg0MTc2MjQxLCJpc3MiOiJodHRwczovL2NvbGxhYi50aXB0YXAuZGV2IiwiYXVkIjoickByaWNvLnd0ZiJ9.1ta0uojxo5wghydungPinO3WRA_6jHZGQ47A_FhSBbs';
+
+     instance.data.provider = new TiptapCollabProvider({
+         appId: 'nrm8g1ko', // get this at collab.tiptap.dev
+         name: properties.document_id, // e.g. a uuid uuidv4();
+         token: instance.data.jwt_token, // see "Authentication" below
+     });
+     
+     
+     
      const extensions = [
-        Document,
-        Paragraph,
-        Text,
-    ]
+         Document,
+         Paragraph,
+         Text,
+         Collaboration.configure({
+             document: instance.data.provider.document,
+         }),
+         CollaborationCursor.configure({
+             provider: instance.data.provider,
+             user: {
+                 name: properties.user_name,
+                 color: properties.cursor_color
+             }
+         }),
+     ]
 
     if (instance.data.active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
     if (instance.data.active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
@@ -97,7 +130,7 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("Strike")) {extensions.push ( Strike )};
     if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )};
     if (instance.data.active_nodes.includes("Gapcursor")) {extensions.push ( Gapcursor )};
-    if (instance.data.active_nodes.includes("History")) {extensions.push ( History )};
+    if ( (instance.data.active_nodes.includes("History") && !!properties.collab) ) {extensions.push ( History )};
     if (instance.data.active_nodes.includes("Blockquote")) {extensions.push ( Blockquote )};
     if (instance.data.active_nodes.includes("BulletList")) {extensions.push ( BulletList )};
     if (instance.data.active_nodes.includes("CodeBlock")) {extensions.push ( CodeBlock )};
@@ -105,20 +138,13 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("ListItem")) {extensions.push ( ListItem )};
     if (instance.data.active_nodes.includes("OrderedList")) {extensions.push ( OrderedList )};
     if (instance.data.active_nodes.includes("Youtube")) {extensions.push ( Youtube.configure({ nocookie: true, }), )};
-    if (instance.data.active_nodes.includes("Underline")) {extensions.push ( Underline )}
     if (instance.data.active_nodes.includes("Table")) {extensions.push ( Table.configure({ resizable: true, }), TableRow, TableHeader, TableCell, )};
     if (instance.data.active_nodes.includes("Image")) {extensions.push ( Image.configure({ inline: true, allowBase64: true, }), )};
     if (instance.data.active_nodes.includes("Link")) {extensions.push ( Link )};
     if (instance.data.active_nodes.includes("Placeholder")) {extensions.push ( Placeholder.configure({ placeholder: placeholder, }) )};
     if (instance.data.active_nodes.includes("CharacterCount")) {extensions.push ( CharacterCount )};
-    if (instance.data.active_nodes.includes("BubbleMenu")) {extensions.push ( BubbleMenu )};
-    if (instance.data.active_nodes.includes("FloatingMenu")) {extensions.push ( FloatingMenu )};
     if (instance.data.active_nodes.includes("TextAlign")) {extensions.push ( TextAlign.configure({ types: ['heading', 'paragraph'], }) )};
-                                             
-	console.log("extensions", extensions);
-	const options_v2 = { extensions };
-	console.log("options_v2", options_v2);
-     
+   
      
     // 
     // create the options object    
@@ -126,38 +152,8 @@ function(instance, properties, context) {
 	let options = {
 		element: d,
         editable: true,
-        content: content,
+        // content: if (!!properties.collab) , // content,
         extensions: extensions,
-/*        extensions: [      
-            StarterKit
-				.configure({
-                    heading: {
-                        levels: instance.data.headings,
-					},
-				}),
-            TaskList,
-			TaskItem.configure({ nested: true, }),
-            Highlight,
-            Underline,
-            TextAlign.configure({ types: ['heading', 'paragraph'], }),
-            Placeholder.configure({ placeholder: placeholder, }),
-            CharacterCount,
-            Image.configure({
-                inline: true,
-                allowBase64: true,
-            }),
-            Link,
-			Table.configure({
-				resizable: true,
-			}),
-			TableRow,
-			TableHeader,
-            TableCell,
-            Youtube.configure({
-  				nocookie: true,
-            }),
-
-      	], */
 		injectCSS: true,
         editorProps: {
             attributes: {
@@ -183,6 +179,9 @@ function(instance, properties, context) {
             instance.publishState('characterCount', editor.storage.characterCount.characters());
             instance.publishState('wordCount', editor.storage.characterCount.words());
             instance.triggerEvent('contentUpdated');
+            
+            // updates the auto_binding data, but it does so only if auto_binding is on, the editor is ready, and the data actually changed
+            // and it updates only every 2 seconds to not flood 
             if (!!properties.bubble.auto_binding() && !!instance.data.editor_is_ready && !instance.data.autobinding_processing && ( ( properties.auto_binding !== editor.getHTML() ) ) ) {
                 instance.data.autobinding_processing = true
                 setTimeout(() => {
@@ -232,6 +231,8 @@ function(instance, properties, context) {
 		instance.publishState('table', editor.isActive('table'));
       },
     onSelectionUpdate({ editor }) {
+        
+        // gets the current selected text
         const { view, state } = editor;
 		const { from, to } = view.state.selection;
 		const text = state.doc.textBetween(from, to, '');
@@ -265,10 +266,19 @@ function(instance, properties, context) {
 	},
 
 
-    } // end of options
+    } 
+    //
+    // end of options
+    //
 
+    
+    // add content if not collab is turned off.
+  	if (!properties.collab) {
+        options.content = content;
+    };
+    
 
-	if (properties.bubbleMenu != '') {
+	if ( (properties.bubbleMenu != '') && instance.data.active_nodes.includes("BubbleMenu") ) {
         let bubbleMenuTheme = properties.bubbleMenuTheme;
         console.log(`setting bubble menu to: ${properties.bubbleMenuTheme}`);
         let bubbleMenuDiv = document.querySelector("#" + properties.bubbleMenu);
@@ -277,7 +287,7 @@ function(instance, properties, context) {
         } }) );
     }
      
-     if (properties.floatingMenu != '') {
+     if ( (properties.floatingMenu != '') && instance.data.active_nodes.includes("FloatingMenu") ) {
 		 let floatingMenuTheme = properties.floatingMenuTheme;
          console.log(`setting floating menu to: ${properties.floatingMenuTheme}`);
          let floatingMenuDiv = document.querySelector("#" + properties.floatingMenu);
@@ -330,10 +340,14 @@ function(instance, properties, context) {
     };
 
     
+    console.log("status of autobinding: ",properties.bubble.auto_binding() );
+    console.log("!properties.bubble.auto_binding()",!properties.bubble.auto_binding() );
 
     // handing changing of initial content
-    if (!!instance.data.editor_is_ready && (instance.data.initialContent !== properties.initialContent) && !properties.bubble.auto_binding()) {
+    if (!!instance.data.editor_is_ready && !properties.collab && (instance.data.initialContent !== properties.initialContent) && !properties.bubble.auto_binding()) {
         console.log("initialContent has changed");
+		console.log("status of autobinding: ",properties.bubble.auto_binding() );
+		console.log("!properties.bubble.auto_binding()",!properties.bubble.auto_binding() );
         instance.data.initialContent = properties.initialContent;
         instance.data.editor.commands.setContent(instance.data.initialContent, true);
     };
@@ -349,6 +363,14 @@ function(instance, properties, context) {
             instance.canvas.css({'overflow':'auto'});
         }
     }
+    
+    if (!!instance.data.isEditorSetup) {
+	instance.data.editor.commands.updateUser({
+        name: properties.user_name,
+        color: properties.cursor_color,
+        avatar: 'https://unavatar.io/github/ueberdosis',
+	});
+}
     
 
     //  color: var(--color_text_default); font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
@@ -482,6 +504,31 @@ td {
 }
 .ProseMirror img {
     ${properties.image}
+}
+
+.collaboration-cursor__caret {
+  position: relative;
+  margin-left: -1px;
+  margin-right: -1px;
+  border-left: 1px solid #0D0D0D;
+  border-right: 1px solid #0D0D0D;
+  word-break: normal;
+  pointer-events: none;
+}
+
+.collaboration-cursor__label {
+  position: absolute;
+  top: -1.4em;
+  left: -1px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  user-select: none;
+  color: #0D0D0D;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px 3px 3px 0;
+  white-space: nowrap;
 }
 `      
     

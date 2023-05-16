@@ -8,6 +8,6 @@
     "image": "//s3.amazonaws.com/appforest_uf/f1671049405494x906508617350303200/tiptap%20logo%20400x400.jpg",
     "license": "open_source",
     "link": "https://forum.bubble.io/t/tiptap-rich-text-editor-with-html-output/238504",
-    "name": "Rich text editor (Tiptap.dev)",
+    "name": "🤌 Rich text editor (Tiptap.dev)",
     "plugin_instructions": "1. Place the element on the page\n2. Feed it some initial content (plain text or HTML)\n3. Save the HTML as output\n\nExtras:\n- build and wire your own menu\n- floating menu\n- bubble menu\n"
 }

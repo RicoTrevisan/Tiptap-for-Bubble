@@ -258,7 +258,7 @@
             "in_style": true,
             "long_text": false,
             "name": "headings",
-            "rank": 55
+            "rank": 56
         },
         "ADq": {
             "caption": "YouTube",
@@ -268,7 +268,7 @@
             "in_style": true,
             "long_text": true,
             "name": "iframe",
-            "rank": 56,
+            "rank": 57,
             "value": "text"
         },
         "ADr": {
@@ -280,6 +280,44 @@
             "long_text": true,
             "name": "image",
             "rank": 40
+        },
+        "ADt": {
+            "caption": "collab",
+            "editor": "Label",
+            "name": "collab",
+            "rank": 58
+        },
+        "ADu": {
+            "caption": "collab?",
+            "default_val": false,
+            "editor": "Checkbox",
+            "name": "collab",
+            "rank": 59
+        },
+        "ADv": {
+            "caption": "Document ID",
+            "editor": "DynamicValue",
+            "name": "document_id",
+            "optional": true,
+            "rank": 60,
+            "value": "text"
+        },
+        "ADw": {
+            "caption": "user",
+            "default_val": "Jack",
+            "editor": "DynamicValue",
+            "name": "user_name",
+            "optional": true,
+            "rank": 61,
+            "value": "text"
+        },
+        "ADx": {
+            "caption": "cursor color",
+            "editor": "DynamicValue",
+            "name": "cursor_color",
+            "optional": true,
+            "rank": 62,
+            "value": "text"
         },
         "h1_font_weight": {
             "caption": "H1 font-weight",
@@ -504,13 +542,13 @@
         },
         "nodes": {
             "caption": "nodes",
-            "default_val": "TaskList, Highlight, Underline, HardBreak, Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, Image, Link, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign",
-            "doc": "Active nodes. If you remove an item, the editor will not allow or render that node type. Possible options: TaskList, Highlight, Underline, HardBreak, Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, Image, Link, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign",
+            "default_val": "Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, TableCell, TableHeader, TableRow, Image, Link, TaskList, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign, Highlight",
+            "doc": "Active nodes. If you remove an item, the editor will not allow or render that node type. Possible options: Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, Image, Link, TaskList, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign, Highlight",
             "editor": "StaticText",
             "in_style": true,
             "long_text": true,
             "name": "nodes",
-            "rank": 57
+            "rank": 55
         }
     },
     "has_reset_fn": false,
