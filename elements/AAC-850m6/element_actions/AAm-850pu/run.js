@@ -1,5 +1,6 @@
 function(instance, properties, context) {
 
-	instance.data.editor.chain().focus().toggleStrike().run();
-
+	if (instance.data.active_nodes.includes("Strike")) {
+		instance.data.editor.chain().focus().toggleStrike().run();
+	};
 }

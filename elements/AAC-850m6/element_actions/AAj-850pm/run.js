@@ -1,7 +1,7 @@
 function(instance, properties, context) {
 
-
-	instance.data.editor.chain().focus().toggleItalic().run();
-
+    if (instance.data.active_nodes.includes("Italic")) {
+		instance.data.editor.chain().focus().toggleItalic().run();
+	};
 
 }

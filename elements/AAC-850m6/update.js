@@ -84,19 +84,24 @@ function(instance, properties, context) {
         Paragraph,
         Text,
     ]
+    
+    if (instance.data.active_nodes.includes("Bold")) {extensions.push ( Bold )};
+    if (instance.data.active_nodes.includes("Italic")) {extensions.push ( Italic )};
+    if (instance.data.active_nodes.includes("Strike")) {extensions.push ( Strike )};
+
+    if (instance.data.active_nodes.includes("Heading")) {extensions.push ( Heading.configure({ levels: instance.data.headings, }), )};
+    
+    
+    
+    if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )};
+    if (instance.data.active_nodes.includes("Gapcursor")) {extensions.push ( Gapcursor )};
 
     if (instance.data.active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
     if (instance.data.active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
     if (instance.data.active_nodes.includes("Underline")) { extensions.push( Underline ) };
     if (instance.data.active_nodes.includes("HardBreak")) { extensions.push( HardBreak ) };
 
-    if (instance.data.active_nodes.includes("Heading")) {extensions.push ( Heading.configure({ levels: instance.data.headings, }), )};
-    if (instance.data.active_nodes.includes("Bold")) {extensions.push ( Bold )};
     if (instance.data.active_nodes.includes("Code")) {extensions.push ( Code )};
-    if (instance.data.active_nodes.includes("Italic")) {extensions.push ( Italic )};
-    if (instance.data.active_nodes.includes("Strike")) {extensions.push ( Strike )};
-    if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )};
-    if (instance.data.active_nodes.includes("Gapcursor")) {extensions.push ( Gapcursor )};
     if (instance.data.active_nodes.includes("History")) {extensions.push ( History )};
     if (instance.data.active_nodes.includes("Blockquote")) {extensions.push ( Blockquote )};
     if (instance.data.active_nodes.includes("BulletList")) {extensions.push ( BulletList )};
@@ -105,7 +110,6 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("ListItem")) {extensions.push ( ListItem )};
     if (instance.data.active_nodes.includes("OrderedList")) {extensions.push ( OrderedList )};
     if (instance.data.active_nodes.includes("Youtube")) {extensions.push ( Youtube.configure({ nocookie: true, }), )};
-    if (instance.data.active_nodes.includes("Underline")) {extensions.push ( Underline )}
     if (instance.data.active_nodes.includes("Table")) {extensions.push ( Table.configure({ resizable: true, }), TableRow, TableHeader, TableCell, )};
     if (instance.data.active_nodes.includes("Image")) {extensions.push ( Image.configure({ inline: true, allowBase64: true, }), )};
     if (instance.data.active_nodes.includes("Link")) {extensions.push ( Link )};

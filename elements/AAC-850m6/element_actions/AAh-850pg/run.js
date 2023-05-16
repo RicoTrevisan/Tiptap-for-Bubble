@@ -1,6 +1,7 @@
 function(instance, properties, context) {
 
-	instance.data.editor.chain().focus().toggleBold().run();
-
+	if (instance.data.active_nodes.includes("Bold")) {
+		instance.data.editor.chain().focus().toggleBold().run();
+	};
 
 }
