@@ -542,8 +542,8 @@
         },
         "nodes": {
             "caption": "nodes",
-            "default_val": "Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, TableCell, TableHeader, TableRow, Image, Link, TaskList, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign, Highlight",
-            "doc": "Active nodes. If you remove an item, the editor will not allow or render that node type. Possible options: Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, Image, Link, TaskList, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign, Highlight",
+            "default_val": "TaskList, Highlight, Underline, HardBreak, Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, Image, Link, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign",
+            "doc": "Active nodes. If you remove an item, the editor will not allow or render that node type. Possible options: TaskList, Highlight, Underline, HardBreak, Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, CodeBlock, HorizontalRule, ListItem, OrderedList, Youtube, Underline, Table, Image, Link, Placeholder, CharacterCount, BubbleMenu, FloatingMenu, TextAlign",
             "editor": "StaticText",
             "in_style": true,
             "long_text": true,
