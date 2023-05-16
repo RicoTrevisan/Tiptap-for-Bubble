@@ -281,44 +281,6 @@
             "name": "image",
             "rank": 40
         },
-        "ADt": {
-            "caption": "collab",
-            "editor": "Label",
-            "name": "collab",
-            "rank": 58
-        },
-        "ADu": {
-            "caption": "collab?",
-            "default_val": false,
-            "editor": "Checkbox",
-            "name": "collab",
-            "rank": 59
-        },
-        "ADv": {
-            "caption": "Document ID",
-            "editor": "DynamicValue",
-            "name": "document_id",
-            "optional": true,
-            "rank": 60,
-            "value": "text"
-        },
-        "ADw": {
-            "caption": "user",
-            "default_val": "Jack",
-            "editor": "DynamicValue",
-            "name": "user_name",
-            "optional": true,
-            "rank": 61,
-            "value": "text"
-        },
-        "ADx": {
-            "caption": "cursor color",
-            "editor": "DynamicValue",
-            "name": "cursor_color",
-            "optional": true,
-            "rank": 62,
-            "value": "text"
-        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",
