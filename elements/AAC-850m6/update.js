@@ -83,9 +83,10 @@ function(instance, properties, context) {
          Document,
          Paragraph,
          Text,
+         ListItem,
+         CharacterCount,
         ]
 
-        // if (instance.data.active_nodes.includes("ListItem")) {extensions.push ( ListItem )};
         
         // maybe these should be included in the standard
     if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )};
@@ -99,10 +100,8 @@ function(instance, properties, context) {
 
     if (instance.data.active_nodes.includes("Heading")) {extensions.push ( Heading.configure({ levels: instance.data.headings, }), )};
 
-    // includes the dependency ListItem if any list extensions are used.
-    if (instance.data.active_nodes.includes("BulletList") || instance.data.active_nodes.includes("OrderedList") || instance.data.active_nodes.includes("TaskList") ) {extensions.push ( ListItem )};
 
-    // group that needs indenting
+    // group that needs ListItem
     if (instance.data.active_nodes.includes("BulletList")) {extensions.push ( BulletList )};
     if (instance.data.active_nodes.includes("OrderedList")) {extensions.push ( OrderedList )};
     if (instance.data.active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
@@ -123,9 +122,7 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("Image")) {extensions.push ( Image.configure({ inline: true, allowBase64: true, }), )};
     if (instance.data.active_nodes.includes("Link")) {extensions.push ( Link )};
     if (instance.data.active_nodes.includes("Placeholder")) {extensions.push ( Placeholder.configure({ placeholder: placeholder, }) )};
-    if (instance.data.active_nodes.includes("CharacterCount")) {extensions.push ( CharacterCount )};
-    if (instance.data.active_nodes.includes("BubbleMenu")) {extensions.push ( BubbleMenu )};
-    if (instance.data.active_nodes.includes("FloatingMenu")) {extensions.push ( FloatingMenu )};
+//    if (instance.data.active_nodes.includes("CharacterCount")) {extensions.push ( CharacterCount )};
     if (instance.data.active_nodes.includes("TextAlign")) {extensions.push ( TextAlign.configure({ types: ['heading', 'paragraph'], }) )};
                                              
      
@@ -133,7 +130,8 @@ function(instance, properties, context) {
     // 
     // create the options object    
     // 
-	let options = {
+     let options = {};
+	options = {
 		element: d,
         editable: true,
         content: content,
@@ -199,8 +197,8 @@ function(instance, properties, context) {
 		instance.publishState('h6', editor.isActive('heading', { level: 6 }));
 		instance.publishState('orderedList', editor.isActive('orderedList'));
         instance.publishState('bulletList', editor.isActive('bulletList'));
-		instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));  
-		instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
+		instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));
+        instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
 		instance.publishState('blockquote', editor.isActive('blockquote'));
         instance.publishState('codeBlock', editor.isActive('codeBlock'));
         instance.publishState('taskList', editor.isActive('taskList'));
@@ -292,8 +290,11 @@ function(instance, properties, context) {
     instance.publishState('contentText', instance.data.editor.getText());
 	instance.publishState('contentJSON', JSON.stringify(instance.data.editor.getJSON()));
     instance.publishState('isEditable', instance.data.editor.isEditable);
-    instance.publishState('characterCount', instance.data.editor.storage.characterCount.characters());
-    instance.publishState('wordCount', instance.data.editor.storage.characterCount.words());
+    if (instance.data.active_nodes.includes("CharacterCount")) {
+        instance.publishState('characterCount', instance.data.editor.storage.characterCount.characters());
+        instance.publishState('wordCount', instance.data.editor.storage.characterCount.words());
+    };
+    
      instance.data.initialContent = instance.data.editor.getHTML();
         
 		instance.data.isEditorSetup = true;
