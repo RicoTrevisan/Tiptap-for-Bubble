@@ -1,8 +1,8 @@
 function(instance, properties, context) {
 
-
-	instance.data.editor.chain().focus().toggleBlockquote().run();
-
+    if (instance.data.active_nodes.includes("Blockquote")) {
+		instance.data.editor.chain().focus().toggleBlockquote().run();
+	};
 
 
 }

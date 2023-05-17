@@ -84,28 +84,33 @@ function(instance, properties, context) {
         Paragraph,
         Text,
     ]
+
+    // maybe these should be included in the standard
+    if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )};
+    if (instance.data.active_nodes.includes("Gapcursor")) {extensions.push ( Gapcursor )};
+    if (instance.data.active_nodes.includes("HardBreak")) { extensions.push( HardBreak ) };
+    if (instance.data.active_nodes.includes("History")) {extensions.push ( History )};
     
     if (instance.data.active_nodes.includes("Bold")) {extensions.push ( Bold )};
     if (instance.data.active_nodes.includes("Italic")) {extensions.push ( Italic )};
     if (instance.data.active_nodes.includes("Strike")) {extensions.push ( Strike )};
 
     if (instance.data.active_nodes.includes("Heading")) {extensions.push ( Heading.configure({ levels: instance.data.headings, }), )};
-    
-    
-    
-    if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )};
-    if (instance.data.active_nodes.includes("Gapcursor")) {extensions.push ( Gapcursor )};
 
+    // group that needs indenting
     if (instance.data.active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
+
     if (instance.data.active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
     if (instance.data.active_nodes.includes("Underline")) { extensions.push( Underline ) };
-    if (instance.data.active_nodes.includes("HardBreak")) { extensions.push( HardBreak ) };
-
+    
+    if (instance.data.active_nodes.includes("CodeBlock")) {extensions.push ( CodeBlock )};
     if (instance.data.active_nodes.includes("Code")) {extensions.push ( Code )};
-    if (instance.data.active_nodes.includes("History")) {extensions.push ( History )};
+    
+    // done fixing above
+
+
     if (instance.data.active_nodes.includes("Blockquote")) {extensions.push ( Blockquote )};
     if (instance.data.active_nodes.includes("BulletList")) {extensions.push ( BulletList )};
-    if (instance.data.active_nodes.includes("CodeBlock")) {extensions.push ( CodeBlock )};
     if (instance.data.active_nodes.includes("HorizontalRule")) {extensions.push ( HorizontalRule )};
     if (instance.data.active_nodes.includes("ListItem")) {extensions.push ( ListItem )};
     if (instance.data.active_nodes.includes("OrderedList")) {extensions.push ( OrderedList )};
