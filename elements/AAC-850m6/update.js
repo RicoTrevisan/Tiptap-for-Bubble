@@ -80,12 +80,14 @@ function(instance, properties, context) {
      const active_nodes = instance.data.active_nodes;
      
      const extensions = [
-        Document,
-        Paragraph,
-        Text,
-    ]
+         Document,
+         Paragraph,
+         Text,
+        ]
 
-    // maybe these should be included in the standard
+        // if (instance.data.active_nodes.includes("ListItem")) {extensions.push ( ListItem )};
+        
+        // maybe these should be included in the standard
     if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )};
     if (instance.data.active_nodes.includes("Gapcursor")) {extensions.push ( Gapcursor )};
     if (instance.data.active_nodes.includes("HardBreak")) { extensions.push( HardBreak ) };
@@ -97,7 +99,12 @@ function(instance, properties, context) {
 
     if (instance.data.active_nodes.includes("Heading")) {extensions.push ( Heading.configure({ levels: instance.data.headings, }), )};
 
+    // includes the dependency ListItem if any list extensions are used.
+    if (instance.data.active_nodes.includes("BulletList") || instance.data.active_nodes.includes("OrderedList") || instance.data.active_nodes.includes("TaskList") ) {extensions.push ( ListItem )};
+
     // group that needs indenting
+    if (instance.data.active_nodes.includes("BulletList")) {extensions.push ( BulletList )};
+    if (instance.data.active_nodes.includes("OrderedList")) {extensions.push ( OrderedList )};
     if (instance.data.active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
 
     if (instance.data.active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
@@ -110,10 +117,7 @@ function(instance, properties, context) {
 
 
     if (instance.data.active_nodes.includes("Blockquote")) {extensions.push ( Blockquote )};
-    if (instance.data.active_nodes.includes("BulletList")) {extensions.push ( BulletList )};
     if (instance.data.active_nodes.includes("HorizontalRule")) {extensions.push ( HorizontalRule )};
-    if (instance.data.active_nodes.includes("ListItem")) {extensions.push ( ListItem )};
-    if (instance.data.active_nodes.includes("OrderedList")) {extensions.push ( OrderedList )};
     if (instance.data.active_nodes.includes("Youtube")) {extensions.push ( Youtube.configure({ nocookie: true, }), )};
     if (instance.data.active_nodes.includes("Table")) {extensions.push ( Table.configure({ resizable: true, }), TableRow, TableHeader, TableCell, )};
     if (instance.data.active_nodes.includes("Image")) {extensions.push ( Image.configure({ inline: true, allowBase64: true, }), )};
