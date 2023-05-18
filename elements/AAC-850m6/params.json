@@ -510,7 +510,7 @@
             "in_style": true,
             "long_text": true,
             "name": "extensions",
-            "rank": 55
+            "rank": 5
         }
     },
     "has_reset_fn": false,
