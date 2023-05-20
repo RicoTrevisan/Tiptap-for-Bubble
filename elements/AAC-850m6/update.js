@@ -67,7 +67,6 @@ function(instance, properties, context) {
     const generateHTML = window.tiptapGenerateHTML;
      
         
-             
 
      instance.data.headings = [];
      properties.headings.split(",").map(item => {
@@ -75,10 +74,11 @@ function(instance, properties, context) {
 
      });
 
-     
+
      instance.data.active_nodes = properties.nodes.split(",").map(item => item.trim());
-     const active_nodes = instance.data.active_nodes;
      
+     const active_nodes = instance.data.active_nodes;
+    
      const extensions = [
          Document,
          Paragraph,
@@ -353,36 +353,42 @@ function(instance, properties, context) {
   color: ${properties.h1_color};
   margin: ${properties.h1_margin};
   font-weight: ${properties.h1_font_weight};
+  ${properties.h1_adv}
 }
 .ProseMirror h2 {
   font-size: ${properties.h2_size};
   color: ${properties.h2_color};
   margin: ${properties.h2_margin};
   font-weight: ${properties.h2_font_weight};
+  ${properties.h2_adv}
 }
 .ProseMirror h3 {
   font-size: ${properties.h3_size};
   color: ${properties.h3_color};
   margin: ${properties.h3_margin};
   font-weight: ${properties.h3_font_weight};
+  ${properties.h3_adv}
 }
 .ProseMirror h4 {
   font-size: ${properties.h4_size};
   color: ${properties.h4_color};
   margin: ${properties.h4_margin};
   font-weight: ${properties.h4_font_weight};
+  ${properties.h4_adv}
 }
 .ProseMirror h5 {
     font-size: ${properties.h5_size};
     color: ${properties.h5_color};
     margin: ${properties.h5_margin};
     font-weight: ${properties.h5_font_weight};
+    ${properties.h5_adv}
 }
 .ProseMirror h6 {
     font-size: ${properties.h6_size};
     color: ${properties.h6_color};
     margin: ${properties.h6_margin};
     font-weight: ${properties.h6_font_weight};
+    ${properties.h6_adv}
 }
 .ProseMirror p {
     font-size: ${properties.bubble.font_size()};
@@ -390,6 +396,7 @@ function(instance, properties, context) {
     font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
     margin: 1rem 0;
     font-weight: 400;
+    ${properties.p_adv}
 }
 .ProseMirror table {
   width: 100%;

@@ -281,6 +281,69 @@
             "name": "image",
             "rank": 40
         },
+        "ADt": {
+            "caption": "h1_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h1_adv",
+            "rank": 58,
+            "value": "text"
+        },
+        "ADu": {
+            "caption": "h2_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h2_adv",
+            "rank": 59,
+            "value": "text"
+        },
+        "ADv": {
+            "caption": "h3_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h3_adv",
+            "rank": 60,
+            "value": "text"
+        },
+        "ADw": {
+            "caption": "h4_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h4_adv",
+            "rank": 61,
+            "value": "text"
+        },
+        "ADx": {
+            "caption": "h5_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h5_adv",
+            "rank": 62,
+            "value": "text"
+        },
+        "ADy": {
+            "caption": "h6_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h6_adv",
+            "rank": 63,
+            "value": "text"
+        },
+        "ADz": {
+            "caption": "p_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "p_adv",
+            "rank": 64,
+            "value": "text"
+        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",
@@ -503,14 +566,14 @@
             "rank": 36
         },
         "nodes": {
-            "caption": "nodes",
+            "caption": "Extensions",
             "default_val": "Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, OrderedList, TaskList, CodeBlock, HorizontalRule, Youtube, Underline, Table, Image, Link, Placeholder, BubbleMenu, FloatingMenu, TextAlign, Highlight",
             "doc": "Active extensions. If you remove an item, the editor will not allow or render that node type. Possible options: Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, OrderedList, TaskList, CodeBlock, HorizontalRule, Youtube, Underline, Table, Image, Link, Placeholder, BubbleMenu, FloatingMenu, TextAlign, Highlight",
             "editor": "StaticText",
             "in_style": true,
             "long_text": true,
-            "name": "extensions",
-            "rank": 5
+            "name": "nodes",
+            "rank": 55
         }
     },
     "has_reset_fn": false,
