@@ -356,14 +356,22 @@
             "rank": 21,
             "value": "text"
         },
-        "h3_adv": {
-            "caption": "h3_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h3_adv",
-            "rank": 60,
-            "value": "text"
+        "h2_2size": {
+            "caption": "H2 Size",
+            "default_val": "3rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h2_size",
+            "rank": 17
+        },
+        "h2_4margin": {
+            "caption": "H2 margin",
+            "default_val": "2.5rem 0",
+            "doc": "e.g.: \"2.5rem 0\" means top & bottom 2.5rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h2_margin",
+            "rank": 19
         },
         "h3_color": {
             "caption": "H3 Color",
