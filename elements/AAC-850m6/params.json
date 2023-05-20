@@ -360,7 +360,7 @@
             "name": "stylesheet_info",
             "rank": 10
         },
-        "h2_color": {
+        "h2_3color": {
             "caption": "H2 Color",
             "default_val": "rgba(17,17,17,10)",
             "editor": "Color",
@@ -368,7 +368,7 @@
             "name": "h2_color",
             "rank": 18
         },
-        "h2_font_weight": {
+        "h2_5font_weight": {
             "caption": "H2 font-weight",
             "default_val": "800",
             "doc": "",
@@ -378,13 +378,13 @@
             "options": "900,800,700,600,500,400",
             "rank": 20
         },
-        "h2_info": {
+        "h2_1info": {
             "caption": "h2 info",
             "editor": "Label",
             "name": "stylesheet_info",
             "rank": 16
         },
-        "h2_margin": {
+        "h2_4margin": {
             "caption": "H2 margin",
             "default_val": "2.5rem 0",
             "doc": "e.g.: \"2.5rem 0\" means top & bottom 2.5rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
@@ -393,7 +393,7 @@
             "name": "h2_margin",
             "rank": 19
         },
-        "h2_size": {
+        "h2_2size": {
             "caption": "H2 Size",
             "default_val": "3rem",
             "editor": "StaticText",
