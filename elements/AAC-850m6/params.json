@@ -356,23 +356,6 @@
             "rank": 21,
             "value": "text"
         },
-        "h2_2size": {
-            "caption": "H2 Size",
-            "default_val": "3rem",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h2_size",
-            "rank": 17
-        },
-        "h2_4margin": {
-            "caption": "H2 margin",
-            "default_val": "2.5rem 0",
-            "doc": "e.g.: \"2.5rem 0\" means top & bottom 2.5rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h2_margin",
-            "rank": 19
-        },
         "h3_color": {
             "caption": "H3 Color",
             "default_val": "rgba(17, 17, 17, 1)",
@@ -420,7 +403,7 @@
             "editor": "DynamicValue",
             "long_text": true,
             "name": "h4_adv",
-            "rank": 61,
+            "rank": 60,
             "value": "text"
         },
         "h4_color": {
@@ -470,7 +453,7 @@
             "editor": "DynamicValue",
             "long_text": true,
             "name": "h5_adv",
-            "rank": 62,
+            "rank": 61,
             "value": "text"
         },
         "h5_color": {
@@ -520,7 +503,7 @@
             "editor": "DynamicValue",
             "long_text": true,
             "name": "h6_adv",
-            "rank": 63,
+            "rank": 62,
             "value": "text"
         },
         "h6_color": {
@@ -580,7 +563,7 @@
             "editor": "DynamicValue",
             "long_text": true,
             "name": "p_adv",
-            "rank": 64,
+            "rank": 63,
             "value": "text"
         }
     },
