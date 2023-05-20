@@ -281,7 +281,7 @@
             "name": "image",
             "rank": 41
         },
-        "ADt": {
+        "h1_adv": {
             "caption": "h1_adv",
             "doc": "any CSS properties",
             "editor": "DynamicValue",
@@ -290,7 +290,7 @@
             "rank": 15,
             "value": "text"
         },
-        "ADu": {
+        "h2_adv": {
             "caption": "h2_adv",
             "doc": "any CSS properties",
             "editor": "DynamicValue",
@@ -299,7 +299,7 @@
             "rank": 20,
             "value": "text"
         },
-        "ADv": {
+        "h3_adv": {
             "caption": "h3_adv",
             "doc": "any CSS properties",
             "editor": "DynamicValue",
@@ -308,7 +308,7 @@
             "rank": 60,
             "value": "text"
         },
-        "ADw": {
+        "h4_adv": {
             "caption": "h4_adv",
             "doc": "any CSS properties",
             "editor": "DynamicValue",
@@ -317,7 +317,7 @@
             "rank": 61,
             "value": "text"
         },
-        "ADx": {
+        "h5_adv": {
             "caption": "h5_adv",
             "doc": "any CSS properties",
             "editor": "DynamicValue",
@@ -326,7 +326,7 @@
             "rank": 62,
             "value": "text"
         },
-        "ADy": {
+        "h6_adv": {
             "caption": "h6_adv",
             "doc": "any CSS properties",
             "editor": "DynamicValue",
@@ -335,7 +335,7 @@
             "rank": 63,
             "value": "text"
         },
-        "ADz": {
+        "p_adv": {
             "caption": "p_adv",
             "doc": "any CSS properties",
             "editor": "DynamicValue",
