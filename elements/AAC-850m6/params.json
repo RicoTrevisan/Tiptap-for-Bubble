@@ -143,7 +143,7 @@
             "caption": "table settings",
             "editor": "Label",
             "name": "table",
-            "rank": 42
+            "rank": 43
         },
         "ADZ": {
             "caption": "Cell padding",
@@ -151,7 +151,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "table_th_td_padding",
-            "rank": 43
+            "rank": 44
         },
         "ADa": {
             "caption": "Row bottom border",
@@ -159,7 +159,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "table_th_td_border_bottom",
-            "rank": 44
+            "rank": 45
         },
         "ADb": {
             "caption": "Header font weight",
@@ -169,7 +169,7 @@
             "in_style": true,
             "name": "table_th_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 46
+            "rank": 47
         },
         "ADc": {
             "caption": "Header background",
@@ -177,7 +177,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_th_background",
-            "rank": 48
+            "rank": 49
         },
         "ADd": {
             "caption": "Row border color",
@@ -185,7 +185,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_row_border_color",
-            "rank": 45
+            "rank": 46
         },
         "ADe": {
             "caption": "Header font color",
@@ -193,7 +193,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_header_font_color",
-            "rank": 47
+            "rank": 48
         },
         "ADf": {
             "caption": "Zebra background",
@@ -202,7 +202,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_zebra_background",
-            "rank": 49
+            "rank": 50
         },
         "ADg": {
             "caption": "Link color",
@@ -210,7 +210,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color",
-            "rank": 51
+            "rank": 52
         },
         "ADk": {
             "caption": "Link color hover",
@@ -218,7 +218,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color_hover",
-            "rank": 52
+            "rank": 53
         },
         "ADl": {
             "caption": "Link color visited",
@@ -226,7 +226,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color_visited",
-            "rank": 54
+            "rank": 55
         },
         "ADm": {
             "caption": "Link hover adv",
@@ -236,19 +236,19 @@
             "in_style": true,
             "long_text": true,
             "name": "link_hover_adv",
-            "rank": 53
+            "rank": 54
         },
         "ADn": {
             "caption": "link settings",
             "editor": "Label",
             "name": "link_settings",
-            "rank": 50
+            "rank": 51
         },
         "ADo": {
             "caption": "options",
             "editor": "Label",
             "name": "options",
-            "rank": 55
+            "rank": 56
         },
         "ADp": {
             "caption": "headings",
@@ -258,7 +258,7 @@
             "in_style": true,
             "long_text": false,
             "name": "headings",
-            "rank": 57
+            "rank": 58
         },
         "ADq": {
             "caption": "YouTube",
@@ -268,7 +268,7 @@
             "in_style": true,
             "long_text": true,
             "name": "iframe",
-            "rank": 58,
+            "rank": 59,
             "value": "text"
         },
         "ADr": {
@@ -279,7 +279,7 @@
             "in_style": true,
             "long_text": true,
             "name": "image",
-            "rank": 41
+            "rank": 42
         },
         "h1_adv": {
             "caption": "h1_adv",
@@ -288,60 +288,6 @@
             "long_text": true,
             "name": "h1_adv",
             "rank": 15,
-            "value": "text"
-        },
-        "h2_adv": {
-            "caption": "h2_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h2_adv",
-            "rank": 20,
-            "value": "text"
-        },
-        "h3_adv": {
-            "caption": "h3_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h3_adv",
-            "rank": 60,
-            "value": "text"
-        },
-        "h4_adv": {
-            "caption": "h4_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h4_adv",
-            "rank": 61,
-            "value": "text"
-        },
-        "h5_adv": {
-            "caption": "h5_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h5_adv",
-            "rank": 62,
-            "value": "text"
-        },
-        "h6_adv": {
-            "caption": "h6_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h6_adv",
-            "rank": 63,
-            "value": "text"
-        },
-        "p_adv": {
-            "caption": "p_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "p_adv",
-            "rank": 64,
             "value": "text"
         },
         "h1_font_weight": {
@@ -360,6 +306,20 @@
             "name": "stylesheet_info",
             "rank": 10
         },
+        "h2_1info": {
+            "caption": "h2 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 16
+        },
+        "h2_2size": {
+            "caption": "H2 Size",
+            "default_val": "3rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h2_size",
+            "rank": 17
+        },
         "h2_3color": {
             "caption": "H2 Color",
             "default_val": "rgba(17,17,17,10)",
@@ -367,6 +327,15 @@
             "in_style": true,
             "name": "h2_color",
             "rank": 18
+        },
+        "h2_4margin": {
+            "caption": "H2 margin",
+            "default_val": "2.5rem 0",
+            "doc": "e.g.: \"2.5rem 0\" means top & bottom 2.5rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h2_margin",
+            "rank": 19
         },
         "h2_5font_weight": {
             "caption": "H2 font-weight",
@@ -378,28 +347,23 @@
             "options": "900,800,700,600,500,400",
             "rank": 20
         },
-        "h2_1info": {
-            "caption": "h2 info",
-            "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 16
+        "h2_adv": {
+            "caption": "h2_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h2_adv",
+            "rank": 21,
+            "value": "text"
         },
-        "h2_4margin": {
-            "caption": "H2 margin",
-            "default_val": "2.5rem 0",
-            "doc": "e.g.: \"2.5rem 0\" means top & bottom 2.5rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h2_margin",
-            "rank": 19
-        },
-        "h2_2size": {
-            "caption": "H2 Size",
-            "default_val": "3rem",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h2_size",
-            "rank": 17
+        "h3_adv": {
+            "caption": "h3_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h3_adv",
+            "rank": 60,
+            "value": "text"
         },
         "h3_color": {
             "caption": "H3 Color",
@@ -407,7 +371,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h3_color",
-            "rank": 23
+            "rank": 24
         },
         "h3_font_weight": {
             "caption": "H3 font-weight",
@@ -417,13 +381,13 @@
             "in_style": true,
             "name": "h3_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 24
+            "rank": 25
         },
         "h3_info": {
             "caption": "h3 info",
             "editor": "Label",
             "name": "stylesheet_info",
-            "rank": 21
+            "rank": 22
         },
         "h3_margin": {
             "caption": "H3 margin",
@@ -432,7 +396,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h3_margin",
-            "rank": 25
+            "rank": 26
         },
         "h3_size": {
             "caption": "H3 Size",
@@ -440,7 +404,16 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h3_size",
-            "rank": 22
+            "rank": 23
+        },
+        "h4_adv": {
+            "caption": "h4_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h4_adv",
+            "rank": 61,
+            "value": "text"
         },
         "h4_color": {
             "caption": "H4 Color",
@@ -448,7 +421,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h4_color",
-            "rank": 28
+            "rank": 29
         },
         "h4_font_weight": {
             "caption": "H4 font-weight",
@@ -458,13 +431,13 @@
             "in_style": true,
             "name": "h4_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 29
+            "rank": 30
         },
         "h4_info": {
             "caption": "h4_info",
             "editor": "Label",
             "name": "h4_info",
-            "rank": 26
+            "rank": 27
         },
         "h4_margin": {
             "caption": "H4 margin",
@@ -473,7 +446,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h4_margin",
-            "rank": 30
+            "rank": 31
         },
         "h4_size": {
             "caption": "H4 Size",
@@ -481,7 +454,16 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h4_size",
-            "rank": 27
+            "rank": 28
+        },
+        "h5_adv": {
+            "caption": "h5_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h5_adv",
+            "rank": 62,
+            "value": "text"
         },
         "h5_color": {
             "caption": "H5 Color",
@@ -489,7 +471,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h5_color",
-            "rank": 33
+            "rank": 34
         },
         "h5_font_weight": {
             "caption": "H5 font-weight",
@@ -499,13 +481,13 @@
             "in_style": true,
             "name": "h5_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 34
+            "rank": 35
         },
         "h5_info": {
             "caption": "h5_info",
             "editor": "Label",
             "name": "h5_info",
-            "rank": 31
+            "rank": 32
         },
         "h5_margin": {
             "caption": "H5 margin",
@@ -514,7 +496,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h5_margin",
-            "rank": 35
+            "rank": 36
         },
         "h5_size": {
             "caption": "H5 Size",
@@ -522,7 +504,16 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h5_size",
-            "rank": 32
+            "rank": 33
+        },
+        "h6_adv": {
+            "caption": "h6_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h6_adv",
+            "rank": 63,
+            "value": "text"
         },
         "h6_color": {
             "caption": "H6 Color",
@@ -530,7 +521,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h6_color",
-            "rank": 38
+            "rank": 39
         },
         "h6_font_weight": {
             "caption": "H6 font-weight",
@@ -540,13 +531,13 @@
             "in_style": true,
             "name": "h6_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 39
+            "rank": 40
         },
         "h6_info": {
             "caption": "h6_info",
             "editor": "Label",
             "name": "h6_info",
-            "rank": 36
+            "rank": 37
         },
         "h6_margin": {
             "caption": "H6 margin",
@@ -555,7 +546,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h6_margin",
-            "rank": 40
+            "rank": 41
         },
         "h6_size": {
             "caption": "H6 Size",
@@ -563,7 +554,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h6_size",
-            "rank": 37
+            "rank": 38
         },
         "nodes": {
             "caption": "Extensions",
@@ -573,7 +564,16 @@
             "in_style": true,
             "long_text": true,
             "name": "nodes",
-            "rank": 56
+            "rank": 57
+        },
+        "p_adv": {
+            "caption": "p_adv",
+            "doc": "any CSS properties",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "p_adv",
+            "rank": 64,
+            "value": "text"
         }
     },
     "has_reset_fn": false,
