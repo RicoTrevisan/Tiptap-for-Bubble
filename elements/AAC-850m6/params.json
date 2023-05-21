@@ -108,7 +108,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h1_size",
-            "rank": 11
+            "rank": 12
         },
         "ADS": {
             "caption": "H1 Color",
@@ -116,7 +116,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h1_color",
-            "rank": 12
+            "rank": 13
         },
         "ADT": {
             "caption": "H1 margin",
@@ -125,7 +125,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h1_margin",
-            "rank": 14
+            "rank": 15
         },
         "ADV": {
             "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
@@ -134,7 +134,7 @@
             "rank": 8
         },
         "ADW": {
-            "caption": "info",
+            "caption": "paragraph",
             "editor": "Label",
             "name": "stylesheet_info",
             "rank": 9
@@ -143,7 +143,7 @@
             "caption": "table settings",
             "editor": "Label",
             "name": "table",
-            "rank": 44
+            "rank": 49
         },
         "ADZ": {
             "caption": "Cell padding",
@@ -151,7 +151,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "table_th_td_padding",
-            "rank": 45
+            "rank": 50
         },
         "ADa": {
             "caption": "Row bottom border",
@@ -159,7 +159,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "table_th_td_border_bottom",
-            "rank": 46
+            "rank": 51
         },
         "ADb": {
             "caption": "Header font weight",
@@ -169,7 +169,7 @@
             "in_style": true,
             "name": "table_th_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 48
+            "rank": 53
         },
         "ADc": {
             "caption": "Header background",
@@ -177,7 +177,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_th_background",
-            "rank": 50
+            "rank": 55
         },
         "ADd": {
             "caption": "Row border color",
@@ -185,7 +185,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_row_border_color",
-            "rank": 47
+            "rank": 52
         },
         "ADe": {
             "caption": "Header font color",
@@ -193,7 +193,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_header_font_color",
-            "rank": 49
+            "rank": 54
         },
         "ADf": {
             "caption": "Zebra background",
@@ -202,7 +202,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_zebra_background",
-            "rank": 51
+            "rank": 56
         },
         "ADg": {
             "caption": "Link color",
@@ -210,7 +210,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color",
-            "rank": 53
+            "rank": 58
         },
         "ADk": {
             "caption": "Link color hover",
@@ -218,7 +218,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color_hover",
-            "rank": 54
+            "rank": 59
         },
         "ADl": {
             "caption": "Link color visited",
@@ -226,7 +226,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color_visited",
-            "rank": 56
+            "rank": 61
         },
         "ADm": {
             "caption": "Link hover adv",
@@ -236,19 +236,19 @@
             "in_style": true,
             "long_text": true,
             "name": "link_hover_adv",
-            "rank": 55
+            "rank": 60
         },
         "ADn": {
             "caption": "link settings",
             "editor": "Label",
             "name": "link_settings",
-            "rank": 52
+            "rank": 57
         },
         "ADo": {
             "caption": "options",
             "editor": "Label",
             "name": "options",
-            "rank": 57
+            "rank": 63
         },
         "ADp": {
             "caption": "headings",
@@ -258,7 +258,7 @@
             "in_style": true,
             "long_text": false,
             "name": "headings",
-            "rank": 59
+            "rank": 65
         },
         "ADq": {
             "caption": "YouTube",
@@ -268,7 +268,7 @@
             "in_style": true,
             "long_text": true,
             "name": "iframe",
-            "rank": 60,
+            "rank": 62,
             "value": "text"
         },
         "ADr": {
@@ -279,15 +279,145 @@
             "in_style": true,
             "long_text": true,
             "name": "image",
-            "rank": 43
+            "rank": 48
         },
-        "h1_adv": {
+        "ADt": {
+            "caption": "p_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "p_adv",
+            "optional": true,
+            "rank": 10,
+            "value": "text"
+        },
+        "ADu": {
             "caption": "h1_adv",
-            "doc": "any CSS properties",
+            "doc": "any CSS property",
             "editor": "DynamicValue",
             "long_text": true,
             "name": "h1_adv",
-            "rank": 15,
+            "optional": true,
+            "rank": 16,
+            "value": "text"
+        },
+        "ADv": {
+            "caption": "h2_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h2_adv",
+            "optional": true,
+            "rank": 22,
+            "value": "text"
+        },
+        "ADw": {
+            "caption": "h3_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h3_adv",
+            "optional": true,
+            "rank": 28,
+            "value": "text"
+        },
+        "ADx": {
+            "caption": "h4_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h4_adv",
+            "optional": true,
+            "rank": 34,
+            "value": "text"
+        },
+        "ADy": {
+            "caption": "h5_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h5_adv",
+            "optional": true,
+            "rank": 40,
+            "value": "text"
+        },
+        "ADz": {
+            "caption": "h6_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h6_adv",
+            "optional": true,
+            "rank": 46,
+            "value": "text"
+        },
+        "AEA": {
+            "caption": "Image",
+            "editor": "Label",
+            "name": "image",
+            "rank": 47
+        },
+        "AEB": {
+            "caption": "Collaboration",
+            "editor": "Label",
+            "name": "collab_info",
+            "rank": 66
+        },
+        "AEC": {
+            "caption": "Enable collaboration?",
+            "default_val": false,
+            "editor": "Checkbox",
+            "name": "collab_active",
+            "rank": 68
+        },
+        "AED": {
+            "caption": "user_name",
+            "default_val": "John Doe",
+            "doc": "Name displayed to other users",
+            "editor": "DynamicValue",
+            "name": "collab_user_name",
+            "optional": true,
+            "rank": 69,
+            "value": "text"
+        },
+        "AEE": {
+            "caption": "cursor_color",
+            "default_val": "rgba(179,208,252,1)",
+            "doc": "In which color this user's name will show to other users.",
+            "editor": "Color",
+            "name": "collab_cursor_color",
+            "optional": true,
+            "rank": 70,
+            "value": "text"
+        },
+        "AEG": {
+            "caption": "collab_info_sub when enabled, autobinding is off -- the doc is autobound to the cloud server",
+            "editor": "Label",
+            "name": "collab_info_sub",
+            "rank": 67
+        },
+        "AEH": {
+            "caption": "app_id",
+            "default_val": "nrm8g1ko",
+            "editor": "StaticText",
+            "name": "collab_app_id",
+            "optional": true,
+            "rank": 71
+        },
+        "AEI": {
+            "caption": "collab_doc_id",
+            "editor": "DynamicValue",
+            "name": "collab_doc_id",
+            "optional": true,
+            "rank": 72,
+            "value": "text"
+        },
+        "AEN": {
+            "caption": "collab_jwt",
+            "editor": "DynamicValue",
+            "name": "collab_jwt",
+            "optional": true,
+            "rank": 73,
             "value": "text"
         },
         "h1_font_weight": {
@@ -298,29 +428,23 @@
             "in_style": true,
             "name": "h1_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 13
+            "rank": 14
         },
         "h1_info1": {
             "caption": "h1 info",
             "editor": "Label",
             "name": "stylesheet_info",
-            "rank": 10
+            "rank": 11
         },
-        "h2_1info": {
-            "caption": "h2 info",
-            "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 16
-        },
-        "h2_3color": {
+        "h2_color": {
             "caption": "H2 Color",
             "default_val": "rgba(17,17,17,10)",
             "editor": "Color",
             "in_style": true,
             "name": "h2_color",
-            "rank": 17
+            "rank": 19
         },
-        "h2_5font_weight": {
+        "h2_font_weight": {
             "caption": "H2 font-weight",
             "default_val": "800",
             "doc": "",
@@ -328,16 +452,30 @@
             "in_style": true,
             "name": "h2_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 18
+            "rank": 21
         },
-        "h2_adv": {
-            "caption": "h2_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h2_adv",
-            "rank": 19,
-            "value": "text"
+        "h2_info": {
+            "caption": "h2 info",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 17
+        },
+        "h2_margin": {
+            "caption": "H2 margin",
+            "default_val": "2.5rem 0",
+            "doc": "e.g.: \"2.5rem 0\" means top & bottom 2.5rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h2_margin",
+            "rank": 20
+        },
+        "h2_size": {
+            "caption": "H2 Size",
+            "default_val": "3rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h2_size",
+            "rank": 18
         },
         "h3_color": {
             "caption": "H3 Color",
@@ -345,7 +483,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h3_color",
-            "rank": 22
+            "rank": 25
         },
         "h3_font_weight": {
             "caption": "H3 font-weight",
@@ -355,13 +493,13 @@
             "in_style": true,
             "name": "h3_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 23
+            "rank": 26
         },
         "h3_info": {
             "caption": "h3 info",
             "editor": "Label",
             "name": "stylesheet_info",
-            "rank": 20
+            "rank": 23
         },
         "h3_margin": {
             "caption": "H3 margin",
@@ -370,7 +508,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h3_margin",
-            "rank": 24
+            "rank": 27
         },
         "h3_size": {
             "caption": "H3 Size",
@@ -378,16 +516,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h3_size",
-            "rank": 21
-        },
-        "h4_adv": {
-            "caption": "h4_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h4_adv",
-            "rank": 30,
-            "value": "text"
+            "rank": 24
         },
         "h4_color": {
             "caption": "H4 Color",
@@ -395,7 +524,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h4_color",
-            "rank": 27
+            "rank": 31
         },
         "h4_font_weight": {
             "caption": "H4 font-weight",
@@ -405,13 +534,13 @@
             "in_style": true,
             "name": "h4_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 28
+            "rank": 32
         },
         "h4_info": {
             "caption": "h4_info",
             "editor": "Label",
             "name": "h4_info",
-            "rank": 25
+            "rank": 29
         },
         "h4_margin": {
             "caption": "H4 margin",
@@ -420,7 +549,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h4_margin",
-            "rank": 29
+            "rank": 33
         },
         "h4_size": {
             "caption": "H4 Size",
@@ -428,16 +557,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h4_size",
-            "rank": 26
-        },
-        "h5_adv": {
-            "caption": "h5_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h5_adv",
-            "rank": 36,
-            "value": "text"
+            "rank": 30
         },
         "h5_color": {
             "caption": "H5 Color",
@@ -445,7 +565,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h5_color",
-            "rank": 33
+            "rank": 37
         },
         "h5_font_weight": {
             "caption": "H5 font-weight",
@@ -455,13 +575,13 @@
             "in_style": true,
             "name": "h5_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 34
+            "rank": 38
         },
         "h5_info": {
             "caption": "h5_info",
             "editor": "Label",
             "name": "h5_info",
-            "rank": 31
+            "rank": 35
         },
         "h5_margin": {
             "caption": "H5 margin",
@@ -470,7 +590,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h5_margin",
-            "rank": 35
+            "rank": 39
         },
         "h5_size": {
             "caption": "H5 Size",
@@ -478,16 +598,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h5_size",
-            "rank": 32
-        },
-        "h6_adv": {
-            "caption": "h6_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h6_adv",
-            "rank": 42,
-            "value": "text"
+            "rank": 36
         },
         "h6_color": {
             "caption": "H6 Color",
@@ -495,7 +606,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h6_color",
-            "rank": 39
+            "rank": 43
         },
         "h6_font_weight": {
             "caption": "H6 font-weight",
@@ -505,13 +616,13 @@
             "in_style": true,
             "name": "h6_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 40
+            "rank": 44
         },
         "h6_info": {
             "caption": "h6_info",
             "editor": "Label",
             "name": "h6_info",
-            "rank": 37
+            "rank": 41
         },
         "h6_margin": {
             "caption": "H6 margin",
@@ -520,7 +631,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h6_margin",
-            "rank": 41
+            "rank": 45
         },
         "h6_size": {
             "caption": "H6 Size",
@@ -528,7 +639,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h6_size",
-            "rank": 38
+            "rank": 42
         },
         "nodes": {
             "caption": "Extensions",
@@ -538,16 +649,7 @@
             "in_style": true,
             "long_text": true,
             "name": "nodes",
-            "rank": 58
-        },
-        "p_adv": {
-            "caption": "p_adv",
-            "doc": "any CSS properties",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "p_adv",
-            "rank": 61,
-            "value": "text"
+            "rank": 64
         }
     },
     "has_reset_fn": false,

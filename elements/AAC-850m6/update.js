@@ -1,6 +1,11 @@
 function(instance, properties, context) {
     
-   
+         if (!!properties.collab_active && !properties.collab_jwt ) {
+             console.log("collab is active but jwt token is not yet loaded. Returning...");
+             return 
+         }
+
+    
     
 // load once
  if (!instance.data.isEditorSetup) {
@@ -65,6 +70,13 @@ function(instance, properties, context) {
 	const Underline = window.tiptapUnderline;    
     const Youtube = window.tiptapYoutube;
     const generateHTML = window.tiptapGenerateHTML;
+         
+
+     // load collaboration libraries
+     const Collaboration = window.tiptapCollaboration;
+     const CollaborationCursor = window.tiptapCollaborationCursor;
+     const TiptapCollabProvider = window.TiptapCollabProvider;
+
      
         
 
@@ -125,6 +137,8 @@ function(instance, properties, context) {
 //    if (instance.data.active_nodes.includes("CharacterCount")) {extensions.push ( CharacterCount )};
     if (instance.data.active_nodes.includes("TextAlign")) {extensions.push ( TextAlign.configure({ types: ['heading', 'paragraph'], }) )};
                                              
+    
+     
      
      
     // 
@@ -277,12 +291,41 @@ function(instance, properties, context) {
         
      }
      
+     
+          // set up collaboration
+
+
+     if (!!properties.collab_active) {              
+
+         // removes initialContent -- normally a collab document will have some document in the cloud.
+         delete options.content;
+
+         instance.data.provider = new TiptapCollabProvider({
+             appId: properties.collab_app_id,
+             name: properties.collab_doc_id,
+             token: properties.collab_jwt,
+         });
+
+
+         extensions.push (
+             Collaboration.configure({
+                 document: instance.data.provider.document,
+             }),
+             CollaborationCursor.configure({
+                 provider: instance.data.provider,
+                 user: {
+                     name: properties.collab_user_name,
+                     color: properties.collab_cursor_color,
+                 }
+             }),
+         );
+
+     }
 
 
     
     // create the editor    
 	instance.data.editor = new Editor(options);        
-    window.editor = instance.data.editor;
         
     
     // initialize exposed states
@@ -298,7 +341,7 @@ function(instance, properties, context) {
      instance.data.initialContent = instance.data.editor.getHTML();
         
 		instance.data.isEditorSetup = true;
-	} // end load once
+} // end load once
 
     
     
@@ -322,10 +365,18 @@ function(instance, properties, context) {
     
 
     // handing changing of initial content
-    if (!!instance.data.editor_is_ready && (instance.data.initialContent !== properties.initialContent) && !properties.bubble.auto_binding()) {
-        console.log("initialContent has changed");
-        instance.data.initialContent = properties.initialContent;
-        instance.data.editor.commands.setContent(instance.data.initialContent, true);
+    // checks if the initial content has something -- if it's empty the user is probably using set content which means this should NOT be applicable
+    if (!!instance.data.editor_is_ready && !properties.initialContent == '' && (instance.data.initialContent !== properties.initialContent) && !properties.bubble.auto_binding() ) {
+
+        if (!properties.collab_active) {
+            
+            console.log("initialContent has changed");
+            instance.data.initialContent = properties.initialContent;
+            instance.data.editor.commands.setContent(instance.data.initialContent, true);
+            
+        } else {
+            console.log("initialContent has changed but collaboration is active -- not updating content");
+        }
     };
 
     
@@ -340,10 +391,20 @@ function(instance, properties, context) {
         }
     }
     
+    
+    // if collab is on, update username and color
+    if (!!instance.data.editor_is_ready && !!properties.collab_active) {
+        instance.data.editor.commands.updateUser({
+            name: properties.collab_user_name,
+            color: properties.collab_cursor_color,
+            //            avatar: 'https://unavatar.io/github/ueberdosis',
+        });
+    }
 
-    //  color: var(--color_text_default); font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
-//    console.log(properties.bubble.font_face().match(/^(.*?):/)[1]);
-     instance.data.stylesheet.innerHTML = `
+
+    // update the stylesheet
+    
+    instance.data.stylesheet.innerHTML = `
 .ProseMirror {
   
 }
@@ -381,14 +442,14 @@ function(instance, properties, context) {
     color: ${properties.h5_color};
     margin: ${properties.h5_margin};
     font-weight: ${properties.h5_font_weight};
-    ${properties.h5_adv}
+  ${properties.h5_adv}
 }
 .ProseMirror h6 {
     font-size: ${properties.h6_size};
     color: ${properties.h6_color};
     margin: ${properties.h6_margin};
     font-weight: ${properties.h6_font_weight};
-    ${properties.h6_adv}
+  ${properties.h6_adv}
 }
 .ProseMirror p {
     font-size: ${properties.bubble.font_size()};
@@ -479,6 +540,31 @@ td {
 }
 .ProseMirror img {
     ${properties.image}
+}
+  .collaboration-cursor__caret {
+  position: relative;
+  margin-left: -1px;
+  margin-right: -1px;
+  border-left: 1px solid #0D0D0D;
+  border-right: 1px solid #0D0D0D;
+  word-break: normal;
+  pointer-events: none;
+}
+
+/* Render the username above the caret */
+.collaboration-cursor__label {
+  position: absolute;
+  top: -1.4em;
+  left: -1px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  user-select: none;
+  color: #0D0D0D;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px 3px 3px 0;
+  white-space: nowrap;
 }
 `      
     

@@ -1,0 +1,24 @@
+{
+    "category": "data (things)",
+    "display": "generate JWT key",
+    "fields": {
+        "AEL": {
+            "caption": "Doc ID",
+            "doc": "the document's unique ID",
+            "editor": "DynamicValue",
+            "name": "doc_id",
+            "rank": 0,
+            "value": "text"
+        }
+    },
+    "return_value": {
+        "AEM": {
+            "caption": "jwt key",
+            "name": "jwt_key",
+            "rank": 0,
+            "value": "text"
+        }
+    },
+    "type": "server_side",
+    "use_packages": true
+}

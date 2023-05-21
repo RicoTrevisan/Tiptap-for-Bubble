@@ -3,5 +3,11 @@
         "alpha_opt_in": false,
         "plugin_api_version": 3,
         "use_jquery": true
+    },
+    "shared_keys": {
+        "AEF": {
+            "caption": "tiptap_collab",
+            "type": "secure"
+        }
     }
 }
