@@ -358,7 +358,7 @@
             "rank": 47
         },
         "AEB": {
-            "caption": "Collaboration",
+            "caption": "𝗖𝗢𝗟𝗟𝗔𝗕𝗢𝗥𝗔𝗧𝗜𝗢𝗡 (beta)",
             "editor": "Label",
             "name": "collab_info",
             "rank": 66
@@ -391,7 +391,7 @@
             "value": "text"
         },
         "AEG": {
-            "caption": "collab_info_sub when enabled, autobinding is off -- the doc is autobound to the cloud server",
+            "caption": "to use the collaboration function you first need an account with 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
             "editor": "Label",
             "name": "collab_info_sub",
             "rank": 67
@@ -399,6 +399,7 @@
         "AEH": {
             "caption": "app_id",
             "default_val": "nrm8g1ko",
+            "doc": "Get the app id from 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
             "editor": "StaticText",
             "name": "collab_app_id",
             "optional": true,
@@ -413,7 +414,8 @@
             "value": "text"
         },
         "AEN": {
-            "caption": "collab_jwt",
+            "caption": "JWT key",
+            "doc": "You will need to use the 𝗴𝗲𝗻𝗲𝗿𝗮𝘁𝗲 𝗝𝗪𝗧 𝗸𝗲𝘆 action.",
             "editor": "DynamicValue",
             "name": "collab_jwt",
             "optional": true,

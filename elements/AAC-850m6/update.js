@@ -356,10 +356,14 @@ function(instance, properties, context) {
     }
     
     
-    
+    // autobinding: updates content except if collab is active.
 	if (!!instance.data.editor_is_ready && !instance.data.is_focused && !!properties.bubble.auto_binding()) {
-        let content = properties.autobinding;
-        instance.data.editor.commands.setContent(content, true);
+        if (!properties.collab_active) {
+            let content = properties.autobinding;
+            instance.data.editor.commands.setContent(content, true);
+        } else {
+            console.log("autobinding and collab are on at the same time. Not updating content.");
+        }
     };
 
     

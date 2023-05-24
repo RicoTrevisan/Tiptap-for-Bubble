@@ -4,7 +4,7 @@
     "fields": {
         "AEL": {
             "caption": "Doc ID",
-            "doc": "the document's unique ID",
+            "doc": "the document's unique ID. This will be the name of the document that you will see on 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
             "editor": "DynamicValue",
             "name": "doc_id",
             "rank": 0,
