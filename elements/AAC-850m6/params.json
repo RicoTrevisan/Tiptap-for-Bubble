@@ -278,7 +278,8 @@
             "editor": "StaticText",
             "in_style": true,
             "long_text": true,
-            "name": "image",
+            "name": "image_css",
+            "optional": true,
             "rank": 48
         },
         "ADt": {

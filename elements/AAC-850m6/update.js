@@ -1,5 +1,7 @@
 function(instance, properties, context) {
     
+    // Removing timing from autobinding
+    
          if (!!properties.collab_active && !properties.collab_jwt ) {
              console.log("collab is active but jwt token is not yet loaded. Returning...");
              return 
@@ -131,7 +133,7 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("HorizontalRule")) {extensions.push ( HorizontalRule )};
     if (instance.data.active_nodes.includes("Youtube")) {extensions.push ( Youtube.configure({ nocookie: true, }), )};
     if (instance.data.active_nodes.includes("Table")) {extensions.push ( Table.configure({ resizable: true, }), TableRow, TableHeader, TableCell, )};
-    if (instance.data.active_nodes.includes("Image")) {extensions.push ( Image.configure({ inline: true, allowBase64: true, }), )};
+    if (instance.data.active_nodes.includes("Image")) {extensions.push ( Image.configure({ inline: false, allowBase64: true, }), )};
     if (instance.data.active_nodes.includes("Link")) {extensions.push ( Link )};
     if (instance.data.active_nodes.includes("Placeholder")) {extensions.push ( Placeholder.configure({ placeholder: placeholder, }) )};
 //    if (instance.data.active_nodes.includes("CharacterCount")) {extensions.push ( CharacterCount )};
@@ -176,27 +178,35 @@ function(instance, properties, context) {
             instance.publishState('wordCount', editor.storage.characterCount.words());
             instance.triggerEvent('contentUpdated');
             
+            if ( !!properties.bubble.auto_binding() ) {
+                instance.publishAutobinding(editor.getHTML());
+            }
+            
+            /*
             // updates the auto_binding data, but it does so only if auto_binding is on, the editor is ready, and the data actually changed
-            // and it updates only every 2 seconds to not flood 
+            // and it updates only every 2 seconds to not flood the editor (the timing is now configurable 
             if (!!properties.bubble.auto_binding() && !!instance.data.editor_is_ready && !instance.data.autobinding_processing && ( ( properties.auto_binding !== editor.getHTML() ) ) ) {
+                console.log("running onUpdate loop");
                 instance.data.autobinding_processing = true
-                setTimeout(() => {
+                instance.data.currentTimeout = setTimeout(() => {
 					instance.publishAutobinding(editor.getHTML());
                     instance.data.autobinding_processing = false;
-                }, 2000);
+                }, properties.autobinding_delay);
 
-            };
+            }; */
 
       },
-	  onFocus({ editor, event }) {
-          instance.triggerEvent('isFocused');
-          instance.publishState('isFocused', true);
-		  instance.data.is_focused = true;
-  	  },
-  	  onBlur({ editor, event }) {
+        onFocus({ editor, event }) {
+            instance.triggerEvent('isFocused');
+            instance.publishState('isFocused', true);
+            instance.data.is_focused = true;
+        },
+
+        onBlur({ editor, event }) {
           instance.triggerEvent('isntFocused');
           instance.publishState('isFocused', false);
           instance.data.is_focused = false;
+          
           
   	  },
       onTransaction({ editor, transaction }) {
@@ -340,7 +350,7 @@ function(instance, properties, context) {
     
      instance.data.initialContent = instance.data.editor.getHTML();
         
-		instance.data.isEditorSetup = true;
+     instance.data.isEditorSetup = true;
 } // end load once
 
     
@@ -543,7 +553,7 @@ td {
 	${properties.iframe}
 }
 .ProseMirror img {
-    ${properties.image}
+    ${properties.image_css}
 }
   .collaboration-cursor__caret {
   position: relative;
@@ -573,15 +583,6 @@ td {
 `      
     
 
-/*  intent was to guess when the initialContent changed and do something with it
-	but that goes against the idea of initialContent. 
-    Removing it.
-    if (instance.data.editor_is_ready && properties.initialContent != instance.data.initialContent && !properties.bubble.auto_binding()) {
-        console.log("sequence has run");
-        let content = properties.initialContent;
-        instance.data.initialContent = content;
-        instance.data.editor.commands.setContent(content, true);
-    }
-*/
+
 
 }

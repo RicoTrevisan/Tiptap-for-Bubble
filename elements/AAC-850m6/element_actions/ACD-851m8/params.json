@@ -5,7 +5,7 @@
             "caption": "Image",
             "doc": "Should be a valid URL. Accepts Base64.",
             "editor": "DynamicValue",
-            "name": "image",
+            "name": "insert_image",
             "rank": 0,
             "value": "image"
         },
