@@ -14,12 +14,20 @@ function(instance, properties, context) {
         if (title) { options.title = title };
         if (alt_text) { options.alt = alt_text };
 
+        instance.data.editor
+            .commands
+            .setImage(options)
+
+        
         //let options = { src: image, alt: alt_text, title: title };
+        /*
         instance.data.editor
             .chain()
             .focus()
             .setImage(options)
             .run();
+            */
+        
     } else { console.log("tried to add Image, but extension is not active.") };
 
 

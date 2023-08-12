@@ -1,11 +1,12 @@
 function(instance, properties, context) {
     
-    // Removing timing from autobinding
-    
-         if (!!properties.collab_active && !properties.collab_jwt ) {
-             console.log("collab is active but jwt token is not yet loaded. Returning...");
-             return 
-         }
+   
+   
+
+    if (!!properties.collab_active && !properties.collab_jwt ) {
+        console.log("collab is active but jwt token is not yet loaded. Returning...");
+        return 
+    }
 
     
     
@@ -26,58 +27,72 @@ function(instance, properties, context) {
 
         
         
-    // create the editor div
-	const randomId = (Math.random() + 1).toString(36).substring(3);
-	var d = document.createElement("div");
-    d.id = 'tiptapEditor-' + randomId;
-    instance.canvas.append(d);
+     // create the editor div
+     const randomId = (Math.random() + 1).toString(36).substring(3);
+     var d = document.createElement("div");
+     d.id = 'tiptapEditor-' + randomId;
+     instance.data.tiptapEditorID = d.id;
+     instance.canvas.append(d);
+
+     
+     // instance.data.editor = new Editor({
+     //     element: d,
+     //     extensions: [
+     //         Text,
+     //         Paragraph,
+     //         HardBreak,
+     //         Document,
+     //     ],
+     //     content: '<p>Hello World!</p>',
+     // }) 
 
     
-    
+
 	// pull the libraries that were loaded on Header
-    const Document = window.tiptapDocument;
-    const HardBreak = window.tiptapHardBreak;
-    const Heading = window.tiptapHeading;
-    const Paragraph = window.tiptapParagraph;
-    const Text = window.tiptapText;
-    const Bold = window.tiptapBold;
-    const Code = window.tiptapCode;
-    const Italic = window.tiptapItalic;
-    const Strike = window.tiptapStrike;
-    const Dropcursor = window.tiptapDropcursor;
-    const Gapcursor = window.tiptapGapcursor;
-    const History = window.tiptapHistory;
-    const Blockquote = window.tiptapBlockquote;
-    const BulletList = window.tiptapBulletList;
-    const CodeBlock = window.tiptapCodeBlock;
-    const HorizontalRule = window.tiptapHorizontalRule;
-    const ListItem = window.tiptapListItem;
-    const OrderedList = window.tiptapOrderedList;
+    // const Document = window.tiptapDocument;
+    // const HardBreak = window.tiptapHardBreak;
+    // const Heading = window.tiptapHeading;
+    // const Paragraph = window.tiptapParagraph;
+    // const Text = window.tiptapText;
+    // const Bold = window.tiptapBold;
+    // const Code = window.tiptapCode;
+    // const Italic = window.tiptapItalic;
+    // const Strike = window.tiptapStrike;
+    // const Dropcursor = window.tiptapDropcursor;
+    // const Gapcursor = window.tiptapGapcursor;
+    // const History = window.tiptapHistory;
+    // const Blockquote = window.tiptapBlockquote;
+    // const BulletList = window.tiptapBulletList;
+    // const CodeBlock = window.tiptapCodeBlock;
+    // const HorizontalRule = window.tiptapHorizontalRule;
+    // const ListItem = window.tiptapListItem;
+    // const OrderedList = window.tiptapOrderedList;
 
-    const Editor = window.tiptapEditor;
-    const TaskList = window.tiptapTaskList;
-    const TaskItem	= window.tiptapTaskItem;
-	const Placeholder = window.tiptapPlaceholder;
-    const CharacterCount = window.tiptapCharacterCount;
-	const Image = window.tiptapImage;
-    const BubbleMenu = window.tiptapBubbleMenu;
-	const FloatingMenu = window.tiptapFloatingMenu;
-    const Link = window.tiptapLink;
-    const TextAlign = window.tiptapTextAlign;
-   	const Highlight = window.tiptapHighlight;
-	const Table = window.tiptapTable;
-	const TableCell = window.tiptapTableCell;
-	const TableHeader = window.tiptapTableHeader;
-	const TableRow = window.tiptapTableRow;
-	const Underline = window.tiptapUnderline;    
-    const Youtube = window.tiptapYoutube;
-    const generateHTML = window.tiptapGenerateHTML;
+    // const Editor = window.tiptapEditor;
+    // const TaskList = window.tiptapTaskList;
+    // const TaskItem	= window.tiptapTaskItem;
+	// const Placeholder = window.tiptapPlaceholder;
+    // const CharacterCount = window.tiptapCharacterCount;
+	// const Image = window.tiptapImage;
+    // const BubbleMenu = window.tiptapBubbleMenu;
+	// const FloatingMenu = window.tiptapFloatingMenu;
+    // const Link = window.tiptapLink;
+    // const TextAlign = window.tiptapTextAlign;
+   	// const Highlight = window.tiptapHighlight;
+	// const Table = window.tiptapTable;
+	// const TableCell = window.tiptapTableCell;
+	// const TableHeader = window.tiptapTableHeader;
+	// const TableRow = window.tiptapTableRow;
+	// const Underline = window.tiptapUnderline;    
+    // const Youtube = window.tiptapYoutube;
+    // const generateHTML = window.tiptapGenerateHTML;
          
 
-     // load collaboration libraries
-     const Collaboration = window.tiptapCollaboration;
-     const CollaborationCursor = window.tiptapCollaborationCursor;
-     const TiptapCollabProvider = window.TiptapCollabProvider;
+    //  // load collaboration libraries
+    //  const Collaboration = window.tiptapCollaboration;
+    //  const CollaborationCursor = window.tiptapCollaborationCursor;
+    //  const TiptapCollabProvider = window.TiptapCollabProvider;
+
 
      
         
@@ -170,6 +185,7 @@ function(instance, properties, context) {
             
 		},
 		onUpdate({ editor }) {
+            // The content has changed.
 			instance.publishState('contentHTML', editor.getHTML());
         	instance.publishState('contentText', editor.getText());
 			instance.publishState('contentJSON', JSON.stringify(editor.getJSON()));
@@ -178,38 +194,44 @@ function(instance, properties, context) {
             instance.publishState('wordCount', editor.storage.characterCount.words());
             instance.triggerEvent('contentUpdated');
             
-            if ( !!properties.bubble.auto_binding() ) {
-                instance.publishAutobinding(editor.getHTML());
-            }
+//            if ( properties.bubble.auto_binding() == true ) {
+//                instance.publishAutobinding(editor.getHTML());
+//            }
             
-            /*
+            
             // updates the auto_binding data, but it does so only if auto_binding is on, the editor is ready, and the data actually changed
             // and it updates only every 2 seconds to not flood the editor (the timing is now configurable 
-            if (!!properties.bubble.auto_binding() && !!instance.data.editor_is_ready && !instance.data.autobinding_processing && ( ( properties.auto_binding !== editor.getHTML() ) ) ) {
-                console.log("running onUpdate loop");
-                instance.data.autobinding_processing = true
-                instance.data.currentTimeout = setTimeout(() => {
-					instance.publishAutobinding(editor.getHTML());
-                    instance.data.autobinding_processing = false;
-                }, properties.autobinding_delay);
+            // removed this line: !instance.data.autobinding_processing &&
 
-            }; */
+    
+            
+            
+            if ( ( properties.bubble.auto_binding() == true ) && !!instance.data.editor_is_ready &&  ( ( properties.autobinding !== editor.getHTML() ) ) ) {
 
+                instance.data.writeToAutobinding(); // throttles the autobinding to every 2 seconds
+                // instance.publishAutobinding(instance.data.editor.getHTML()); //raw-dog autobinding
+                
+            }
+
+            
       },
         onFocus({ editor, event }) {
             instance.triggerEvent('isFocused');
             instance.publishState('isFocused', true);
             instance.data.is_focused = true;
-        },
+       
+       },
 
         onBlur({ editor, event }) {
-          instance.triggerEvent('isntFocused');
-          instance.publishState('isFocused', false);
-          instance.data.is_focused = false;
+            instance.triggerEvent('isntFocused');
+            instance.publishState('isFocused', false);
+            instance.data.is_focused = false;
+        
           
           
   	  },
       onTransaction({ editor, transaction }) {
+          // The editor state has changed.
 		instance.publishState('bold', editor.isActive('bold'));
         instance.publishState('italic', editor.isActive('italic'));
         instance.publishState('strike', editor.isActive('strike'));
@@ -277,21 +299,35 @@ function(instance, properties, context) {
     // end of options
     //
 
+     
+
+//     console.log("bubbleMenu", instance.data.findElement(properties.bubbleMenu);
+//     console.log("floatingMenu", instance.data.findElement(instance.canvas);
     
 
-	if ( (properties.bubbleMenu != '') && instance.data.active_nodes.includes("BubbleMenu") ) {
-        let bubbleMenuTheme = properties.bubbleMenuTheme;
-        console.log(`setting bubble menu to: ${properties.bubbleMenuTheme}`);
-        let bubbleMenuDiv = document.querySelector("#" + properties.bubbleMenu);
-        options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, tippyOptions: {
-            theme: bubbleMenuTheme,
-        } }) );
-    }
+     if ( (properties.bubbleMenu) && instance.data.active_nodes.includes("BubbleMenu") ) {
+
+         let bubbleMenuTheme = properties.bubbleMenuTheme;
+//         console.log(`attempting to setup bubble menu. id ${properties.bubbleMenu}`);         
+
+         let bubbleMenuDiv = instance.data.findElement(properties.bubbleMenu);
+         window.bubbleMenuDiv = bubbleMenuDiv
+         bubbleMenuDiv.id += randomId
+         console.log("bubbleMenuDiv",bubbleMenuDiv)
+         
+          options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, tippyOptions: {
+             theme: bubbleMenuTheme,
+         } }) );
+     }
      
-     if ( (properties.floatingMenu != '') && instance.data.active_nodes.includes("FloatingMenu") ) {
+     if ( (properties.floatingMenu) && instance.data.active_nodes.includes("FloatingMenu") ) {
 		 let floatingMenuTheme = properties.floatingMenuTheme;
-         console.log(`setting floating menu to: ${properties.floatingMenuTheme}`);
-         let floatingMenuDiv = document.querySelector("#" + properties.floatingMenu);
+//         console.log(`setting floating menu to: ${properties.floatingMenuTheme}`);
+         
+         let floatingMenuDiv = instance.data.findElement(properties.floatingMenu);
+         floatingMenuDiv.id += randomId
+         console.log("floatingMenuDiv",floatingMenuDiv)
+         
          options.extensions.push( FloatingMenu.configure({ 
              element: floatingMenuDiv, 
              tippyOptions: {
@@ -302,7 +338,7 @@ function(instance, properties, context) {
      }
      
      
-          // set up collaboration
+     // set up collaboration
 
 
      if (!!properties.collab_active) {              
@@ -358,23 +394,13 @@ function(instance, properties, context) {
     //
     // run when the editor is ready
     //
-    
-    
+        
 	if (!!instance.data.editor_is_ready && (properties.isEditable != instance.data.editor.isEditable) ) {
 		let isEditable = properties.isEditable;
         instance.data.editor.setEditable(isEditable);
     }
     
-    
-    // autobinding: updates content except if collab is active.
-	if (!!instance.data.editor_is_ready && !instance.data.is_focused && !!properties.bubble.auto_binding()) {
-        if (!properties.collab_active) {
-            let content = properties.autobinding;
-            instance.data.editor.commands.setContent(content, true);
-        } else {
-            console.log("autobinding and collab are on at the same time. Not updating content.");
-        }
-    };
+
 
     
 
@@ -473,6 +499,32 @@ function(instance, properties, context) {
     font-weight: 400;
     ${properties.p_adv}
 }
+
+.ProseMirror ul[data-type="taskList"] {
+  list-style: none;
+  padding: 0;
+}
+
+.ProseMirror ul[data-type="taskList"] p {
+  margin: 0;
+}
+
+.ProseMirror ul[data-type="taskList"] li {
+  display: flex;
+}
+
+.ProseMirror ul[data-type="taskList"] li > label {
+  flex: 0 0 auto;
+  margin-right: 0.5rem;
+  user-select: none;
+}
+
+.ProseMirror ul[data-type="taskList"] li > div {
+  flex: 1 1 auto;
+}
+
+
+
 .ProseMirror table {
   width: 100%;
   border-collapse: collapse;
@@ -565,7 +617,7 @@ td {
   pointer-events: none;
 }
 
-/* Render the username above the caret */
+
 .collaboration-cursor__label {
   position: absolute;
   top: -1.4em;

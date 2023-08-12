@@ -1,3 +1,39 @@
 {
-    "caption": "Focus"
+    "caption": "Focus",
+    "fields": {
+        "AEQ": {
+            "caption": "position",
+            "default_val": "end",
+            "doc": "Focus the editor. By the default it restores the cursor position (and text selection)",
+            "editor": "DynamicValue",
+            "name": "position",
+            "optional": true,
+            "rank": 0,
+            "value": "text"
+        },
+        "AER": {
+            "caption": "start: Set the cursor to the first position",
+            "editor": "Label",
+            "name": "start",
+            "rank": 1
+        },
+        "AES": {
+            "caption": "end: Set the cursor to the last position",
+            "editor": "Label",
+            "name": "end",
+            "rank": 2
+        },
+        "AET": {
+            "caption": "all: Selects the whole document",
+            "editor": "Label",
+            "name": "all",
+            "rank": 3
+        },
+        "AEU": {
+            "caption": "number: Set the cursor to position xx",
+            "editor": "Label",
+            "name": "number",
+            "rank": 4
+        }
+    }
 }

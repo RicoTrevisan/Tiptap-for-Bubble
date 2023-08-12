@@ -62,13 +62,14 @@
         "ACL": {
             "caption": "Bubble menu",
             "doc": "ID of the group that holds the Bubble Menu. This menu shows up when the user selects some text.",
-            "editor": "StaticText",
+            "editor": "DynamicValue",
             "name": "bubbleMenu",
             "optional": true,
-            "rank": 4
+            "rank": 4,
+            "value": "text"
         },
         "ACS": {
-            "caption": "Floating meny",
+            "caption": "Floating menu",
             "doc": "ID of the group that holds the Floating Menu. This menu shows up on an empty line.",
             "editor": "StaticText",
             "name": "floatingMenu",

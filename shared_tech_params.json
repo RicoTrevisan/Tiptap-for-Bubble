@@ -1,7 +1,7 @@
 {
     "dependencies": {
         "alpha_opt_in": false,
-        "plugin_api_version": 3,
+        "plugin_api_version": "4",
         "use_jquery": true
     },
     "shared_keys": {
