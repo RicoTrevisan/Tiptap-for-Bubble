@@ -33,67 +33,6 @@ function(instance, properties, context) {
      d.id = 'tiptapEditor-' + randomId;
      instance.data.tiptapEditorID = d.id;
      instance.canvas.append(d);
-
-     
-     // instance.data.editor = new Editor({
-     //     element: d,
-     //     extensions: [
-     //         Text,
-     //         Paragraph,
-     //         HardBreak,
-     //         Document,
-     //     ],
-     //     content: '<p>Hello World!</p>',
-     // }) 
-
-    
-
-	// pull the libraries that were loaded on Header
-    // const Document = window.tiptapDocument;
-    // const HardBreak = window.tiptapHardBreak;
-    // const Heading = window.tiptapHeading;
-    // const Paragraph = window.tiptapParagraph;
-    // const Text = window.tiptapText;
-    // const Bold = window.tiptapBold;
-    // const Code = window.tiptapCode;
-    // const Italic = window.tiptapItalic;
-    // const Strike = window.tiptapStrike;
-    // const Dropcursor = window.tiptapDropcursor;
-    // const Gapcursor = window.tiptapGapcursor;
-    // const History = window.tiptapHistory;
-    // const Blockquote = window.tiptapBlockquote;
-    // const BulletList = window.tiptapBulletList;
-    // const CodeBlock = window.tiptapCodeBlock;
-    // const HorizontalRule = window.tiptapHorizontalRule;
-    // const ListItem = window.tiptapListItem;
-    // const OrderedList = window.tiptapOrderedList;
-
-    // const Editor = window.tiptapEditor;
-    // const TaskList = window.tiptapTaskList;
-    // const TaskItem	= window.tiptapTaskItem;
-	// const Placeholder = window.tiptapPlaceholder;
-    // const CharacterCount = window.tiptapCharacterCount;
-	// const Image = window.tiptapImage;
-    // const BubbleMenu = window.tiptapBubbleMenu;
-	// const FloatingMenu = window.tiptapFloatingMenu;
-    // const Link = window.tiptapLink;
-    // const TextAlign = window.tiptapTextAlign;
-   	// const Highlight = window.tiptapHighlight;
-	// const Table = window.tiptapTable;
-	// const TableCell = window.tiptapTableCell;
-	// const TableHeader = window.tiptapTableHeader;
-	// const TableRow = window.tiptapTableRow;
-	// const Underline = window.tiptapUnderline;    
-    // const Youtube = window.tiptapYoutube;
-    // const generateHTML = window.tiptapGenerateHTML;
-         
-
-    //  // load collaboration libraries
-    //  const Collaboration = window.tiptapCollaboration;
-    //  const CollaborationCursor = window.tiptapCollaborationCursor;
-    //  const TiptapCollabProvider = window.TiptapCollabProvider;
-
-
      
         
 
@@ -153,6 +92,8 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("Placeholder")) {extensions.push ( Placeholder.configure({ placeholder: placeholder, }) )};
 //    if (instance.data.active_nodes.includes("CharacterCount")) {extensions.push ( CharacterCount )};
     if (instance.data.active_nodes.includes("TextAlign")) {extensions.push ( TextAlign.configure({ types: ['heading', 'paragraph'], }) )};
+     
+     if (instance.data.active_nodes.includes("UniqueID")) {extensions.push ( UniqueID.configure({ types: ['heading', 'paragraph'], }), )};
                                              
     
      
@@ -265,6 +206,13 @@ function(instance, properties, context) {
 		const { from, to } = view.state.selection;
 		const text = state.doc.textBetween(from, to, '');
         instance.publishState('selected_text', text);
+   
+        let uniqueIdList = [{
+  "uniqueId": "uniqueId",
+  "tag": "tag",
+  "content": "content"
+}]
+        instance.publishState('uniqueid_list', uniqueIdList)
         
 		instance.publishState('bold', editor.isActive('bold'));
         instance.publishState('italic', editor.isActive('italic'));
@@ -371,7 +319,8 @@ function(instance, properties, context) {
 
     
     // create the editor    
-	instance.data.editor = new Editor(options);        
+	instance.data.editor = new Editor(options);       
+     window.editor = instance.data.editor;
         
     
     // initialize exposed states

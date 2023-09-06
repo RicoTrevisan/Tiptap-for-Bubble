@@ -9,6 +9,7 @@ function(instance, context) {
     // this boolean turns true when the editor is initialized and ready.
 	instance.data.editor_is_ready = false;
 
+    // deprecated by throttle function
     // autobinding can be overwhelmed by Tiptap. To handle that, this boolean turns true while setTimeout is running.
     instance.data.autobinding_processing = false;
     instance.publishState('is_ready', false);

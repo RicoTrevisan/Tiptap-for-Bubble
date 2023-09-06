@@ -1,0 +1,16 @@
+{
+    "calls": {
+        "AEV": {
+            "initialized": true,
+            "method": "get",
+            "name": "Unique ID",
+            "publish_as": "data",
+            "rank": 0,
+            "ret_value": "api.1670612027178x122079323974008830.plugin_api.AEV",
+            "should_reinitialize": false,
+            "types": "{\"plugin_api.AEV\":{\"caption\":\"Unique ID\",\"fields\":{\"_p_uniqueId\":{\"ret_value\":\"text\",\"caption\":\"uniqueId\",\"sample_value\":\"uniqueId\",\"path\":[\"uniqueId\"]},\"_p_tag\":{\"ret_value\":\"text\",\"caption\":\"tag\",\"sample_value\":\"tag\",\"path\":[\"tag\"]},\"_p_content\":{\"ret_value\":\"text\",\"caption\":\"content\",\"sample_value\":\"content\",\"path\":[\"content\"]}}}}",
+            "url": "https://api.thecatapi.com/v1/images/search"
+        }
+    },
+    "human": "New API"
+}
