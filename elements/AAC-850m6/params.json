@@ -424,12 +424,6 @@
             "rank": 73,
             "value": "text"
         },
-        "AEe": {
-            "caption": "uniqueIds",
-            "editor": "custom_type",
-            "name": "uniqueids",
-            "rank": 74
-        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",
@@ -961,15 +955,6 @@
             },
             "name": "selected_html",
             "value": "text"
-        },
-        "AEW": {
-            "caption": "uniqueId list",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "is_list": true,
-            "name": "uniqueid_list",
-            "value": "custom_data_AEe"
         }
     },
     "support_autobinding": true
