@@ -31,6 +31,7 @@ function(instance, properties, context) {
      const randomId = (Math.random() + 1).toString(36).substring(3);
      var d = document.createElement("div");
      d.id = 'tiptapEditor-' + randomId;
+     d.style = "flex-grow: 1; display: flex;";
      instance.data.tiptapEditorID = d.id;
      instance.canvas.append(d);
 
@@ -446,7 +447,8 @@ function(instance, properties, context) {
     
     instance.data.stylesheet.innerHTML = `
 .ProseMirror {
-  
+    flex-grow: 1;
+
 }
 
 .ProseMirror h1 {

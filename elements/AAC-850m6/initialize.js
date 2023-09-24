@@ -1,5 +1,7 @@
 function(instance, context) {
     
+    // add display: flex to main element
+    instance.canvas.css("display", "flex");
         
 
     // this boolean turns true after the setup has been done, but the editor might not yet be initialized.
