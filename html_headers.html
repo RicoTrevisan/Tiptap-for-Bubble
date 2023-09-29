@@ -1,45 +1,45 @@
 <script type="module">
 
-import { Editor } from "https://esm.sh/@tiptap/core@2.0.3?pin=v125";
+import { Editor } from "https://cdn.skypack.dev/@tiptap/core@2.0.3";
 
-import Document from "https://esm.sh/@tiptap/extension-document@2.0.3?pin=v125";
-import HardBreak from "https://esm.sh/@tiptap/extension-hard-break@2.0.3?pin=v125";
-import Paragraph from "https://esm.sh/@tiptap/extension-paragraph@2.0.3?pin=v125";
-import Text from "https://esm.sh/@tiptap/extension-text@2.0.3?pin=v125";
+import Document from "https://cdn.skypack.dev/@tiptap/extension-document@2.0.3";
+import HardBreak from "https://cdn.skypack.dev/@tiptap/extension-hard-break@2.0.3";
+import Paragraph from "https://cdn.skypack.dev/@tiptap/extension-paragraph@2.0.3";
+import Text from "https://cdn.skypack.dev/@tiptap/extension-text@2.0.3";
 
-import Heading from "https://esm.sh/@tiptap/extension-heading@2.0.3?pin=v125";
-import Bold from "https://esm.sh/@tiptap/extension-bold@2.0.3?pin=v125";
-import Code from "https://esm.sh/@tiptap/extension-code@2.0.3?pin=v125";
-import Italic from "https://esm.sh/@tiptap/extension-italic@2.0.3?pin=v125";
-import Strike from "https://esm.sh/@tiptap/extension-strike@2.0.3?pin=v125";
-import Dropcursor from "https://esm.sh/@tiptap/extension-dropcursor@2.0.3?pin=v125";
-import Gapcursor from "https://esm.sh/@tiptap/extension-gapcursor@2.0.3?pin=v125";
-import History from "https://esm.sh/@tiptap/extension-history@2.0.3?pin=v125";
+import Heading from "https://cdn.skypack.dev/@tiptap/extension-heading@2.0.3";
+import Bold from "https://cdn.skypack.dev/@tiptap/extension-bold@2.0.3";
+import Code from "https://cdn.skypack.dev/@tiptap/extension-code@2.0.3";
+import Italic from "https://cdn.skypack.dev/@tiptap/extension-italic@2.0.3";
+import Strike from "https://cdn.skypack.dev/@tiptap/extension-strike@2.0.3";
+import Dropcursor from "https://cdn.skypack.dev/@tiptap/extension-dropcursor@2.0.3";
+import Gapcursor from "https://cdn.skypack.dev/@tiptap/extension-gapcursor@2.0.3";
+import History from "https://cdn.skypack.dev/@tiptap/extension-history@2.0.3";
 
-import Blockquote from "https://esm.sh/@tiptap/extension-blockquote@2.0.3?pin=v125";
-import BulletList from "https://esm.sh/@tiptap/extension-bullet-list@2.0.3?pin=v125";
-import CodeBlock from "https://esm.sh/@tiptap/extension-code-block@2.0.3?pin=v125";
-import HorizontalRule from "https://esm.sh/@tiptap/extension-horizontal-rule@2.0.3?pin=v125";
-import ListItem from "https://esm.sh/@tiptap/extension-list-item@2.0.3?pin=v125";
-import OrderedList from "https://esm.sh/@tiptap/extension-ordered-list@2.0.3?pin=v125";
+import Blockquote from "https://cdn.skypack.dev/@tiptap/extension-blockquote@2.0.3";
+import BulletList from "https://cdn.skypack.dev/@tiptap/extension-bullet-list@2.0.3";
+import CodeBlock from "https://cdn.skypack.dev/@tiptap/extension-code-block@2.0.3";
+import HorizontalRule from "https://cdn.skypack.dev/@tiptap/extension-horizontal-rule@2.0.3";
+import ListItem from "https://cdn.skypack.dev/@tiptap/extension-list-item@2.0.3";
+import OrderedList from "https://cdn.skypack.dev/@tiptap/extension-ordered-list@2.0.3";
 
-import Youtube from "https://esm.sh/@tiptap/extension-youtube@2.0.3?pin=v125";
-import Underline from "https://esm.sh/@tiptap/extension-underline@2.0.3?pin=v125";
-import Table from "https://esm.sh/@tiptap/extension-table@2.0.3?pin=v125";
-import TableCell from "https://esm.sh/@tiptap/extension-table-cell@2.0.3?pin=v125";
-import TableHeader from "https://esm.sh/@tiptap/extension-table-header@2.0.3?pin=v125";
-import TableRow from "https://esm.sh/@tiptap/extension-table-row@2.0.3?pin=v125";
-import Image from 'https://esm.sh/@tiptap/extension-image@2.0.3?pin=v125';
-import Link from "https://esm.sh/@tiptap/extension-link@2.0.3?pin=v125";
-import TaskList from "https://esm.sh/@tiptap/extension-task-list@2.0.3?pin=v125";
-import TaskItem from "https://esm.sh/@tiptap/extension-task-item@2.0.3?pin=v125";
-import Placeholder from "https://esm.sh/@tiptap/extension-placeholder@2.0.3?pin=v125";
-import CharacterCount from "https://esm.sh/@tiptap/extension-character-count@2.0.3?pin=v125";
-import BubbleMenu from "https://esm.sh/@tiptap/extension-bubble-menu@2.0.3?pin=v125";
-import FloatingMenu from "https://esm.sh/@tiptap/extension-floating-menu@2.0.3?pin=v125";
-import TextAlign from "https://esm.sh/@tiptap/extension-text-align@2.0.3?pin=v125";
-import Highlight from 'https://esm.sh/@tiptap/extension-highlight@2.0.3?pin=v125';
-import { generateHTML } from 'https://esm.sh/@tiptap/html@2.0.3?pin=v125';
+import Youtube from "https://cdn.skypack.dev/@tiptap/extension-youtube@2.0.3";
+import Underline from "https://cdn.skypack.dev/@tiptap/extension-underline@2.0.3";
+import Table from "https://cdn.skypack.dev/@tiptap/extension-table@2.0.3";
+import TableCell from "https://cdn.skypack.dev/@tiptap/extension-table-cell@2.0.3";
+import TableHeader from "https://cdn.skypack.dev/@tiptap/extension-table-header@2.0.3";
+import TableRow from "https://cdn.skypack.dev/@tiptap/extension-table-row@2.0.3";
+import Image from 'https://cdn.skypack.dev/@tiptap/extension-image@2.0.3';
+import Link from "https://cdn.skypack.dev/@tiptap/extension-link@2.0.3";
+import TaskList from "https://cdn.skypack.dev/@tiptap/extension-task-list@2.0.3";
+import TaskItem from "https://cdn.skypack.dev/@tiptap/extension-task-item@2.0.3";
+import Placeholder from "https://cdn.skypack.dev/@tiptap/extension-placeholder@2.0.3";
+import CharacterCount from "https://cdn.skypack.dev/@tiptap/extension-character-count@2.0.3";
+import BubbleMenu from "https://cdn.skypack.dev/@tiptap/extension-bubble-menu@2.0.3";
+import FloatingMenu from "https://cdn.skypack.dev/@tiptap/extension-floating-menu@2.0.3";
+import TextAlign from "https://cdn.skypack.dev/@tiptap/extension-text-align@2.0.3";
+import Highlight from 'https://cdn.skypack.dev/@tiptap/extension-highlight@2.0.3';
+import { generateHTML } from 'https://cdn.skypack.dev/@tiptap/html@2.0.3';
 
 window.tiptapDocument = Document;
 window.tiptapHardBreak = HardBreak;
@@ -83,9 +83,9 @@ window.tiptapGenerateHTML = generateHTML;
 
 
 
-import Collaboration from "https://esm.sh/@tiptap/extension-collaboration@2.0.3?pin=v125";
-import CollaborationCursor from 'https://esm.sh/@tiptap/extension-collaboration-cursor@2.0.3?pin=v125';
-import { TiptapCollabProvider } from 'https://esm.sh/@hocuspocus/provider@2.0.0?pin=v125';
+import Collaboration from "https://cdn.skypack.dev/@tiptap/extension-collaboration@2.0.3";
+import CollaborationCursor from 'https://cdn.skypack.dev/@tiptap/extension-collaboration-cursor@2.0.3';
+import { TiptapCollabProvider } from 'https://cdn.skypack.dev/@hocuspocus/provider@2.0.0';
 
 window.tiptapCollaboration = Collaboration;
 window.tiptapCollaborationCursor = CollaborationCursor;
