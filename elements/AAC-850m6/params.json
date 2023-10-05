@@ -88,6 +88,7 @@
         "ADP": {
             "caption": "Bubble menu theme",
             "default_val": "translucent",
+            "doc": "The style of the tooltip box. See more here: https://atomiks.github.io/tippyjs/v5/themes/",
             "editor": "Dropdown",
             "in_style": true,
             "name": "bubbleMenuTheme",
@@ -97,6 +98,7 @@
         "ADQ": {
             "caption": "Floating Menu Theme",
             "default_val": "translucent",
+            "doc": "The style of the tooltip box. See more here: https://atomiks.github.io/tippyjs/v5/themes/",
             "editor": "Dropdown",
             "in_style": true,
             "name": "floatingMenuTheme",
@@ -424,6 +426,17 @@
             "rank": 73,
             "value": "text"
         },
+        "AEV": {
+            "caption": "Blockquote styling",
+            "default_val": "// background: green; padding: 0.5rem;",
+            "doc": "add any css to target the blockquote element. This will override the standard Tiptap (ProseMirror) styling.",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "blockquote_adv",
+            "optional": true,
+            "rank": 74,
+            "value": "text"
+        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",
@@ -435,7 +448,7 @@
             "rank": 14
         },
         "h1_info1": {
-            "caption": "h1 info",
+            "caption": "     ----- H1 styling -----",
             "editor": "Label",
             "name": "stylesheet_info",
             "rank": 11
@@ -459,7 +472,7 @@
             "rank": 21
         },
         "h2_info": {
-            "caption": "h2 info",
+            "caption": "     ----- H2 styling -----",
             "editor": "Label",
             "name": "stylesheet_info",
             "rank": 17
@@ -500,7 +513,7 @@
             "rank": 26
         },
         "h3_info": {
-            "caption": "h3 info",
+            "caption": "     ----- H3 styling -----",
             "editor": "Label",
             "name": "stylesheet_info",
             "rank": 23
@@ -541,7 +554,7 @@
             "rank": 32
         },
         "h4_info": {
-            "caption": "h4_info",
+            "caption": "     ----- H4 styling -----",
             "editor": "Label",
             "name": "h4_info",
             "rank": 29
@@ -582,7 +595,7 @@
             "rank": 38
         },
         "h5_info": {
-            "caption": "h5_info",
+            "caption": "     ----- H5 styling -----",
             "editor": "Label",
             "name": "h5_info",
             "rank": 35
@@ -623,7 +636,7 @@
             "rank": 44
         },
         "h6_info": {
-            "caption": "h6_info",
+            "caption": "     ----- H6 styling -----",
             "editor": "Label",
             "name": "h6_info",
             "rank": 41

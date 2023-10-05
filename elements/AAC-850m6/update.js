@@ -15,20 +15,21 @@ function(instance, properties, context) {
         
     
 
-	let initialContent = (properties.bubble.auto_binding()) ? properties.autobinding : properties.initialContent;
-	instance.data.initialContent = initialContent; // a string to keep track of what's currently in the initialContent so that the editor can change when the initialContent changes
-	let content = (properties.content_is_json) ? JSON.parse(initialContent) : initialContent;
+  let initialContent = (properties.bubble.auto_binding()) ? properties.autobinding : properties.initialContent;
+  instance.data.initialContent = initialContent; // a string to keep track of what's currently in the initialContent so that the editor can change when the initialContent changes
+  let content = (properties.content_is_json) ? JSON.parse(initialContent) : initialContent;
      
 
     
     let placeholder = properties.placeholder;
-	let bubbleMenu = properties.bubbleMenu;
+  let bubbleMenu = properties.bubbleMenu;
     let floatingMenu = properties.floatingMenu;
 
         
         
      // create the editor div
      const randomId = (Math.random() + 1).toString(36).substring(3);
+     instance.data.randomId = randomId;
      var d = document.createElement("div");
      d.id = 'tiptapEditor-' + randomId;
      d.style = "flex-grow: 1; display: flex;";
@@ -49,7 +50,7 @@ function(instance, properties, context) {
 
     
 
-	// pull the libraries that were loaded on Header
+  // pull the libraries that were loaded on Header
     const Document = window.tiptapDocument;
     const HardBreak = window.tiptapHardBreak;
     const Heading = window.tiptapHeading;
@@ -72,19 +73,19 @@ function(instance, properties, context) {
     const Editor = window.tiptapEditor;
     const TaskList = window.tiptapTaskList;
     const TaskItem	= window.tiptapTaskItem;
-	const Placeholder = window.tiptapPlaceholder;
+  const Placeholder = window.tiptapPlaceholder;
     const CharacterCount = window.tiptapCharacterCount;
-	const Image = window.tiptapImage;
+  const Image = window.tiptapImage;
     const BubbleMenu = window.tiptapBubbleMenu;
-	const FloatingMenu = window.tiptapFloatingMenu;
+  const FloatingMenu = window.tiptapFloatingMenu;
     const Link = window.tiptapLink;
     const TextAlign = window.tiptapTextAlign;
-   	const Highlight = window.tiptapHighlight;
-	const Table = window.tiptapTable;
-	const TableCell = window.tiptapTableCell;
-	const TableHeader = window.tiptapTableHeader;
-	const TableRow = window.tiptapTableRow;
-	const Underline = window.tiptapUnderline;    
+     const Highlight = window.tiptapHighlight;
+  const Table = window.tiptapTable;
+  const TableCell = window.tiptapTableCell;
+  const TableHeader = window.tiptapTableHeader;
+  const TableRow = window.tiptapTableRow;
+  const Underline = window.tiptapUnderline;    
     const Youtube = window.tiptapYoutube;
     const generateHTML = window.tiptapGenerateHTML;
          
@@ -163,34 +164,35 @@ function(instance, properties, context) {
     // create the options object    
     // 
      let options = {};
-	options = {
-		element: d,
-        editable: true,
-        content: content,
-        extensions: extensions,
-		injectCSS: true,
-        editorProps: {
-            attributes: {
-                style: instance.data.stylesheet,
-            },
-        },
-		onBeforeCreate({ editor }) {
-    		// Before the view is created.
-		},
-		onCreate({ editor }) {
-			// The editor is ready.
+  options = {
+    element: d,
+    editable: true,
+    content: content,
+    extensions: extensions,
+    injectCSS: true,
+        // editorProps: {
+        //     attributes: {
+        //         // style: instance.data.stylesheet,
+        //         // style: `ProseMirror-${instance.data.randomId}`,
+        //     },
+        // },
+    onBeforeCreate({ editor }) {
+        // Before the view is created.
+    },
+    onCreate({ editor }) {
+      // The editor is ready.
             instance.data.editor_is_ready = true;
             instance.triggerEvent('is_ready');
             instance.publishState('is_ready', true);
             console.log("editor is ready");
             
-		},
-		onUpdate({ editor }) {
+    },
+    onUpdate({ editor }) {
             // The content has changed.
-			instance.publishState('contentHTML', editor.getHTML());
-        	instance.publishState('contentText', editor.getText());
-			instance.publishState('contentJSON', JSON.stringify(editor.getJSON()));
-        	instance.publishState('isEditable', editor.isEditable);
+      instance.publishState('contentHTML', editor.getHTML());
+          instance.publishState('contentText', editor.getText());
+      instance.publishState('contentJSON', JSON.stringify(editor.getJSON()));
+          instance.publishState('isEditable', editor.isEditable);
             instance.publishState('characterCount', editor.storage.characterCount.characters());
             instance.publishState('wordCount', editor.storage.characterCount.words());
             instance.triggerEvent('contentUpdated');
@@ -230,69 +232,69 @@ function(instance, properties, context) {
         
           
           
-  	  },
+      },
       onTransaction({ editor, transaction }) {
           // The editor state has changed.
-		instance.publishState('bold', editor.isActive('bold'));
+    instance.publishState('bold', editor.isActive('bold'));
         instance.publishState('italic', editor.isActive('italic'));
         instance.publishState('strike', editor.isActive('strike'));
         instance.publishState('h1', editor.isActive('heading', { level: 1 }));
-		instance.publishState('h2', editor.isActive('heading', { level: 2 }));
-		instance.publishState('h3', editor.isActive('heading', { level: 3 }));
-		instance.publishState('h4', editor.isActive('heading', { level: 4 }));
-		instance.publishState('h5', editor.isActive('heading', { level: 5 }));
-		instance.publishState('h6', editor.isActive('heading', { level: 6 }));
-		instance.publishState('orderedList', editor.isActive('orderedList'));
+    instance.publishState('h2', editor.isActive('heading', { level: 2 }));
+    instance.publishState('h3', editor.isActive('heading', { level: 3 }));
+    instance.publishState('h4', editor.isActive('heading', { level: 4 }));
+    instance.publishState('h5', editor.isActive('heading', { level: 5 }));
+    instance.publishState('h6', editor.isActive('heading', { level: 6 }));
+    instance.publishState('orderedList', editor.isActive('orderedList'));
         instance.publishState('bulletList', editor.isActive('bulletList'));
-		instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));
+    instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));
         instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
-		instance.publishState('blockquote', editor.isActive('blockquote'));
+    instance.publishState('blockquote', editor.isActive('blockquote'));
         instance.publishState('codeBlock', editor.isActive('codeBlock'));
         instance.publishState('taskList', editor.isActive('taskList'));
         instance.publishState('taskItem', editor.isActive('taskItem'));
         instance.publishState('link', editor.isActive('link'));
         instance.publishState('url', editor.getAttributes('link').href);
         instance.publishState('align_left', editor.isActive({ textAlign: 'left' }) );
-		instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
-		instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
+    instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
+    instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
         instance.publishState('highlight', editor.isActive('highlight'));
-		instance.publishState('underline', editor.isActive('underline'));
-		instance.publishState('table', editor.isActive('table'));
+    instance.publishState('underline', editor.isActive('underline'));
+    instance.publishState('table', editor.isActive('table'));
       },
     onSelectionUpdate({ editor }) {
         
         // gets the current selected text
         const { view, state } = editor;
-		const { from, to } = view.state.selection;
-		const text = state.doc.textBetween(from, to, '');
+    const { from, to } = view.state.selection;
+    const text = state.doc.textBetween(from, to, '');
         instance.publishState('selected_text', text);
         
-		instance.publishState('bold', editor.isActive('bold'));
+    instance.publishState('bold', editor.isActive('bold'));
         instance.publishState('italic', editor.isActive('italic'));
         instance.publishState('strike', editor.isActive('strike'));
         instance.publishState('h1', editor.isActive('heading', { level: 1 }));
-		instance.publishState('h2', editor.isActive('heading', { level: 2 }));
-		instance.publishState('h3', editor.isActive('heading', { level: 3 }));
-		instance.publishState('h4', editor.isActive('heading', { level: 4 }));
-		instance.publishState('h5', editor.isActive('heading', { level: 5 }));
-		instance.publishState('h6', editor.isActive('heading', { level: 6 }));
-		instance.publishState('orderedList', editor.isActive('orderedList'));
+    instance.publishState('h2', editor.isActive('heading', { level: 2 }));
+    instance.publishState('h3', editor.isActive('heading', { level: 3 }));
+    instance.publishState('h4', editor.isActive('heading', { level: 4 }));
+    instance.publishState('h5', editor.isActive('heading', { level: 5 }));
+    instance.publishState('h6', editor.isActive('heading', { level: 6 }));
+    instance.publishState('orderedList', editor.isActive('orderedList'));
         instance.publishState('bulletList', editor.isActive('bulletList'));
-		instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));  
-		instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
-		instance.publishState('blockquote', editor.isActive('blockquote'));
+    instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));  
+    instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
+    instance.publishState('blockquote', editor.isActive('blockquote'));
         instance.publishState('codeBlock', editor.isActive('codeBlock'));
         instance.publishState('taskList', editor.isActive('taskList'));
         instance.publishState('taskItem', editor.isActive('taskItem'));
         instance.publishState('link', editor.isActive('link'));
         instance.publishState('url', editor.getAttributes('link').href);
         instance.publishState('align_left', editor.isActive({ textAlign: 'left' }) );
-		instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
-		instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
+    instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
+    instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
         instance.publishState('highlight', editor.isActive('highlight'));
-		instance.publishState('underline', editor.isActive('underline'));
-		instance.publishState('table', editor.isActive('table'));
-	},
+    instance.publishState('underline', editor.isActive('underline'));
+    instance.publishState('table', editor.isActive('table'));
+  },
 
 
     } 
@@ -322,7 +324,7 @@ function(instance, properties, context) {
      }
      
      if ( (properties.floatingMenu) && instance.data.active_nodes.includes("FloatingMenu") ) {
-		 let floatingMenuTheme = properties.floatingMenuTheme;
+     let floatingMenuTheme = properties.floatingMenuTheme;
 //         console.log(`setting floating menu to: ${properties.floatingMenuTheme}`);
          
          let floatingMenuDiv = instance.data.findElement(properties.floatingMenu);
@@ -372,13 +374,13 @@ function(instance, properties, context) {
 
     
     // create the editor    
-	instance.data.editor = new Editor(options);        
+  instance.data.editor = new Editor(options);        
         
     
     // initialize exposed states
     instance.publishState('contentHTML', instance.data.editor.getHTML());
     instance.publishState('contentText', instance.data.editor.getText());
-	instance.publishState('contentJSON', JSON.stringify(instance.data.editor.getJSON()));
+  instance.publishState('contentJSON', JSON.stringify(instance.data.editor.getJSON()));
     instance.publishState('isEditable', instance.data.editor.isEditable);
     if (instance.data.active_nodes.includes("CharacterCount")) {
         instance.publishState('characterCount', instance.data.editor.storage.characterCount.characters());
@@ -396,8 +398,8 @@ function(instance, properties, context) {
     // run when the editor is ready
     //
         
-	if (!!instance.data.editor_is_ready && (properties.isEditable != instance.data.editor.isEditable) ) {
-		let isEditable = properties.isEditable;
+  if (!!instance.data.editor_is_ready && (properties.isEditable != instance.data.editor.isEditable) ) {
+    let isEditable = properties.isEditable;
         instance.data.editor.setEditable(isEditable);
     }
     
@@ -446,54 +448,54 @@ function(instance, properties, context) {
     // update the stylesheet
     
     instance.data.stylesheet.innerHTML = `
-.ProseMirror {
+#tiptapEditor-${instance.data.randomId} .ProseMirror {
     flex-grow: 1;
 
 }
 
-.ProseMirror h1 {
+#tiptapEditor-${instance.data.randomId} .ProseMirror h1 {
   font-size: ${properties.h1_size};
   color: ${properties.h1_color};
   margin: ${properties.h1_margin};
   font-weight: ${properties.h1_font_weight};
   ${properties.h1_adv}
 }
-.ProseMirror h2 {
+#tiptapEditor-${instance.data.randomId} .ProseMirror h2 {
   font-size: ${properties.h2_size};
   color: ${properties.h2_color};
   margin: ${properties.h2_margin};
   font-weight: ${properties.h2_font_weight};
   ${properties.h2_adv}
 }
-.ProseMirror h3 {
+#tiptapEditor-${instance.data.randomId} .ProseMirror h3 {
   font-size: ${properties.h3_size};
   color: ${properties.h3_color};
   margin: ${properties.h3_margin};
   font-weight: ${properties.h3_font_weight};
   ${properties.h3_adv}
 }
-.ProseMirror h4 {
+#tiptapEditor-${instance.data.randomId} .ProseMirror h4 {
   font-size: ${properties.h4_size};
   color: ${properties.h4_color};
   margin: ${properties.h4_margin};
   font-weight: ${properties.h4_font_weight};
   ${properties.h4_adv}
 }
-.ProseMirror h5 {
+#tiptapEditor-${instance.data.randomId} .ProseMirror h5 {
     font-size: ${properties.h5_size};
     color: ${properties.h5_color};
     margin: ${properties.h5_margin};
     font-weight: ${properties.h5_font_weight};
   ${properties.h5_adv}
 }
-.ProseMirror h6 {
+#tiptapEditor-${instance.data.randomId} .ProseMirror h6 {
     font-size: ${properties.h6_size};
     color: ${properties.h6_color};
     margin: ${properties.h6_margin};
     font-weight: ${properties.h6_font_weight};
   ${properties.h6_adv}
 }
-.ProseMirror p {
+#tiptapEditor-${instance.data.randomId} .ProseMirror p {
     font-size: ${properties.bubble.font_size()};
     color: ${properties.bubble.font_color()};
     font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
@@ -502,53 +504,57 @@ function(instance, properties, context) {
     ${properties.p_adv}
 }
 
-.ProseMirror ul[data-type="taskList"] {
+#tiptapEditor-${instance.data.randomId} .ProseMirror blockquote {
+    ${properties.blockquote_adv}
+}
+
+#tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] {
   list-style: none;
   padding: 0;
 }
 
-.ProseMirror ul[data-type="taskList"] p {
+#tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] p {
   margin: 0;
 }
 
-.ProseMirror ul[data-type="taskList"] li {
+#tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] li {
   display: flex;
 }
 
-.ProseMirror ul[data-type="taskList"] li > label {
+#tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] li > label {
   flex: 0 0 auto;
   margin-right: 0.5rem;
   user-select: none;
 }
 
-.ProseMirror ul[data-type="taskList"] li > div {
+#tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] li > div {
   flex: 1 1 auto;
 }
 
 
 
-.ProseMirror table {
+#tiptapEditor-${instance.data.randomId} .ProseMirror table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   text-indent: 0;
 }
-.ProseMirror th,
+#tiptapEditor-${instance.data.randomId} .ProseMirror th,
 td {
   padding: ${properties.table_th_td_padding};
   text-align: start;
   border-bottom: ${properties.table_th_td_border_bottom} ${properties.table_row_border_color};
 }
-.ProseMirror th {
+#tiptapEditor-${instance.data.randomId} .ProseMirror th {
   font-weight: ${properties.table_th_font_weight};
   text-align: left;
   background: ${properties.table_th_background};
 }
-.ProseMirror th * {
+#tiptapEditor-${instance.data.randomId} .ProseMirror th * {
   color: ${properties.table_header_font_color};
   font-weight: ${properties.table_th_font_weight}; 
 }
-.ProseMirror tr:nth-of-type(odd) {
+#tiptapEditor-${instance.data.randomId} .ProseMirror tr:nth-of-type(odd) {
   background: ${properties.table_zebra_background};
 }
 .selectedCell:after {
@@ -580,33 +586,33 @@ td {
   cursor: ew-resize;
   cursor: col-resize;
 }
-.ProseMirror a {
+#tiptapEditor-${instance.data.randomId} .ProseMirror a {
   text-decoration: underline;
   cursor: pointer;
 }
-.ProseMirror a:link {
+#tiptapEditor-${instance.data.randomId} .ProseMirror a:link {
   color: ${properties.link_color};
 }
 
-.ProseMirror a:visited {
+#tiptapEditor-${instance.data.randomId} .ProseMirror a:visited {
   color: ${properties.link_color_visited};
 }
 
-.ProseMirror a:focus {
+#tiptapEditor-${instance.data.randomId} .ProseMirror a:focus {
 }
 
-.ProseMirror a:hover {
+#tiptapEditor-${instance.data.randomId} .ProseMirror a:hover {
    color: ${properties.link_color_hover};
    ${properties.link_hover_adv};
 }
 
-.ProseMirror a:active {
+#tiptapEditor-${instance.data.randomId} .ProseMirror a:active {
 }
 
-.ProseMirror iframe {
-	${properties.iframe}
+#tiptapEditor-${instance.data.randomId} .ProseMirror iframe {
+  ${properties.iframe}
 }
-.ProseMirror img {
+#tiptapEditor-${instance.data.randomId} .ProseMirror img {
     ${properties.image_css}
 }
   .collaboration-cursor__caret {
