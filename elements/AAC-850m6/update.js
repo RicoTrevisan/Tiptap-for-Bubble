@@ -444,7 +444,8 @@ function(instance, properties, context) {
         });
     }
 
-
+    
+    
     // update the stylesheet
     
     instance.data.stylesheet.innerHTML = `
