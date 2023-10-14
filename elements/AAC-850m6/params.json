@@ -29,7 +29,7 @@
         }
     },
     "fields": {
-        "AAK": {
+        "AAKtest": {
             "caption": "Initial content",
             "doc": "Content in Plain Text or HTML format. If JSON make sure the \"Content is JSON?\" is set to \"yes\".",
             "editor": "DynamicValue",
