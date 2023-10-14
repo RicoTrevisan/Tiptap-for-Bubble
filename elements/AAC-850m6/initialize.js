@@ -1,6 +1,6 @@
 function(instance, context) {
     
-    // add display: flex to main element
+    // add display: flex to main element test
     instance.canvas.css("display", "flex");
         
 
