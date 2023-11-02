@@ -88,7 +88,10 @@ function(instance, properties, context) {
   const Underline = window.tiptapUnderline;    
     const Youtube = window.tiptapYoutube;
     const generateHTML = window.tiptapGenerateHTML;
-         
+     const UniqueID = window.UniqueID;
+     console.log("UniqueID", UniqueID);
+          
+     
 
      // load collaboration libraries
      const Collaboration = window.tiptapCollaboration;
@@ -116,6 +119,9 @@ function(instance, properties, context) {
          Text,
          ListItem,
          CharacterCount,
+         UniqueID.configure({
+        types: ['heading', 'paragraph'],
+      })
         ]
 
         

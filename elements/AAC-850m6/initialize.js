@@ -92,7 +92,7 @@ function(instance, context) {
         instance.publishAutobinding(instance.data.editor.getHTML());
 
     }, 2000);
-
-
+    
+    
       
 }
