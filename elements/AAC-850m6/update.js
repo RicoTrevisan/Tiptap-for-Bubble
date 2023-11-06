@@ -70,24 +70,24 @@ function(instance, properties, context) {
     const ListItem = window.tiptapListItem;
     const OrderedList = window.tiptapOrderedList;
 
-    const Editor = window.tiptapEditor;
-    const TaskList = window.tiptapTaskList;
-    const TaskItem	= window.tiptapTaskItem;
-  const Placeholder = window.tiptapPlaceholder;
-    const CharacterCount = window.tiptapCharacterCount;
-  const Image = window.tiptapImage;
-    const BubbleMenu = window.tiptapBubbleMenu;
-  const FloatingMenu = window.tiptapFloatingMenu;
-    const Link = window.tiptapLink;
-    const TextAlign = window.tiptapTextAlign;
+     const Editor = window.tiptapEditor;
+     const TaskList = window.tiptapTaskList;
+     const TaskItem	= window.tiptapTaskItem;
+     const Placeholder = window.tiptapPlaceholder;
+     const CharacterCount = window.tiptapCharacterCount;
+     const Image = window.tiptapImage;
+     const BubbleMenu = window.tiptapBubbleMenu;
+     const FloatingMenu = window.tiptapFloatingMenu;
+     const Link = window.tiptapLink;
+     const TextAlign = window.tiptapTextAlign;
      const Highlight = window.tiptapHighlight;
-  const Table = window.tiptapTable;
-  const TableCell = window.tiptapTableCell;
-  const TableHeader = window.tiptapTableHeader;
-  const TableRow = window.tiptapTableRow;
-  const Underline = window.tiptapUnderline;    
-    const Youtube = window.tiptapYoutube;
-    const generateHTML = window.tiptapGenerateHTML;
+     const Table = window.tiptapTable;
+     const TableCell = window.tiptapTableCell;
+     const TableHeader = window.tiptapTableHeader;
+     const TableRow = window.tiptapTableRow;
+     const Underline = window.tiptapUnderline;    
+     const Youtube = window.tiptapYoutube;
+     const generateHTML = window.tiptapGenerateHTML;
          
 
      // load collaboration libraries
@@ -188,34 +188,21 @@ function(instance, properties, context) {
             console.log("editor is ready");
             
     },
-    onUpdate({ editor }) {
-            // The content has changed.
-      instance.publishState('contentHTML', editor.getHTML());
+      onUpdate({ editor }) {
+          // The content has changed.
+          instance.publishState('contentHTML', editor.getHTML());
           instance.publishState('contentText', editor.getText());
-      instance.publishState('contentJSON', JSON.stringify(editor.getJSON()));
+          instance.publishState('contentJSON', JSON.stringify(editor.getJSON()));
           instance.publishState('isEditable', editor.isEditable);
-            instance.publishState('characterCount', editor.storage.characterCount.characters());
-            instance.publishState('wordCount', editor.storage.characterCount.words());
-            instance.triggerEvent('contentUpdated');
-            
-//            if ( properties.bubble.auto_binding() == true ) {
-//                instance.publishAutobinding(editor.getHTML());
-//            }
-            
-            
-            // updates the auto_binding data, but it does so only if auto_binding is on, the editor is ready, and the data actually changed
-            // and it updates only every 2 seconds to not flood the editor (the timing is now configurable 
-            // removed this line: !instance.data.autobinding_processing &&
+          instance.publishState('characterCount', editor.storage.characterCount.characters());
+          instance.publishState('wordCount', editor.storage.characterCount.words());
+          instance.triggerEvent('contentUpdated');  
+          if ( ( properties.bubble.auto_binding() == true ) && !!instance.data.editor_is_ready &&  ( ( properties.autobinding !== editor.getHTML() ) ) ) {
 
-    
-            
-            
-            if ( ( properties.bubble.auto_binding() == true ) && !!instance.data.editor_is_ready &&  ( ( properties.autobinding !== editor.getHTML() ) ) ) {
+              instance.data.writeToAutobinding(); // throttles the autobinding to every 2 seconds
+              // instance.publishAutobinding(instance.data.editor.getHTML()); //raw-dog autobinding
 
-                instance.data.writeToAutobinding(); // throttles the autobinding to every 2 seconds
-                // instance.publishAutobinding(instance.data.editor.getHTML()); //raw-dog autobinding
-                
-            }
+          }
 
             
       },
@@ -236,111 +223,108 @@ function(instance, properties, context) {
       },
       onTransaction({ editor, transaction }) {
           // The editor state has changed.
-    instance.publishState('bold', editor.isActive('bold'));
-        instance.publishState('italic', editor.isActive('italic'));
-        instance.publishState('strike', editor.isActive('strike'));
-        instance.publishState('h1', editor.isActive('heading', { level: 1 }));
-    instance.publishState('h2', editor.isActive('heading', { level: 2 }));
-    instance.publishState('h3', editor.isActive('heading', { level: 3 }));
-    instance.publishState('h4', editor.isActive('heading', { level: 4 }));
-    instance.publishState('h5', editor.isActive('heading', { level: 5 }));
-    instance.publishState('h6', editor.isActive('heading', { level: 6 }));
-    instance.publishState('orderedList', editor.isActive('orderedList'));
-        instance.publishState('bulletList', editor.isActive('bulletList'));
-    instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));
-        instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
-    instance.publishState('blockquote', editor.isActive('blockquote'));
-        instance.publishState('codeBlock', editor.isActive('codeBlock'));
-        instance.publishState('taskList', editor.isActive('taskList'));
-        instance.publishState('taskItem', editor.isActive('taskItem'));
-        instance.publishState('link', editor.isActive('link'));
-        instance.publishState('url', editor.getAttributes('link').href);
-        instance.publishState('align_left', editor.isActive({ textAlign: 'left' }) );
-    instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
-    instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
-        instance.publishState('highlight', editor.isActive('highlight'));
-    instance.publishState('underline', editor.isActive('underline'));
-    instance.publishState('table', editor.isActive('table'));
+          instance.publishState('bold', editor.isActive('bold'));
+          instance.publishState('italic', editor.isActive('italic'));
+          instance.publishState('strike', editor.isActive('strike'));
+          instance.publishState('h1', editor.isActive('heading', { level: 1 }));
+          instance.publishState('h2', editor.isActive('heading', { level: 2 }));
+          instance.publishState('h3', editor.isActive('heading', { level: 3 }));
+          instance.publishState('h4', editor.isActive('heading', { level: 4 }));
+          instance.publishState('h5', editor.isActive('heading', { level: 5 }));
+          instance.publishState('h6', editor.isActive('heading', { level: 6 }));
+          instance.publishState('orderedList', editor.isActive('orderedList'));
+          instance.publishState('bulletList', editor.isActive('bulletList'));
+          instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));
+          instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
+          instance.publishState('blockquote', editor.isActive('blockquote'));
+          instance.publishState('codeBlock', editor.isActive('codeBlock'));
+          instance.publishState('taskList', editor.isActive('taskList'));
+          instance.publishState('taskItem', editor.isActive('taskItem'));
+          instance.publishState('link', editor.isActive('link'));
+          instance.publishState('url', editor.getAttributes('link').href);
+          instance.publishState('align_left', editor.isActive({ textAlign: 'left' }) );
+          instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
+          instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
+          instance.publishState('highlight', editor.isActive('highlight'));
+          instance.publishState('underline', editor.isActive('underline'));
+          instance.publishState('table', editor.isActive('table'));
+          
+          instance.publishState('characterCount', editor.storage.characterCount.characters());
+          instance.publishState('wordCount', editor.storage.characterCount.words());
+  
       },
-    onSelectionUpdate({ editor }) {
-        
-        // gets the current selected text
-        const { view, state } = editor;
-    const { from, to } = view.state.selection;
-    const text = state.doc.textBetween(from, to, '');
-        instance.publishState('selected_text', text);
-        
-    instance.publishState('bold', editor.isActive('bold'));
-        instance.publishState('italic', editor.isActive('italic'));
-        instance.publishState('strike', editor.isActive('strike'));
-        instance.publishState('h1', editor.isActive('heading', { level: 1 }));
-    instance.publishState('h2', editor.isActive('heading', { level: 2 }));
-    instance.publishState('h3', editor.isActive('heading', { level: 3 }));
-    instance.publishState('h4', editor.isActive('heading', { level: 4 }));
-    instance.publishState('h5', editor.isActive('heading', { level: 5 }));
-    instance.publishState('h6', editor.isActive('heading', { level: 6 }));
-    instance.publishState('orderedList', editor.isActive('orderedList'));
-        instance.publishState('bulletList', editor.isActive('bulletList'));
-    instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));  
-    instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
-    instance.publishState('blockquote', editor.isActive('blockquote'));
-        instance.publishState('codeBlock', editor.isActive('codeBlock'));
-        instance.publishState('taskList', editor.isActive('taskList'));
-        instance.publishState('taskItem', editor.isActive('taskItem'));
-        instance.publishState('link', editor.isActive('link'));
-        instance.publishState('url', editor.getAttributes('link').href);
-        instance.publishState('align_left', editor.isActive({ textAlign: 'left' }) );
-    instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
-    instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
-        instance.publishState('highlight', editor.isActive('highlight'));
-    instance.publishState('underline', editor.isActive('underline'));
-    instance.publishState('table', editor.isActive('table'));
-  },
+      
+      
+      onSelectionUpdate({ editor }) {
+
+          // gets the current selected text
+          const { view, state } = editor;
+          const { from, to } = view.state.selection;
+          const text = state.doc.textBetween(from, to, '');
+          instance.publishState('selected_text', text);
+
+          instance.publishState('bold', editor.isActive('bold'));
+          instance.publishState('italic', editor.isActive('italic'));
+          instance.publishState('strike', editor.isActive('strike'));
+          instance.publishState('h1', editor.isActive('heading', { level: 1 }));
+          instance.publishState('h2', editor.isActive('heading', { level: 2 }));
+          instance.publishState('h3', editor.isActive('heading', { level: 3 }));
+          instance.publishState('h4', editor.isActive('heading', { level: 4 }));
+          instance.publishState('h5', editor.isActive('heading', { level: 5 }));
+          instance.publishState('h6', editor.isActive('heading', { level: 6 }));
+          instance.publishState('orderedList', editor.isActive('orderedList'));
+          instance.publishState('bulletList', editor.isActive('bulletList'));
+          instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));  
+          instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
+          instance.publishState('blockquote', editor.isActive('blockquote'));
+          instance.publishState('codeBlock', editor.isActive('codeBlock'));
+          instance.publishState('taskList', editor.isActive('taskList'));
+          instance.publishState('taskItem', editor.isActive('taskItem'));
+          instance.publishState('link', editor.isActive('link'));
+          instance.publishState('url', editor.getAttributes('link').href);
+          instance.publishState('align_left', editor.isActive({ textAlign: 'left' }) );
+          instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
+          instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
+          instance.publishState('highlight', editor.isActive('highlight'));
+          instance.publishState('underline', editor.isActive('underline'));
+          instance.publishState('table', editor.isActive('table'));
+      },
 
 
     } 
     //
     // end of options
     //
-
-     
-
-//     console.log("bubbleMenu", instance.data.findElement(properties.bubbleMenu);
-//     console.log("floatingMenu", instance.data.findElement(instance.canvas);
     
 
      if ( (properties.bubbleMenu) && instance.data.active_nodes.includes("BubbleMenu") ) {
 
          let bubbleMenuTheme = properties.bubbleMenuTheme;
-//         console.log(`attempting to setup bubble menu. id ${properties.bubbleMenu}`);         
 
          let bubbleMenuDiv = instance.data.findElement(properties.bubbleMenu);
          window.bubbleMenuDiv = bubbleMenuDiv
          bubbleMenuDiv.id += randomId
-         console.log("bubbleMenuDiv",bubbleMenuDiv)
-         
-          options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, tippyOptions: {
+
+         options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, tippyOptions: {
              theme: bubbleMenuTheme,
          } }) );
      }
      
      if ( (properties.floatingMenu) && instance.data.active_nodes.includes("FloatingMenu") ) {
-     let floatingMenuTheme = properties.floatingMenuTheme;
-//         console.log(`setting floating menu to: ${properties.floatingMenuTheme}`);
-         
+         let floatingMenuTheme = properties.floatingMenuTheme;
+
          let floatingMenuDiv = instance.data.findElement(properties.floatingMenu);
          floatingMenuDiv.id += randomId
-         console.log("floatingMenuDiv",floatingMenuDiv)
-         
+
          options.extensions.push( FloatingMenu.configure({ 
              element: floatingMenuDiv, 
              tippyOptions: {
                  theme: floatingMenuTheme,
              }
          }) );
-        
+
      }
-     
+
      
      // set up collaboration
 
@@ -374,19 +358,19 @@ function(instance, properties, context) {
 
 
     
-    // create the editor    
-  instance.data.editor = new Editor(options);        
-        
-    
-    // initialize exposed states
-    instance.publishState('contentHTML', instance.data.editor.getHTML());
-    instance.publishState('contentText', instance.data.editor.getText());
-  instance.publishState('contentJSON', JSON.stringify(instance.data.editor.getJSON()));
-    instance.publishState('isEditable', instance.data.editor.isEditable);
-    if (instance.data.active_nodes.includes("CharacterCount")) {
-        instance.publishState('characterCount', instance.data.editor.storage.characterCount.characters());
-        instance.publishState('wordCount', instance.data.editor.storage.characterCount.words());
-    };
+     // create the editor    
+     instance.data.editor = new Editor(options);
+
+
+     // initialize exposed states
+     instance.publishState('contentHTML', instance.data.editor.getHTML());
+     instance.publishState('contentText', instance.data.editor.getText());
+     instance.publishState('contentJSON', JSON.stringify(instance.data.editor.getJSON()));
+     instance.publishState('isEditable', instance.data.editor.isEditable);
+     if (instance.data.active_nodes.includes("CharacterCount")) {
+         instance.publishState('characterCount', instance.data.editor.storage.characterCount.characters());
+         instance.publishState('wordCount', instance.data.editor.storage.characterCount.words());
+     };
     
      instance.data.initialContent = instance.data.editor.getHTML();
         
