@@ -88,10 +88,7 @@ function(instance, properties, context) {
   const Underline = window.tiptapUnderline;    
     const Youtube = window.tiptapYoutube;
     const generateHTML = window.tiptapGenerateHTML;
-     const UniqueID = window.UniqueID;
-     console.log("UniqueID", UniqueID);
-          
-     
+         
 
      // load collaboration libraries
      const Collaboration = window.tiptapCollaboration;
@@ -118,10 +115,9 @@ function(instance, properties, context) {
          Paragraph,
          Text,
          ListItem,
-         CharacterCount,
-         UniqueID.configure({
-        types: ['heading', 'paragraph'],
-      })
+         CharacterCount.configure({
+             limit: properties.characterLimit || null,
+         }),
         ]
 
         
@@ -161,8 +157,7 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("Placeholder")) {extensions.push ( Placeholder.configure({ placeholder: placeholder, }) )};
 //    if (instance.data.active_nodes.includes("CharacterCount")) {extensions.push ( CharacterCount )};
     if (instance.data.active_nodes.includes("TextAlign")) {extensions.push ( TextAlign.configure({ types: ['heading', 'paragraph'], }) )};
-                                             
-    
+
      
      
      

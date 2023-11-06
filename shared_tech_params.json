@@ -1,10 +1,4 @@
 {
-    "assets": {
-        "AEY": {
-            "name": "UniqueID",
-            "url": "//meta-l.cdn.bubble.io/f1698057767154x526423314455148500/UniqueID.js"
-        }
-    },
     "dependencies": {
         "alpha_opt_in": false,
         "plugin_api_version": "4",
@@ -13,10 +7,6 @@
     "shared_keys": {
         "AEF": {
             "caption": "tiptap_collab",
-            "type": "secure"
-        },
-        "AEW": {
-            "caption": "extras",
             "type": "secure"
         }
     }

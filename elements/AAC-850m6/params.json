@@ -29,7 +29,7 @@
         }
     },
     "fields": {
-        "AAKtest": {
+        "AAK": {
             "caption": "Initial content",
             "doc": "Content in Plain Text or HTML format. If JSON make sure the \"Content is JSON?\" is set to \"yes\".",
             "editor": "DynamicValue",
@@ -38,6 +38,16 @@
             "optional": true,
             "rank": 1,
             "value": "text"
+        },
+        "ABs": {
+            "caption": "This input is enabled",
+            "default_val": true,
+            "editor": "Checkbox",
+            "in_style": true,
+            "name": "isEditable",
+            "optional": false,
+            "rank": 3,
+            "value": "boolean"
         },
         "ACA": {
             "caption": "Placeholder",
@@ -427,6 +437,14 @@
             "rank": 74,
             "value": "text"
         },
+        "AEW": {
+            "caption": "Max number of characters",
+            "editor": "StaticNumber",
+            "in_style": true,
+            "name": "characterLimit",
+            "optional": true,
+            "rank": 75
+        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",
@@ -647,16 +665,6 @@
             "in_style": true,
             "name": "h6_size",
             "rank": 42
-        },
-        "isEditable": {
-            "caption": "This input is enabled",
-            "default_val": true,
-            "editor": "Checkbox",
-            "in_style": true,
-            "name": "isEditable",
-            "optional": false,
-            "rank": 3,
-            "value": "boolean"
         },
         "nodes": {
             "caption": "Extensions",

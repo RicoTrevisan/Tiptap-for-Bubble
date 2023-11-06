@@ -1,6 +1,6 @@
 function(instance, context) {
     
-    // add display: flex to main element test
+    // add display: flex to main element
     instance.canvas.css("display", "flex");
         
 
@@ -92,7 +92,7 @@ function(instance, context) {
         instance.publishAutobinding(instance.data.editor.getHTML());
 
     }, 2000);
-    
-    
+
+
       
 }
