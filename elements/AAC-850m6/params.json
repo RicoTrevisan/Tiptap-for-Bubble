@@ -5,51 +5,16 @@
     "can_fit_height": true,
     "can_fit_width": true,
     "category": "input forms",
-    "default_dim": {
-        "height": 100,
-        "width": 600
-    },
+    "default_dim": { "height": 100, "width": 600 },
     "display": "Tiptap",
     "events": {
-        "ABl": {
-            "caption": "is focused",
-            "name": "isFocused"
-        },
-        "ABm": {
-            "caption": "isn't focused",
-            "name": "isntFocused"
-        },
-        "ACU": {
-            "caption": "Content updated",
-            "name": "contentUpdated"
-        },
-        "ACV": {
-            "caption": "Editor is ready",
-            "name": "is_ready"
-        }
+        "ABl": { "caption": "is focused", "name": "isFocused" },
+        "ABm": { "caption": "isn't focused", "name": "isntFocused" },
+        "ACU": { "caption": "Content updated", "name": "contentUpdated" },
+        "ACV": { "caption": "Editor is ready", "name": "is_ready" }
     },
     "fields": {
-        "AAK": {
-            "caption": "Initial content",
-            "doc": "Content in Plain Text or HTML format. If JSON make sure the \"Content is JSON?\" is set to \"yes\".",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "initialContent",
-            "optional": true,
-            "rank": 1,
-            "value": "text"
-        },
-        "ABs": {
-            "caption": "This input is enabled",
-            "default_val": true,
-            "editor": "Checkbox",
-            "in_style": true,
-            "name": "isEditable",
-            "optional": false,
-            "rank": 3,
-            "value": "boolean"
-        },
-        "ACA": {
+        "placeholder": {
             "caption": "Placeholder",
             "default_val": "Write something...",
             "editor": "DynamicValue",
@@ -59,393 +24,7 @@
             "rank": 0,
             "value": "text"
         },
-        "ACL": {
-            "caption": "Bubble menu",
-            "doc": "ID of the group that holds the Bubble Menu. This menu shows up when the user selects some text.",
-            "editor": "DynamicValue",
-            "name": "bubbleMenu",
-            "optional": true,
-            "rank": 4,
-            "value": "text"
-        },
-        "ACS": {
-            "caption": "Floating menu",
-            "doc": "ID of the group that holds the Floating Menu. This menu shows up on an empty line.",
-            "editor": "StaticText",
-            "name": "floatingMenu",
-            "optional": true,
-            "rank": 5
-        },
-        "ACZ": {
-            "caption": "Content is JSON?",
-            "default_val": false,
-            "doc": "In case your initial content is in JSON format. It needs to be a valid Tiptap JSON format. More info: https://tiptap.dev/guide/output#option-2-generate-html-from-prosemirror-json",
-            "editor": "DynamicValue",
-            "name": "content_is_json",
-            "rank": 2,
-            "value": "boolean"
-        },
-        "ADP": {
-            "caption": "Bubble menu theme",
-            "default_val": "translucent",
-            "doc": "The style of the tooltip box. See more here: https://atomiks.github.io/tippyjs/v5/themes/",
-            "editor": "Dropdown",
-            "in_style": true,
-            "name": "bubbleMenuTheme",
-            "options": "translucent,light,light-border,material",
-            "rank": 6
-        },
-        "ADQ": {
-            "caption": "Floating Menu Theme",
-            "default_val": "translucent",
-            "doc": "The style of the tooltip box. See more here: https://atomiks.github.io/tippyjs/v5/themes/",
-            "editor": "Dropdown",
-            "in_style": true,
-            "name": "floatingMenuTheme",
-            "options": "translucent,light,light-border,material",
-            "rank": 7
-        },
-        "ADR": {
-            "caption": "H1 Size",
-            "default_val": "4rem",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h1_size",
-            "rank": 12
-        },
-        "ADS": {
-            "caption": "H1 Color",
-            "default_val": "rgba(17, 17, 17, 1)",
-            "editor": "Color",
-            "in_style": true,
-            "name": "h1_color",
-            "rank": 13
-        },
-        "ADT": {
-            "caption": "H1 margin",
-            "default_val": "3rem 0",
-            "doc": "e.g.: \"3rem 0\" means top & bottom 3rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h1_margin",
-            "rank": 15
-        },
-        "ADV": {
-            "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
-            "editor": "Label",
-            "name": "info",
-            "rank": 8
-        },
-        "ADW": {
-            "caption": "paragraph",
-            "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 9
-        },
-        "ADY": {
-            "caption": "table settings",
-            "editor": "Label",
-            "name": "table",
-            "rank": 49
-        },
-        "ADZ": {
-            "caption": "Cell padding",
-            "default_val": "0 1rem",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "table_th_td_padding",
-            "rank": 50
-        },
-        "ADa": {
-            "caption": "Row bottom border",
-            "default_val": "1px solid",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "table_th_td_border_bottom",
-            "rank": 51
-        },
-        "ADb": {
-            "caption": "Header font weight",
-            "default_val": "800",
-            "doc": "",
-            "editor": "Dropdown",
-            "in_style": true,
-            "name": "table_th_font_weight",
-            "options": "900,800,700,600,500,400",
-            "rank": 53
-        },
-        "ADc": {
-            "caption": "Header background",
-            "default_val": "rgba(0,0,0,1)",
-            "editor": "Color",
-            "in_style": true,
-            "name": "table_th_background",
-            "rank": 55
-        },
-        "ADd": {
-            "caption": "Row border color",
-            "default_val": "rgba(0,0,0,1)",
-            "editor": "Color",
-            "in_style": true,
-            "name": "table_row_border_color",
-            "rank": 52
-        },
-        "ADe": {
-            "caption": "Header font color",
-            "default_val": "rgba(255,255,255,1)",
-            "editor": "Color",
-            "in_style": true,
-            "name": "table_header_font_color",
-            "rank": 54
-        },
-        "ADf": {
-            "caption": "Zebra background",
-            "default_val": "rgba(238,238,238,1)",
-            "doc": "Background color for odd rows",
-            "editor": "Color",
-            "in_style": true,
-            "name": "table_zebra_background",
-            "rank": 56
-        },
-        "ADg": {
-            "caption": "Link color",
-            "default_val": "rgba(79, 70, 229, 1)",
-            "editor": "Color",
-            "in_style": true,
-            "name": "link_color",
-            "rank": 58
-        },
-        "ADk": {
-            "caption": "Link color hover",
-            "default_val": "rgba(147, 51, 234, 1)",
-            "editor": "Color",
-            "in_style": true,
-            "name": "link_color_hover",
-            "rank": 59
-        },
-        "ADl": {
-            "caption": "Link color visited",
-            "default_val": "rgba(75, 85, 99, 1)",
-            "editor": "Color",
-            "in_style": true,
-            "name": "link_color_visited",
-            "rank": 61
-        },
-        "ADm": {
-            "caption": "Link hover adv",
-            "default_val": "/*   text-decoration: wavy underline red;  */  /*   background: greenyellow; */",
-            "doc": "ADVANCED FEATURE: Here you can enter any valid CSS to apply to hovered links.",
-            "editor": "StaticText",
-            "in_style": true,
-            "long_text": true,
-            "name": "link_hover_adv",
-            "rank": 60
-        },
-        "ADn": {
-            "caption": "link settings",
-            "editor": "Label",
-            "name": "link_settings",
-            "rank": 57
-        },
-        "ADo": {
-            "caption": "options",
-            "editor": "Label",
-            "name": "options",
-            "rank": 63
-        },
-        "ADp": {
-            "caption": "headings",
-            "default_val": "1,2,3,4,5,6",
-            "doc": "Enable headings. 𝟏,𝟐 will allow only heading 1 and heading 2, etc. Comma separated list of numbers from 1 to 6.",
-            "editor": "StaticText",
-            "in_style": true,
-            "long_text": false,
-            "name": "headings",
-            "rank": 65
-        },
-        "ADq": {
-            "caption": "YouTube",
-            "default_val": "width: 100%; //overrides the default 640px",
-            "doc": "Add any CSS properties. FYI: The underlying item is an iFrame.",
-            "editor": "StaticText",
-            "in_style": true,
-            "long_text": true,
-            "name": "iframe",
-            "rank": 62,
-            "value": "text"
-        },
-        "ADr": {
-            "caption": "Image properties",
-            "default_val": "width: 100%;",
-            "doc": "Add any CSS properties.",
-            "editor": "StaticText",
-            "in_style": true,
-            "long_text": true,
-            "name": "image_css",
-            "optional": true,
-            "rank": 48
-        },
-        "ADt": {
-            "caption": "p_adv",
-            "doc": "any CSS property",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "p_adv",
-            "optional": true,
-            "rank": 10,
-            "value": "text"
-        },
-        "ADu": {
-            "caption": "h1_adv",
-            "doc": "any CSS property",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h1_adv",
-            "optional": true,
-            "rank": 16,
-            "value": "text"
-        },
-        "ADv": {
-            "caption": "h2_adv",
-            "doc": "any CSS property",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h2_adv",
-            "optional": true,
-            "rank": 22,
-            "value": "text"
-        },
-        "ADw": {
-            "caption": "h3_adv",
-            "doc": "any CSS property",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h3_adv",
-            "optional": true,
-            "rank": 28,
-            "value": "text"
-        },
-        "ADx": {
-            "caption": "h4_adv",
-            "doc": "any CSS property",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h4_adv",
-            "optional": true,
-            "rank": 34,
-            "value": "text"
-        },
-        "ADy": {
-            "caption": "h5_adv",
-            "doc": "any CSS property",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h5_adv",
-            "optional": true,
-            "rank": 40,
-            "value": "text"
-        },
-        "ADz": {
-            "caption": "h6_adv",
-            "doc": "any CSS property",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "h6_adv",
-            "optional": true,
-            "rank": 46,
-            "value": "text"
-        },
-        "AEA": {
-            "caption": "Image",
-            "editor": "Label",
-            "name": "image",
-            "rank": 47
-        },
-        "AEB": {
-            "caption": "𝗖𝗢𝗟𝗟𝗔𝗕𝗢𝗥𝗔𝗧𝗜𝗢𝗡 (beta)",
-            "editor": "Label",
-            "name": "collab_info",
-            "rank": 66
-        },
-        "AEC": {
-            "caption": "Enable collaboration?",
-            "default_val": false,
-            "editor": "Checkbox",
-            "name": "collab_active",
-            "rank": 68
-        },
-        "AED": {
-            "caption": "user_name",
-            "default_val": "John Doe",
-            "doc": "Name displayed to other users",
-            "editor": "DynamicValue",
-            "name": "collab_user_name",
-            "optional": true,
-            "rank": 69,
-            "value": "text"
-        },
-        "AEE": {
-            "caption": "cursor_color",
-            "default_val": "rgba(179,208,252,1)",
-            "doc": "In which color this user's name will show to other users.",
-            "editor": "Color",
-            "name": "collab_cursor_color",
-            "optional": true,
-            "rank": 70,
-            "value": "text"
-        },
-        "AEG": {
-            "caption": "to use the collaboration function you first need an account with 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
-            "editor": "Label",
-            "name": "collab_info_sub",
-            "rank": 67
-        },
-        "AEH": {
-            "caption": "app_id",
-            "default_val": "nrm8g1ko",
-            "doc": "Get the app id from 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
-            "editor": "StaticText",
-            "name": "collab_app_id",
-            "optional": true,
-            "rank": 71
-        },
-        "AEI": {
-            "caption": "collab_doc_id",
-            "editor": "DynamicValue",
-            "name": "collab_doc_id",
-            "optional": true,
-            "rank": 72,
-            "value": "text"
-        },
-        "AEN": {
-            "caption": "JWT key",
-            "doc": "You will need to use the 𝗴𝗲𝗻𝗲𝗿𝗮𝘁𝗲 𝗝𝗪𝗧 𝗸𝗲𝘆 action.",
-            "editor": "DynamicValue",
-            "name": "collab_jwt",
-            "optional": true,
-            "rank": 73,
-            "value": "text"
-        },
-        "AEV": {
-            "caption": "Blockquote styling",
-            "default_val": "// background: green; padding: 0.5rem;",
-            "doc": "add any css to target the blockquote element. This will override the standard Tiptap (ProseMirror) styling.",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "blockquote_adv",
-            "optional": true,
-            "rank": 74,
-            "value": "text"
-        },
-        "AEW": {
-            "caption": "Max number of characters",
-            "editor": "StaticNumber",
-            "in_style": true,
-            "name": "characterLimit",
-            "optional": true,
-            "rank": 75
-        },
-        "AEX": {
+        "placeholder_color": {
             "caption": "Placeholder color",
             "default_val": "rgba(173, 181, 189, 1)",
             "doc": "Color of the placeholder text",
@@ -453,7 +32,117 @@
             "in_style": true,
             "name": "placeholder_color",
             "optional": true,
-            "rank": 76
+            "rank": 1
+        },
+        "initialContent": {
+            "caption": "Initial content",
+            "doc": "Content in Plain Text or HTML format. If JSON make sure the \"Content is JSON?\" is set to \"yes\".",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "initialContent",
+            "optional": true,
+            "rank": 2,
+            "value": "text"
+        },
+        "content_is_json": {
+            "caption": "Content is JSON?",
+            "default_val": false,
+            "doc": "In case your initial content is in JSON format. It needs to be a valid Tiptap JSON format. More info: https://tiptap.dev/guide/output#option-2-generate-html-from-prosemirror-json",
+            "editor": "DynamicValue",
+            "name": "content_is_json",
+            "rank": 3,
+            "value": "boolean"
+        },
+        "isEditable": {
+            "caption": "This input is enabled",
+            "default_val": true,
+            "editor": "Checkbox",
+            "in_style": true,
+            "name": "isEditable",
+            "optional": false,
+            "rank": 4,
+            "value": "boolean"
+        },
+        "bubbleMenu": {
+            "caption": "Bubble menu",
+            "doc": "ID of the group that holds the Bubble Menu. This menu shows up when the user selects some text.",
+            "editor": "DynamicValue",
+            "name": "bubbleMenu",
+            "optional": true,
+            "rank": 5,
+            "value": "text"
+        },
+        "floatingMenu": {
+            "caption": "Floating menu",
+            "doc": "ID of the group that holds the Floating Menu. This menu shows up on an empty line.",
+            "editor": "StaticText",
+            "name": "floatingMenu",
+            "optional": true,
+            "rank": 6
+        },
+        "bubbleMenuTheme": {
+            "caption": "Bubble menu theme",
+            "default_val": "translucent",
+            "doc": "The style of the tooltip box. See more here: https://atomiks.github.io/tippyjs/v5/themes/",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "bubbleMenuTheme",
+            "options": "translucent,light,light-border,material",
+            "rank": 7
+        },
+        "floatingMenuTheme": {
+            "caption": "Floating Menu Theme",
+            "default_val": "translucent",
+            "doc": "The style of the tooltip box. See more here: https://atomiks.github.io/tippyjs/v5/themes/",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "floatingMenuTheme",
+            "options": "translucent,light,light-border,material",
+            "rank": 8
+        },
+        "info": {
+            "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
+            "editor": "Label",
+            "name": "info",
+            "rank": 9
+        },
+        "stylesheet_info": {
+            "caption": "paragraph",
+            "editor": "Label",
+            "name": "stylesheet_info",
+            "rank": 10
+        },
+        "p_adv": {
+            "caption": "p_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "p_adv",
+            "optional": true,
+            "rank": 11,
+            "value": "text"
+        },
+        "stylesheet_info1": {
+            "caption": "     ----- H1 styling -----",
+            "editor": "Label",
+            "name": "stylesheet_info1",
+            "rank": 12
+        },
+        "h1_size": {
+            "caption": "H1 Size",
+            "default_val": "4rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h1_size",
+            "rank": 13
+        },
+        "h1_color": {
+            "caption": "H1 Color",
+            "default_val": "rgba(17, 17, 17, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "h1_color",
+            "rank": 14
         },
         "h1_font_weight": {
             "caption": "H1 font-weight",
@@ -463,13 +152,40 @@
             "in_style": true,
             "name": "h1_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 14
+            "rank": 15
         },
-        "h1_info1": {
-            "caption": "     ----- H1 styling -----",
+        "h1_margin": {
+            "caption": "H1 margin",
+            "default_val": "3rem 0",
+            "doc": "e.g.: \"3rem 0\" means top & bottom 3rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h1_margin",
+            "rank": 16
+        },
+        "h1_adv": {
+            "caption": "h1_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h1_adv",
+            "optional": true,
+            "rank": 17,
+            "value": "text"
+        },
+        "stylesheet_info2": {
+            "caption": "     ----- H2 styling -----",
             "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 11
+            "name": "stylesheet_info2",
+            "rank": 18
+        },
+        "h2_size": {
+            "caption": "H2 Size",
+            "default_val": "3rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h2_size",
+            "rank": 19
         },
         "h2_color": {
             "caption": "H2 Color",
@@ -477,7 +193,16 @@
             "editor": "Color",
             "in_style": true,
             "name": "h2_color",
-            "rank": 19
+            "rank": 20
+        },
+        "h2_margin": {
+            "caption": "H2 margin",
+            "default_val": "2.5rem 0",
+            "doc": "e.g.: \"2.5rem 0\" means top & bottom 2.5rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "h2_margin",
+            "rank": 21
         },
         "h2_font_weight": {
             "caption": "H2 font-weight",
@@ -487,30 +212,31 @@
             "in_style": true,
             "name": "h2_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 21
+            "rank": 22
         },
-        "h2_info": {
-            "caption": "     ----- H2 styling -----",
+        "h2_adv": {
+            "caption": "h2_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h2_adv",
+            "optional": true,
+            "rank": 23,
+            "value": "text"
+        },
+        "stylesheet_info3": {
+            "caption": "     ----- H3 styling -----",
             "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 17
+            "name": "stylesheet_info3",
+            "rank": 24
         },
-        "h2_margin": {
-            "caption": "H2 margin",
-            "default_val": "2.5rem 0",
-            "doc": "e.g.: \"2.5rem 0\" means top & bottom 2.5rem, left & right 0.  Accepts CSS margin shorthand notation. For more info: google: \"mdn CSS margin\" OR ask in the forum thread.",
+        "h3_size": {
+            "caption": "H3 Size",
+            "default_val": "2rem",
             "editor": "StaticText",
             "in_style": true,
-            "name": "h2_margin",
-            "rank": 20
-        },
-        "h2_size": {
-            "caption": "H2 Size",
-            "default_val": "3rem",
-            "editor": "StaticText",
-            "in_style": true,
-            "name": "h2_size",
-            "rank": 18
+            "name": "h3_size",
+            "rank": 25
         },
         "h3_color": {
             "caption": "H3 Color",
@@ -518,7 +244,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h3_color",
-            "rank": 25
+            "rank": 26
         },
         "h3_font_weight": {
             "caption": "H3 font-weight",
@@ -528,13 +254,7 @@
             "in_style": true,
             "name": "h3_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 26
-        },
-        "h3_info": {
-            "caption": "     ----- H3 styling -----",
-            "editor": "Label",
-            "name": "stylesheet_info",
-            "rank": 23
+            "rank": 27
         },
         "h3_margin": {
             "caption": "H3 margin",
@@ -543,15 +263,31 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h3_margin",
-            "rank": 27
+            "rank": 28
         },
-        "h3_size": {
-            "caption": "H3 Size",
-            "default_val": "2rem",
+        "h3_adv": {
+            "caption": "h3_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h3_adv",
+            "optional": true,
+            "rank": 29,
+            "value": "text"
+        },
+        "h4_info": {
+            "caption": "     ----- H4 styling -----",
+            "editor": "Label",
+            "name": "h4_info",
+            "rank": 30
+        },
+        "h4_size": {
+            "caption": "H4 Size",
+            "default_val": "1.5rem",
             "editor": "StaticText",
             "in_style": true,
-            "name": "h3_size",
-            "rank": 24
+            "name": "h4_size",
+            "rank": 31
         },
         "h4_color": {
             "caption": "H4 Color",
@@ -559,7 +295,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h4_color",
-            "rank": 31
+            "rank": 32
         },
         "h4_font_weight": {
             "caption": "H4 font-weight",
@@ -569,13 +305,7 @@
             "in_style": true,
             "name": "h4_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 32
-        },
-        "h4_info": {
-            "caption": "     ----- H4 styling -----",
-            "editor": "Label",
-            "name": "h4_info",
-            "rank": 29
+            "rank": 33
         },
         "h4_margin": {
             "caption": "H4 margin",
@@ -584,15 +314,31 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h4_margin",
-            "rank": 33
+            "rank": 34
         },
-        "h4_size": {
-            "caption": "H4 Size",
-            "default_val": "1.5rem",
+        "h4_adv": {
+            "caption": "h4_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h4_adv",
+            "optional": true,
+            "rank": 35,
+            "value": "text"
+        },
+        "h5_info": {
+            "caption": "     ----- H5 styling -----",
+            "editor": "Label",
+            "name": "h5_info",
+            "rank": 36
+        },
+        "h5_size": {
+            "caption": "H5 Size",
+            "default_val": "1rem",
             "editor": "StaticText",
             "in_style": true,
-            "name": "h4_size",
-            "rank": 30
+            "name": "h5_size",
+            "rank": 37
         },
         "h5_color": {
             "caption": "H5 Color",
@@ -600,7 +346,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h5_color",
-            "rank": 37
+            "rank": 38
         },
         "h5_font_weight": {
             "caption": "H5 font-weight",
@@ -610,13 +356,7 @@
             "in_style": true,
             "name": "h5_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 38
-        },
-        "h5_info": {
-            "caption": "     ----- H5 styling -----",
-            "editor": "Label",
-            "name": "h5_info",
-            "rank": 35
+            "rank": 39
         },
         "h5_margin": {
             "caption": "H5 margin",
@@ -625,15 +365,31 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h5_margin",
-            "rank": 39
+            "rank": 40
         },
-        "h5_size": {
-            "caption": "H5 Size",
+        "h5_adv": {
+            "caption": "h5_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h5_adv",
+            "optional": true,
+            "rank": 41,
+            "value": "text"
+        },
+        "h6_info": {
+            "caption": "     ----- H6 styling -----",
+            "editor": "Label",
+            "name": "h6_info",
+            "rank": 42
+        },
+        "h6_size": {
+            "caption": "H6 Size",
             "default_val": "1rem",
             "editor": "StaticText",
             "in_style": true,
-            "name": "h5_size",
-            "rank": 36
+            "name": "h6_size",
+            "rank": 43
         },
         "h6_color": {
             "caption": "H6 Color",
@@ -641,7 +397,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h6_color",
-            "rank": 43
+            "rank": 44
         },
         "h6_font_weight": {
             "caption": "H6 font-weight",
@@ -651,13 +407,7 @@
             "in_style": true,
             "name": "h6_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 44
-        },
-        "h6_info": {
-            "caption": "     ----- H6 styling -----",
-            "editor": "Label",
-            "name": "h6_info",
-            "rank": 41
+            "rank": 45
         },
         "h6_margin": {
             "caption": "H6 margin",
@@ -666,15 +416,156 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h6_margin",
-            "rank": 45
+            "rank": 46
         },
-        "h6_size": {
-            "caption": "H6 Size",
-            "default_val": "1rem",
+        "h6_adv": {
+            "caption": "h6_adv",
+            "doc": "any CSS property",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "h6_adv",
+            "optional": true,
+            "rank": 47,
+            "value": "text"
+        },
+        "image": {
+            "caption": "Image",
+            "editor": "Label",
+            "name": "image",
+            "rank": 48
+        },
+        "image_css": {
+            "caption": "Image properties",
+            "default_val": "width: 100%;",
+            "doc": "Add any CSS properties.",
             "editor": "StaticText",
             "in_style": true,
-            "name": "h6_size",
-            "rank": 42
+            "long_text": true,
+            "name": "image_css",
+            "optional": true,
+            "rank": 49
+        },
+        "table": {
+            "caption": "table settings",
+            "editor": "Label",
+            "name": "table",
+            "rank": 50
+        },
+        "table_th_td_padding": {
+            "caption": "Cell padding",
+            "default_val": "0 1rem",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "table_th_td_padding",
+            "rank": 51
+        },
+        "table_th_td_border_bottom": {
+            "caption": "Row bottom border",
+            "default_val": "1px solid",
+            "editor": "StaticText",
+            "in_style": true,
+            "name": "table_th_td_border_bottom",
+            "rank": 52
+        },
+        "table_row_border_color": {
+            "caption": "Row border color",
+            "default_val": "rgba(0,0,0,1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "table_row_border_color",
+            "rank": 53
+        },
+        "table_th_font_weight": {
+            "caption": "Header font weight",
+            "default_val": "800",
+            "doc": "",
+            "editor": "Dropdown",
+            "in_style": true,
+            "name": "table_th_font_weight",
+            "options": "900,800,700,600,500,400",
+            "rank": 54
+        },
+        "table_header_font_color": {
+            "caption": "Header font color",
+            "default_val": "rgba(255,255,255,1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "table_header_font_color",
+            "rank": 55
+        },
+        "table_th_background": {
+            "caption": "Header background",
+            "default_val": "rgba(0,0,0,1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "table_th_background",
+            "rank": 56
+        },
+        "table_zebra_background": {
+            "caption": "Zebra background",
+            "default_val": "rgba(238,238,238,1)",
+            "doc": "Background color for odd rows",
+            "editor": "Color",
+            "in_style": true,
+            "name": "table_zebra_background",
+            "rank": 57
+        },
+        "link_settings": {
+            "caption": "link settings",
+            "editor": "Label",
+            "name": "link_settings",
+            "rank": 58
+        },
+        "link_color": {
+            "caption": "Link color",
+            "default_val": "rgba(79, 70, 229, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "link_color",
+            "rank": 59
+        },
+        "link_color_hover": {
+            "caption": "Link color hover",
+            "default_val": "rgba(147, 51, 234, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "link_color_hover",
+            "rank": 60
+        },
+        "link_hover_adv": {
+            "caption": "Link hover adv",
+            "default_val": "/*   text-decoration: wavy underline red;  */  /*   background: greenyellow; */",
+            "doc": "ADVANCED FEATURE: Here you can enter any valid CSS to apply to hovered links.",
+            "editor": "StaticText",
+            "in_style": true,
+            "long_text": true,
+            "name": "link_hover_adv",
+            "rank": 61
+        },
+        "link_color_visited": {
+            "caption": "Link color visited",
+            "default_val": "rgba(75, 85, 99, 1)",
+            "editor": "Color",
+            "in_style": true,
+            "name": "link_color_visited",
+            "rank": 62
+        },
+        "iframe": {
+            "caption": "YouTube",
+            "default_val": "width: 100%; //overrides the default 640px",
+            "doc": "Add any CSS properties. FYI: The underlying item is an iFrame.",
+            "editor": "StaticText",
+            "in_style": true,
+            "long_text": true,
+            "name": "iframe",
+            "rank": 63,
+            "value": "text"
+        },
+        "options": {
+            "caption": "options",
+            "editor": "Label",
+            "name": "options",
+            "rank": 64
         },
         "nodes": {
             "caption": "Extensions",
@@ -684,7 +575,101 @@
             "in_style": true,
             "long_text": true,
             "name": "nodes",
-            "rank": 64
+            "rank": 65
+        },
+        "headings": {
+            "caption": "headings",
+            "default_val": "1,2,3,4,5,6",
+            "doc": "Enable headings. 𝟏,𝟐 will allow only heading 1 and heading 2, etc. Comma separated list of numbers from 1 to 6.",
+            "editor": "StaticText",
+            "in_style": true,
+            "long_text": false,
+            "name": "headings",
+            "rank": 66
+        },
+        "collab_info": {
+            "caption": "𝗖𝗢𝗟𝗟𝗔𝗕𝗢𝗥𝗔𝗧𝗜𝗢𝗡 (beta)",
+            "editor": "Label",
+            "name": "collab_info",
+            "rank": 67
+        },
+        "collab_info_sub": {
+            "caption": "to use the collaboration function you first need an account with 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
+            "editor": "Label",
+            "name": "collab_info_sub",
+            "rank": 68
+        },
+        "collab_active": {
+            "caption": "Enable collaboration?",
+            "default_val": false,
+            "editor": "Checkbox",
+            "name": "collab_active",
+            "rank": 69
+        },
+        "collab_user_name": {
+            "caption": "user_name",
+            "default_val": "John Doe",
+            "doc": "Name displayed to other users",
+            "editor": "DynamicValue",
+            "name": "collab_user_name",
+            "optional": true,
+            "rank": 70,
+            "value": "text"
+        },
+        "collab_cursor_color": {
+            "caption": "cursor_color",
+            "default_val": "rgba(179,208,252,1)",
+            "doc": "In which color this user's name will show to other users.",
+            "editor": "Color",
+            "name": "collab_cursor_color",
+            "optional": true,
+            "rank": 71,
+            "value": "text"
+        },
+        "collab_app_id": {
+            "caption": "app_id",
+            "default_val": "nrm8g1ko",
+            "doc": "Get the app id from 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
+            "editor": "StaticText",
+            "name": "collab_app_id",
+            "optional": true,
+            "rank": 72
+        },
+        "collab_doc_id": {
+            "caption": "collab_doc_id",
+            "editor": "DynamicValue",
+            "name": "collab_doc_id",
+            "optional": true,
+            "rank": 73,
+            "value": "text"
+        },
+        "collab_jwt": {
+            "caption": "JWT key",
+            "doc": "You will need to use the 𝗴𝗲𝗻𝗲𝗿𝗮𝘁𝗲 𝗝𝗪𝗧 𝗸𝗲𝘆 action.",
+            "editor": "DynamicValue",
+            "name": "collab_jwt",
+            "optional": true,
+            "rank": 74,
+            "value": "text"
+        },
+        "blockquote_adv": {
+            "caption": "Blockquote styling",
+            "default_val": "// background: green; padding: 0.5rem;",
+            "doc": "add any css to target the blockquote element. This will override the standard Tiptap (ProseMirror) styling.",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "blockquote_adv",
+            "optional": true,
+            "rank": 75,
+            "value": "text"
+        },
+        "characterLimit": {
+            "caption": "Max number of characters",
+            "editor": "StaticNumber",
+            "in_style": true,
+            "name": "characterLimit",
+            "optional": true,
+            "rank": 76
         }
     },
     "has_reset_fn": false,
