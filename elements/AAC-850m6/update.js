@@ -20,10 +20,10 @@ function(instance, properties, context) {
   let content = (properties.content_is_json) ? JSON.parse(initialContent) : initialContent;
      
 
-
-     let placeholder = properties.placeholder || "Start typing...";
-     let bubbleMenu = properties.bubbleMenu;
-     let floatingMenu = properties.floatingMenu;
+    
+    let placeholder = properties.placeholder;
+  let bubbleMenu = properties.bubbleMenu;
+    let floatingMenu = properties.floatingMenu;
 
         
         
@@ -36,6 +36,17 @@ function(instance, properties, context) {
      instance.data.tiptapEditorID = d.id;
      instance.canvas.append(d);
 
+     
+     // instance.data.editor = new Editor({
+     //     element: d,
+     //     extensions: [
+     //         Text,
+     //         Paragraph,
+     //         HardBreak,
+     //         Document,
+     //     ],
+     //     content: '<p>Hello World!</p>',
+     // }) 
 
     
 
@@ -67,7 +78,7 @@ function(instance, properties, context) {
      const Image = window.tiptapImage;
      const BubbleMenu = window.tiptapBubbleMenu;
      const FloatingMenu = window.tiptapFloatingMenu;
-     const Link = window.tiptapLink;     
+     const Link = window.tiptapLink;
      const TextAlign = window.tiptapTextAlign;
      const Highlight = window.tiptapHighlight;
      const Table = window.tiptapTable;
@@ -134,6 +145,7 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("CodeBlock")) {extensions.push ( CodeBlock )};
     if (instance.data.active_nodes.includes("Code")) {extensions.push ( Code )};
     
+    // done fixing above
 
 
     if (instance.data.active_nodes.includes("Blockquote")) {extensions.push ( Blockquote )};
@@ -141,8 +153,8 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("Youtube")) {extensions.push ( Youtube.configure({ nocookie: true, }), )};
     if (instance.data.active_nodes.includes("Table")) {extensions.push ( Table.configure({ resizable: true, }), TableRow, TableHeader, TableCell, )};
     if (instance.data.active_nodes.includes("Image")) {extensions.push ( Image.configure({ inline: false, allowBase64: true, }), )};
-    if (instance.data.active_nodes.includes("Link")) {extensions.push ( Link.configure({linkOnPaste: true,}) )};
-    if (instance.data.active_nodes.includes("Placeholder")) {extensions.push ( Placeholder.configure({ placeholder: placeholder }) )};
+    if (instance.data.active_nodes.includes("Link")) {extensions.push ( Link )};
+    if (instance.data.active_nodes.includes("Placeholder")) {extensions.push ( Placeholder.configure({ placeholder: placeholder, }) )};
 //    if (instance.data.active_nodes.includes("CharacterCount")) {extensions.push ( CharacterCount )};
     if (instance.data.active_nodes.includes("TextAlign")) {extensions.push ( TextAlign.configure({ types: ['heading', 'paragraph'], }) )};
 
@@ -290,8 +302,7 @@ function(instance, properties, context) {
          let bubbleMenuTheme = properties.bubbleMenuTheme;
 
          let bubbleMenuDiv = instance.data.findElement(properties.bubbleMenu);
-         // add overflow property to bubble menu so it always shows
-         // bubbleMenuDiv.style.overflow = "visible";
+         window.bubbleMenuDiv = bubbleMenuDiv
          bubbleMenuDiv.id += randomId
 
          options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, tippyOptions: {
@@ -303,8 +314,6 @@ function(instance, properties, context) {
          let floatingMenuTheme = properties.floatingMenuTheme;
 
          let floatingMenuDiv = instance.data.findElement(properties.floatingMenu);
-         // add overflow property to floating menu so it always shows
-         // floatingMenuDiv.style.overflow = "visible";
          floatingMenuDiv.id += randomId
 
          options.extensions.push( FloatingMenu.configure({ 
@@ -427,7 +436,6 @@ function(instance, properties, context) {
     instance.data.stylesheet.innerHTML = `
 #tiptapEditor-${instance.data.randomId} .ProseMirror {
     flex-grow: 1;
-	overflow: visible;
 
 }
 
@@ -473,16 +481,6 @@ function(instance, properties, context) {
     font-weight: ${properties.h6_font_weight};
   ${properties.h6_adv}
 }
-
-#tiptapEditor-${instance.data.randomId} p.is-editor-empty:first-child::before {
-  color: ${properties.placeholder_color || "#adb5bd"};
-  content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  pointer-events: none;
-}
-
-
 #tiptapEditor-${instance.data.randomId} .ProseMirror p {
     font-size: ${properties.bubble.font_size()};
     color: ${properties.bubble.font_color()};
@@ -490,6 +488,14 @@ function(instance, properties, context) {
     margin: 1rem 0;
     font-weight: 400;
     ${properties.p_adv}
+}
+
+#tiptapEditor-${instance.data.randomId} p.is-editor-empty:first-child::before {
+  color: ${properties.placeholder_color || "#adb5bd"};
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror blockquote {
