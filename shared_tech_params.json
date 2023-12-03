@@ -1,4 +1,10 @@
 {
+    "assets": {
+        "AEb": {
+            "name": "dist.js",
+            "url": "//meta-q.cdn.bubble.io/f1701591085680x725033244829215400/dist.js"
+        }
+    },
     "dependencies": {
         "alpha_opt_in": false,
         "plugin_api_version": "4",

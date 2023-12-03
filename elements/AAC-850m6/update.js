@@ -7,7 +7,7 @@ function(instance, properties, context) {
         console.log("collab is active but jwt token is not yet loaded. Returning...");
         return 
     }
-
+    
     
     
 // load once
@@ -35,18 +35,6 @@ function(instance, properties, context) {
      d.style = "flex-grow: 1; display: flex;";
      instance.data.tiptapEditorID = d.id;
      instance.canvas.append(d);
-
-     
-     // instance.data.editor = new Editor({
-     //     element: d,
-     //     extensions: [
-     //         Text,
-     //         Paragraph,
-     //         HardBreak,
-     //         Document,
-     //     ],
-     //     content: '<p>Hello World!</p>',
-     // }) 
 
     
 
@@ -93,7 +81,8 @@ function(instance, properties, context) {
      // load collaboration libraries
      const Collaboration = window.tiptapCollaboration;
      const CollaborationCursor = window.tiptapCollaborationCursor;
-     const TiptapCollabProvider = window.TiptapCollabProvider;
+     const TiptapCollabProvider = window.tiptapCollabProvider;
+     const Y = window.tiptapYJS;
 
 
      
@@ -110,7 +99,7 @@ function(instance, properties, context) {
      
      const active_nodes = instance.data.active_nodes;
     
-     const extensions = [
+     let extensions = [
          Document,
          Paragraph,
          Text,
@@ -125,7 +114,7 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )};
     if (instance.data.active_nodes.includes("Gapcursor")) {extensions.push ( Gapcursor )};
     if (instance.data.active_nodes.includes("HardBreak")) { extensions.push( HardBreak ) };
-    if (instance.data.active_nodes.includes("History")) {extensions.push ( History )};
+    if (instance.data.active_nodes.includes("History") && !properties.collab_active) {extensions.push ( History )};
     
     if (instance.data.active_nodes.includes("Bold")) {extensions.push ( Bold )};
     if (instance.data.active_nodes.includes("Italic")) {extensions.push ( Italic )};
@@ -334,28 +323,30 @@ function(instance, properties, context) {
          // removes initialContent -- normally a collab document will have some document in the cloud.
          delete options.content;
 
+         const doc = new Y.Doc();
+
          instance.data.provider = new TiptapCollabProvider({
              appId: properties.collab_app_id,
              name: properties.collab_doc_id,
              token: properties.collab_jwt,
+             document: doc
          });
 
 
          extensions.push (
              Collaboration.configure({
-                 document: instance.data.provider.document,
+                 document: doc,
              }),
              CollaborationCursor.configure({
                  provider: instance.data.provider,
                  user: {
                      name: properties.collab_user_name,
-                     color: properties.collab_cursor_color,
+                     color: instance.data.rgbaToHex(properties.collab_cursor_color) || "#2563eb"
                  }
              }),
          );
 
      }
-
 
     
      // create the editor    
@@ -422,10 +413,10 @@ function(instance, properties, context) {
     
     // if collab is on, update username and color
     if (!!instance.data.editor_is_ready && !!properties.collab_active) {
+        
         instance.data.editor.commands.updateUser({
             name: properties.collab_user_name,
-            color: properties.collab_cursor_color,
-            //            avatar: 'https://unavatar.io/github/ueberdosis',
+            color: instance.data.rgbaToHex(properties.collab_cursor_color) || "#2563eb",
         });
     }
 

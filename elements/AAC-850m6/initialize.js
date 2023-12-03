@@ -93,6 +93,47 @@ function(instance, context) {
 
     }, 2000);
 
+    
+    // transform rgba to hex so that it can be used in the collab mode
+   instance.data.rgbaToHex = (rgba) => {
+
+       console.log("transforming rgba color", rgba);
+       if (!rgba) {
+           console.log("color is empty, returning");
+           return
+       }
+        // Check if input is properly formatted
+        if(!/^rgba?\([\d+,\s*]{3}(1|0?\.?\d*)\)?$/i.test(rgba)) {
+            console.log("color is not rgba, returning color", rgba)            
+            return rgba
+        }
+
+        let parts = rgba.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(1|0?.?\d*))?\)$/i);
+
+        let r = parseInt(parts[1]).toString(16).padStart(2, '0'),
+            g = parseInt(parts[2]).toString(16).padStart(2, '0'),
+            b = parseInt(parts[3]).toString(16).padStart(2, '0'),
+            a = (parts[4] === undefined) ? 'FF' : Math.round(parseFloat(parts[4]) * 255).toString(16).padStart(2, '0');
+
+        let hex = '#' + r + g + b + a;
+
+       console.log("hexed color", hex);
+        return hex;
+    }
+    
+/*    instance.data.rgbaToHex = (rgba) => {
+        let parts = rgba.match(
+            /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(1|0?\.?\d*))?\)$/i
+        );
+        let r = (parts[1] | (1 << 8)).toString(16).slice(1),
+            g = (parts[2] | (1 << 8)).toString(16).slice(1),
+            b = (parts[3] | (1 << 8)).toString(16).slice(1),
+            a = ((parts[4] || "") === "" ? 255 : parts[4] * 255)
+        .toString(16)
+        .slice(1 / 0.5),
+            hex = "#" + r + g + b + a;
+        return hex;
+    };*/
 
       
 }

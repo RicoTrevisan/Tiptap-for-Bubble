@@ -687,7 +687,7 @@
             "rank": 64
         }
     },
-    "has_reset_fn": false,
+    "has_reset_fn": true,
     "icon": "ion-chatbox-working",
     "property_applications": {
         "Background": true,
