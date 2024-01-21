@@ -1,12 +1,6 @@
 function(instance, properties, context) {
     
-   
-   
-
-    if (!!properties.collab_active && !properties.collab_jwt ) {
-        console.log("collab is active but jwt token is not yet loaded. Returning...");
-        return 
-    }
+  
     
     
     
@@ -15,7 +9,7 @@ function(instance, properties, context) {
         
     
 
-  let initialContent = (properties.bubble.auto_binding()) ? properties.autobinding : properties.initialContent;
+  let initialContent = properties.initialContent;
   instance.data.initialContent = initialContent; // a string to keep track of what's currently in the initialContent so that the editor can change when the initialContent changes
   let content = (properties.content_is_json) ? JSON.parse(initialContent) : initialContent;
      
@@ -78,12 +72,6 @@ function(instance, properties, context) {
      const generateHTML = window.tiptapGenerateHTML;
          
 
-     // load collaboration libraries
-     const Collaboration = window.tiptapCollaboration;
-     const CollaborationCursor = window.tiptapCollaborationCursor;
-     const TiptapCollabProvider = window.tiptapCollabProvider;
-     const Y = window.tiptapYJS;
-
 
      
         
@@ -114,7 +102,7 @@ function(instance, properties, context) {
     if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )};
     if (instance.data.active_nodes.includes("Gapcursor")) {extensions.push ( Gapcursor )};
     if (instance.data.active_nodes.includes("HardBreak")) { extensions.push( HardBreak ) };
-    if (instance.data.active_nodes.includes("History") && !properties.collab_active) {extensions.push ( History )};
+    if (instance.data.active_nodes.includes("History"))  {extensions.push ( History )};
     
     if (instance.data.active_nodes.includes("Bold")) {extensions.push ( Bold )};
     if (instance.data.active_nodes.includes("Italic")) {extensions.push ( Italic )};
@@ -186,12 +174,6 @@ function(instance, properties, context) {
           instance.publishState('characterCount', editor.storage.characterCount.characters());
           instance.publishState('wordCount', editor.storage.characterCount.words());
           instance.triggerEvent('contentUpdated');  
-          if ( ( properties.bubble.auto_binding() == true ) && !!instance.data.editor_is_ready &&  ( ( properties.autobinding !== editor.getHTML() ) ) ) {
-
-              instance.data.writeToAutobinding(); // throttles the autobinding to every 2 seconds
-              // instance.publishAutobinding(instance.data.editor.getHTML()); //raw-dog autobinding
-
-          }
 
             
       },
@@ -315,39 +297,6 @@ function(instance, properties, context) {
      }
 
      
-     // set up collaboration
-
-
-     if (!!properties.collab_active) {              
-
-         // removes initialContent -- normally a collab document will have some document in the cloud.
-         delete options.content;
-
-         const doc = new Y.Doc();
-
-         instance.data.provider = new TiptapCollabProvider({
-             appId: properties.collab_app_id,
-             name: properties.collab_doc_id,
-             token: properties.collab_jwt,
-             document: doc
-         });
-
-
-         extensions.push (
-             Collaboration.configure({
-                 document: doc,
-             }),
-             CollaborationCursor.configure({
-                 provider: instance.data.provider,
-                 user: {
-                     name: properties.collab_user_name,
-                     color: instance.data.rgbaToHex(properties.collab_cursor_color) || "#2563eb"
-                 }
-             }),
-         );
-
-     }
-
     
      // create the editor    
      instance.data.editor = new Editor(options);
@@ -385,17 +334,11 @@ function(instance, properties, context) {
 
     // handing changing of initial content
     // checks if the initial content has something -- if it's empty the user is probably using set content which means this should NOT be applicable
-    if (!!instance.data.editor_is_ready && !properties.initialContent == '' && (instance.data.initialContent !== properties.initialContent) && !properties.bubble.auto_binding() ) {
+    if (!!instance.data.editor_is_ready && !properties.initialContent == '' && (instance.data.initialContent !== properties.initialContent) ) {
 
-        if (!properties.collab_active) {
-            
             console.log("initialContent has changed");
             instance.data.initialContent = properties.initialContent;
             instance.data.editor.commands.setContent(instance.data.initialContent, true);
-            
-        } else {
-            console.log("initialContent has changed but collaboration is active -- not updating content");
-        }
     };
 
     
@@ -411,14 +354,6 @@ function(instance, properties, context) {
     }
     
     
-    // if collab is on, update username and color
-    if (!!instance.data.editor_is_ready && !!properties.collab_active) {
-        
-        instance.data.editor.commands.updateUser({
-            name: properties.collab_user_name,
-            color: instance.data.rgbaToHex(properties.collab_cursor_color) || "#2563eb",
-        });
-    }
 
     
     
@@ -600,34 +535,6 @@ td {
 #tiptapEditor-${instance.data.randomId} .ProseMirror img {
     ${properties.image_css}
 }
-  .collaboration-cursor__caret {
-  position: relative;
-  margin-left: -1px;
-  margin-right: -1px;
-  border-left: 1px solid #0D0D0D;
-  border-right: 1px solid #0D0D0D;
-  word-break: normal;
-  pointer-events: none;
-}
-
-
-.collaboration-cursor__label {
-  position: absolute;
-  top: -1.4em;
-  left: -1px;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  user-select: none;
-  color: #0D0D0D;
-  padding: 0.1rem 0.3rem;
-  border-radius: 3px 3px 3px 0;
-  white-space: nowrap;
-}
 `      
-    
-
-
 
 }

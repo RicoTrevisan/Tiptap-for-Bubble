@@ -361,71 +361,6 @@
             "name": "image",
             "rank": 47
         },
-        "AEB": {
-            "caption": "𝗖𝗢𝗟𝗟𝗔𝗕𝗢𝗥𝗔𝗧𝗜𝗢𝗡 (beta)",
-            "editor": "Label",
-            "name": "collab_info",
-            "rank": 66
-        },
-        "AEC": {
-            "caption": "Enable collaboration?",
-            "default_val": false,
-            "editor": "Checkbox",
-            "name": "collab_active",
-            "rank": 68
-        },
-        "AED": {
-            "caption": "user_name",
-            "default_val": "John Doe",
-            "doc": "Name displayed to other users",
-            "editor": "DynamicValue",
-            "name": "collab_user_name",
-            "optional": true,
-            "rank": 69,
-            "value": "text"
-        },
-        "AEE": {
-            "caption": "cursor_color",
-            "default_val": "rgba(179,208,252,1)",
-            "doc": "In which color this user's name will show to other users.",
-            "editor": "Color",
-            "name": "collab_cursor_color",
-            "optional": true,
-            "rank": 70,
-            "value": "text"
-        },
-        "AEG": {
-            "caption": "to use the collaboration function you first need an account with 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
-            "editor": "Label",
-            "name": "collab_info_sub",
-            "rank": 67
-        },
-        "AEH": {
-            "caption": "app_id",
-            "default_val": "nrm8g1ko",
-            "doc": "Get the app id from 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
-            "editor": "StaticText",
-            "name": "collab_app_id",
-            "optional": true,
-            "rank": 71
-        },
-        "AEI": {
-            "caption": "collab_doc_id",
-            "editor": "DynamicValue",
-            "name": "collab_doc_id",
-            "optional": true,
-            "rank": 72,
-            "value": "text"
-        },
-        "AEN": {
-            "caption": "JWT key",
-            "doc": "You will need to use the 𝗴𝗲𝗻𝗲𝗿𝗮𝘁𝗲 𝗝𝗪𝗧 𝗸𝗲𝘆 action.",
-            "editor": "DynamicValue",
-            "name": "collab_jwt",
-            "optional": true,
-            "rank": 73,
-            "value": "text"
-        },
         "AEV": {
             "caption": "Blockquote styling",
             "default_val": "// background: green; padding: 0.5rem;",
@@ -434,7 +369,7 @@
             "long_text": true,
             "name": "blockquote_adv",
             "optional": true,
-            "rank": 74,
+            "rank": 66,
             "value": "text"
         },
         "AEW": {
@@ -443,7 +378,7 @@
             "in_style": true,
             "name": "characterLimit",
             "optional": true,
-            "rank": 75
+            "rank": 67
         },
         "AEX": {
             "caption": "placeholder_color",
@@ -453,7 +388,7 @@
             "in_style": true,
             "name": "placeholder_color",
             "optional": true,
-            "rank": 76
+            "rank": 68
         },
         "h1_font_weight": {
             "caption": "H1 font-weight",
@@ -988,5 +923,5 @@
             "value": "text"
         }
     },
-    "support_autobinding": true
+    "support_autobinding": false
 }
