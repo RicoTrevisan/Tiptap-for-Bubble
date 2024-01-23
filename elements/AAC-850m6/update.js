@@ -211,6 +211,7 @@ function(instance, properties, context) {
           instance.publishState('h4', editor.isActive('heading', { level: 4 }));
           instance.publishState('h5', editor.isActive('heading', { level: 5 }));
           instance.publishState('h6', editor.isActive('heading', { level: 6 }));
+          instance.publishState('body', !editor.isActive('heading'));
           instance.publishState('orderedList', editor.isActive('orderedList'));
           instance.publishState('bulletList', editor.isActive('bulletList'));
           instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));
@@ -339,6 +340,7 @@ function(instance, properties, context) {
     
      // create the editor    
      instance.data.editor = new Editor(options);
+     window.tippytappy = instance.data.editor;
 
 
      // initialize exposed states

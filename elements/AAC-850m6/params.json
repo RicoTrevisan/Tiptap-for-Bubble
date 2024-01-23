@@ -986,6 +986,15 @@
             },
             "name": "selected_html",
             "value": "text"
+        },
+        "AEg": {
+            "caption": "paragraph is plain text",
+            "doc": "It's not a heading",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "body",
+            "value": "boolean"
         }
     },
     "support_autobinding": false
