@@ -1,9 +1,6 @@
 function(instance, properties, context) {
 
-    if (!instance.data.editor_is_ready) {
-        console.log("tried to run add_youtube before editor was ready");
-        return
-    }
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("Add YouTube")
 
 
     let url = properties.url;

@@ -1,9 +1,6 @@
 function(instance, properties, context) {
 
-    if (!instance.data.editor_is_ready) {
-        console.log("trying to run outdent_item before edit is ready")
-        return
-    }
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("Outdent Item")
 
 
     if (instance.data.active_nodes.includes("BulletList") || instance.data.active_nodes.includes("OrderedList") || instance.data.active_nodes.includes("TaskList") ) {

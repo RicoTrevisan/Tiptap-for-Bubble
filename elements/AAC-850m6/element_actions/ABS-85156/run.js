@@ -1,9 +1,6 @@
 function(instance, properties, context) {
 
-    if (!instance.data.editor_is_ready) {
-        console.log("trying to run task_list before edit is ready")
-        return
-    }
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("Task List")
 
 
     if (instance.data.active_nodes.includes("TaskList")) { 

@@ -1,9 +1,6 @@
 function(instance, properties, context) {
     
-    if (!instance.data.editor_is_ready) {
-        console.log("Tried to run clear_contents before editor is ready.");
-        return
-    }
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("Clear Contents")
 
 	try {
 		instance.data.editor.chain().clearContent(true).run();

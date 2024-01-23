@@ -1,9 +1,6 @@
 function(instance, properties, context) {
 
-    if (!instance.data.editor_is_ready) {
-        console.log("trying to run horizontal_rule before edit is ready")
-        return
-    }
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("Horizontal Rule")
 
     
 

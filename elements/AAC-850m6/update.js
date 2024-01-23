@@ -533,10 +533,6 @@ function(instance, properties, context) {
   flex: 1 1 auto;
 }
 
-#tiptapEditor-${instance.data.randomId} .ProseMirror ul {
-  flex: 1 1 auto;
-}
-
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror table {
   width: 100%;

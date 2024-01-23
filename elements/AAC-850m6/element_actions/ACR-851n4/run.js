@@ -1,9 +1,6 @@
 function(instance, properties, context) {
 
-    if (!instance.data.editor_is_ready) {
-        console.log("tried to run remove_link before editor was ready");
-        return
-    }
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("Remove Link")
 
     if (instance.data.active_nodes.includes("Link")) {
         instance.data.editor.commands.unsetLink();

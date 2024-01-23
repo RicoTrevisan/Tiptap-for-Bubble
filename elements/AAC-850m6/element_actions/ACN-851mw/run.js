@@ -1,9 +1,6 @@
 function(instance, properties, context) {
 
-    if (!instance.data.editor_is_ready) {
-        console.log("tried to run set_link before editor was ready");
-        return
-    }
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("Set Link")
 
     if (instance.data.active_nodes.includes("Link")) {
         let url = properties.url;

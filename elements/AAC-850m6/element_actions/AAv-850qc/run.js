@@ -1,9 +1,6 @@
 function(instance, properties, context) {
 
-    if (!instance.data.editor_is_ready) {
-        console.log("trying to run h2 before edit is ready")
-        return
-    }    
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("H2")
     
     if (instance.data.active_nodes.includes("Heading") && instance.data.headings.includes(2) ) {
         instance.data.editor.chain().focus().toggleHeading({ level: 2 }).run();

@@ -84,8 +84,12 @@ function(instance, context) {
         }
     }
 
-
-   
+    instance.data.returnAndReportErrorIfEditorNotReady = (errorFragment = "error") => {
+        const message = `Tried to run ${errorFragment} before editor was ready. Crash prevented. Returning`
+        console.log(message);
+        context.reportDebugger(message);
+        return
+    }
 
       
 }

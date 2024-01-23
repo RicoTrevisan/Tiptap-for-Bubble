@@ -1,9 +1,6 @@
 function(instance, properties, context) {
 
-    if (!instance.data.editor_is_ready) {
-        console.log("trying to run numbered_list before edit is ready")
-        return
-    }    
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("Numbered List")
     
     if (instance.data.active_nodes.includes("OrderedList")) {
     instance.data.editor.chain().focus().toggleOrderedList().run();

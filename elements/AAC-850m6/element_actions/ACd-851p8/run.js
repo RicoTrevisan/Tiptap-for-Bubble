@@ -1,10 +1,7 @@
 function(instance, properties, context) {
     
 
-    if (!instance.data.editor_is_ready) {
-        console.log("tried to run align_text before editor was ready");
-        return
-    }
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("Align Text")
 
     if (instance.data.active_nodes.includes("TextAlign")) {
         let alignment = properties.alignment;

@@ -1,9 +1,6 @@
 function(instance, properties, context) {
 
-    if (!instance.data.editor_is_ready) {
-        console.log("Tried to run setContent before editor was ready.");
-        return
-    }
+    if (!instance.data.editor_is_ready) return instance.data.returnAndReportErrorIfEditorNotReady("Set Content")
 
     try {
         let content = (properties.is_json) ? JSON.parse(properties.content) : properties.content;
