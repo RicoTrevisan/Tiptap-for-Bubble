@@ -276,32 +276,59 @@ function(instance, properties, context) {
     // end of options
     //
     
+     
+     
+     // 
+     // set up menus
+     //
+     
+     const menuErrorMessage = " not found. Is the entered id correct? FYI: the Bubble element should default to visible."
 
      if ( (properties.bubbleMenu) && instance.data.active_nodes.includes("BubbleMenu") ) {
 
          let bubbleMenuTheme = properties.bubbleMenuTheme;
 
          let bubbleMenuDiv = instance.data.findElement(properties.bubbleMenu);
-         window.bubbleMenuDiv = bubbleMenuDiv
-         bubbleMenuDiv.id += randomId
 
-         options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, tippyOptions: {
-             theme: bubbleMenuTheme,
-         } }) );
+         // Early return if bubbleMenuDiv is not found
+         if (!bubbleMenuDiv) {
+            const errorMessage = "BubbleMenu" + menuErrorMessage;
+             context.reportDebugger(errorMessage);
+             console.log(errorMessage);
+         } else {
+
+             //         window.bubbleMenuDiv = bubbleMenuDiv
+             bubbleMenuDiv.id += randomId
+
+             options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, tippyOptions: {
+                 theme: bubbleMenuTheme,
+             } }) );
+         }
      }
      
+
+
      if ( (properties.floatingMenu) && instance.data.active_nodes.includes("FloatingMenu") ) {
          let floatingMenuTheme = properties.floatingMenuTheme;
 
          let floatingMenuDiv = instance.data.findElement(properties.floatingMenu);
-         floatingMenuDiv.id += randomId
 
-         options.extensions.push( FloatingMenu.configure({ 
-             element: floatingMenuDiv, 
-             tippyOptions: {
-                 theme: floatingMenuTheme,
-             }
-         }) );
+         // Early return if floatingMenuDiv is not found
+         if (!floatingMenuDiv) {
+             const errorMessage = "FloatingMenu" + menuErrorMessage;
+             context.reportDebugger(errorMessage);
+             console.log(errorMessage);
+
+         } else {
+             floatingMenuDiv.id += randomId
+
+             options.extensions.push( FloatingMenu.configure({ 
+                 element: floatingMenuDiv, 
+                 tippyOptions: {
+                     theme: floatingMenuTheme,
+                 }
+             }) );
+         }
 
      }
 
@@ -506,6 +533,9 @@ function(instance, properties, context) {
   flex: 1 1 auto;
 }
 
+#tiptapEditor-${instance.data.randomId} .ProseMirror ul {
+  flex: 1 1 auto;
+}
 
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror table {
