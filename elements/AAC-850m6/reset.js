@@ -1,6 +1,9 @@
 function(instance, context) {
     
-    if (!instance.data.editor) return
+    if (!instance.data.editor_is_ready) {
+        console.log("trying to run reset before edit is ready")
+        return
+    }
 
     try {
 		instance.data.editor.chain().clearContent().run();

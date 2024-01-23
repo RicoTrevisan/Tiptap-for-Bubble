@@ -1,7 +1,7 @@
 function(instance, properties, context) {
 
     if (!instance.data.editor_is_ready) {
-        console.log("Tried to run setContent before editor was ready. Returning.");
+        console.log("Tried to run setContent before editor was ready.");
         return
     }
 

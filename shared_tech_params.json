@@ -1,8 +1,12 @@
 {
     "assets": {
-        "AEd": {
+        "AEb": {
             "name": "dist.js",
-            "url": "//meta-q.cdn.bubble.io/f1704961328220x426987700055719900/dist.js"
+            "url": "//meta-q.cdn.bubble.io/f1701591085680x725033244829215400/dist.js"
+        },
+        "AEc": {
+            "name": "2024-01-21-dist.js",
+            "url": "//meta-q.cdn.bubble.io/f1705853172144x869173511080595800/dist.js"
         }
     },
     "dependencies": {

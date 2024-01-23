@@ -1,7 +1,7 @@
 function(instance, properties, context) {
 
     if (!instance.data.editor_is_ready) {
-        context.reportDebugger("tried to run focus before editor was ready");
+        console.log("tried to run focus before editor was ready");
         return
     }
     

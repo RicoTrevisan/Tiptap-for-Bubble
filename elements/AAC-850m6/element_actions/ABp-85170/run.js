@@ -1,7 +1,7 @@
 function(instance, properties, context) {
     
     if (!instance.data.editor_is_ready) {
-        console.log("Tried to run clearContent before editor was ready. Error should have been avoided.");
+        console.log("Tried to run clear_contents before editor is ready.");
         return
     }
 

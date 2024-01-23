@@ -1,5 +1,10 @@
 function(instance, properties, context) {
 
+    if (!instance.data.editor_is_ready) {
+        console.log("tried to run insert_table before editor was ready");
+        return
+    }
+
 
     const rows = properties.rows;
     const columns = properties.columns;

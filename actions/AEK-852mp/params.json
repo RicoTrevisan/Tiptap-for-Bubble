@@ -1,0 +1,47 @@
+{
+    "category": "data (things)",
+    "display": "generate JWT key",
+    "fields": {
+        "AEL": {
+            "caption": "Doc ID",
+            "doc": "the document's unique ID. This will be the name of the document that you will see on 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
+            "editor": "DynamicValue",
+            "name": "docID",
+            "optional": true,
+            "rank": 0,
+            "value": "text"
+        },
+        "AEY": {
+            "caption": "Doc ID (list)",
+            "doc": "Doc ids list",
+            "editor": "DynamicValue",
+            "is_list": true,
+            "name": "docIDList",
+            "optional": true,
+            "rank": 1,
+            "value": "text"
+        }
+    },
+    "return_value": {
+        "AEM": {
+            "caption": "jwt key",
+            "name": "jwt_key",
+            "rank": 0,
+            "value": "text"
+        },
+        "AEZ": {
+            "caption": "error",
+            "name": "error",
+            "rank": 1,
+            "value": "text"
+        },
+        "AEa": {
+            "caption": "returned_an_error",
+            "name": "returned_an_error",
+            "rank": 2,
+            "value": "boolean"
+        }
+    },
+    "type": "server_side",
+    "use_packages": true
+}

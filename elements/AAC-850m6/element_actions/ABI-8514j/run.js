@@ -1,5 +1,11 @@
 function(instance, properties, context) {
 
+    if (!instance.data.editor_is_ready) {
+        console.log("trying to run outdent_item before edit is ready")
+        return
+    }
+
+
     if (instance.data.active_nodes.includes("BulletList") || instance.data.active_nodes.includes("OrderedList") || instance.data.active_nodes.includes("TaskList") ) {
         
         instance.data.editor.chain().focus().liftListItem('listItem').run();
