@@ -403,7 +403,13 @@ function(instance, properties, context) {
     // handing changing of initial content
     // checks if the initial content has something -- if it's empty the user is probably using set content which means this should NOT be applicable
     if (!!instance.data.editor_is_ready && !properties.initialContent == '' && (instance.data.initialContent !== properties.initialContent)) {
-
+        
+        console.log("!!instance.data.editor_is_ready", !!instance.data.editor_is_ready);
+        console.log("!properties.initialContent == '' ", !properties.initialContent == '');
+        console.log("instance.data.initialContent", instance.data.initialContent);
+        console.log("properties.initialContent", properties.initialContent);
+        console.log("(instance.data.initialContent !== properties.initialContent)", (instance.data.initialContent !== properties.initialContent))
+        
         if (!properties.collab_active) {
             
             console.log("initialContent has changed");
@@ -510,6 +516,8 @@ function(instance, properties, context) {
     ${properties.blockquote_adv}
 }
 
+
+
 #tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] {
   list-style: none;
   padding: 0;
@@ -531,6 +539,15 @@ function(instance, properties, context) {
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] li > div {
   flex: 1 1 auto;
+}
+
+#tiptapEditor-${instance.data.randomId} .ProseMirror ul:not([data-type="taskList"]) {
+	${properties.ul_adv}
+
+}
+
+#tiptapEditor-${instance.data.randomId} .ProseMirror ol {
+	${properties.ol_adv}
 }
 
 

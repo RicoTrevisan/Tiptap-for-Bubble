@@ -455,6 +455,28 @@
             "optional": true,
             "rank": 76
         },
+        "AEh": {
+            "caption": "Bullet lists CSS",
+            "default_val": "padding-left: 20px;",
+            "doc": "styling for unordered lists (aka bullet lists). You can use nested selectors to target child elements. Use `padding-left: 20px;` if all you want to do is to align it to the text.",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "ul_adv",
+            "optional": true,
+            "rank": 77,
+            "value": "text"
+        },
+        "AEi": {
+            "caption": "Number list CSS",
+            "default_val": "padding-left: 20px;",
+            "doc": "styling for ordered lists (aka number lists). Use `padding-left: 20px;` if all you want to do is to align it to the text.",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "ol_adv",
+            "optional": true,
+            "rank": 78,
+            "value": "text"
+        },
         "h1_font_weight": {
             "caption": "H1 font-weight",
             "default_val": "900",
