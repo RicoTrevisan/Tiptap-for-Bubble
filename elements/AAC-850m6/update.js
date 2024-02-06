@@ -446,11 +446,10 @@ function(instance, properties, context) {
     
     
     // update the stylesheet
-    
     instance.data.stylesheet.innerHTML = `
 #tiptapEditor-${instance.data.randomId} .ProseMirror {
     flex-grow: 1;
-
+    word-break: break-word;
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror h1 {
