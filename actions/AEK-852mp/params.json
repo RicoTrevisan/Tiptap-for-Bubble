@@ -20,6 +20,16 @@
             "optional": true,
             "rank": 1,
             "value": "text"
+        },
+        "jwt_secret": {
+            "caption": "Which JWT secret to use",
+            "default_val": "Tiptap Cloud",
+            "doc": "Key to use to sign the JWT key",
+            "editor": "Dropdown",
+            "name": "jwt_secret",
+            "optional": true,
+            "options": "Tiptap Cloud,Custom",
+            "rank": 2
         }
     },
     "return_value": {

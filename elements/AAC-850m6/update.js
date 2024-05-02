@@ -1,439 +1,564 @@
 function(instance, properties, context) {
-    
-   
+    if (
+        properties.collab_active === true &&
+        // properties.collabProvider === "tiptap" &&
+        !properties.collab_jwt
+    ) {
+        console.log(
+            "collab is active but jwt token is not yet loaded. Returning...",
+        );
+        return;
 
-    if (!!properties.collab_active && !properties.collab_jwt ) {
-        console.log("collab is active but jwt token is not yet loaded. Returning...");
-        return 
     }
 
-    
-    
-// load once
- if (!instance.data.isEditorSetup) {
-        
-    
+    // load once
+    if (!instance.data.isEditorSetup) {
+        // try {}
+        let initialContent = properties.initialContent;
+        instance.data.initialContent = initialContent; // a string to keep track of what's currently in the initialContent so that the editor can change when the initialContent changes
+        let content = properties.content_is_json
+            ? JSON.parse(initialContent)
+            : initialContent;
 
-  let initialContent = properties.initialContent;
-  instance.data.initialContent = initialContent; // a string to keep track of what's currently in the initialContent so that the editor can change when the initialContent changes
-  let content = (properties.content_is_json) ? JSON.parse(initialContent) : initialContent;
+        let placeholder = properties.placeholder;
+        let bubbleMenu = properties.bubbleMenu;
+        let floatingMenu = properties.floatingMenu;
 
+        // create the editor div
+        const randomId = (Math.random() + 1).toString(36).substring(3);
+        instance.data.randomId = randomId;
+        var d = document.createElement("div");
+        d.id = "tiptapEditor-" + randomId;
+        d.style = "flex-grow: 1; display: flex;";
+        instance.data.tiptapEditorID = d.id;
+        instance.canvas.append(d);
 
+        // pull the libraries that were loaded on Header
+        const Document = window.tiptapDocument;
+        const HardBreak = window.tiptapHardBreak;
+        const Heading = window.tiptapHeading;
+        const Paragraph = window.tiptapParagraph;
+        const Text = window.tiptapText;
+        const Bold = window.tiptapBold;
+        const Code = window.tiptapCode;
+        const Italic = window.tiptapItalic;
+        const Strike = window.tiptapStrike;
+        const Dropcursor = window.tiptapDropcursor;
+        const Gapcursor = window.tiptapGapcursor;
+        const History = window.tiptapHistory;
+        const Blockquote = window.tiptapBlockquote;
+        const BulletList = window.tiptapBulletList;
+        const CodeBlock = window.tiptapCodeBlock;
+        const HorizontalRule = window.tiptapHorizontalRule;
+        const ListItem = window.tiptapListItem;
+        const OrderedList = window.tiptapOrderedList;
 
-     let placeholder = properties.placeholder;
-     let bubbleMenu = properties.bubbleMenu;
-     let floatingMenu = properties.floatingMenu;
+        const Editor = window.tiptapEditor;
+        const TaskList = window.tiptapTaskList;
+        const TaskItem = window.tiptapTaskItem;
+        const Placeholder = window.tiptapPlaceholder;
+        const CharacterCount = window.tiptapCharacterCount;
+        const Image = window.tiptapImage;
+        const BubbleMenu = window.tiptapBubbleMenu;
+        const FloatingMenu = window.tiptapFloatingMenu;
+        const Link = window.tiptapLink;
+        const TextAlign = window.tiptapTextAlign;
+        const Highlight = window.tiptapHighlight;
+        const Table = window.tiptapTable;
+        const TableCell = window.tiptapTableCell;
+        const TableHeader = window.tiptapTableHeader;
+        const TableRow = window.tiptapTableRow;
+        const Underline = window.tiptapUnderline;
+        const Youtube = window.tiptapYoutube;
+        const generateHTML = window.tiptapGenerateHTML;
 
-        
-        
-     // create the editor div
-     const randomId = (Math.random() + 1).toString(36).substring(3);
-     instance.data.randomId = randomId;
-     var d = document.createElement("div");
-     d.id = 'tiptapEditor-' + randomId;
-     d.style = "flex-grow: 1; display: flex;";
-     instance.data.tiptapEditorID = d.id;
-     instance.canvas.append(d);
+        instance.data.headings = [];
+        properties.headings.split(",").map((item) => {
+            instance.data.headings.push(parseInt(item));
+        });
 
-     
+        instance.data.active_nodes = properties.nodes
+            .split(",")
+            .map((item) => item.trim());
 
-    
+        const extensions = [
+            Document,
+            Paragraph,
+            Text,
+            ListItem,
+            CharacterCount.configure({
+                limit: properties.characterLimit || null,
+            }),
+        ];
 
-  // pull the libraries that were loaded on Header
-    const Document = window.tiptapDocument;
-    const HardBreak = window.tiptapHardBreak;
-    const Heading = window.tiptapHeading;
-    const Paragraph = window.tiptapParagraph;
-    const Text = window.tiptapText;
-    const Bold = window.tiptapBold;
-    const Code = window.tiptapCode;
-    const Italic = window.tiptapItalic;
-    const Strike = window.tiptapStrike;
-    const Dropcursor = window.tiptapDropcursor;
-    const Gapcursor = window.tiptapGapcursor;
-    const History = window.tiptapHistory;
-    const Blockquote = window.tiptapBlockquote;
-    const BulletList = window.tiptapBulletList;
-    const CodeBlock = window.tiptapCodeBlock;
-    const HorizontalRule = window.tiptapHorizontalRule;
-    const ListItem = window.tiptapListItem;
-    const OrderedList = window.tiptapOrderedList;
-
-     const Editor = window.tiptapEditor;
-     const TaskList = window.tiptapTaskList;
-     const TaskItem	= window.tiptapTaskItem;
-     const Placeholder = window.tiptapPlaceholder;
-     const CharacterCount = window.tiptapCharacterCount;
-     const Image = window.tiptapImage;
-     const BubbleMenu = window.tiptapBubbleMenu;
-     const FloatingMenu = window.tiptapFloatingMenu;
-     const Link = window.tiptapLink;
-     const TextAlign = window.tiptapTextAlign;
-     const Highlight = window.tiptapHighlight;
-     const Table = window.tiptapTable;
-     const TableCell = window.tiptapTableCell;
-     const TableHeader = window.tiptapTableHeader;
-     const TableRow = window.tiptapTableRow;
-     const Underline = window.tiptapUnderline;    
-     const Youtube = window.tiptapYoutube;
-     const generateHTML = window.tiptapGenerateHTML;
-         
-
-     // load collaboration libraries
-     const Collaboration = window.tiptapCollaboration;
-     const CollaborationCursor = window.tiptapCollaborationCursor;
-     const TiptapCollabProvider = window.tiptapCollabProvider;
-
-
-     
-        
-
-     instance.data.headings = [];
-     properties.headings.split(",").map(item => {
-         instance.data.headings.push(parseInt(item));
-
-     });
-
-
-     instance.data.active_nodes = properties.nodes.split(",").map(item => item.trim());
-     
-     const active_nodes = instance.data.active_nodes;
-    
-     const extensions = [
-         Document,
-         Paragraph,
-         Text,
-         ListItem,
-         CharacterCount.configure({
-             limit: properties.characterLimit || null,
-         }),
-        ]
-
-        
         // maybe these should be included in the standard
-    if (instance.data.active_nodes.includes("Dropcursor")) {extensions.push ( Dropcursor )};
-    if (instance.data.active_nodes.includes("Gapcursor")) {extensions.push ( Gapcursor )};
-    if (instance.data.active_nodes.includes("HardBreak")) { extensions.push( HardBreak ) };
-    if (instance.data.active_nodes.includes("History")) {extensions.push ( History )};
-    
-    if (instance.data.active_nodes.includes("Bold")) {extensions.push ( Bold )};
-    if (instance.data.active_nodes.includes("Italic")) {extensions.push ( Italic )};
-    if (instance.data.active_nodes.includes("Strike")) {extensions.push ( Strike )};
+        if (instance.data.active_nodes.includes("Dropcursor")) {
+            extensions.push(Dropcursor);
+        }
+        if (instance.data.active_nodes.includes("Gapcursor")) {
+            extensions.push(Gapcursor);
+        }
+        if (instance.data.active_nodes.includes("HardBreak")) {
+            extensions.push(HardBreak);
+        }
+        if (instance.data.active_nodes.includes("History")) {
+            extensions.push(History);
+        }
 
-    if (instance.data.active_nodes.includes("Heading")) {extensions.push ( Heading.configure({ levels: instance.data.headings, }), )};
+        if (instance.data.active_nodes.includes("Bold")) {
+            extensions.push(Bold);
+        }
+        if (instance.data.active_nodes.includes("Italic")) {
+            extensions.push(Italic);
+        }
+        if (instance.data.active_nodes.includes("Strike")) {
+            extensions.push(Strike);
+        }
+
+        if (instance.data.active_nodes.includes("Heading")) {
+            extensions.push(
+                Heading.configure({ levels: instance.data.headings }),
+            );
+        }
+
+        // group that needs ListItem
+        if (instance.data.active_nodes.includes("BulletList")) {
+            extensions.push(BulletList);
+        }
+        if (instance.data.active_nodes.includes("OrderedList")) {
+            extensions.push(OrderedList);
+        }
+        if (instance.data.active_nodes.includes("TaskList")) {
+            extensions.push(TaskList, TaskItem.configure({ nested: true }));
+        }
+
+        if (instance.data.active_nodes.includes("Highlight")) {
+            extensions.push(Highlight);
+        }
+        if (instance.data.active_nodes.includes("Underline")) {
+            extensions.push(Underline);
+        }
+
+        if (instance.data.active_nodes.includes("CodeBlock")) {
+            extensions.push(CodeBlock);
+        }
+        if (instance.data.active_nodes.includes("Code")) {
+            extensions.push(Code);
+        }
+
+        if (instance.data.active_nodes.includes("Blockquote")) {
+            extensions.push(Blockquote);
+        }
+        if (instance.data.active_nodes.includes("HorizontalRule")) {
+            extensions.push(HorizontalRule);
+        }
+        if (instance.data.active_nodes.includes("Youtube")) {
+            extensions.push(Youtube.configure({ nocookie: true }));
+        }
+        if (instance.data.active_nodes.includes("Table")) {
+            extensions.push(
+                Table.configure({ resizable: true }),
+                TableRow,
+                TableHeader,
+                TableCell,
+            );
+        }
+        if (instance.data.active_nodes.includes("Image")) {
+            extensions.push(
+                Image.configure({ inline: false, allowBase64: true }),
+            );
+        }
+        if (instance.data.active_nodes.includes("Link")) {
+            extensions.push(Link);
+        }
+        if (instance.data.active_nodes.includes("Placeholder")) {
+            extensions.push(
+                Placeholder.configure({ placeholder: placeholder }),
+            );
+        }
+        if (instance.data.active_nodes.includes("TextAlign")) {
+            extensions.push(
+                TextAlign.configure({ types: ["heading", "paragraph"] }),
+            );
+        }
+
+        console.log("content before loading options", content);
+        //
+        // create the options object
+        //
+        let options = {};
+        options = {
+            element: d,
+            editable: properties.isEditable,
+            content: content,
+            extensions: extensions,
+            injectCSS: true,
+            onCreate({ editor }) {
+                // The editor is ready.
+                instance.data.editor_is_ready = true;
+                instance.triggerEvent("is_ready");
+                instance.publishState("is_ready", true);
+
+                // initialize exposed states
+                instance.publishState("contentHTML", editor.getHTML());
+                instance.publishState("contentText", editor.getText());
+                instance.publishState(
+                    "contentJSON",
+                    JSON.stringify(instance.data.editor.getJSON()),
+                );
+                instance.publishState("isEditable", editor.isEditable);
+                if (instance.data.active_nodes.includes("CharacterCount")) {
+                    instance.publishState(
+                        "characterCount",
+                        editor.storage.characterCount.characters(),
+                    );
+                    instance.publishState(
+                        "wordCount",
+                        editor.storage.characterCount.words(),
+                    );
+                }
 
 
-    // group that needs ListItem
-    if (instance.data.active_nodes.includes("BulletList")) {extensions.push ( BulletList )};
-    if (instance.data.active_nodes.includes("OrderedList")) {extensions.push ( OrderedList )};
-    if (instance.data.active_nodes.includes("TaskList")) { extensions.push( TaskList, TaskItem.configure({ nested: true, }) )};
+            },
+            onUpdate({ editor }) {
+                // The content has changed.
+                instance.publishState("contentHTML", editor.getHTML());
+                instance.publishState("contentText", editor.getText());
+                instance.publishState(
+                    "contentJSON",
+                    JSON.stringify(editor.getJSON()),
+                );
+                instance.publishState("isEditable", editor.isEditable);
+                instance.publishState(
+                    "characterCount",
+                    editor.storage.characterCount.characters(),
+                );
+                instance.publishState(
+                    "wordCount",
+                    editor.storage.characterCount.words(),
+                );
+                //       _.debounce(instance.triggerEvent('contentUpdated'), 2000);
+                instance.triggerEvent("contentUpdated");
+         //       instance.data.throttle(instance.publishAutobinding(editor.getHTML()));
+            },
+            onFocus({ editor, event }) {
+                instance.triggerEvent("isFocused");
+                instance.publishState("isFocused", true);
+                instance.data.is_focused = true;
+            },
 
-    if (instance.data.active_nodes.includes("Highlight")) { extensions.push( Highlight ) };
-    if (instance.data.active_nodes.includes("Underline")) { extensions.push( Underline ) };
-    
-    if (instance.data.active_nodes.includes("CodeBlock")) {extensions.push ( CodeBlock )};
-    if (instance.data.active_nodes.includes("Code")) {extensions.push ( Code )};
-    
-    // done fixing above
+            onBlur({ editor, event }) {
+                instance.triggerEvent("isntFocused");
+                instance.publishState("isFocused", false);
+                instance.data.is_focused = false;
+            },
+            onTransaction({ editor, transaction }) {
+                // The editor state has changed.
+                instance.publishState("bold", editor.isActive("bold"));
+                instance.publishState("italic", editor.isActive("italic"));
+                instance.publishState("strike", editor.isActive("strike"));
+                instance.publishState(
+                    "h1",
+                    editor.isActive("heading", { level: 1 }),
+                );
+                instance.publishState(
+                    "h2",
+                    editor.isActive("heading", { level: 2 }),
+                );
+                instance.publishState(
+                    "h3",
+                    editor.isActive("heading", { level: 3 }),
+                );
+                instance.publishState(
+                    "h4",
+                    editor.isActive("heading", { level: 4 }),
+                );
+                instance.publishState(
+                    "h5",
+                    editor.isActive("heading", { level: 5 }),
+                );
+                instance.publishState(
+                    "h6",
+                    editor.isActive("heading", { level: 6 }),
+                );
+                instance.publishState("body", !editor.isActive("heading"));
+                instance.publishState(
+                    "orderedList",
+                    editor.isActive("orderedList"),
+                );
+                instance.publishState(
+                    "bulletList",
+                    editor.isActive("bulletList"),
+                );
+                instance.publishState(
+                    "sinkListItem",
+                    editor.can().sinkListItem("listItem"),
+                );
+                instance.publishState(
+                    "liftListItem",
+                    editor.can().liftListItem("listItem"),
+                );
+                instance.publishState(
+                    "blockquote",
+                    editor.isActive("blockquote"),
+                );
+                instance.publishState(
+                    "codeBlock",
+                    editor.isActive("codeBlock"),
+                );
+                instance.publishState("taskList", editor.isActive("taskList"));
+                instance.publishState("taskItem", editor.isActive("taskItem"));
+                instance.publishState("link", editor.isActive("link"));
+                instance.publishState("url", editor.getAttributes("link").href);
+                instance.publishState(
+                    "align_left",
+                    editor.isActive({ textAlign: "left" }),
+                );
+                instance.publishState(
+                    "align_center",
+                    editor.isActive({ textAlign: "center" }),
+                );
+                instance.publishState(
+                    "align_right",
+                    editor.isActive({ textAlign: "right" }),
+                );
+                instance.publishState(
+                    "highlight",
+                    editor.isActive("highlight"),
+                );
+                instance.publishState(
+                    "underline",
+                    editor.isActive("underline"),
+                );
+                instance.publishState("table", editor.isActive("table"));
 
+                instance.publishState(
+                    "characterCount",
+                    editor.storage.characterCount.characters(),
+                );
+                instance.publishState(
+                    "wordCount",
+                    editor.storage.characterCount.words(),
+                );
+            },
 
-    if (instance.data.active_nodes.includes("Blockquote")) {extensions.push ( Blockquote )};
-    if (instance.data.active_nodes.includes("HorizontalRule")) {extensions.push ( HorizontalRule )};
-    if (instance.data.active_nodes.includes("Youtube")) {extensions.push ( Youtube.configure({ nocookie: true, }), )};
-    if (instance.data.active_nodes.includes("Table")) {extensions.push ( Table.configure({ resizable: true, }), TableRow, TableHeader, TableCell, )};
-    if (instance.data.active_nodes.includes("Image")) {extensions.push ( Image.configure({ inline: false, allowBase64: true, }), )};
-    if (instance.data.active_nodes.includes("Link")) {extensions.push ( Link )};
-    if (instance.data.active_nodes.includes("Placeholder")) {extensions.push ( Placeholder.configure({ placeholder: placeholder, }) )};
-//    if (instance.data.active_nodes.includes("CharacterCount")) {extensions.push ( CharacterCount )};
-    if (instance.data.active_nodes.includes("TextAlign")) {extensions.push ( TextAlign.configure({ types: ['heading', 'paragraph'], }) )};
+            onSelectionUpdate({ editor }) {
+                // gets the current selected text
+                const { view, state } = editor;
+                const { from, to } = view.state.selection;
+                const text = state.doc.textBetween(from, to, "");
+                instance.publishState("selected_text", text);
 
-     
-     
-     
-    // 
-    // create the options object    
-    // 
-     let options = {};
-  options = {
-    element: d,
-    editable: true,
-    content: content,
-    extensions: extensions,
-    injectCSS: true,
-    onBeforeCreate({ editor }) {
-        // Before the view is created.
-    },
-    onCreate({ editor }) {
-      // The editor is ready.
-            instance.data.editor_is_ready = true;
-            instance.triggerEvent('is_ready');
-            instance.publishState('is_ready', true);
-            console.log("editor is ready");
-            
-    },
-      onUpdate({ editor }) {
-          // The content has changed.
-          instance.publishState('contentHTML', editor.getHTML());
-          instance.publishState('contentText', editor.getText());
-          instance.publishState('contentJSON', JSON.stringify(editor.getJSON()));
-          instance.publishState('isEditable', editor.isEditable);
-          instance.publishState('characterCount', editor.storage.characterCount.characters());
-          instance.publishState('wordCount', editor.storage.characterCount.words());
-   //       _.debounce(instance.triggerEvent('contentUpdated'), 2000);
-          instance.triggerEvent('contentUpdated');
-          
+                instance.publishState("bold", editor.isActive("bold"));
+                instance.publishState("italic", editor.isActive("italic"));
+                instance.publishState("strike", editor.isActive("strike"));
+                instance.publishState(
+                    "h1",
+                    editor.isActive("heading", { level: 1 }),
+                );
+                instance.publishState(
+                    "h2",
+                    editor.isActive("heading", { level: 2 }),
+                );
+                instance.publishState(
+                    "h3",
+                    editor.isActive("heading", { level: 3 }),
+                );
+                instance.publishState(
+                    "h4",
+                    editor.isActive("heading", { level: 4 }),
+                );
+                instance.publishState(
+                    "h5",
+                    editor.isActive("heading", { level: 5 }),
+                );
+                instance.publishState(
+                    "h6",
+                    editor.isActive("heading", { level: 6 }),
+                );
+                instance.publishState(
+                    "orderedList",
+                    editor.isActive("orderedList"),
+                );
+                instance.publishState(
+                    "bulletList",
+                    editor.isActive("bulletList"),
+                );
+                instance.publishState(
+                    "sinkListItem",
+                    editor.can().sinkListItem("listItem"),
+                );
+                instance.publishState(
+                    "liftListItem",
+                    editor.can().liftListItem("listItem"),
+                );
+                instance.publishState(
+                    "blockquote",
+                    editor.isActive("blockquote"),
+                );
+                instance.publishState(
+                    "codeBlock",
+                    editor.isActive("codeBlock"),
+                );
+                instance.publishState("taskList", editor.isActive("taskList"));
+                instance.publishState("taskItem", editor.isActive("taskItem"));
+                instance.publishState("link", editor.isActive("link"));
+                instance.publishState("url", editor.getAttributes("link").href);
+                instance.publishState(
+                    "align_left",
+                    editor.isActive({ textAlign: "left" }),
+                );
+                instance.publishState(
+                    "align_center",
+                    editor.isActive({ textAlign: "center" }),
+                );
+                instance.publishState(
+                    "align_right",
+                    editor.isActive({ textAlign: "right" }),
+                );
+                instance.publishState(
+                    "highlight",
+                    editor.isActive("highlight"),
+                );
+                instance.publishState(
+                    "underline",
+                    editor.isActive("underline"),
+                );
+                instance.publishState("table", editor.isActive("table"));
+            },
+        };
+        //
+        // end of options
+        //
 
-            
-      },
-        onFocus({ editor, event }) {
-            instance.triggerEvent('isFocused');
-            instance.publishState('isFocused', true);
-            instance.data.is_focused = true;
-       
-       },
+        //
+        // set up menus
+        //
 
-        onBlur({ editor, event }) {
-            instance.triggerEvent('isntFocused');
-            instance.publishState('isFocused', false);
-            instance.data.is_focused = false;
+        const menuErrorMessage =
+            " not found. Is the entered id correct? FYI: the Bubble element should default to visible.";
+
+        if (
+            properties.bubbleMenu &&
+            instance.data.active_nodes.includes("BubbleMenu")
+        ) {
+            let bubbleMenuTheme = properties.bubbleMenuTheme;
+
+            let bubbleMenuDiv = instance.data.findElement(
+                properties.bubbleMenu,
+            );
+
+            // Early return if bubbleMenuDiv is not found
+            if (!bubbleMenuDiv) {
+                const errorMessage = "BubbleMenu" + menuErrorMessage;
+                context.reportDebugger(errorMessage);
+                console.log(errorMessage);
+            } else {
+                //         window.bubbleMenuDiv = bubbleMenuDiv
+                bubbleMenuDiv.id += randomId;
+
+                options.extensions.push(
+                    BubbleMenu.configure({
+                        element: bubbleMenuDiv,
+                        tippyOptions: {
+                            theme: bubbleMenuTheme,
+                        },
+                    }),
+                );
+            }
+        }
+
+        if (
+            properties.floatingMenu &&
+            instance.data.active_nodes.includes("FloatingMenu")
+        ) {
+            let floatingMenuTheme = properties.floatingMenuTheme;
+
+            let floatingMenuDiv = instance.data.findElement(
+                properties.floatingMenu,
+            );
+
+            // Early return if floatingMenuDiv is not found
+            if (!floatingMenuDiv) {
+                const errorMessage = "FloatingMenu" + menuErrorMessage;
+                context.reportDebugger(errorMessage);
+                console.log(errorMessage);
+            } else {
+                floatingMenuDiv.id += randomId;
+
+                options.extensions.push(
+                    FloatingMenu.configure({
+                        element: floatingMenuDiv,
+                        tippyOptions: {
+                            theme: floatingMenuTheme,
+                        },
+                    }),
+                );
+            }
+        }
+
+        // set up collaboration
+        instance.data.maybeSetupCollaboration(
+            instance,
+            properties,
+            options,
+            extensions,
+        );
         
-          
-          
-      },
-      onTransaction({ editor, transaction }) {
-          // The editor state has changed.
-          instance.publishState('bold', editor.isActive('bold'));
-          instance.publishState('italic', editor.isActive('italic'));
-          instance.publishState('strike', editor.isActive('strike'));
-          instance.publishState('h1', editor.isActive('heading', { level: 1 }));
-          instance.publishState('h2', editor.isActive('heading', { level: 2 }));
-          instance.publishState('h3', editor.isActive('heading', { level: 3 }));
-          instance.publishState('h4', editor.isActive('heading', { level: 4 }));
-          instance.publishState('h5', editor.isActive('heading', { level: 5 }));
-          instance.publishState('h6', editor.isActive('heading', { level: 6 }));
-          instance.publishState('body', !editor.isActive('heading'));
-          instance.publishState('orderedList', editor.isActive('orderedList'));
-          instance.publishState('bulletList', editor.isActive('bulletList'));
-          instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));
-          instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
-          instance.publishState('blockquote', editor.isActive('blockquote'));
-          instance.publishState('codeBlock', editor.isActive('codeBlock'));
-          instance.publishState('taskList', editor.isActive('taskList'));
-          instance.publishState('taskItem', editor.isActive('taskItem'));
-          instance.publishState('link', editor.isActive('link'));
-          instance.publishState('url', editor.getAttributes('link').href);
-          instance.publishState('align_left', editor.isActive({ textAlign: 'left' }) );
-          instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
-          instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
-          instance.publishState('highlight', editor.isActive('highlight'));
-          instance.publishState('underline', editor.isActive('underline'));
-          instance.publishState('table', editor.isActive('table'));
-          
-          instance.publishState('characterCount', editor.storage.characterCount.characters());
-          instance.publishState('wordCount', editor.storage.characterCount.words());
-  
-      },
-      
-      
-      onSelectionUpdate({ editor }) {
 
-          // gets the current selected text
-          const { view, state } = editor;
-          const { from, to } = view.state.selection;
-          const text = state.doc.textBetween(from, to, '');
-          instance.publishState('selected_text', text);
+        // create the editor
+        try {
+            instance.data.editor = new Editor(options);
+            instance.data.isEditorSetup = true;
+        } catch (error) {
+            console.log("failed trying to create the Editor", error);
+        }
+    } // end load once
 
-          instance.publishState('bold', editor.isActive('bold'));
-          instance.publishState('italic', editor.isActive('italic'));
-          instance.publishState('strike', editor.isActive('strike'));
-          instance.publishState('h1', editor.isActive('heading', { level: 1 }));
-          instance.publishState('h2', editor.isActive('heading', { level: 2 }));
-          instance.publishState('h3', editor.isActive('heading', { level: 3 }));
-          instance.publishState('h4', editor.isActive('heading', { level: 4 }));
-          instance.publishState('h5', editor.isActive('heading', { level: 5 }));
-          instance.publishState('h6', editor.isActive('heading', { level: 6 }));
-          instance.publishState('orderedList', editor.isActive('orderedList'));
-          instance.publishState('bulletList', editor.isActive('bulletList'));
-          instance.publishState('sinkListItem', editor.can().sinkListItem('listItem'));  
-          instance.publishState('liftListItem', editor.can().liftListItem('listItem'));
-          instance.publishState('blockquote', editor.isActive('blockquote'));
-          instance.publishState('codeBlock', editor.isActive('codeBlock'));
-          instance.publishState('taskList', editor.isActive('taskList'));
-          instance.publishState('taskItem', editor.isActive('taskItem'));
-          instance.publishState('link', editor.isActive('link'));
-          instance.publishState('url', editor.getAttributes('link').href);
-          instance.publishState('align_left', editor.isActive({ textAlign: 'left' }) );
-          instance.publishState('align_center', editor.isActive({ textAlign: 'center' }) );
-          instance.publishState('align_right', editor.isActive({ textAlign: 'right' }) );
-          instance.publishState('highlight', editor.isActive('highlight'));
-          instance.publishState('underline', editor.isActive('underline'));
-          instance.publishState('table', editor.isActive('table'));
-      },
-
-
-    } 
-    //
-    // end of options
-    //
-    
-     
-     
-     // 
-     // set up menus
-     //
-     
-     const menuErrorMessage = " not found. Is the entered id correct? FYI: the Bubble element should default to visible."
-
-     if ( (properties.bubbleMenu) && instance.data.active_nodes.includes("BubbleMenu") ) {
-
-         let bubbleMenuTheme = properties.bubbleMenuTheme;
-
-         let bubbleMenuDiv = instance.data.findElement(properties.bubbleMenu);
-
-         // Early return if bubbleMenuDiv is not found
-         if (!bubbleMenuDiv) {
-            const errorMessage = "BubbleMenu" + menuErrorMessage;
-             context.reportDebugger(errorMessage);
-             console.log(errorMessage);
-         } else {
-
-             //         window.bubbleMenuDiv = bubbleMenuDiv
-             bubbleMenuDiv.id += randomId
-
-             options.extensions.push( BubbleMenu.configure({ element: bubbleMenuDiv, tippyOptions: {
-                 theme: bubbleMenuTheme,
-             } }) );
-         }
-     }
-     
-
-
-     if ( (properties.floatingMenu) && instance.data.active_nodes.includes("FloatingMenu") ) {
-         let floatingMenuTheme = properties.floatingMenuTheme;
-
-         let floatingMenuDiv = instance.data.findElement(properties.floatingMenu);
-
-         // Early return if floatingMenuDiv is not found
-         if (!floatingMenuDiv) {
-             const errorMessage = "FloatingMenu" + menuErrorMessage;
-             context.reportDebugger(errorMessage);
-             console.log(errorMessage);
-
-         } else {
-             floatingMenuDiv.id += randomId
-
-             options.extensions.push( FloatingMenu.configure({ 
-                 element: floatingMenuDiv, 
-                 tippyOptions: {
-                     theme: floatingMenuTheme,
-                 }
-             }) );
-         }
-
-     }
-
-     
-     // set up collaboration
-
-
-     if (!!properties.collab_active) {              
-
-         // removes initialContent -- normally a collab document will have some document in the cloud.
-         delete options.content;
-
-         instance.data.provider = new TiptapCollabProvider({
-             appId: properties.collab_app_id,
-             name: properties.collab_doc_id,
-             token: properties.collab_jwt,
-         });
-
-
-         extensions.push (
-             Collaboration.configure({
-                 document: instance.data.provider.document,
-             }),
-             CollaborationCursor.configure({
-                 provider: instance.data.provider,
-                 user: {
-                     name: properties.collab_user_name,
-                     color: properties.collab_cursor_color,
-                 }
-             }),
-         );
-
-     }
-
-
-    
-     // create the editor    
-     instance.data.editor = new Editor(options);
-     window.tippytappy = instance.data.editor;
-
-
-     // initialize exposed states
-     instance.publishState('contentHTML', instance.data.editor.getHTML());
-     instance.publishState('contentText', instance.data.editor.getText());
-     instance.publishState('contentJSON', JSON.stringify(instance.data.editor.getJSON()));
-     instance.publishState('isEditable', instance.data.editor.isEditable);
-     if (instance.data.active_nodes.includes("CharacterCount")) {
-         instance.publishState('characterCount', instance.data.editor.storage.characterCount.characters());
-         instance.publishState('wordCount', instance.data.editor.storage.characterCount.words());
-     };
-    
-     instance.data.initialContent = instance.data.editor.getHTML();
-        
-     instance.data.isEditorSetup = true;
-} // end load once
-
-    
-    
     //
     // run when the editor is ready
     //
-        
-  if (!!instance.data.editor_is_ready && (properties.isEditable != instance.data.editor.isEditable) ) {
-    let isEditable = properties.isEditable;
+
+    if (
+        !!instance.data.editor_is_ready &&
+        properties.isEditable != instance.data.editor.isEditable
+    ) {
+        let isEditable = properties.isEditable;
         instance.data.editor.setEditable(isEditable);
     }
-    
-
-
-    
 
     // handing changing of initial content
     // checks if the initial content has something -- if it's empty the user is probably using set content which means this should NOT be applicable
-    if (!!instance.data.editor_is_ready && !properties.initialContent == '' && (instance.data.initialContent !== properties.initialContent)) {
-        
-        console.log("!!instance.data.editor_is_ready", !!instance.data.editor_is_ready);
-        console.log("!properties.initialContent == '' ", !properties.initialContent == '');
-        console.log("instance.data.initialContent", instance.data.initialContent);
-        console.log("properties.initialContent", properties.initialContent);
-        console.log("(instance.data.initialContent !== properties.initialContent)", (instance.data.initialContent !== properties.initialContent))
-        
+    if (
+        instance.data.editor_is_ready &&
+        !properties.initialContent == "" &&
+        instance.data.initialContent !== properties.initialContent 
+   // &&     !properties.bubble.auto_binding()
+    ) {
+       
         if (!properties.collab_active) {
-            
             console.log("initialContent has changed");
             instance.data.initialContent = properties.initialContent;
-            instance.data.editor.commands.setContent(instance.data.initialContent, true);
-            
+            instance.data.editor.commands.setContent(
+                instance.data.initialContent,
+                true,
+            );
         } else {
-            console.log("initialContent has changed but collaboration is active -- not updating content");
+            console.log(
+                "initialContent has changed but collaboration is active -- not updating content",
+            );
         }
-    };
+    }
 
-    
-    
-    
     // switch between scrolling the editor or stretching it.
     if (!!instance.data.editor_is_ready) {
         if (!properties.bubble.fit_height()) {
-            instance.canvas.css({'overflow':'scroll'});
+            instance.canvas.css({ overflow: "scroll" });
         } else {
-            instance.canvas.css({'overflow':'auto'});
+            instance.canvas.css({ overflow: "auto" });
         }
     }
-    
-    
+
     // if collab is on, update username and color
     if (!!instance.data.editor_is_ready && !!properties.collab_active) {
         instance.data.editor.commands.updateUser({
@@ -443,13 +568,10 @@ function(instance, properties, context) {
         });
     }
 
-    
-    
     // update the stylesheet
     instance.data.stylesheet.innerHTML = `
 #tiptapEditor-${instance.data.randomId} .ProseMirror {
-    flex-grow: 1;
-    word-break: break-word;
+	${properties.baseDiv}
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror h1 {
@@ -657,9 +779,5 @@ td {
   border-radius: 3px 3px 3px 0;
   white-space: nowrap;
 }
-`      
-    
-
-
-
+`;
 }

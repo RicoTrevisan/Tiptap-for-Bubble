@@ -1,5 +1,1 @@
-function(instance, properties) {
-
-
-
-}
+function(instance, properties) {}

@@ -36,7 +36,7 @@
             "long_text": true,
             "name": "initialContent",
             "optional": true,
-            "rank": 1,
+            "rank": 2,
             "value": "text"
         },
         "ABs": {
@@ -46,14 +46,15 @@
             "in_style": true,
             "name": "isEditable",
             "optional": false,
-            "rank": 3,
+            "rank": 5,
             "value": "boolean"
         },
         "ACA": {
             "caption": "Placeholder",
             "default_val": "Write something...",
+            "doc": "The text that is displayed when the editor is empty. Make sure that it is selected in the Extensions panel below.",
             "editor": "DynamicValue",
-            "long_text": true,
+            "long_text": false,
             "name": "placeholder",
             "optional": true,
             "rank": 0,
@@ -65,7 +66,7 @@
             "editor": "DynamicValue",
             "name": "bubbleMenu",
             "optional": true,
-            "rank": 4,
+            "rank": 6,
             "value": "text"
         },
         "ACS": {
@@ -74,7 +75,7 @@
             "editor": "StaticText",
             "name": "floatingMenu",
             "optional": true,
-            "rank": 5
+            "rank": 7
         },
         "ACZ": {
             "caption": "Content is JSON?",
@@ -82,7 +83,7 @@
             "doc": "In case your initial content is in JSON format. It needs to be a valid Tiptap JSON format. More info: https://tiptap.dev/guide/output#option-2-generate-html-from-prosemirror-json",
             "editor": "DynamicValue",
             "name": "content_is_json",
-            "rank": 2,
+            "rank": 4,
             "value": "boolean"
         },
         "ADP": {
@@ -93,7 +94,7 @@
             "in_style": true,
             "name": "bubbleMenuTheme",
             "options": "translucent,light,light-border,material",
-            "rank": 6
+            "rank": 8
         },
         "ADQ": {
             "caption": "Floating Menu Theme",
@@ -103,7 +104,7 @@
             "in_style": true,
             "name": "floatingMenuTheme",
             "options": "translucent,light,light-border,material",
-            "rank": 7
+            "rank": 9
         },
         "ADR": {
             "caption": "H1 Size",
@@ -111,7 +112,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h1_size",
-            "rank": 12
+            "rank": 14
         },
         "ADS": {
             "caption": "H1 Color",
@@ -119,7 +120,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h1_color",
-            "rank": 13
+            "rank": 15
         },
         "ADT": {
             "caption": "H1 margin",
@@ -128,25 +129,25 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h1_margin",
-            "rank": 15
+            "rank": 17
         },
         "ADV": {
             "caption": "𝗦𝗧𝗬𝗟𝗘𝗦𝗛𝗘𝗘𝗧",
             "editor": "Label",
             "name": "info",
-            "rank": 8
+            "rank": 10
         },
         "ADW": {
             "caption": "paragraph",
             "editor": "Label",
             "name": "stylesheet_info",
-            "rank": 9
+            "rank": 11
         },
         "ADY": {
             "caption": "table settings",
             "editor": "Label",
             "name": "table",
-            "rank": 49
+            "rank": 51
         },
         "ADZ": {
             "caption": "Cell padding",
@@ -154,7 +155,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "table_th_td_padding",
-            "rank": 50
+            "rank": 52
         },
         "ADa": {
             "caption": "Row bottom border",
@@ -162,7 +163,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "table_th_td_border_bottom",
-            "rank": 51
+            "rank": 53
         },
         "ADb": {
             "caption": "Header font weight",
@@ -172,7 +173,7 @@
             "in_style": true,
             "name": "table_th_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 53
+            "rank": 55
         },
         "ADc": {
             "caption": "Header background",
@@ -180,7 +181,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_th_background",
-            "rank": 55
+            "rank": 57
         },
         "ADd": {
             "caption": "Row border color",
@@ -188,7 +189,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_row_border_color",
-            "rank": 52
+            "rank": 54
         },
         "ADe": {
             "caption": "Header font color",
@@ -196,7 +197,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_header_font_color",
-            "rank": 54
+            "rank": 56
         },
         "ADf": {
             "caption": "Zebra background",
@@ -205,7 +206,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "table_zebra_background",
-            "rank": 56
+            "rank": 58
         },
         "ADg": {
             "caption": "Link color",
@@ -213,7 +214,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color",
-            "rank": 58
+            "rank": 60
         },
         "ADk": {
             "caption": "Link color hover",
@@ -221,7 +222,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color_hover",
-            "rank": 59
+            "rank": 61
         },
         "ADl": {
             "caption": "Link color visited",
@@ -229,7 +230,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "link_color_visited",
-            "rank": 61
+            "rank": 63
         },
         "ADm": {
             "caption": "Link hover adv",
@@ -239,19 +240,19 @@
             "in_style": true,
             "long_text": true,
             "name": "link_hover_adv",
-            "rank": 60
+            "rank": 62
         },
         "ADn": {
             "caption": "link settings",
             "editor": "Label",
             "name": "link_settings",
-            "rank": 57
+            "rank": 59
         },
         "ADo": {
             "caption": "options",
             "editor": "Label",
             "name": "options",
-            "rank": 63
+            "rank": 69
         },
         "ADp": {
             "caption": "headings",
@@ -261,7 +262,7 @@
             "in_style": true,
             "long_text": false,
             "name": "headings",
-            "rank": 65
+            "rank": 71
         },
         "ADq": {
             "caption": "YouTube",
@@ -271,7 +272,7 @@
             "in_style": true,
             "long_text": true,
             "name": "iframe",
-            "rank": 62,
+            "rank": 64,
             "value": "text"
         },
         "ADr": {
@@ -283,7 +284,7 @@
             "long_text": true,
             "name": "image_css",
             "optional": true,
-            "rank": 48
+            "rank": 50
         },
         "ADt": {
             "caption": "p_adv",
@@ -292,7 +293,7 @@
             "long_text": true,
             "name": "p_adv",
             "optional": true,
-            "rank": 10,
+            "rank": 12,
             "value": "text"
         },
         "ADu": {
@@ -302,7 +303,7 @@
             "long_text": true,
             "name": "h1_adv",
             "optional": true,
-            "rank": 16,
+            "rank": 18,
             "value": "text"
         },
         "ADv": {
@@ -312,7 +313,7 @@
             "long_text": true,
             "name": "h2_adv",
             "optional": true,
-            "rank": 22,
+            "rank": 24,
             "value": "text"
         },
         "ADw": {
@@ -322,7 +323,7 @@
             "long_text": true,
             "name": "h3_adv",
             "optional": true,
-            "rank": 28,
+            "rank": 30,
             "value": "text"
         },
         "ADx": {
@@ -332,7 +333,7 @@
             "long_text": true,
             "name": "h4_adv",
             "optional": true,
-            "rank": 34,
+            "rank": 36,
             "value": "text"
         },
         "ADy": {
@@ -342,7 +343,7 @@
             "long_text": true,
             "name": "h5_adv",
             "optional": true,
-            "rank": 40,
+            "rank": 42,
             "value": "text"
         },
         "ADz": {
@@ -352,27 +353,27 @@
             "long_text": true,
             "name": "h6_adv",
             "optional": true,
-            "rank": 46,
+            "rank": 48,
             "value": "text"
         },
         "AEA": {
             "caption": "Image",
             "editor": "Label",
             "name": "image",
-            "rank": 47
+            "rank": 49
         },
         "AEB": {
             "caption": "𝗖𝗢𝗟𝗟𝗔𝗕𝗢𝗥𝗔𝗧𝗜𝗢𝗡 (beta)",
             "editor": "Label",
             "name": "collab_info",
-            "rank": 66
+            "rank": 72
         },
         "AEC": {
             "caption": "Enable collaboration?",
             "default_val": false,
             "editor": "Checkbox",
             "name": "collab_active",
-            "rank": 68
+            "rank": 74
         },
         "AED": {
             "caption": "user_name",
@@ -381,7 +382,7 @@
             "editor": "DynamicValue",
             "name": "collab_user_name",
             "optional": true,
-            "rank": 69,
+            "rank": 81,
             "value": "text"
         },
         "AEE": {
@@ -391,39 +392,40 @@
             "editor": "Color",
             "name": "collab_cursor_color",
             "optional": true,
-            "rank": 70,
+            "rank": 82,
             "value": "text"
         },
         "AEG": {
-            "caption": "to use the collaboration function you first need an account with 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
+            "caption": "to use the collaboration function you first need an account with one of the providers: 𝗿𝗶𝗰𝗼.𝘄𝘁𝗳 (has free tier), 𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃, or 𝗹𝗶𝘃𝗲𝗯𝗹𝗼𝗰𝗸𝘀.𝗶𝗼",
             "editor": "Label",
             "name": "collab_info_sub",
-            "rank": 67
+            "rank": 73
         },
         "AEH": {
             "caption": "app_id",
-            "default_val": "nrm8g1ko",
-            "doc": "Get the app id from 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
+            "default_val": "",
+            "doc": "Required for both Tiptap Cloud or Custom. Get the app id from 𝗵𝘁𝘁𝗽𝘀://𝗿𝗶𝗰𝗼.𝘄𝘁𝗳 or 𝗵𝘁𝘁𝗽𝘀://𝗰𝗼𝗹𝗹𝗮𝗯.𝘁𝗶𝗽𝘁𝗮𝗽.𝗱𝗲𝘃",
             "editor": "StaticText",
             "name": "collab_app_id",
             "optional": true,
-            "rank": 71
+            "rank": 78
         },
         "AEI": {
-            "caption": "collab_doc_id",
+            "caption": "Document name",
+            "doc": "Name or id of the document. This should be a unique name like a slug or unique id.",
             "editor": "DynamicValue",
             "name": "collab_doc_id",
             "optional": true,
-            "rank": 72,
+            "rank": 75,
             "value": "text"
         },
         "AEN": {
             "caption": "JWT key",
-            "doc": "You will need to use the 𝗴𝗲𝗻𝗲𝗿𝗮𝘁𝗲 𝗝𝗪𝗧 𝗸𝗲𝘆 action.",
+            "doc": "For both Tiptap Cloud or Custom collab, you need to provide a JWT key. Best idea is to create a workflow when the page loads, run 𝗴𝗲𝗻𝗲𝗿𝗮𝘁𝗲 𝗝𝗪𝗧 𝗸𝗲𝘆 action, and store the token in a state on the page.",
             "editor": "DynamicValue",
             "name": "collab_jwt",
             "optional": true,
-            "rank": 73,
+            "rank": 79,
             "value": "text"
         },
         "AEV": {
@@ -434,7 +436,7 @@
             "long_text": true,
             "name": "blockquote_adv",
             "optional": true,
-            "rank": 74,
+            "rank": 65,
             "value": "text"
         },
         "AEW": {
@@ -443,17 +445,17 @@
             "in_style": true,
             "name": "characterLimit",
             "optional": true,
-            "rank": 75
+            "rank": 3
         },
         "AEX": {
-            "caption": "placeholder_color",
+            "caption": "Placeholder color",
             "default_val": "rgba(173, 181, 189, 1)",
             "doc": "Color of the placeholder text",
             "editor": "Color",
             "in_style": true,
             "name": "placeholder_color",
             "optional": true,
-            "rank": 76
+            "rank": 1
         },
         "AEh": {
             "caption": "Bullet lists CSS",
@@ -463,7 +465,7 @@
             "long_text": true,
             "name": "ul_adv",
             "optional": true,
-            "rank": 77,
+            "rank": 66,
             "value": "text"
         },
         "AEi": {
@@ -474,8 +476,45 @@
             "long_text": true,
             "name": "ol_adv",
             "optional": true,
-            "rank": 78,
+            "rank": 67,
             "value": "text"
+        },
+        "AEj": {
+            "caption": "base div CSS",
+            "default_val": "    flex-grow: 1;     word-wrap: break-word; \tword-break: break-word;",
+            "doc": "gives you direct access to the div that holds the editor",
+            "editor": "DynamicValue",
+            "long_text": true,
+            "name": "baseDiv",
+            "optional": true,
+            "rank": 68,
+            "value": "text"
+        },
+        "AEk": {
+            "caption": "Provider",
+            "default_val": "tiptap",
+            "doc": "Which collab provider you would like to use. Tiptap requires a subscription with cloud.tiptap.com and a JWT key. Liveblocks requires the plublic key. For custom requires the url of the server and a JWT.",
+            "editor": "Dropdown",
+            "name": "collabProvider",
+            "optional": true,
+            "options": "tiptap,liveblocks,custom",
+            "rank": 76
+        },
+        "AEm": {
+            "caption": "Liveblocks key",
+            "doc": "Liveblocks public API key. If you're using Liveblocks, you need to provide this key.",
+            "editor": "StaticText",
+            "name": "liveblocksPublicApiKey",
+            "optional": true,
+            "rank": 80
+        },
+        "collab_url": {
+            "caption": "Custom - URL",
+            "default_val": "default value",
+            "doc": "Paste the collab URL here to enable collaborative editing. Leave empty to disable.",
+            "editor": "StaticText",
+            "name": "collab_url",
+            "rank": 77
         },
         "h1_font_weight": {
             "caption": "H1 font-weight",
@@ -485,13 +524,13 @@
             "in_style": true,
             "name": "h1_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 14
+            "rank": 16
         },
         "h1_info1": {
             "caption": "     ----- H1 styling -----",
             "editor": "Label",
             "name": "stylesheet_info",
-            "rank": 11
+            "rank": 13
         },
         "h2_color": {
             "caption": "H2 Color",
@@ -499,7 +538,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h2_color",
-            "rank": 19
+            "rank": 21
         },
         "h2_font_weight": {
             "caption": "H2 font-weight",
@@ -509,13 +548,13 @@
             "in_style": true,
             "name": "h2_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 21
+            "rank": 23
         },
         "h2_info": {
             "caption": "     ----- H2 styling -----",
             "editor": "Label",
             "name": "stylesheet_info",
-            "rank": 17
+            "rank": 19
         },
         "h2_margin": {
             "caption": "H2 margin",
@@ -524,7 +563,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h2_margin",
-            "rank": 20
+            "rank": 22
         },
         "h2_size": {
             "caption": "H2 Size",
@@ -532,7 +571,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h2_size",
-            "rank": 18
+            "rank": 20
         },
         "h3_color": {
             "caption": "H3 Color",
@@ -540,7 +579,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h3_color",
-            "rank": 25
+            "rank": 27
         },
         "h3_font_weight": {
             "caption": "H3 font-weight",
@@ -550,13 +589,13 @@
             "in_style": true,
             "name": "h3_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 26
+            "rank": 28
         },
         "h3_info": {
             "caption": "     ----- H3 styling -----",
             "editor": "Label",
             "name": "stylesheet_info",
-            "rank": 23
+            "rank": 25
         },
         "h3_margin": {
             "caption": "H3 margin",
@@ -565,7 +604,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h3_margin",
-            "rank": 27
+            "rank": 29
         },
         "h3_size": {
             "caption": "H3 Size",
@@ -573,7 +612,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h3_size",
-            "rank": 24
+            "rank": 26
         },
         "h4_color": {
             "caption": "H4 Color",
@@ -581,7 +620,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h4_color",
-            "rank": 31
+            "rank": 33
         },
         "h4_font_weight": {
             "caption": "H4 font-weight",
@@ -591,13 +630,13 @@
             "in_style": true,
             "name": "h4_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 32
+            "rank": 34
         },
         "h4_info": {
             "caption": "     ----- H4 styling -----",
             "editor": "Label",
             "name": "h4_info",
-            "rank": 29
+            "rank": 31
         },
         "h4_margin": {
             "caption": "H4 margin",
@@ -606,7 +645,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h4_margin",
-            "rank": 33
+            "rank": 35
         },
         "h4_size": {
             "caption": "H4 Size",
@@ -614,7 +653,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h4_size",
-            "rank": 30
+            "rank": 32
         },
         "h5_color": {
             "caption": "H5 Color",
@@ -622,7 +661,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h5_color",
-            "rank": 37
+            "rank": 39
         },
         "h5_font_weight": {
             "caption": "H5 font-weight",
@@ -632,13 +671,13 @@
             "in_style": true,
             "name": "h5_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 38
+            "rank": 40
         },
         "h5_info": {
             "caption": "     ----- H5 styling -----",
             "editor": "Label",
             "name": "h5_info",
-            "rank": 35
+            "rank": 37
         },
         "h5_margin": {
             "caption": "H5 margin",
@@ -647,7 +686,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h5_margin",
-            "rank": 39
+            "rank": 41
         },
         "h5_size": {
             "caption": "H5 Size",
@@ -655,7 +694,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h5_size",
-            "rank": 36
+            "rank": 38
         },
         "h6_color": {
             "caption": "H6 Color",
@@ -663,7 +702,7 @@
             "editor": "Color",
             "in_style": true,
             "name": "h6_color",
-            "rank": 43
+            "rank": 45
         },
         "h6_font_weight": {
             "caption": "H6 font-weight",
@@ -673,13 +712,13 @@
             "in_style": true,
             "name": "h6_font_weight",
             "options": "900,800,700,600,500,400",
-            "rank": 44
+            "rank": 46
         },
         "h6_info": {
             "caption": "     ----- H6 styling -----",
             "editor": "Label",
             "name": "h6_info",
-            "rank": 41
+            "rank": 43
         },
         "h6_margin": {
             "caption": "H6 margin",
@@ -688,7 +727,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h6_margin",
-            "rank": 45
+            "rank": 47
         },
         "h6_size": {
             "caption": "H6 Size",
@@ -696,7 +735,7 @@
             "editor": "StaticText",
             "in_style": true,
             "name": "h6_size",
-            "rank": 42
+            "rank": 44
         },
         "nodes": {
             "caption": "Extensions",
@@ -706,7 +745,7 @@
             "in_style": true,
             "long_text": true,
             "name": "nodes",
-            "rank": 64
+            "rank": 70
         }
     },
     "has_reset_fn": true,

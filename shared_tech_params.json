@@ -1,12 +1,8 @@
 {
     "assets": {
-        "AEb": {
-            "name": "dist.js",
-            "url": "//meta-q.cdn.bubble.io/f1701591085680x725033244829215400/dist.js"
-        },
-        "AEc": {
-            "name": "2024-01-21-dist.js",
-            "url": "//meta-q.cdn.bubble.io/f1705853172144x869173511080595800/dist.js"
+        "AEr": {
+            "name": "2.3.0",
+            "url": "//meta-q.cdn.bubble.io/f1714195549171x369091658660205500/dist.js"
         }
     },
     "dependencies": {
@@ -16,7 +12,11 @@
     },
     "shared_keys": {
         "AEF": {
-            "caption": "tiptap_collab",
+            "caption": "Tiptap Cloud JWT secret",
+            "type": "secure"
+        },
+        "custom_collab_jwt_secret": {
+            "caption": "Custom collab JWT secret",
             "type": "secure"
         }
     }
