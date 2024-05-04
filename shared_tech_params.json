@@ -3,6 +3,10 @@
         "AEr": {
             "name": "2.3.0",
             "url": "//meta-q.cdn.bubble.io/f1714195549171x369091658660205500/dist.js"
+        },
+        "AEs": {
+            "name": "2.3.0-mentions",
+            "url": "//meta-q.cdn.bubble.io/f1714790821829x406493477824515100/dist.js"
         }
     },
     "dependencies": {

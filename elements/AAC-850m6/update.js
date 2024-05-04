@@ -14,7 +14,8 @@ function(instance, properties, context) {
     // load once
     if (!instance.data.isEditorSetup) {
         // try {}
-        let initialContent = properties.initialContent;
+        
+        let initialContent = (properties.bubble.auto_binding()) ? properties.autobinding : properties.initialContent;
         instance.data.initialContent = initialContent; // a string to keep track of what's currently in the initialContent so that the editor can change when the initialContent changes
         let content = properties.content_is_json
             ? JSON.parse(initialContent)
@@ -71,6 +72,8 @@ function(instance, properties, context) {
         const Underline = window.tiptapUnderline;
         const Youtube = window.tiptapYoutube;
         const generateHTML = window.tiptapGenerateHTML;
+        
+        const Mention = window.tiptapMention;
 
         instance.data.headings = [];
         properties.headings.split(",").map((item) => {
@@ -132,6 +135,24 @@ function(instance, properties, context) {
             extensions.push(TaskList, TaskItem.configure({ nested: true }));
         }
 
+        
+        // rest
+        if (instance.data.active_nodes.includes("Mention")) {
+
+            if (!properties.mention_list) {
+                console.log("tried to use Mention extension, but mention_list is empty. Mention extension not loaded");
+            } else {
+                const suggestion_config = instance.data.configureSuggestion(instance, properties);
+                extensions.push(Mention.configure({
+                    HTMLAttributes: {
+                        class: 'mention',
+                    },
+                    deleteTriggerWithBackspace: true,
+                    suggestion: suggestion_config,
+                }))
+            }
+        };
+        
         if (instance.data.active_nodes.includes("Highlight")) {
             extensions.push(Highlight);
         }
@@ -182,7 +203,6 @@ function(instance, properties, context) {
             );
         }
 
-        console.log("content before loading options", content);
         //
         // create the options object
         //
@@ -222,7 +242,8 @@ function(instance, properties, context) {
             },
             onUpdate({ editor }) {
                 // The content has changed.
-                instance.publishState("contentHTML", editor.getHTML());
+                const contentHTML = editor.getHTML();
+                instance.publishState("contentHTML", contentHTML);
                 instance.publishState("contentText", editor.getText());
                 instance.publishState(
                     "contentJSON",
@@ -237,10 +258,19 @@ function(instance, properties, context) {
                     "wordCount",
                     editor.storage.characterCount.words(),
                 );
-                //       _.debounce(instance.triggerEvent('contentUpdated'), 2000);
-                instance.triggerEvent("contentUpdated");
-         //       instance.data.throttle(instance.publishAutobinding(editor.getHTML()));
+  
+                // instance.triggerEvent("contentUpdated");
+                // instance.publishAutobinding( contentHTML )
+                
+                
+                // instance.data.throttle(instance.publishAutobinding(editor.getHTML()));
+                // instance.data.throttledContentUpdated();
+                // instance.data.autobindingContentUpdated = false;
+                instance.data.isDebouncingDone = false;
+                 instance.data.updateContent(contentHTML);
+              
             },
+            
             onFocus({ editor, event }) {
                 instance.triggerEvent("isFocused");
                 instance.publishState("isFocused", true);
@@ -530,17 +560,19 @@ function(instance, properties, context) {
     // handing changing of initial content
     // checks if the initial content has something -- if it's empty the user is probably using set content which means this should NOT be applicable
     if (
-        instance.data.editor_is_ready &&
-        !properties.initialContent == "" &&
-        instance.data.initialContent !== properties.initialContent 
-   // &&     !properties.bubble.auto_binding()
+        instance.data.editor_is_ready
+        && properties.initialContent !== ""
+        && instance.data.initialContent !== properties.initialContent 
+	    && !properties.bubble.auto_binding()
     ) {
+                console.log("content has changed");
        
         if (!properties.collab_active) {
-            console.log("initialContent has changed");
+    
             instance.data.initialContent = properties.initialContent;
+            let content = properties.content_is_json ? JSON.parse(instance.data.initialContent) : instance.data.initialContent;
             instance.data.editor.commands.setContent(
-                instance.data.initialContent,
+                content,
                 true,
             );
         } else {
@@ -549,7 +581,19 @@ function(instance, properties, context) {
             );
         }
     }
+    
 
+    
+    if ( 
+        instance.data.editor_is_ready 
+        && properties.bubble.auto_binding() 
+        && instance.data.isDebouncingDone
+        && properties.autobinding !== instance.data.editor.getHTML()
+    ) {
+        instance.data.editor.commands.setContent( properties.autobinding, true );
+    }
+    
+    
     // switch between scrolling the editor or stretching it.
     if (!!instance.data.editor_is_ready) {
         if (!properties.bubble.fit_height()) {
@@ -570,8 +614,44 @@ function(instance, properties, context) {
 
     // update the stylesheet
     instance.data.stylesheet.innerHTML = `
-#tiptapEditor-${instance.data.randomId} .ProseMirror {
-	${properties.baseDiv}
+#tiptapEditor-${instance.data.randomId} {
+    .ProseMirror {
+	    ${properties.baseDiv}
+    }
+
+    .mention {
+        border: 1px solid #000;
+        border-radius: 0.4rem;
+        padding: 0.1rem 0.3rem;
+        box-decoration-break: clone;
+    }
+
+    .suggestions {
+      border: 1px solid #ccc;
+      background-color: white;
+      padding: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      border-radius: 4px;
+      display: block; /* make sure it is visible */
+      position: absolute;
+      z-index: 1000; /* Ensure it is on top */
+    }
+
+    .suggestion-item {
+      padding: 8px 10px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .suggestion-item:hover {
+      background-color: #eee;
+    }
+
+    .suggestion {
+    background-color: black;
+    color: white;
+    }
+
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror h1 {
@@ -779,5 +859,35 @@ td {
   border-radius: 3px 3px 3px 0;
   white-space: nowrap;
 }
+
+.items_${instance.data.randomId} {
+    padding: 0.2rem;
+    position: relative;
+    border-radius: 0.5rem;
+    background: #FFF;
+    color: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    font-size: 0.9rem;
+    box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0px 10px 20px rgba(0, 0, 0, 0.1),
+    ;
+
+    .item {
+        display: block;
+        margin: 0;
+        width: 100%;
+        text-align: left;
+        background: transparent;
+        border-radius: 0.4rem;
+        border: 1px solid transparent;
+        padding: 0.2rem 0.4rem;
+
+        &.is-selected {
+        	border-color: #000;
+    	}
+	}
+}
 `;
+
 }

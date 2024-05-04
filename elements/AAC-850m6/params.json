@@ -508,6 +508,15 @@
             "optional": true,
             "rank": 80
         },
+        "AEt": {
+            "caption": "mention_list",
+            "editor": "DynamicValue",
+            "is_list": true,
+            "name": "mention_list",
+            "optional": true,
+            "rank": 83,
+            "value": "text"
+        },
         "collab_url": {
             "caption": "Custom - URL",
             "default_val": "default value",
@@ -748,7 +757,7 @@
             "rank": 70
         }
     },
-    "has_reset_fn": true,
+    "has_reset_fn": false,
     "icon": "ion-chatbox-working",
     "property_applications": {
         "Background": true,
@@ -1058,5 +1067,5 @@
             "value": "boolean"
         }
     },
-    "support_autobinding": false
+    "support_autobinding": true
 }

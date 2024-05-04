@@ -16,8 +16,9 @@ function(instance, context) {
 
         instance.data.stylesheet = document.createElement("style");
         instance.canvas.append(instance.data.stylesheet);
+console.log(" initi funiton");
 
-        // sfunction to find the nearest parent.
+        // function to find the nearest parent.
         // useful when Tiptap is used inside a repeating group
         function findElement(elementID) {
             let $parent = instance.canvas.parent();
@@ -33,50 +34,85 @@ function(instance, context) {
         }
         instance.data.findElement = findElement;
 
-        instance.data.debounce = function (func, delay = 1000) {
-            let timer;
-            return function () {
-                clearTimeout(timer);
-                timer = setTimeout(() => {
-                    func.apply(this, arguments);
-                }, delay);
-            };
-        };
+        instance.data.debounce = function debounce(cb, delay = 1000) {
+            let timeout
+
+            return (...args) => {
+                clearTimeout(timeout)
+                timeout = setTimeout(() => {
+                    cb(...args)
+                }, delay)
+            }
+        }
+        
+        instance.data.isDebouncingDone = true;
+        instance.data.updateContent = instance.data.debounce( (content) => {
+            instance.publishAutobinding( content );
+            instance.triggerEvent("contentUpdated");
+            instance.data.isDebouncingDone = true;
+        }, 250);
 
         // throttle function: to take it easy on the autobinding.
         // 1. writes to autobinding
         // 2. then waits a certain delay
         // 3. then writes again if the user created more changes
-        // source: from https://blog.webdevsimplified.com/2022-03/debounce-vs-throttle/code
-
-        
-        function throttle(callback, delay = 1000) {
+        // source: from https://blog.webdevsimplified.com/2022-03/debounce-vs-throttle
+ 
+ /*       function throttle(cb, delay = 1000) {
             instance.data.shouldWait = false;
-            instance.data.timeoutFunc = () => {
-                if (instance.data.waitingArgs == null) {
+            console.log("throttle", "shouldWait", instance.data.shouldWait);
+            let waitingArgs;
+            const timeoutFunc = () => {
+                if (waitingArgs == null) {
+                    console.log("timeoutFunc if");
                     instance.data.shouldWait = false;
                 } else {
-                    callback(...instance.data.waitingArgs);
-                    instance.data.waitingArgs = null;
-                    setTimeout(instance.data.timeoutFunc, delay);
+                    console.log("timeoutFunc else");
+                    cb(...waitingArgs);
+                    waitingArgs = null;
+                    setTimeout(timeoutFunc, delay);
                 }
-            };
+            }
 
             return (...args) => {
                 if (instance.data.shouldWait) {
-                    instance.data.waitingArgs = args;
-                    return;
+                    console.log("shouldWait");
+                    waitingArgs = args;
+                    return
                 }
-
-                // tests
-
-                callback(...args);
+	console.log("running cb");
+                cb(...args);
                 instance.data.shouldWait = true;
+                setTimeout(timeoutFunc, delay);
+            }
+        }
+     */   
+        
+       function throttle(mainFunction, delay = 2000) {
+         
+            let timerFlag = null; // Variable to keep track of the timer
 
-                setTimeout(instance.data.timeoutFunc, delay);
+            // Returning a throttled version 
+            return (...args) => {
+                if (timerFlag === null) { // If there is no timer currently running
+                    mainFunction(...args); // Execute the main function 
+                    timerFlag = setTimeout(() => { // Set a timer to clear the timerFlag after the specified delay
+                        mainFunction(...args);
+                        timerFlag = null; // Clear the timerFlag to allow the main function to be executed again
+                    }, delay);
+                }
             };
-        };
+        }
         instance.data.throttle = throttle;
+        
+        // instance.data.throttledContentUpdated = instance.data.throttle( () => {console.log("contentUpdated")});
+        instance.data.throttledContentUpdated = instance.data.throttle( () => {
+            instance.triggerEvent("contentUpdated");
+            console.log("getHTML", instance.data.editor.getHTML() );
+            instance.data.throttle(instance.publishAutobinding(instance.data.editor.getHTML()));
+        }
+                                                                      );
+        
 
         function returnAndReportErrorIfEditorNotReady(errorFragment = "error") {
             const message =
@@ -288,4 +324,185 @@ function(instance, context) {
     } catch (error) {
         console.log("error in initialize", error);
     }
+    
+    
+    
+    // MentionList
+    /**
+     * @template HTMLElement
+     */
+    instance.data.MentionList = class MentionList {
+        constructor(stuff) {
+            const {props, editor} = stuff
+            this.items = props.items;
+            this.command = props.command;
+            this.selectedIndex = 0;
+            this.randomId = props.randomId;
+            this.editor = editor;
+            this.initElement();
+            this.updateItems(this);
+//            this.range = props.range;
+        }
+
+
+        initElement() {
+            this.element = document.createElement('div');
+            this.element.className = 'items_' + this.randomId;
+
+            this.element.addEventListener('click', this.handleClick.bind(this));
+            this.element.addEventListener('keydown', this.handleKeyDown.bind(this));
+        }
+
+        handleClick(event) {
+            const target = event.target.closest('.item');
+            const index = Array.from(this.element.children).indexOf(target);
+            if (index !== -1) {
+                this.selectItem(index);
+                this.updateSelection(index);
+            }
+        }
+
+        updateItems(props) {
+            this.items = props.items;
+            this.selectedIndex = 0;
+            this.redraw();
+        }
+
+        updateProps(props) {
+            this.range = props.range; 
+            this.editor = props.editor;
+            console.log("range", this.range);
+        }       
+
+        redraw() {
+            this.element.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+
+            this.items.forEach((item, index) => {
+                const button = document.createElement('button');
+                button.textContent = item;
+                button.className = 'item' + (index === this.selectedIndex ? ' is-selected' : '');
+                fragment.appendChild(button);
+            });
+
+            this.element.appendChild(fragment);
+        }
+
+        selectItem(index) {
+            const item = this.items[index];
+            const editor = this.editor;
+            const range = this.range;
+            if (item) {
+                this.command({id: item});
+            }
+        }
+
+        updateSelection(index) {
+            const previouslySelected = this.element.querySelector('.is-selected');
+            if (previouslySelected) previouslySelected.classList.remove('is-selected');
+
+            const newSelected = this.element.children[index];
+            if (newSelected) newSelected.classList.add('is-selected');
+
+            this.selectedIndex = index;
+        }        
+
+        handleKeyDown(event) {
+            switch(event.key) {
+                case 'ArrowUp':
+                    this.moveSelection(-1);
+                    event.preventDefault();
+                    break;
+                case 'ArrowDown':
+                    this.moveSelection(1);
+                    event.preventDefault();
+                    break;
+                case 'Enter':
+                    this.selectItem(this.selectedIndex);
+                    event.preventDefault();
+                    break;
+                case 'Tab':
+                    this.selectItem(this.selectedIndex);
+                    event.preventDefault();
+                    break;
+                            }
+        }
+
+        moveSelection(direction) {
+            const itemLength = this.items.length;
+            const newIndex = (this.selectedIndex + direction + itemLength) % itemLength;
+            this.updateSelection(newIndex);
+            this.redraw();
+        }
+    };
+
+    function configureSuggestion(instance, properties) { 
+        return {
+            items: ({query}) => {
+                if (typeof query !== 'string') {
+                    console.log("thing passed to Mention is not a string, returning. Typeof query: ", typeof query);
+                    return [];
+                }
+                const length = properties.mention_list.length();
+                const mention_list = properties.mention_list.get(0, length);         
+                const query_result = mention_list.filter(item => item.toLowerCase().includes(query.toLowerCase()));
+
+                return query_result;
+            },
+
+            render: () => {
+                let popup, component;
+
+                return {
+                    onStart: (props) => {
+
+                        props.randomId = instance.data.randomId;
+                        component = new instance.data.MentionList({props, editor: props.editor})
+                        popup = window.tiptapTippy('body', {
+                            getReferenceClientRect: props.clientRect,
+                            appendTo: () => document.body,
+                            content: component.element,
+                            showOnCreate: true,
+                            interactive: true,
+                            trigger: 'manual',
+                            placement: 'bottom-start',
+                        });
+
+                    },
+
+                    onUpdate: (props) => {
+                        if (!props.clientRect) {
+                            return;
+                        }
+
+                        component.updateProps(props);
+
+                        popup[0].setProps({
+                            getReferenceClientRect: props.clientRect,
+                        });
+
+                        const newItems = component.updateItems(props);
+                        popup[0].setContent(newItems);
+
+                    },
+
+                    onKeyDown: (props) => {
+                        if (props.event.key === 'Escape') {
+                            popup[0].hide();
+                            return true;
+                        }
+                        return component.handleKeyDown(props.event);
+                    },
+
+                    onExit: () => {
+                        popup[0].destroy()
+                        component.element.remove()
+                    },
+                };
+            }
+        };
+    }
+    instance.data.configureSuggestion = configureSuggestion;    
+    
+    
 }
