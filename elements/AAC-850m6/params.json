@@ -508,14 +508,48 @@
             "optional": true,
             "rank": 80
         },
-        "AEt": {
-            "caption": "mention_list",
+        "AEv": {
+            "caption": "Base URL",
+            "doc": "generally `Website home URL/[users profile]` ",
+            "editor": "DynamicValue",
+            "name": "mention_base_url",
+            "optional": true,
+            "rank": 83,
+            "value": "text"
+        },
+        "AEw": {
+            "caption": "Mention Data source",
             "editor": "DynamicValue",
             "is_list": true,
             "name": "mention_list",
             "optional": true,
-            "rank": 83,
-            "value": "text"
+            "rank": 84,
+            "value": "_any_thing"
+        },
+        "AEx": {
+            "caption": "Type",
+            "editor": "custom_type",
+            "is_list": true,
+            "name": "mention_list_type",
+            "optional": true,
+            "rank": 85,
+            "value": "_any_thing_bindable"
+        },
+        "AEy": {
+            "caption": "Label",
+            "editor": "custom_field_AEx",
+            "field_type_restriction": "text_image_file",
+            "name": "mention_field_label",
+            "optional": true,
+            "rank": 86
+        },
+        "AEz": {
+            "caption": "id",
+            "editor": "custom_field_AEx",
+            "field_type_restriction": "text_image_file",
+            "name": "mention_field_id",
+            "optional": true,
+            "rank": 87
         },
         "collab_url": {
             "caption": "Custom - URL",

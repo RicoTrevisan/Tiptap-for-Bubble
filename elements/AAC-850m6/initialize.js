@@ -16,7 +16,6 @@ function(instance, context) {
 
         instance.data.stylesheet = document.createElement("style");
         instance.canvas.append(instance.data.stylesheet);
-console.log(" initi funiton");
 
         // function to find the nearest parent.
         // useful when Tiptap is used inside a repeating group
@@ -371,7 +370,6 @@ console.log(" initi funiton");
         updateProps(props) {
             this.range = props.range; 
             this.editor = props.editor;
-            console.log("range", this.range);
         }       
 
         redraw() {
@@ -380,7 +378,7 @@ console.log(" initi funiton");
 
             this.items.forEach((item, index) => {
                 const button = document.createElement('button');
-                button.textContent = item;
+                button.textContent = item.label;
                 button.className = 'item' + (index === this.selectedIndex ? ' is-selected' : '');
                 fragment.appendChild(button);
             });
@@ -392,10 +390,24 @@ console.log(" initi funiton");
             const item = this.items[index];
             const editor = this.editor;
             const range = this.range;
-            if (item) {
+
+
+            if (item && range) {
+                editor.commands.insertContentAt(range, {
+                    type: 'mention',
+                    attrs: {
+                        label: item.label,  
+                        id: item.id  
+                    }
+                });
+                editor.commands.insertContent(' ')
+                editor.commands.setTextSelection(range.from + 1);
+            }
+            else {
                 this.command({id: item});
             }
         }
+   // }
 
         updateSelection(index) {
             const previouslySelected = this.element.querySelector('.is-selected');
@@ -444,8 +456,15 @@ console.log(" initi funiton");
                     return [];
                 }
                 const length = properties.mention_list.length();
-                const mention_list = properties.mention_list.get(0, length);         
-                const query_result = mention_list.filter(item => item.toLowerCase().includes(query.toLowerCase()));
+                const source_list = properties.mention_list.get(0, length);
+                const mention_list = source_list.map(item => {
+                    return {
+                        label: item.get(properties.mention_field_label),
+                        id: item.get(properties.mention_field_id)
+                    }
+                })
+                console.log("mention_list", mention_list);
+                const query_result = mention_list.filter(item => item.label.toLowerCase().includes(query.toLowerCase()));
 
                 return query_result;
             },
@@ -486,12 +505,14 @@ console.log(" initi funiton");
 
                     },
 
-                    onKeyDown: (props) => {
-                        if (props.event.key === 'Escape') {
-                            popup[0].hide();
-                            return true;
+                    onKeyDown: ({ event, editor }) => {
+                        if (event.key === 'Enter') {
+                            event.preventDefault(); 
+                            component.selectItem(component.selectedIndex);
+                            return true;  
                         }
-                        return component.handleKeyDown(props.event);
+
+                        return component.handleKeyDown(event);
                     },
 
                     onExit: () => {

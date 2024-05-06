@@ -1,4 +1,5 @@
 function(instance, properties, context) {
+    
     if (
         properties.collab_active === true &&
         // properties.collabProvider === "tiptap" &&
@@ -74,6 +75,7 @@ function(instance, properties, context) {
         const generateHTML = window.tiptapGenerateHTML;
         
         const Mention = window.tiptapMention;
+        const mergeAttributes = window.tiptapMergeAttributes;
 
         instance.data.headings = [];
         properties.headings.split(",").map((item) => {
@@ -138,7 +140,7 @@ function(instance, properties, context) {
         
         // rest
         if (instance.data.active_nodes.includes("Mention")) {
-
+            
             if (!properties.mention_list) {
                 console.log("tried to use Mention extension, but mention_list is empty. Mention extension not loaded");
             } else {
@@ -146,6 +148,16 @@ function(instance, properties, context) {
                 extensions.push(Mention.configure({
                     HTMLAttributes: {
                         class: 'mention',
+                    },
+                    renderHTML({ options, node }) {
+                        console.log("renderHTML options", options);                        
+                        console.log("renderHTML node", node);
+
+                        return [
+                            "a",
+                            mergeAttributes({ href: `${properties.mention_base_url}${node.attrs.id}` }, options.HTMLAttributes),
+                            `${options.suggestion.char}${node.attrs.label ?? node.attrs.id}`,
+                        ];
                     },
                     deleteTriggerWithBackspace: true,
                     suggestion: suggestion_config,
