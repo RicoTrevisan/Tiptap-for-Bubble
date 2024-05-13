@@ -33,7 +33,7 @@ function(instance, context) {
         }
         instance.data.findElement = findElement;
 
-        instance.data.debounce = function debounce(cb, delay = 1000) {
+        instance.data.debounce = function debounce(cb, delay = 2000) {
             let timeout
 
             return (...args) => {
@@ -49,7 +49,7 @@ function(instance, context) {
             instance.publishAutobinding( content );
             instance.triggerEvent("contentUpdated");
             instance.data.isDebouncingDone = true;
-        }, 250);
+        }, 2000);
 
         // throttle function: to take it easy on the autobinding.
         // 1. writes to autobinding
@@ -404,10 +404,11 @@ function(instance, context) {
                 editor.commands.setTextSelection(range.from + 1);
             }
             else {
-                this.command({id: item});
+//                this.command({id: item.label});
+                this.command(item);
             }
         }
-   // }
+    
 
         updateSelection(index) {
             const previouslySelected = this.element.querySelector('.is-selected');

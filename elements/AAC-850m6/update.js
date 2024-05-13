@@ -632,7 +632,9 @@ function(instance, properties, context) {
     }
 
     .mention {
-        border: 1px solid #000;
+        border: 1px solid;
+		border-color: ${properties.mention_border_color};
+		background-color: ${properties.mention_background_color || "transparent"};
         border-radius: 0.4rem;
         padding: 0.1rem 0.3rem;
         box-decoration-break: clone;
@@ -877,7 +879,7 @@ td {
     position: relative;
     border-radius: 0.5rem;
     background: #FFF;
-    color: rgba(0, 0, 0, 0.8);
+    color: ${properties.mention_suggestion_font_color || rgba(0, 0, 0, 0.8)};
     overflow: hidden;
     font-size: 0.9rem;
     box-shadow:

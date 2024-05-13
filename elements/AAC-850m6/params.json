@@ -551,6 +551,42 @@
             "optional": true,
             "rank": 87
         },
+        "AFA": {
+            "caption": "mention_suggestion_font_color",
+            "default_val": "rgba(0,0,0,0.8)",
+            "editor": "Color",
+            "name": "mention_suggestion_font_color",
+            "optional": false,
+            "rank": 88
+        },
+        "AFB": {
+            "caption": "mention_border_color",
+            "default_val": "rgba(0,0,0,1)",
+            "doc": "Color of the border around the mention on the text",
+            "editor": "Color",
+            "name": "mention_border_color",
+            "rank": 89
+        },
+        "AFC": {
+            "caption": "mention_background_color",
+            "default_val": "rgba(255,255,255,0)",
+            "doc": "Color of the background of the mention.",
+            "editor": "Color",
+            "name": "mention_background_color",
+            "rank": 90
+        },
+        "AFD": {
+            "caption": "Mentions",
+            "editor": "Label",
+            "name": "mentions",
+            "rank": 91
+        },
+        "AFE": {
+            "caption": "Mentions sub",
+            "editor": "Label",
+            "name": "mentions_sub",
+            "rank": 92
+        },
         "collab_url": {
             "caption": "Custom - URL",
             "default_val": "default value",
@@ -717,7 +753,7 @@
             "rank": 40
         },
         "h5_info": {
-            "caption": "     ----- H5 styling -----",
+            "caption": "----- H5 styling -----",
             "editor": "Label",
             "name": "h5_info",
             "rank": 37
@@ -791,7 +827,7 @@
             "rank": 70
         }
     },
-    "has_reset_fn": false,
+    "has_reset_fn": true,
     "icon": "ion-chatbox-working",
     "property_applications": {
         "Background": true,
