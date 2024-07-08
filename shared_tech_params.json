@@ -1,12 +1,12 @@
 {
     "assets": {
-        "AEr": {
-            "name": "2.3.0",
-            "url": "//meta-q.cdn.bubble.io/f1714195549171x369091658660205500/dist.js"
-        },
         "AEu": {
             "name": "2.3.0-mentions",
             "url": "//meta-q.cdn.bubble.io/f1714940766252x830317706012694900/dist.js"
+        },
+        "AFI": {
+            "name": "2.4.0",
+            "url": "//meta-q.cdn.bubble.io/f1720075445810x404747430510913800/dist.js"
         }
     },
     "dependencies": {

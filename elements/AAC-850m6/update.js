@@ -1,30 +1,26 @@
 function(instance, properties, context) {
     
-    if (
-        properties.collab_active === true &&
-        // properties.collabProvider === "tiptap" &&
-        !properties.collab_jwt
-    ) {
-        console.log(
-            "collab is active but jwt token is not yet loaded. Returning...",
-        );
+    if (properties.collab_active === true && !properties.collab_jwt) {
+        console.log("collab is active but jwt token is not yet loaded. Returning...");
         return;
-
     }
 
     // load once
     if (!instance.data.isEditorSetup) {
-        // try {}
-        
         let initialContent = (properties.bubble.auto_binding()) ? properties.autobinding : properties.initialContent;
         instance.data.initialContent = initialContent; // a string to keep track of what's currently in the initialContent so that the editor can change when the initialContent changes
-        let content = properties.content_is_json
-            ? JSON.parse(initialContent)
-            : initialContent;
+        let content = properties.content_is_json ? JSON.parse(initialContent) : initialContent;
 
         let placeholder = properties.placeholder;
         let bubbleMenu = properties.bubbleMenu;
         let floatingMenu = properties.floatingMenu;
+        
+        let preserveWhitespace = properties.parseOptions_preserveWhitespace === 'true'
+        ? true
+        : properties.parseOptions_preserveWhitespace === 'false'
+        ? false
+        : 'full';
+
 
         // create the editor div
         const randomId = (Math.random() + 1).toString(36).substring(3);
@@ -73,7 +69,7 @@ function(instance, properties, context) {
         const Underline = window.tiptapUnderline;
         const Youtube = window.tiptapYoutube;
         const generateHTML = window.tiptapGenerateHTML;
-        
+
         const Mention = window.tiptapMention;
         const mergeAttributes = window.tiptapMergeAttributes;
 
@@ -96,7 +92,6 @@ function(instance, properties, context) {
             }),
         ];
 
-        // maybe these should be included in the standard
         if (instance.data.active_nodes.includes("Dropcursor")) {
             extensions.push(Dropcursor);
         }
@@ -126,7 +121,6 @@ function(instance, properties, context) {
             );
         }
 
-        // group that needs ListItem
         if (instance.data.active_nodes.includes("BulletList")) {
             extensions.push(BulletList);
         }
@@ -137,10 +131,7 @@ function(instance, properties, context) {
             extensions.push(TaskList, TaskItem.configure({ nested: true }));
         }
 
-        
-        // rest
         if (instance.data.active_nodes.includes("Mention")) {
-            
             if (!properties.mention_list) {
                 console.log("tried to use Mention extension, but mention_list is empty. Mention extension not loaded");
             } else {
@@ -150,7 +141,7 @@ function(instance, properties, context) {
                         class: 'mention',
                     },
                     renderHTML({ options, node }) {
-                        console.log("renderHTML options", options);                        
+                        console.log("renderHTML options", options);
                         console.log("renderHTML node", node);
 
                         return [
@@ -161,10 +152,10 @@ function(instance, properties, context) {
                     },
                     deleteTriggerWithBackspace: true,
                     suggestion: suggestion_config,
-                }))
+                }));
             }
-        };
-        
+        }
+
         if (instance.data.active_nodes.includes("Highlight")) {
             extensions.push(Highlight);
         }
@@ -215,23 +206,21 @@ function(instance, properties, context) {
             );
         }
 
-        //
-        // create the options object
-        //
         let options = {};
         options = {
             element: d,
             editable: properties.isEditable,
             content: content,
             extensions: extensions,
+            parseOptions: {
+                preserveWhitespace: properties.parseOptions_preserveWhitespace || 'full',
+            },
             injectCSS: true,
             onCreate({ editor }) {
-                // The editor is ready.
                 instance.data.editor_is_ready = true;
                 instance.triggerEvent("is_ready");
                 instance.publishState("is_ready", true);
 
-                // initialize exposed states
                 instance.publishState("contentHTML", editor.getHTML());
                 instance.publishState("contentText", editor.getText());
                 instance.publishState(
@@ -248,12 +237,11 @@ function(instance, properties, context) {
                         "wordCount",
                         editor.storage.characterCount.words(),
                     );
-                }
-
-
+                };
+                window.editor = editor;
+                console.log("onCreate editor", editor);
             },
             onUpdate({ editor }) {
-                // The content has changed.
                 const contentHTML = editor.getHTML();
                 instance.publishState("contentHTML", contentHTML);
                 instance.publishState("contentText", editor.getText());
@@ -270,108 +258,54 @@ function(instance, properties, context) {
                     "wordCount",
                     editor.storage.characterCount.words(),
                 );
-  
-                // instance.triggerEvent("contentUpdated");
-                // instance.publishAutobinding( contentHTML )
                 
                 
-                // instance.data.throttle(instance.publishAutobinding(editor.getHTML()));
-                // instance.data.throttledContentUpdated();
-                // instance.data.autobindingContentUpdated = false;
-                instance.data.isDebouncingDone = false;
-                 instance.data.updateContent(contentHTML);
-              
+                if (!instance.data.isProgrammaticUpdate) {
+                    instance.data.updateContent(contentHTML);
+                    instance.data.isDebouncingDone = false;
+                }
+                
+
+
             },
-            
             onFocus({ editor, event }) {
                 instance.triggerEvent("isFocused");
                 instance.publishState("isFocused", true);
                 instance.data.is_focused = true;
             },
-
             onBlur({ editor, event }) {
                 instance.triggerEvent("isntFocused");
                 instance.publishState("isFocused", false);
                 instance.data.is_focused = false;
+                instance.publishAutobinding(editor.getHTML());
             },
             onTransaction({ editor, transaction }) {
-                // The editor state has changed.
                 instance.publishState("bold", editor.isActive("bold"));
                 instance.publishState("italic", editor.isActive("italic"));
                 instance.publishState("strike", editor.isActive("strike"));
-                instance.publishState(
-                    "h1",
-                    editor.isActive("heading", { level: 1 }),
-                );
-                instance.publishState(
-                    "h2",
-                    editor.isActive("heading", { level: 2 }),
-                );
-                instance.publishState(
-                    "h3",
-                    editor.isActive("heading", { level: 3 }),
-                );
-                instance.publishState(
-                    "h4",
-                    editor.isActive("heading", { level: 4 }),
-                );
-                instance.publishState(
-                    "h5",
-                    editor.isActive("heading", { level: 5 }),
-                );
-                instance.publishState(
-                    "h6",
-                    editor.isActive("heading", { level: 6 }),
-                );
+                instance.publishState("h1", editor.isActive("heading", { level: 1 }));
+                instance.publishState("h2", editor.isActive("heading", { level: 2 }));
+                instance.publishState("h3", editor.isActive("heading", { level: 3 }));
+                instance.publishState("h4", editor.isActive("heading", { level: 4 }));
+                instance.publishState("h5", editor.isActive("heading", { level: 5 }));
+                instance.publishState("h6", editor.isActive("heading", { level: 6 }));
                 instance.publishState("body", !editor.isActive("heading"));
-                instance.publishState(
-                    "orderedList",
-                    editor.isActive("orderedList"),
-                );
-                instance.publishState(
-                    "bulletList",
-                    editor.isActive("bulletList"),
-                );
-                instance.publishState(
-                    "sinkListItem",
-                    editor.can().sinkListItem("listItem"),
-                );
-                instance.publishState(
-                    "liftListItem",
-                    editor.can().liftListItem("listItem"),
-                );
-                instance.publishState(
-                    "blockquote",
-                    editor.isActive("blockquote"),
-                );
-                instance.publishState(
-                    "codeBlock",
-                    editor.isActive("codeBlock"),
-                );
+                instance.publishState("orderedList", editor.isActive("orderedList"));
+                instance.publishState("bulletList", editor.isActive("bulletList"));
+                instance.publishState("sinkListItem", editor.can().sinkListItem("listItem"));
+                instance.publishState("liftListItem", editor.can().liftListItem("listItem"));
+                instance.publishState("blockquote", editor.isActive("blockquote"));
+                instance.publishState("codeBlock", editor.isActive("codeBlock"));
                 instance.publishState("taskList", editor.isActive("taskList"));
                 instance.publishState("taskItem", editor.isActive("taskItem"));
                 instance.publishState("link", editor.isActive("link"));
                 instance.publishState("url", editor.getAttributes("link").href);
-                instance.publishState(
-                    "align_left",
-                    editor.isActive({ textAlign: "left" }),
-                );
-                instance.publishState(
-                    "align_center",
-                    editor.isActive({ textAlign: "center" }),
-                );
-                instance.publishState(
-                    "align_right",
-                    editor.isActive({ textAlign: "right" }),
-                );
-                instance.publishState(
-                    "highlight",
-                    editor.isActive("highlight"),
-                );
-                instance.publishState(
-                    "underline",
-                    editor.isActive("underline"),
-                );
+                instance.publishState("align_left", editor.isActive({ textAlign: "left" }));
+                instance.publishState("align_center", editor.isActive({ textAlign: "center" }));
+                instance.publishState("align_right", editor.isActive({ textAlign: "right" }));
+                instance.publishState("align_justified", editor.isActive({ textAlign: "justify" }));
+                instance.publishState("highlight", editor.isActive("highlight"));
+                instance.publishState("underline", editor.isActive("underline"));
                 instance.publishState("table", editor.isActive("table"));
 
                 instance.publishState(
@@ -383,9 +317,7 @@ function(instance, properties, context) {
                     editor.storage.characterCount.words(),
                 );
             },
-
             onSelectionUpdate({ editor }) {
-                // gets the current selected text
                 const { view, state } = editor;
                 const { from, to } = view.state.selection;
                 const text = state.doc.textBetween(from, to, "");
@@ -394,111 +326,44 @@ function(instance, properties, context) {
                 instance.publishState("bold", editor.isActive("bold"));
                 instance.publishState("italic", editor.isActive("italic"));
                 instance.publishState("strike", editor.isActive("strike"));
-                instance.publishState(
-                    "h1",
-                    editor.isActive("heading", { level: 1 }),
-                );
-                instance.publishState(
-                    "h2",
-                    editor.isActive("heading", { level: 2 }),
-                );
-                instance.publishState(
-                    "h3",
-                    editor.isActive("heading", { level: 3 }),
-                );
-                instance.publishState(
-                    "h4",
-                    editor.isActive("heading", { level: 4 }),
-                );
-                instance.publishState(
-                    "h5",
-                    editor.isActive("heading", { level: 5 }),
-                );
-                instance.publishState(
-                    "h6",
-                    editor.isActive("heading", { level: 6 }),
-                );
-                instance.publishState(
-                    "orderedList",
-                    editor.isActive("orderedList"),
-                );
-                instance.publishState(
-                    "bulletList",
-                    editor.isActive("bulletList"),
-                );
-                instance.publishState(
-                    "sinkListItem",
-                    editor.can().sinkListItem("listItem"),
-                );
-                instance.publishState(
-                    "liftListItem",
-                    editor.can().liftListItem("listItem"),
-                );
-                instance.publishState(
-                    "blockquote",
-                    editor.isActive("blockquote"),
-                );
-                instance.publishState(
-                    "codeBlock",
-                    editor.isActive("codeBlock"),
-                );
+                instance.publishState("h1", editor.isActive("heading", { level: 1 }));
+                instance.publishState("h2", editor.isActive("heading", { level: 2 }));
+                instance.publishState("h3", editor.isActive("heading", { level: 3 }));
+                instance.publishState("h4", editor.isActive("heading", { level: 4 }));
+                instance.publishState("h5", editor.isActive("heading", { level: 5 }));
+                instance.publishState("h6", editor.isActive("heading", { level: 6 }));
+                instance.publishState("orderedList", editor.isActive("orderedList"));
+                instance.publishState("bulletList", editor.isActive("bulletList"));
+                instance.publishState("sinkListItem", editor.can().sinkListItem("listItem"));
+                instance.publishState("liftListItem", editor.can().liftListItem("listItem"));
+                instance.publishState("blockquote", editor.isActive("blockquote"));
+                instance.publishState("codeBlock", editor.isActive("codeBlock"));
                 instance.publishState("taskList", editor.isActive("taskList"));
                 instance.publishState("taskItem", editor.isActive("taskItem"));
                 instance.publishState("link", editor.isActive("link"));
                 instance.publishState("url", editor.getAttributes("link").href);
-                instance.publishState(
-                    "align_left",
-                    editor.isActive({ textAlign: "left" }),
-                );
-                instance.publishState(
-                    "align_center",
-                    editor.isActive({ textAlign: "center" }),
-                );
-                instance.publishState(
-                    "align_right",
-                    editor.isActive({ textAlign: "right" }),
-                );
-                instance.publishState(
-                    "highlight",
-                    editor.isActive("highlight"),
-                );
-                instance.publishState(
-                    "underline",
-                    editor.isActive("underline"),
-                );
+                instance.publishState("align_left", editor.isActive({ textAlign: "left" }));
+                instance.publishState("align_center", editor.isActive({ textAlign: "center" }));
+                instance.publishState("align_right", editor.isActive({ textAlign: "right" }));
+                instance.publishState("align_justified", editor.isActive({ textAlign: "justify" }));
+                instance.publishState("highlight", editor.isActive("highlight"));
+                instance.publishState("underline", editor.isActive("underline"));
                 instance.publishState("table", editor.isActive("table"));
             },
         };
-        //
-        // end of options
-        //
 
-        //
-        // set up menus
-        //
+        const menuErrorMessage = " not found. Is the entered id correct? FYI: the Bubble element should default to visible.";
 
-        const menuErrorMessage =
-            " not found. Is the entered id correct? FYI: the Bubble element should default to visible.";
-
-        if (
-            properties.bubbleMenu &&
-            instance.data.active_nodes.includes("BubbleMenu")
-        ) {
+        if (properties.bubbleMenu && instance.data.active_nodes.includes("BubbleMenu")) {
             let bubbleMenuTheme = properties.bubbleMenuTheme;
+            let bubbleMenuDiv = instance.data.findElement(properties.bubbleMenu);
 
-            let bubbleMenuDiv = instance.data.findElement(
-                properties.bubbleMenu,
-            );
-
-            // Early return if bubbleMenuDiv is not found
             if (!bubbleMenuDiv) {
                 const errorMessage = "BubbleMenu" + menuErrorMessage;
                 context.reportDebugger(errorMessage);
                 console.log(errorMessage);
             } else {
-                //         window.bubbleMenuDiv = bubbleMenuDiv
                 bubbleMenuDiv.id += randomId;
-
                 options.extensions.push(
                     BubbleMenu.configure({
                         element: bubbleMenuDiv,
@@ -510,24 +375,16 @@ function(instance, properties, context) {
             }
         }
 
-        if (
-            properties.floatingMenu &&
-            instance.data.active_nodes.includes("FloatingMenu")
-        ) {
+        if (properties.floatingMenu && instance.data.active_nodes.includes("FloatingMenu")) {
             let floatingMenuTheme = properties.floatingMenuTheme;
+            let floatingMenuDiv = instance.data.findElement(properties.floatingMenu);
 
-            let floatingMenuDiv = instance.data.findElement(
-                properties.floatingMenu,
-            );
-
-            // Early return if floatingMenuDiv is not found
             if (!floatingMenuDiv) {
                 const errorMessage = "FloatingMenu" + menuErrorMessage;
                 context.reportDebugger(errorMessage);
                 console.log(errorMessage);
             } else {
                 floatingMenuDiv.id += randomId;
-
                 options.extensions.push(
                     FloatingMenu.configure({
                         element: floatingMenuDiv,
@@ -539,74 +396,74 @@ function(instance, properties, context) {
             }
         }
 
-        // set up collaboration
-        instance.data.maybeSetupCollaboration(
-            instance,
-            properties,
-            options,
-            extensions,
-        );
-        
+        instance.data.maybeSetupCollaboration(instance, properties, options, extensions);
 
-        // create the editor
         try {
             instance.data.editor = new Editor(options);
             instance.data.isEditorSetup = true;
         } catch (error) {
             console.log("failed trying to create the Editor", error);
         }
-    } // end load once
+    }
 
-    //
-    // run when the editor is ready
-    //
-
-    if (
-        !!instance.data.editor_is_ready &&
-        properties.isEditable != instance.data.editor.isEditable
-    ) {
+    if (!!instance.data.editor_is_ready && properties.isEditable != instance.data.editor.isEditable) {
         let isEditable = properties.isEditable;
         instance.data.editor.setEditable(isEditable);
     }
 
-    // handing changing of initial content
-    // checks if the initial content has something -- if it's empty the user is probably using set content which means this should NOT be applicable
-    if (
-        instance.data.editor_is_ready
-        && properties.initialContent !== ""
-        && instance.data.initialContent !== properties.initialContent 
-	    && !properties.bubble.auto_binding()
-    ) {
-                console.log("content has changed");
-       
+    if (instance.data.editor_is_ready && properties.initialContent !== "" && instance.data.initialContent !== properties.initialContent && !properties.bubble.auto_binding()) {
+        console.log("content has changed");
+
         if (!properties.collab_active) {
-    
             instance.data.initialContent = properties.initialContent;
             let content = properties.content_is_json ? JSON.parse(instance.data.initialContent) : instance.data.initialContent;
-            instance.data.editor.commands.setContent(
-                content,
-                true,
-            );
+
+            // Clear any pending debounce timeout before programmatic update
+            clearTimeout(instance.data.debounceTimeout);
+
+            instance.data.editor.commands.setContent(content, true);
         } else {
-            console.log(
-                "initialContent has changed but collaboration is active -- not updating content",
-            );
+            console.log("initialContent has changed but collaboration is active -- not updating content");
         }
     }
     
-
     
-    if ( 
-        instance.data.editor_is_ready 
-        && properties.bubble.auto_binding() 
-        && instance.data.isDebouncingDone
-        && properties.autobinding !== instance.data.editor.getHTML()
-    ) {
-        instance.data.editor.commands.setContent( properties.autobinding, true );
+    if (instance.data.editor_is_ready && instance.data.delay !== properties.update_delay) {
+        console.log("Updating debounce delay from the standard " + instance.data.delay + "ms to " + properties.update_delay + "ms");
+        instance.data.delay = properties.update_delay;
     }
     
-    
-    // switch between scrolling the editor or stretching it.
+
+    if (
+        instance.data.editor_is_ready 
+        && properties.bubble.auto_binding() 
+        && instance.data.isDebouncingDone 
+        && properties.autobinding !== instance.data.editor.getHTML()
+    ) {
+        // Clear any pending debounce timeout before programmatic update
+        clearTimeout(instance.data.debounceTimeout);
+        let editor = instance.data.editor;
+
+        editor.commands.setContent(properties.autobinding, false);
+        const contentHTML = editor.getHTML();
+        instance.publishState("contentHTML", contentHTML);
+        instance.publishState("contentText", editor.getText());
+        instance.publishState(
+            "contentJSON",
+            JSON.stringify(editor.getJSON()),
+        );
+        instance.publishState("isEditable", editor.isEditable);
+        instance.publishState(
+            "characterCount",
+            editor.storage.characterCount.characters(),
+        );
+        instance.publishState(
+            "wordCount",
+            editor.storage.characterCount.words(),
+        );
+    }
+
+
     if (!!instance.data.editor_is_ready) {
         if (!properties.bubble.fit_height()) {
             instance.canvas.css({ overflow: "scroll" });
@@ -615,293 +472,302 @@ function(instance, properties, context) {
         }
     }
 
-    // if collab is on, update username and color
     if (!!instance.data.editor_is_ready && !!properties.collab_active) {
         instance.data.editor.commands.updateUser({
             name: properties.collab_user_name,
             color: properties.collab_cursor_color,
-            //            avatar: 'https://unavatar.io/github/ueberdosis',
         });
     }
 
-    // update the stylesheet
     instance.data.stylesheet.innerHTML = `
 #tiptapEditor-${instance.data.randomId} {
-    .ProseMirror {
-	    ${properties.baseDiv}
+.ProseMirror {
+	${properties.baseDiv || ""}
+}
+
+.mention {
+border: 1px solid;
+border-color: ${properties.mention_border_color};
+background-color: ${properties.mention_background_color || "transparent"};
+border-radius: 0.4rem;
+padding: 0.1rem 0.3rem;
+box-decoration-break: clone;
+}
+
+.suggestions {
+border: 1px solid #ccc;
+background-color: white;
+padding: 5px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+border-radius: 4px;
+display: block; /* make sure it is visible */
+position: absolute;
+z-index: 1000; /* Ensure it is on top */
+}
+
+.suggestion-item {
+padding: 8px 10px;
+cursor: pointer;
+list-style: none;
+}
+
+.suggestion-item:hover {
+background-color: #eee;
+}
+
+.suggestion {
+background-color: black;
+color: white;
+}
+}
+
+#tiptapEditor-${instance.data.randomId} .ProseMirror {
+
+	h1 {
+        font-size: ${properties.h1_size};
+        color: ${properties.h1_color};
+        margin: ${properties.h1_margin};
+        font-weight: ${properties.h1_font_weight};
+        ${properties.h1_adv}
     }
 
-    .mention {
-        border: 1px solid;
-		border-color: ${properties.mention_border_color};
-		background-color: ${properties.mention_background_color || "transparent"};
-        border-radius: 0.4rem;
-        padding: 0.1rem 0.3rem;
-        box-decoration-break: clone;
+    h2 {
+        font-size: ${properties.h2_size};
+        color: ${properties.h2_color};
+        margin: ${properties.h2_margin};
+        font-weight: ${properties.h2_font_weight};
+        ${properties.h2_adv}
     }
 
-    .suggestions {
-      border: 1px solid #ccc;
-      background-color: white;
-      padding: 5px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      border-radius: 4px;
-      display: block; /* make sure it is visible */
-      position: absolute;
-      z-index: 1000; /* Ensure it is on top */
+    h3 {
+        font-size: ${properties.h3_size};
+        color: ${properties.h3_color};
+        margin: ${properties.h3_margin};
+        font-weight: ${properties.h3_font_weight};
+        ${properties.h3_adv}
     }
 
-    .suggestion-item {
-      padding: 8px 10px;
-      cursor: pointer;
-      list-style: none;
+    h4 {
+        font-size: ${properties.h4_size};
+        color: ${properties.h4_color};
+        margin: ${properties.h4_margin};
+        font-weight: ${properties.h4_font_weight};
+        ${properties.h4_adv}
     }
 
-    .suggestion-item:hover {
-      background-color: #eee;
+    h5 {
+        font-size: ${properties.h5_size};
+        color: ${properties.h5_color};
+        margin: ${properties.h5_margin};
+        font-weight: ${properties.h5_font_weight};
+        ${properties.h5_adv}
     }
 
-    .suggestion {
-    background-color: black;
-    color: white;
+    h6 {
+        font-size: ${properties.h6_size};
+        color: ${properties.h6_color};
+        margin: ${properties.h6_margin};
+        font-weight: ${properties.h6_font_weight};
+        ${properties.h6_adv}
     }
 
+    p {
+        font-size: ${properties.bubble.font_size()};
+        color: ${properties.bubble.font_color()};
+        font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
+        margin: 1rem 0;
+        font-weight: 400;
+        ${properties.p_adv}
+    }
+
+	mark {
+		${properties.mark_adv || ''}
+	}
+
 }
 
-#tiptapEditor-${instance.data.randomId} .ProseMirror h1 {
-  font-size: ${properties.h1_size};
-  color: ${properties.h1_color};
-  margin: ${properties.h1_margin};
-  font-weight: ${properties.h1_font_weight};
-  ${properties.h1_adv}
-}
-#tiptapEditor-${instance.data.randomId} .ProseMirror h2 {
-  font-size: ${properties.h2_size};
-  color: ${properties.h2_color};
-  margin: ${properties.h2_margin};
-  font-weight: ${properties.h2_font_weight};
-  ${properties.h2_adv}
-}
-#tiptapEditor-${instance.data.randomId} .ProseMirror h3 {
-  font-size: ${properties.h3_size};
-  color: ${properties.h3_color};
-  margin: ${properties.h3_margin};
-  font-weight: ${properties.h3_font_weight};
-  ${properties.h3_adv}
-}
-#tiptapEditor-${instance.data.randomId} .ProseMirror h4 {
-  font-size: ${properties.h4_size};
-  color: ${properties.h4_color};
-  margin: ${properties.h4_margin};
-  font-weight: ${properties.h4_font_weight};
-  ${properties.h4_adv}
-}
-#tiptapEditor-${instance.data.randomId} .ProseMirror h5 {
-    font-size: ${properties.h5_size};
-    color: ${properties.h5_color};
-    margin: ${properties.h5_margin};
-    font-weight: ${properties.h5_font_weight};
-  ${properties.h5_adv}
-}
-#tiptapEditor-${instance.data.randomId} .ProseMirror h6 {
-    font-size: ${properties.h6_size};
-    color: ${properties.h6_color};
-    margin: ${properties.h6_margin};
-    font-weight: ${properties.h6_font_weight};
-  ${properties.h6_adv}
-}
-#tiptapEditor-${instance.data.randomId} .ProseMirror p {
-    font-size: ${properties.bubble.font_size()};
-    color: ${properties.bubble.font_color()};
-    font-family: ${properties.bubble.font_face().match(/^(.*?):/)[1]};
-    margin: 1rem 0;
-    font-weight: 400;
-    ${properties.p_adv}
-}
+
+
+
+
+
 
 #tiptapEditor-${instance.data.randomId} p.is-editor-empty:first-child::before {
-  color: ${properties.placeholder_color || "#adb5bd"};
-  content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  pointer-events: none;
+color: ${properties.placeholder_color || "#adb5bd"};
+content: attr(data-placeholder);
+float: left;
+height: 0;
+pointer-events: none;
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror blockquote {
-    ${properties.blockquote_adv}
+${properties.blockquote_adv}
 }
 
-
-
 #tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] {
-  list-style: none;
-  padding: 0;
+list-style: none;
+padding: 0;
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] p {
-  margin: 0;
+margin: 0;
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] li {
-  display: flex;
+display: flex;
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] li > label {
-  flex: 0 0 auto;
-  margin-right: 0.5rem;
-  user-select: none;
+flex: 0 0 auto;
+margin-right: 0.5rem;
+user-select: none;
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror ul[data-type="taskList"] li > div {
-  flex: 1 1 auto;
+flex: 1 1 auto;
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror ul:not([data-type="taskList"]) {
-	${properties.ul_adv}
-
+${properties.ul_adv}
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror ol {
-	${properties.ol_adv}
+${properties.ol_adv}
 }
 
-
 #tiptapEditor-${instance.data.randomId} .ProseMirror table {
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  text-indent: 0;
+width: 100%;
+border-collapse: collapse;
+border-spacing: 0;
+text-indent: 0;
 }
 #tiptapEditor-${instance.data.randomId} .ProseMirror th,
 td {
-  padding: ${properties.table_th_td_padding};
-  text-align: start;
-  border-bottom: ${properties.table_th_td_border_bottom} ${properties.table_row_border_color};
+padding: ${properties.table_th_td_padding};
+text-align: start;
+border-bottom: ${properties.table_th_td_border_bottom} ${properties.table_row_border_color};
 }
 #tiptapEditor-${instance.data.randomId} .ProseMirror th {
-  font-weight: ${properties.table_th_font_weight};
-  text-align: left;
-  background: ${properties.table_th_background};
+font-weight: ${properties.table_th_font_weight};
+text-align: left;
+background: ${properties.table_th_background};
 }
 #tiptapEditor-${instance.data.randomId} .ProseMirror th * {
-  color: ${properties.table_header_font_color};
-  font-weight: ${properties.table_th_font_weight}; 
+color: ${properties.table_header_font_color};
+font-weight: ${properties.table_th_font_weight};
 }
 #tiptapEditor-${instance.data.randomId} .ProseMirror tr:nth-of-type(odd) {
-  background: ${properties.table_zebra_background};
+background: ${properties.table_zebra_background};
 }
 .selectedCell:after {
-  z-index: 2;
-  position: absolute;
-  content: "";
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: rgba(200, 200, 255, 0.4);
-  pointer-events: none;
+z-index: 2;
+position: absolute;
+content: "";
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+background: rgba(200, 200, 255, 0.4);
+pointer-events: none;
 }
 .column-resize-handle {
-  position: absolute;
-  right: -2px;
-  top: 0;
-  bottom: -2px;
-  width: 4px;
-  background-color: #adf;
-  pointer-events: none;
+position: absolute;
+right: -2px;
+top: 0;
+bottom: -2px;
+width: 4px;
+background-color: #adf;
+pointer-events: none;
 }
 
 .tableWrapper {
-  overflow-x: auto;
+overflow-x: auto;
 }
 
 .resize-cursor {
-  cursor: ew-resize;
-  cursor: col-resize;
+cursor: ew-resize;
+cursor: col-resize;
 }
 #tiptapEditor-${instance.data.randomId} .ProseMirror a {
-  text-decoration: underline;
-  cursor: pointer;
+text-decoration: underline;
+cursor: pointer;
 }
 #tiptapEditor-${instance.data.randomId} .ProseMirror a:link {
-  color: ${properties.link_color};
+color: ${properties.link_color};
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror a:visited {
-  color: ${properties.link_color_visited};
+color: ${properties.link_color_visited};
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror a:focus {
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror a:hover {
-   color: ${properties.link_color_hover};
-   ${properties.link_hover_adv};
+color: ${properties.link_color_hover};
+${properties.link_hover_adv};
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror a:active {
 }
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror iframe {
-  ${properties.iframe}
+${properties.iframe}
 }
 #tiptapEditor-${instance.data.randomId} .ProseMirror img {
-    ${properties.image_css}
+${properties.image_css}
 }
-  .collaboration-cursor__caret {
-  position: relative;
-  margin-left: -1px;
-  margin-right: -1px;
-  border-left: 1px solid #0D0D0D;
-  border-right: 1px solid #0D0D0D;
-  word-break: normal;
-  pointer-events: none;
+.collaboration-cursor__caret {
+position: relative;
+margin-left: -1px;
+margin-right: -1px;
+border-left: 1px solid #0D0D0D;
+border-right: 1px solid #0D0D0D;
+word-break: normal;
+pointer-events: none;
 }
-
 
 .collaboration-cursor__label {
-  position: absolute;
-  top: -1.4em;
-  left: -1px;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  user-select: none;
-  color: #0D0D0D;
-  padding: 0.1rem 0.3rem;
-  border-radius: 3px 3px 3px 0;
-  white-space: nowrap;
+position: absolute;
+top: -1.4em;
+left: -1px;
+font-size: 12px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+user-select: none;
+color: #0D0D0D;
+padding: 0.1rem 0.3rem;
+border-radius: 3px 3px 3px 0;
+white-space: nowrap;
 }
 
 .items_${instance.data.randomId} {
-    padding: 0.2rem;
-    position: relative;
-    border-radius: 0.5rem;
-    background: #FFF;
-    color: ${properties.mention_suggestion_font_color || rgba(0, 0, 0, 0.8)};
-    overflow: hidden;
-    font-size: 0.9rem;
-    box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.05),
-    0px 10px 20px rgba(0, 0, 0, 0.1),
-    ;
+padding: 0.2rem;
+position: relative;
+border-radius: 0.5rem;
+background: #FFF;
+color: rgba(0, 0, 0, 0.8);
+overflow: hidden;
+font-size: 0.9rem;
+box-shadow:
+0 0 0 1px rgba(0, 0, 0, 0.05),
+0px 10px 20px rgba(0, 0, 0, 0.1);
 
-    .item {
-        display: block;
-        margin: 0;
-        width: 100%;
-        text-align: left;
-        background: transparent;
-        border-radius: 0.4rem;
-        border: 1px solid transparent;
-        padding: 0.2rem 0.4rem;
+.item {
+display: block;
+margin: 0;
+width: 100%;
+text-align: left;
+background: transparent;
+border-radius: 0.4rem;
+border: 1px solid transparent;
+padding: 0.2rem 0.4rem;
 
-        &.is-selected {
-        	border-color: #000;
-    	}
-	}
+&.is-selected {
+border-color: #000;
+}
+}
 }
 `;
-
 }

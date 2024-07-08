@@ -18,6 +18,15 @@
             "optional": true,
             "rank": 1,
             "value": "boolean"
+        },
+        "AFH": {
+            "caption": "preserveWhitespace",
+            "default_val": "'full'",
+            "doc": "By default, whitespace is collapsed as per HTML's rules. Pass true to preserve whitespace, but normalize newlines to spaces, and 'full' to preserve whitespace entirely.",
+            "editor": "Dropdown",
+            "name": "parseOptions_preserveWhitespace",
+            "options": "true,false,'full'",
+            "rank": 2
         }
     }
 }
