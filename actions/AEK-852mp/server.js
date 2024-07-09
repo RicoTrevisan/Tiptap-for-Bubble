@@ -26,6 +26,7 @@ function(properties, context) {
 
         }
     } catch (error) {
+        console.log("error when creating JWT token", inspect(error) );
         return {
             jwt_key: "",
             error: "there was an error retrieving the jwt keys.\n" + inspect(error),
