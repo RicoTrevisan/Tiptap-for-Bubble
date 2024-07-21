@@ -79,7 +79,7 @@ function(instance, context) {
 
         instance.data.throttledContentUpdated = instance.data.throttle(() => {
             instance.triggerEvent("contentUpdated");
-            console.log("getHTML", instance.data.editor.getHTML());
+            // console.log("getHTML", instance.data.editor.getHTML());
             instance.data.throttle(instance.publishAutobinding(instance.data.editor.getHTML()));
         });
 
@@ -379,7 +379,7 @@ function(instance, context) {
         return {
             items: ({ query }) => {
                 if (typeof query !== 'string') {
-                    console.log("thing passed to Mention is not a string, returning. Typeof query: ", typeof query);
+                    // console.log("thing passed to Mention is not a string, returning. Typeof query: ", typeof query);
                     return [];
                 }
                 const length = properties.mention_list.length();
@@ -390,7 +390,7 @@ function(instance, context) {
                         id: item.get(properties.mention_field_id)
                     };
                 });
-                console.log("mention_list", mention_list);
+                // console.log("mention_list", mention_list);
                 const query_result = mention_list.filter(item => item.label.toLowerCase().includes(query.toLowerCase()));
 
                 return query_result;

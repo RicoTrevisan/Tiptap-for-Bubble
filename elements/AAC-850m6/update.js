@@ -20,7 +20,8 @@ function(instance, properties, context) {
         : properties.parseOptions_preserveWhitespace === 'false'
         ? false
         : 'full';
-
+        
+   
 
         // create the editor div
         const randomId = (Math.random() + 1).toString(36).substring(3);
@@ -136,13 +137,14 @@ function(instance, properties, context) {
                 console.log("tried to use Mention extension, but mention_list is empty. Mention extension not loaded");
             } else {
                 const suggestion_config = instance.data.configureSuggestion(instance, properties);
+                // console.log("Mention loaded properly", Mention, typeof Mention);
                 extensions.push(Mention.configure({
                     HTMLAttributes: {
                         class: 'mention',
                     },
                     renderHTML({ options, node }) {
-                        console.log("renderHTML options", options);
-                        console.log("renderHTML node", node);
+                        // console.log("renderHTML options", options);
+                        // console.log("renderHTML node", node);
 
                         return [
                             "a",
@@ -205,6 +207,7 @@ function(instance, properties, context) {
                 TextAlign.configure({ types: ["heading", "paragraph"] }),
             );
         }
+        
 
         let options = {};
         options = {
@@ -213,7 +216,7 @@ function(instance, properties, context) {
             content: content,
             extensions: extensions,
             parseOptions: {
-                preserveWhitespace: properties.parseOptions_preserveWhitespace || 'full',
+                preserveWhitespace: preserveWhitespace,
             },
             injectCSS: true,
             onCreate({ editor }) {
@@ -238,8 +241,8 @@ function(instance, properties, context) {
                         editor.storage.characterCount.words(),
                     );
                 };
-                window.editor = editor;
-                console.log("onCreate editor", editor);
+                // window.editor = editor;
+                // console.log("onCreate editor", editor);
             },
             onUpdate({ editor }) {
                 const contentHTML = editor.getHTML();
@@ -584,6 +587,34 @@ color: white;
 		${properties.mark_adv || ''}
 	}
 
+	a {
+        text-decoration: underline;
+        cursor: pointer;
+		${properties.link_adv}
+    }
+
+	a:link {
+    	color: ${properties.link_color};
+		${properties.link_unvisited_adv}
+    }
+
+	a:visited {
+		color: ${properties.link_color_visited};
+		${properties.link_visited_adv}
+	}
+
+	a:focus {
+		${properties.link_focus_adv}
+	}
+
+	a:hover {
+        color: ${properties.link_color_hover};
+        ${properties.link_hover_adv};
+    }
+
+	a:active {
+	}
+
 }
 
 
@@ -688,28 +719,7 @@ overflow-x: auto;
 cursor: ew-resize;
 cursor: col-resize;
 }
-#tiptapEditor-${instance.data.randomId} .ProseMirror a {
-text-decoration: underline;
-cursor: pointer;
-}
-#tiptapEditor-${instance.data.randomId} .ProseMirror a:link {
-color: ${properties.link_color};
-}
 
-#tiptapEditor-${instance.data.randomId} .ProseMirror a:visited {
-color: ${properties.link_color_visited};
-}
-
-#tiptapEditor-${instance.data.randomId} .ProseMirror a:focus {
-}
-
-#tiptapEditor-${instance.data.randomId} .ProseMirror a:hover {
-color: ${properties.link_color_hover};
-${properties.link_hover_adv};
-}
-
-#tiptapEditor-${instance.data.randomId} .ProseMirror a:active {
-}
 
 #tiptapEditor-${instance.data.randomId} .ProseMirror iframe {
 ${properties.iframe}

@@ -9,6 +9,9 @@ function(instance, properties, context) {
         : properties.parseOptions_preserveWhitespace === 'false'
         ? false
         : 'full';
+        
+        console.log("setContent preserveWhitespace", typeof preserveWhitespace, preserveWhitespace);
+        
         instance.data.editor.commands.setContent(
             content,
             true,
