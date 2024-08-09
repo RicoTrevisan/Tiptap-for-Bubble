@@ -72,10 +72,11 @@
         "ACS": {
             "caption": "Floating menu",
             "doc": "ID of the group that holds the Floating Menu. This menu shows up on an empty line.",
-            "editor": "StaticText",
+            "editor": "DynamicValue",
             "name": "floatingMenu",
             "optional": true,
-            "rank": 7
+            "rank": 7,
+            "value": "text"
         },
         "ACZ": {
             "caption": "Content is JSON?",
@@ -885,8 +886,8 @@
         },
         "nodes": {
             "caption": "Extensions",
-            "default_val": "Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, OrderedList, TaskList, CodeBlock, HorizontalRule, Youtube, Underline, Table, Image, Link, Placeholder, BubbleMenu, FloatingMenu, TextAlign, Highlight",
-            "doc": "Active extensions. If you remove an item, the editor will not allow or render that node type. Possible options: Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, OrderedList, TaskList, CodeBlock, HorizontalRule, Youtube, Underline, Table, Image, Link, Placeholder, BubbleMenu, FloatingMenu, TextAlign, Highlight",
+            "default_val": "Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, OrderedList, TaskList, CodeBlock, HorizontalRule, Youtube, Underline, Table, Image, Link, Placeholder, BubbleMenu, FloatingMenu, TextAlign, Highlight, HardBreak",
+            "doc": "Active extensions. If you remove an item, the editor will not allow or render that node type. Possible options: Heading, Bold, Code, Italic, Strike, Dropcursor, Gapcursor, History, Blockquote, BulletList, OrderedList, TaskList, CodeBlock, HorizontalRule, Youtube, Underline, Table, Image, Link, Placeholder, BubbleMenu, FloatingMenu, TextAlign, Highlight, HardBreak",
             "editor": "StaticText",
             "in_style": true,
             "long_text": true,

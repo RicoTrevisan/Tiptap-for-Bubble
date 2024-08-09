@@ -1,6 +1,3 @@
 function(instance, properties, context) {
-    
-
-
 
 }
