@@ -10,6 +10,37 @@
             "name": "content",
             "rank": 0,
             "value": "text"
+        },
+        "AFc": {
+            "caption": "To insert content at a certain position, give it a 'from'. You can also give it a 'to' value. Ensure that these values are non-negative integers. ",
+            "editor": "Label",
+            "name": "info",
+            "rank": 1
+        },
+        "AFd": {
+            "caption": "from",
+            "editor": "DynamicValue",
+            "name": "from",
+            "optional": true,
+            "rank": 2,
+            "value": "number"
+        },
+        "AFe": {
+            "caption": "to",
+            "editor": "DynamicValue",
+            "name": "to",
+            "optional": true,
+            "rank": 3,
+            "value": "number"
+        },
+        "AFf": {
+            "caption": "updateSelection",
+            "default_val": true,
+            "doc": "controls if the selection should be moved to the newly inserted content",
+            "editor": "DynamicValue",
+            "name": "updateSelection",
+            "rank": 4,
+            "value": "boolean"
         }
     }
 }

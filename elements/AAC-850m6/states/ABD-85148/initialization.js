@@ -1,5 +1,1 @@
-function(properties, context) {
-
-
-
-}
+function(properties, context) {}

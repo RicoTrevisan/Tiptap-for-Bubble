@@ -11,6 +11,22 @@
         "AFM": {
             "name": "2.4.0-mentionsa",
             "url": "//meta-q.cdn.bubble.io/f1720778103437x376558476994640400/dist.js"
+        },
+        "AFR": {
+            "name": "2.6.6",
+            "url": "//meta-q.cdn.bubble.io/f1725102408827x256411782932763900/dist.js"
+        },
+        "AFV": {
+            "name": "font_family",
+            "url": "//meta-q.cdn.bubble.io/f1725115443528x635832079188353200/dist.js"
+        },
+        "AFW": {
+            "name": "color",
+            "url": "//meta-q.cdn.bubble.io/f1725172267146x509181904903777100/dist.js"
+        },
+        "AFp": {
+            "name": "2.8",
+            "url": "//meta-q.cdn.bubble.io/f1729069176273x135609299418327100/dist.js"
         }
     },
     "dependencies": {

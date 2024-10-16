@@ -1,0 +1,13 @@
+{
+    "caption": "Set font family",
+    "fields": {
+        "AFT": {
+            "caption": "Font family",
+            "default_val": "Inter",
+            "editor": "DynamicValue",
+            "name": "font_family",
+            "rank": 0,
+            "value": "text"
+        }
+    }
+}

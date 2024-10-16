@@ -1,0 +1,12 @@
+{
+    "caption": "Set color",
+    "fields": {
+        "AFY": {
+            "caption": "Color",
+            "default_val": "rgba(6,121,150,1)",
+            "editor": "Color",
+            "name": "color",
+            "rank": 0
+        }
+    }
+}
