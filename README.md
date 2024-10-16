@@ -3,6 +3,8 @@
 
 [Demo](https://tiptap-demo.bubbleapps.io/version-test/doc/demo)
 
+Please upvote, fund, or submit an issue:
+[Issues](https://github.com/RicoTrevisan/Tiptap-for-Bubble/issues)
 
 
 ---
