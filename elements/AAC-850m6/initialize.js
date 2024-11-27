@@ -536,51 +536,67 @@ function(instance, context) {
 
 
     function getSelection(editor, properties) {
-        const { view, state } = editor;
+        const { state, view } = editor;
         const { from, to } = view.state.selection;
         const text = state.doc.textBetween(from, to, "");
         instance.publishState("selected_text", text);
         instance.publishState("from", from);
         instance.publishState("to", to);
 
-        // select entire block
-        const startBlock = instance.data.findParentBlock(state, from);
-        const endBlock = instance.data.findParentBlock(state, to);
+        if (from === to) {
+            // No selection, clear states
+            instance.publishState("selectedContent", null);
+            instance.publishState("selectedHTML", null);
+            instance.publishState("selectedJSON", null);
+            return;
+        }
 
-        if (startBlock && endBlock && startBlock.depth === endBlock.depth) {
-            const blockFrom = startBlock.pos;
-            const blockTo = endBlock.pos + endBlock.node.nodeSize;
+        try {
+            const $from = state.doc.resolve(from);
+            const $to = state.doc.resolve(to);
+            let parentNode = $from.parent;
+            let parentNodeType = parentNode.type.name;
 
-            try {
-                const selectedNode = state.doc.slice(blockFrom, blockTo);
-                const selectedJSON = selectedNode.toJSON();
+            // Map ProseMirror node types to HTML tags
+            const nodeTypeToHtmlTag = {
+                'paragraph': 'p',
+                'heading': 'h' + (parentNode.attrs.level || '1'), // h1, h2, etc.
+                'bulletList': 'ul',
+                'orderedList': 'ol',
+                'listItem': 'li',
+                'blockquote': 'blockquote',
+                'codeBlock': 'pre',
+                'horizontalRule': 'hr',
+                'table': 'table',
+                'tableRow': 'tr',
+                'tableCell': 'td',
+                'tableHeader': 'th'
+            };
 
-                // Get configured extensions
-                const extensions = getConfiguredExtensions(instance, properties);
+            const selectedNode = state.doc.slice(from, to);
+            const selectedJSON = selectedNode.toJSON();
+            const content = selectedJSON.content;
 
-                // Generate HTML from the JSON using the utility function
-                const selectedHTML = window.tiptap.generateHTML({type: 'doc', content: selectedJSON.content}, extensions);
+            // Get configured extensions
+            const extensions = instance.data.getConfiguredExtensions(properties);
 
-                instance.publishState("selectedBlockFrom", blockFrom);
-                instance.publishState("selectedBlockTo", blockTo);
-                instance.publishState("selectedBlockContent", text);
-                instance.publishState("selectedBlockType", startBlock.node.type.name);
-                instance.publishState("selectedBlockHTML", selectedHTML);
-                instance.publishState("selectedBlockJSON", JSON.stringify(selectedJSON));
-            } catch (error) {
-                console.error('Error generating JSON or HTML:', error);
+            // Generate HTML from the JSON using the utility function
+            let selectedHTML = window.tiptap.generateHTML({type: 'doc', content: content}, extensions);
 
-
+            // If the selection is just text, wrap it with the appropriate HTML tag
+            if (content.length === 1 && content[0].type === 'text') {
+                const htmlTag = nodeTypeToHtmlTag[parentNodeType] || 'p';
+                selectedHTML = `<${htmlTag}>${selectedHTML}</${htmlTag}>`;
             }
-        } else {
-            instance.publishState("selectedBlockFrom", null);
-            instance.publishState("selectedBlockTo", null);
-            instance.publishState("selectedBlockContent", null);
-            instance.publishState("selectedBlockType", null);
-            instance.publishState("selectedBlockHTML", null);
-            instance.publishState("selectedBlockJSON", null);
+
+            instance.publishState("selectedContent", text);
+            instance.publishState("selectedHTML", selectedHTML);
+            instance.publishState("selectedJSON", JSON.stringify(selectedJSON));
+        } catch (error) {
+            console.error('Error generating JSON or HTML:', error);
         }
     }
+
     instance.data.getSelection = getSelection;
 
     function getConfiguredExtensions(instance, properties) {

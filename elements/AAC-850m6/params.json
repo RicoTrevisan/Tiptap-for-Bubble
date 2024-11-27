@@ -364,7 +364,7 @@
             "rank": 49
         },
         "AEB": {
-            "caption": "𝗖𝗢𝗟𝗟𝗔𝗕𝗢𝗥𝗔𝗧𝗜𝗢𝗡 (beta)",
+            "caption": "𝗖𝗢𝗟𝗟𝗔𝗕𝗢𝗥𝗔𝗧𝗜𝗢𝗡",
             "editor": "Label",
             "name": "collab_info",
             "rank": 72
@@ -481,9 +481,9 @@
             "value": "text"
         },
         "AEj": {
-            "caption": "base div CSS",
+            "caption": "CSS for base div // override",
             "default_val": "    flex-grow: 1;     word-wrap: break-word; \tword-break: break-word; \twhite-space: pre-wrap;",
-            "doc": "gives you direct access to the div that holds the editor",
+            "doc": "gives you direct access to the div that holds the editor. This is also the last item in the CSS so you can override anything that precedes it.",
             "editor": "DynamicValue",
             "long_text": true,
             "name": "baseDiv",
@@ -654,6 +654,14 @@
             "optional": true,
             "rank": 98,
             "value": "text"
+        },
+        "AFq": {
+            "caption": "Allow Base 64?",
+            "default_val": true,
+            "doc": "Allow images to be parsed as base64 strings. When off Base64 images will remain in the code, but it won't be displayed.",
+            "editor": "Checkbox",
+            "name": "allowBase64",
+            "rank": 99
         },
         "collab_url": {
             "caption": "Custom - URL",
@@ -1220,7 +1228,7 @@
             "value": "text"
         },
         "AFg": {
-            "caption": "from",
+            "caption": "selection begin position",
             "doc": "The current selection's start",
             "initialization_code": {
                 "fn": "function(properties, context) {\n\n\n\n}"
@@ -1229,7 +1237,7 @@
             "value": "number"
         },
         "AFh": {
-            "caption": "to",
+            "caption": "selection end position",
             "doc": "The current selection's end",
             "initialization_code": {
                 "fn": "function(properties, context) {\n\n\n\n}"
@@ -1237,53 +1245,29 @@
             "name": "to",
             "value": "number"
         },
-        "AFj": {
-            "caption": "selectedBlockFrom",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "name": "selectedBlockFrom",
-            "value": "number"
-        },
-        "AFk": {
-            "caption": "selectedBlockTo",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "name": "selectedBlockTo",
-            "value": "number"
-        },
         "AFl": {
-            "caption": "selectedBlockContent",
+            "caption": "selectedContent",
             "initialization_code": {
                 "fn": "function(properties, context) {\n\n\n\n}"
             },
-            "name": "selectedBlockContent",
-            "value": "text"
-        },
-        "AFm": {
-            "caption": "selectedBlockType",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "name": "selectedBlockType",
+            "name": "selectedContent",
             "value": "text"
         },
         "AFn": {
-            "caption": "selectedBlockHTML",
+            "caption": "selectedHTML",
             "doc": "The current selection from block element to block element.",
             "initialization_code": {
                 "fn": "function(properties, context) {\n\n\n\n}"
             },
-            "name": "selectedBlockHTML",
+            "name": "selectedHTML",
             "value": "text"
         },
         "AFo": {
-            "caption": "selectedBlockJSON",
+            "caption": "selectedJSON",
             "initialization_code": {
                 "fn": "function(properties, context) {\n\n\n\n}"
             },
-            "name": "selectedBlockJSON",
+            "name": "selectedJSON",
             "value": "text"
         }
     },
