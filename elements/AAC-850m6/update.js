@@ -56,9 +56,15 @@ function(instance, properties, context) {
         const ListItem = window.tiptapListItem;
         const OrderedList = window.tiptapOrderedList;
 
-        const FontFamily = window.tiptap.FontFamily;
-        const TextStyle = window.tiptap.TextStyle;
-        const Color = window.tiptap.Color;
+        const {
+            FontFamily,
+            Color,
+            TextStyle,
+            FileHandler,
+            generateHTML
+        } = window.tiptap;
+        
+  
 
         const Editor = window.tiptapEditor;
         const TaskList = window.tiptapTaskList;
@@ -77,11 +83,11 @@ function(instance, properties, context) {
         const TableRow = window.tiptapTableRow;
         const Underline = window.tiptapUnderline;
         const Youtube = window.tiptapYoutube;
-        const generateHTML = window.tiptap.generateHTML;
-
 
         const Mention = window.tiptapMention;
         const mergeAttributes = window.tiptapMergeAttributes;
+        
+  
 
         instance.data.headings = [];
         properties.headings.split(",").map((item) => {
@@ -165,9 +171,6 @@ function(instance, properties, context) {
                             class: "mention",
                         },
                         renderHTML({ options, node }) {
-                            // console.log("renderHTML options", options);
-                            // console.log("renderHTML node", node);
-
                             return [
                                 "a",
                                 mergeAttributes(
@@ -215,7 +218,6 @@ function(instance, properties, context) {
                 TableCell
             );
         }
-        console.log("allowBase64", properties.allowBase64);
         if (instance.data.active_nodes.includes("Image")) {
             extensions.push(Image.configure({ inline: false, allowBase64: properties.allowBase64 }));
         }
@@ -228,6 +230,92 @@ function(instance, properties, context) {
         if (instance.data.active_nodes.includes("TextAlign")) {
             extensions.push(TextAlign.configure({ types: ["heading", "paragraph"] }));
         }
+
+
+        function handleUpload(file, editor, pos) {
+            const attachFilesTo = properties.attachFilesTo || null;
+            return new Promise((resolve, reject) => {
+                if (!instance.canUploadFile(file)) {
+                    context.reportDebugger("Not allowed to upload this file");
+                    reject(new Error("File upload not allowed"));
+                    return;
+                }
+                if (!properties.attachFilesTo) {
+                    context.reportDebugger("Uploading a file, but there's no object to attach to. This file could be accessible by anyone. Consider the privacy implications.");
+                }
+
+                const uploadedFile = instance.uploadFile(file, (err, url) => {
+                    if (err) {
+                        instance.triggerEvent("fileUploadError");
+                        context.reportDebugger(`There was an error uploading a file: ${err.message}`);
+                        instance.publishState('fileUploadErrorMessage', err.message);
+                        instance.data.fileUploadError += "\n" + err.message;
+                        reject(err);
+                        return;
+                    }
+
+                    if (file.type.startsWith('image/')) {
+                              // Insert at the drop position
+                        if (pos !== undefined) {
+                            editor.commands.insertContentAt(pos, {
+                                type: 'image',
+                                attrs: { src: url }
+                            });
+                        } else {
+                            // Fallback to regular image insertion if no position specified
+                            editor.commands.setImage({ src: url });
+                        }
+                    }
+                    instance.data.fileUploadUrls += `\n${url}`;
+                    instance.triggerEvent("fileUploaded");
+                    resolve(url);
+
+                }, properties.attachFilesTo, (progress) => {
+                    instance.publishState("fileUploadProgress", progress);
+                });
+            });
+        }
+
+
+        let allowedMimeTypes = undefined;
+        if (properties.allowedMimeTypes) {
+            allowedMimeTypes = properties.allowedMimeTypes.get(0, properties.allowedMimeTypes.length());
+        };
+        
+        extensions.push(FileHandler.configure({
+            onDrop: async (editor, files, pos) => {
+                console.log("position", pos);
+                instance.data.fileUploadUrls = "";
+
+                try {
+                    const uploadPromises = Array.from(files).map(file => 
+                                                                 handleUpload(file, editor, pos)
+                                                                );
+
+                    // Wait for all uploads to complete
+                    const urls = await Promise.all(uploadPromises);
+                } catch (error) {
+                    context.reportDebugger(`Upload error: ${error.message}`);
+                }
+            },
+
+            onPaste: async (editor, files, htmlContent) => {
+
+                try {
+                    const uploadPromises = Array.from(files).map(file => 
+                                                                 handleUpload(file, editor)
+                                                                );
+
+                    // Wait for all uploads to complete
+                    const urls = await Promise.all(uploadPromises);
+                    instance.data.fileUploadUrls = urls.join('\n');
+                } catch (error) {
+                    console.error("Paste upload error:", error);
+                    context.reportDebugger(`Paste upload error: ${error.message}`);
+                }
+            },
+            allowedMimeTypes: allowedMimeTypes,
+        }));
 
         let options = {};
         options = {

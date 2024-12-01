@@ -1,32 +1,16 @@
 {
     "assets": {
-        "AEu": {
-            "name": "2.3.0-mentions",
-            "url": "//meta-q.cdn.bubble.io/f1714940766252x830317706012694900/dist.js"
-        },
-        "AFI": {
-            "name": "2.4.0",
-            "url": "//meta-q.cdn.bubble.io/f1720075445810x404747430510913800/dist.js"
-        },
-        "AFM": {
-            "name": "2.4.0-mentionsa",
-            "url": "//meta-q.cdn.bubble.io/f1720778103437x376558476994640400/dist.js"
-        },
-        "AFR": {
-            "name": "2.6.6",
-            "url": "//meta-q.cdn.bubble.io/f1725102408827x256411782932763900/dist.js"
-        },
-        "AFV": {
-            "name": "font_family",
-            "url": "//meta-q.cdn.bubble.io/f1725115443528x635832079188353200/dist.js"
-        },
-        "AFW": {
-            "name": "color",
-            "url": "//meta-q.cdn.bubble.io/f1725172267146x509181904903777100/dist.js"
-        },
         "AFp": {
             "name": "2.8",
             "url": "//meta-q.cdn.bubble.io/f1729069176273x135609299418327100/dist.js"
+        },
+        "AFr": {
+            "name": "2.10.3",
+            "url": "//meta-q.cdn.bubble.io/f1732874199313x135749546184598340/dist.js"
+        },
+        "AFs": {
+            "name": "2.10.3-fille-handler",
+            "url": "//meta-q.cdn.bubble.io/f1732876391434x542806054989120960/dist.js"
         }
     },
     "dependencies": {

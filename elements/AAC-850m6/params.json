@@ -1,6 +1,7 @@
 {
     "add_hover_pressed": true,
     "add_is_visible": true,
+    "add_large_file_upload_properties": true,
     "autobinding_value": "text",
     "can_fit_height": true,
     "can_fit_width": true,
@@ -26,6 +27,14 @@
         "ACV": {
             "caption": "Editor is ready",
             "name": "is_ready"
+        },
+        "AFt": {
+            "caption": "file upload error",
+            "name": "fileUploadError"
+        },
+        "AFu": {
+            "caption": "file is uploaded",
+            "name": "fileUploaded"
         }
     },
     "fields": {
@@ -663,6 +672,25 @@
             "name": "allowBase64",
             "rank": 99
         },
+        "AFy": {
+            "caption": "Attach files to",
+            "doc": "Bubble thing that it should attach files to",
+            "editor": "DynamicValue",
+            "name": "attachFilesTo",
+            "optional": true,
+            "rank": 100,
+            "value": "_any_thing"
+        },
+        "AFz": {
+            "caption": "Allowed MIME Types",
+            "doc": "Which types of files are the users allowed to paste or drop in the editor. Typical types are 'image/jpeg', 'image/png', 'image/gif'. Leaving this blank will allow any file to be uploaded.",
+            "editor": "DynamicValue",
+            "is_list": true,
+            "name": "allowedMimeTypes",
+            "optional": true,
+            "rank": 101,
+            "value": "text"
+        },
         "collab_url": {
             "caption": "Custom - URL",
             "default_val": "default value",
@@ -1268,6 +1296,24 @@
                 "fn": "function(properties, context) {\n\n\n\n}"
             },
             "name": "selectedJSON",
+            "value": "text"
+        },
+        "AFw": {
+            "caption": "File upload progress",
+            "doc": "Upload progress. From 0 to 1.",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "fileUploadProgress",
+            "value": "number"
+        },
+        "AFx": {
+            "caption": "File upload error message",
+            "doc": "If there is an error, it will be shown here",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "fileUploadErrorMessage",
             "value": "text"
         }
     },
