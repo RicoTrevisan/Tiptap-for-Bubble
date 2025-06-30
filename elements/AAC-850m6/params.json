@@ -691,6 +691,55 @@
             "rank": 101,
             "value": "text"
         },
+        "AGB": {
+            "caption": "Keep marks after <br>",
+            "default_val": true,
+            "doc": "Decides if to keep a mark after a hardbreak. When checked, and you're typing in bold, when you hit Shift+Enter, the next line will continue with bold. If unchecked, it will revert to normal text.",
+            "editor": "Checkbox",
+            "name": "hardBreakKeepMarks",
+            "rank": 102,
+            "value": "boolean"
+        },
+        "AGG": {
+            "caption": "Enabled?",
+            "default_val": false,
+            "doc": "Turns on Unique ID extension.",
+            "editor": "Checkbox",
+            "name": "extension_uniqueid",
+            "rank": 105
+        },
+        "AGH": {
+            "caption": "Element types",
+            "default_val": "heading, paragraph",
+            "doc": "Which elements should be tagged with the unique ID? Some typical options: heading, paragraph, image",
+            "editor": "DynamicValue",
+            "name": "extension_uniqueid_types",
+            "optional": true,
+            "rank": 106,
+            "value": "text"
+        },
+        "AGI": {
+            "caption": "Attribute name",
+            "default_val": "id",
+            "doc": "What name should the attribute have? Defaults to 'uid'. Each tagged element will have `data-uid=SOME_UNIQUE_ID` added to them.",
+            "editor": "DynamicValue",
+            "name": "extension_uniqueid_attrName",
+            "optional": true,
+            "rank": 107,
+            "value": "text"
+        },
+        "AGJ": {
+            "caption": "𝗨𝗡𝗜𝗤𝗨𝗘 𝗜𝗗 (𝗲𝘅𝘁𝗲𝗻𝘀𝗶𝗼𝗻)",
+            "editor": "Label",
+            "name": "extension_uniqueid_info",
+            "rank": 103
+        },
+        "AGK": {
+            "caption": "The UniqueID extension adds unique IDs to nodes. Useful if you want to target a certain part of the text. You can configure which node types get an unique ID.",
+            "editor": "Label",
+            "name": "unique_id_info",
+            "rank": 104
+        },
         "collab_url": {
             "caption": "Custom - URL",
             "default_val": "default value",
@@ -1314,6 +1363,16 @@
                 "fn": "function(properties, context) {\n\n\n\n}"
             },
             "name": "fileUploadErrorMessage",
+            "value": "text"
+        },
+        "AGA": {
+            "caption": "File upload URLs",
+            "doc": "URLs of files that have been uploaded",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "is_list": true,
+            "name": "fileUploadUrls",
             "value": "text"
         }
     },

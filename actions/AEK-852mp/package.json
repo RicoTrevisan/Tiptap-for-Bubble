@@ -1,5 +1,6 @@
 {
     "dependencies": {
+        "node:util": "latest",
         "jsonwebtoken": "latest"
     }
 }

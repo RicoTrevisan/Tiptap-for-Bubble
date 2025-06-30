@@ -6,6 +6,7 @@ function(instance, properties, context) {
         return;
     }
 
+
     // load once
     if (!instance.data.isEditorSetup) {
         let initialContent = properties.bubble.auto_binding()
@@ -61,7 +62,11 @@ function(instance, properties, context) {
             Color,
             TextStyle,
             FileHandler,
-            generateHTML
+            generateHTML,
+            DragHandle,
+            UniqueID,
+            Image,
+            Resizable
         } = window.tiptap;
         
   
@@ -71,7 +76,6 @@ function(instance, properties, context) {
         const TaskItem = window.tiptapTaskItem;
         const Placeholder = window.tiptapPlaceholder;
         const CharacterCount = window.tiptapCharacterCount;
-        const Image = window.tiptapImage;
         const BubbleMenu = window.tiptapBubbleMenu;
         const FloatingMenu = window.tiptapFloatingMenu;
         const Link = window.tiptapLink;
@@ -108,6 +112,32 @@ function(instance, properties, context) {
                 limit: properties.characterLimit || null,
             }),
         ];
+        
+        
+        if (properties.extension_uniqueid) {
+            if (!properties.extension_uniqueid_types) {
+                context.reportDebugger("UniqueID extension is active but the types are empty. You could target `paragraph, heading`, for example.");
+                return
+            }
+            let unique_id_types = properties.extension_uniqueid_types.split(",").map((item) => {
+                return item.trim()
+            })
+            
+            if (unique_id_types.length === 0) {
+                context.reportDebugger("UniqueID extension is active but there are no types for it to target. You could target `paragraph, heading`, for example.");
+                return
+            }
+            
+            let attributeName = properties.extension_uniqueid_attrName || "id";
+            console.log("attributeName", attributeName);
+            
+            extensions.push(
+                UniqueID.configure({
+                    types: unique_id_types,
+                    attributeName: attributeName,
+                })
+            );
+        };
 
         if (instance.data.active_nodes.includes("Dropcursor")) {
             extensions.push(Dropcursor);
@@ -116,7 +146,9 @@ function(instance, properties, context) {
             extensions.push(Gapcursor);
         }
         if (instance.data.active_nodes.includes("HardBreak")) {
-            extensions.push(HardBreak);
+            extensions.push(HardBreak.configure({
+                keepMarks: properties.hardBreakKeepMarks,
+            }));
         }
         if (instance.data.active_nodes.includes("History")) {
             extensions.push(History);
@@ -219,7 +251,7 @@ function(instance, properties, context) {
             );
         }
         if (instance.data.active_nodes.includes("Image")) {
-            extensions.push(Image.configure({ inline: false, allowBase64: properties.allowBase64 }));
+            extensions.push(Image.configure({ inline: false, allowBase64: properties.allowBase64 }), Resizable);
         }
         if (instance.data.active_nodes.includes("Link")) {
             extensions.push(Link);
@@ -230,33 +262,36 @@ function(instance, properties, context) {
         if (instance.data.active_nodes.includes("TextAlign")) {
             extensions.push(TextAlign.configure({ types: ["heading", "paragraph"] }));
         }
+       
+        
 
 
         function handleUpload(file, editor, pos) {
             const attachFilesTo = properties.attachFilesTo || null;
             return new Promise((resolve, reject) => {
                 if (!instance.canUploadFile(file)) {
-                    context.reportDebugger("Not allowed to upload this file");
-                    reject(new Error("File upload not allowed"));
+                    const message = "Not allowed to upload this file";
+                    context.reportDebugger(message);
+                    instance.publishState("fileUploadErrorMessage", message);
+                    reject(new Error(message));
                     return;
                 }
                 if (!properties.attachFilesTo) {
                     context.reportDebugger("Uploading a file, but there's no object to attach to. This file could be accessible by anyone. Consider the privacy implications.");
                 }
 
+                instance.publishState("fileUploadProgress", 0);
                 const uploadedFile = instance.uploadFile(file, (err, url) => {
                     if (err) {
-                        instance.triggerEvent("fileUploadError");
-                        context.reportDebugger(`There was an error uploading a file: ${err.message}`);
+                        context.reportDebugger(err.message);
                         instance.publishState('fileUploadErrorMessage', err.message);
-                        instance.data.fileUploadError += "\n" + err.message;
                         reject(err);
                         return;
                     }
 
                     if (file.type.startsWith('image/')) {
-                              // Insert at the drop position
-                        if (pos !== undefined) {
+                        // Insert at the drop position
+                        if (pos) {
                             editor.commands.insertContentAt(pos, {
                                 type: 'image',
                                 attrs: { src: url }
@@ -266,8 +301,9 @@ function(instance, properties, context) {
                             editor.commands.setImage({ src: url });
                         }
                     }
-                    instance.data.fileUploadUrls += `\n${url}`;
+                    instance.data.fileUploadUrls.push(url);
                     instance.triggerEvent("fileUploaded");
+                    instance.publishState("fileUploadUrls", instance.data.fileUploadUrls);
                     resolve(url);
 
                 }, properties.attachFilesTo, (progress) => {
@@ -284,9 +320,7 @@ function(instance, properties, context) {
         
         extensions.push(FileHandler.configure({
             onDrop: async (editor, files, pos) => {
-                console.log("position", pos);
-                instance.data.fileUploadUrls = "";
-
+                instance.data.fileUploadUrls = [];
                 try {
                     const uploadPromises = Array.from(files).map(file => 
                                                                  handleUpload(file, editor, pos)
@@ -294,24 +328,32 @@ function(instance, properties, context) {
 
                     // Wait for all uploads to complete
                     const urls = await Promise.all(uploadPromises);
+                    console.log("urls", urls);
+                    instance.publishState("fileUploadUrls", urls);
                 } catch (error) {
-                    context.reportDebugger(`Upload error: ${error.message}`);
+                    instance.triggerEvent("fileUploadError");
+                    console.error("Upload error:", error);
+                    context.reportDebugger(error.message);
+                    instance.publishState('fileUploadErrorMessage', error.message);
                 }
             },
 
             onPaste: async (editor, files, htmlContent) => {
-
+                instance.data.fileUploadUrls = [];
+                if (htmlContent) return
                 try {
                     const uploadPromises = Array.from(files).map(file => 
                                                                  handleUpload(file, editor)
                                                                 );
 
                     // Wait for all uploads to complete
-                    const urls = await Promise.all(uploadPromises);
-                    instance.data.fileUploadUrls = urls.join('\n');
+                     const urls = await Promise.all(uploadPromises);
+                     instance.publishState("fileUploadUrls", urls);
                 } catch (error) {
-                    console.error("Paste upload error:", error);
-                    context.reportDebugger(`Paste upload error: ${error.message}`);
+                    instance.triggerEvent("fileUploadError");
+                    console.error("Upload error:", error);
+                    context.reportDebugger(error.message);
+                    instance.publishState('fileUploadErrorMessage', error.message);
                 }
             },
             allowedMimeTypes: allowedMimeTypes,
@@ -629,6 +671,13 @@ function(instance, properties, context) {
             console.log("failed trying to create the Editor", error);
         }
     }
+    /*
+    
+    END OF INITIAL LOAD
+    
+    */
+    
+
 
     if (
         !!instance.data.editor_is_ready &&
@@ -717,7 +766,12 @@ function(instance, properties, context) {
 
    instance.data.stylesheet.innerHTML = `
 #tiptapEditor-${instance.data.randomId} {
+
+
     .ProseMirror {
+
+
+
         h1 {
             font-size: ${properties.h1_size};
             color: ${properties.h1_color};
@@ -885,10 +939,24 @@ function(instance, properties, context) {
         	background: ${properties.table_zebra_background};
         }
 
+        .tiptap-drag-handle {
+          align-items: center;
+          background: black;
+          border-radius: .25rem;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          cursor: grab;
+          display: flex;
+          height: 1.5rem;
+          justify-content: center;
+          width: 1.5rem;
+
+        }
 
 
 
-        ${properties.baseDiv || ""}
+
+            ${properties.baseDiv || ""}
+
     }
 
     .mention {

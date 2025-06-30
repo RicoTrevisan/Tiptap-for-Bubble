@@ -11,6 +11,14 @@
         "AFs": {
             "name": "2.10.3-fille-handler",
             "url": "//meta-q.cdn.bubble.io/f1732876391434x542806054989120960/dist.js"
+        },
+        "AGF": {
+            "name": "2.11.2-ida",
+            "url": "//meta-q.cdn.bubble.io/f1737559867068x234949295295092680/dist.js"
+        },
+        "AGL": {
+            "name": "2.11.2-resize_image",
+            "url": "//meta-q.cdn.bubble.io/f1740299743780x981628697617822600/dist.js"
         }
     },
     "dependencies": {
