@@ -19,6 +19,10 @@
         "AGL": {
             "name": "2.11.2-resize_image",
             "url": "//meta-q.cdn.bubble.io/f1740299743780x981628697617822600/dist.js"
+        },
+        "AGQ": {
+            "name": "2.11.2-preserve",
+            "url": "//meta-q.cdn.bubble.io/f1751452274360x126917333554564580/dist.js"
         }
     },
     "dependencies": {

@@ -740,6 +740,30 @@
             "name": "unique_id_info",
             "rank": 104
         },
+        "AGM": {
+            "caption": "preserve_attributes",
+            "default_val": true,
+            "editor": "DynamicValue",
+            "name": "preserve_attributes",
+            "rank": 108,
+            "value": "boolean"
+        },
+        "AGN": {
+            "caption": "preserved_attributes",
+            "default_val": "class,style,id,data-*",
+            "editor": "DynamicValue",
+            "name": "preserved_attributes",
+            "rank": 109,
+            "value": "text"
+        },
+        "AGO": {
+            "caption": "preserve_unknown_tags",
+            "default_val": true,
+            "editor": "DynamicValue",
+            "name": "preserve_unknown_tags",
+            "rank": 110,
+            "value": "boolean"
+        },
         "collab_url": {
             "caption": "Custom - URL",
             "default_val": "default value",

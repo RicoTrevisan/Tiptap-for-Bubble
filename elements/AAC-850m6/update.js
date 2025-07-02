@@ -58,6 +58,9 @@ function(instance, properties, context) {
         const OrderedList = window.tiptapOrderedList;
 
         const {
+            Editor,
+            Node,
+            Extension,
             FontFamily,
             Color,
             TextStyle,
@@ -66,12 +69,10 @@ function(instance, properties, context) {
             DragHandle,
             UniqueID,
             Image,
-            Resizable
+            Resizable,
         } = window.tiptap;
         
   
-
-        const Editor = window.tiptapEditor;
         const TaskList = window.tiptapTaskList;
         const TaskItem = window.tiptapTaskItem;
         const Placeholder = window.tiptapPlaceholder;
@@ -262,7 +263,73 @@ function(instance, properties, context) {
         if (instance.data.active_nodes.includes("TextAlign")) {
             extensions.push(TextAlign.configure({ types: ["heading", "paragraph"] }));
         }
-       
+
+        const PreserveAttributes = Extension.create({
+            name: 'preserveAttributes',
+
+            addGlobalAttributes() {
+                if (!properties.preserve_attributes) return [];
+
+                const preservedAttrs = properties.preserved_attributes
+                .split(',')
+                .map(attr => attr.trim())
+                .filter(attr => attr.length > 0);
+
+                const attributeConfig = {};
+
+                preservedAttrs.forEach(attrName => {
+                    if (attrName === 'data-*') {
+                        // Handle all data attributes
+                        attributeConfig['data-attributes'] = {
+                            default: null,
+                            parseHTML: element => {
+                                const dataAttrs = {};
+                                Array.from(element.attributes).forEach(attr => {
+                                    if (attr.name.startsWith('data-')) {
+                                        dataAttrs[attr.name] = attr.value;
+                                    }
+                                });
+                                return Object.keys(dataAttrs).length ? dataAttrs : null;
+                            },
+                            renderHTML: attributes => {
+                                if (!attributes['data-attributes']) return {};
+                                return attributes['data-attributes'];
+                            },
+                        };
+                    } else {
+                        // Handle specific attributes
+                        attributeConfig[attrName] = {
+                            default: null,
+                            parseHTML: element => element.getAttribute(attrName),
+                            renderHTML: attributes => {
+                                if (!attributes[attrName]) return {};
+                                return { [attrName]: attributes[attrName] };
+                            },
+                        };
+                    }
+                });
+
+                return [
+                    {
+                        // Apply to all block nodes
+                        types: ['paragraph', 'heading', 'blockquote', 'codeBlock', 'listItem', 'table', 'tableRow', 'tableCell', 'tableHeader'],
+                        attributes: attributeConfig,
+                    },
+                    {
+                        // Apply to inline marks
+                        types: ['bold', 'italic', 'strike', 'code', 'link', 'textStyle'],
+                        attributes: {
+                            class: attributeConfig.class || null,
+                            style: attributeConfig.style || null,
+                        },
+                    }
+                ];
+            },
+        });
+        
+        if (properties.preserve_attributes) {
+            extensions.push(PreserveAttributes);
+        }
         
 
 
