@@ -23,6 +23,10 @@
         "AGQ": {
             "name": "2.11.2-preserve",
             "url": "//meta-q.cdn.bubble.io/f1751452274360x126917333554564580/dist.js"
+        },
+        "AGR": {
+            "name": "2.11.2-preserve",
+            "url": "//meta-q.cdn.bubble.io/f1751454052316x514680040614802240/dist.js"
         }
     },
     "dependencies": {

@@ -581,7 +581,7 @@ function(instance, context) {
             const content = selectedJSON.content;
 
             // Get configured extensions
-            const extensions = instance.data.getConfiguredExtensions(properties);
+            const extensions = instance.data.getConfiguredExtensions(instance, properties);
 
             // Generate HTML from the JSON using the utility function
             let selectedHTML = window.tiptap.generateHTML({type: 'doc', content: content}, extensions);
@@ -604,11 +604,7 @@ function(instance, context) {
 
     function getConfiguredExtensions(instance, properties) {
         // pull the libraries that were loaded on Header
-        const Document = window.tiptapDocument;
-        const HardBreak = window.tiptapHardBreak;
         const Heading = window.tiptapHeading;
-        const Paragraph = window.tiptapParagraph;
-        const Text = window.tiptapText;
         const Bold = window.tiptapBold;
         const Code = window.tiptapCode;
         const Italic = window.tiptapItalic;
@@ -623,16 +619,31 @@ function(instance, context) {
         const ListItem = window.tiptapListItem;
         const OrderedList = window.tiptapOrderedList;
 
-        const FontFamily = window.tiptap.FontFamily;
-        const TextStyle = window.tiptap.TextStyle;
-        const Color = window.tiptap.Color;
+        const {
+            Editor,
+            Node,
+            Extension,
+            mergeAttributes,
+            Document,
+            HardBreak,
+            Paragraph,
+            Text,
+            FontFamily,
+            Color,
+            TextStyle,
+            FileHandler,
+            generateHTML,
+            DragHandle,
+            UniqueID,
+            Image,
+            Resizable
+        } = window.tiptap;
 
-        const Editor = window.tiptapEditor;
+
         const TaskList = window.tiptapTaskList;
         const TaskItem = window.tiptapTaskItem;
         const Placeholder = window.tiptapPlaceholder;
         const CharacterCount = window.tiptapCharacterCount;
-        const Image = window.tiptapImage;
         const BubbleMenu = window.tiptapBubbleMenu;
         const FloatingMenu = window.tiptapFloatingMenu;
         const Link = window.tiptapLink;
@@ -644,11 +655,12 @@ function(instance, context) {
         const TableRow = window.tiptapTableRow;
         const Underline = window.tiptapUnderline;
         const Youtube = window.tiptapYoutube;
-        const generateHTML = window.tiptap.generateHTML;
-
 
         const Mention = window.tiptapMention;
-        const mergeAttributes = window.tiptapMergeAttributes;
+        
+        instance.data.active_nodes = properties.nodes
+            .split(",")
+            .map((item) => item.trim());
 
         const extensions = [
             Document,
@@ -656,7 +668,9 @@ function(instance, context) {
             Text,
             ListItem,
             TextStyle,
-            CharacterCount,
+            CharacterCount.configure({
+                limit: properties.characterLimit || null,
+            }),
         ];
 
         if (instance.data.active_nodes.includes("Dropcursor")) extensions.push(Dropcursor);

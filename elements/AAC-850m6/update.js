@@ -38,11 +38,8 @@ function(instance, properties, context) {
         instance.canvas.append(d);
 
         // pull the libraries that were loaded on Header
-        const Document = window.tiptapDocument;
-        const HardBreak = window.tiptapHardBreak;
+
         const Heading = window.tiptapHeading;
-        const Paragraph = window.tiptapParagraph;
-        const Text = window.tiptapText;
         const Bold = window.tiptapBold;
         const Code = window.tiptapCode;
         const Italic = window.tiptapItalic;
@@ -61,6 +58,11 @@ function(instance, properties, context) {
             Editor,
             Node,
             Extension,
+            mergeAttributes,
+            Document,
+            HardBreak,
+            Paragraph,
+            Text,
             FontFamily,
             Color,
             TextStyle,
@@ -69,10 +71,10 @@ function(instance, properties, context) {
             DragHandle,
             UniqueID,
             Image,
-            Resizable,
+            Resizable
         } = window.tiptap;
-        
-  
+
+
         const TaskList = window.tiptapTaskList;
         const TaskItem = window.tiptapTaskItem;
         const Placeholder = window.tiptapPlaceholder;
@@ -90,9 +92,8 @@ function(instance, properties, context) {
         const Youtube = window.tiptapYoutube;
 
         const Mention = window.tiptapMention;
-        const mergeAttributes = window.tiptapMergeAttributes;
-        
-  
+
+
 
         instance.data.headings = [];
         properties.headings.split(",").map((item) => {
@@ -113,8 +114,8 @@ function(instance, properties, context) {
                 limit: properties.characterLimit || null,
             }),
         ];
-        
-        
+
+
         if (properties.extension_uniqueid) {
             if (!properties.extension_uniqueid_types) {
                 context.reportDebugger("UniqueID extension is active but the types are empty. You could target `paragraph, heading`, for example.");
@@ -123,15 +124,15 @@ function(instance, properties, context) {
             let unique_id_types = properties.extension_uniqueid_types.split(",").map((item) => {
                 return item.trim()
             })
-            
+
             if (unique_id_types.length === 0) {
                 context.reportDebugger("UniqueID extension is active but there are no types for it to target. You could target `paragraph, heading`, for example.");
                 return
             }
-            
+
             let attributeName = properties.extension_uniqueid_attrName || "id";
             console.log("attributeName", attributeName);
-            
+
             extensions.push(
                 UniqueID.configure({
                     types: unique_id_types,
@@ -268,69 +269,149 @@ function(instance, properties, context) {
             name: 'preserveAttributes',
 
             addGlobalAttributes() {
-                if (!properties.preserve_attributes) return [];
-
-                const preservedAttrs = properties.preserved_attributes
-                .split(',')
-                .map(attr => attr.trim())
-                .filter(attr => attr.length > 0);
-
-                const attributeConfig = {};
-
-                preservedAttrs.forEach(attrName => {
-                    if (attrName === 'data-*') {
-                        // Handle all data attributes
-                        attributeConfig['data-attributes'] = {
-                            default: null,
-                            parseHTML: element => {
-                                const dataAttrs = {};
-                                Array.from(element.attributes).forEach(attr => {
-                                    if (attr.name.startsWith('data-')) {
-                                        dataAttrs[attr.name] = attr.value;
-                                    }
-                                });
-                                return Object.keys(dataAttrs).length ? dataAttrs : null;
-                            },
-                            renderHTML: attributes => {
-                                if (!attributes['data-attributes']) return {};
-                                return attributes['data-attributes'];
-                            },
-                        };
-                    } else {
-                        // Handle specific attributes
-                        attributeConfig[attrName] = {
-                            default: null,
-                            parseHTML: element => element.getAttribute(attrName),
-                            renderHTML: attributes => {
-                                if (!attributes[attrName]) return {};
-                                return { [attrName]: attributes[attrName] };
-                            },
-                        };
-                    }
-                });
-
                 return [
                     {
                         // Apply to all block nodes
                         types: ['paragraph', 'heading', 'blockquote', 'codeBlock', 'listItem', 'table', 'tableRow', 'tableCell', 'tableHeader'],
-                        attributes: attributeConfig,
+                        attributes: {
+                            class: {
+                                default: null,
+                                parseHTML: element => element.getAttribute('class'),
+                                renderHTML: attributes => {
+                                    if (!attributes.class) return {};
+                                    return { class: attributes.class };
+                                },
+                            },
+                            style: {
+                                default: null,
+                                parseHTML: element => element.getAttribute('style'),
+                                renderHTML: attributes => {
+                                    if (!attributes.style) return {};
+                                    return { style: attributes.style };
+                                },
+                            },
+                            id: {
+                                default: null,
+                                parseHTML: element => element.getAttribute('id'),
+                                renderHTML: attributes => {
+                                    if (!attributes.id) return {};
+                                    return { id: attributes.id };
+                                },
+                            },
+                            'data-attributes': {
+                                default: null,
+                                parseHTML: element => {
+                                    const dataAttrs = {};
+                                    Array.from(element.attributes).forEach(attr => {
+                                        if (attr.name.startsWith('data-')) {
+                                            dataAttrs[attr.name] = attr.value;
+                                        }
+                                    });
+                                    return Object.keys(dataAttrs).length ? dataAttrs : null;
+                                },
+                                renderHTML: attributes => {
+                                    if (!attributes['data-attributes']) return {};
+                                    return attributes['data-attributes'];
+                                },
+                            }
+                        },
                     },
                     {
                         // Apply to inline marks
-                        types: ['bold', 'italic', 'strike', 'code', 'link', 'textStyle'],
+                        types: ['bold', 'italic', 'strike', 'code', 'link'],
                         attributes: {
-                            class: attributeConfig.class || null,
-                            style: attributeConfig.style || null,
+                            class: {
+                                default: null,
+                                parseHTML: element => element.getAttribute('class'),
+                                renderHTML: attributes => {
+                                    if (!attributes.class) return {};
+                                    return { class: attributes.class };
+                                },
+                            },
+                            style: {
+                                default: null,
+                                parseHTML: element => element.getAttribute('style'),
+                                renderHTML: attributes => {
+                                    if (!attributes.style) return {};
+                                    return { style: attributes.style };
+                                },
+                            }
                         },
                     }
                 ];
             },
         });
-        
+
+        const CustomDivExtension = Node.create({
+            name: 'customDiv',
+            group: 'block',
+            content: 'block*',
+            defining: true,
+
+            addAttributes() {
+                return {
+                    class: {
+                        default: null,
+                        parseHTML: element => element.getAttribute('class'),
+                    },
+                    style: {
+                        default: null,
+                        parseHTML: element => element.getAttribute('style'),
+                    },
+                    id: {
+                        default: null,
+                        parseHTML: element => element.getAttribute('id'),
+                    },
+                    'data-attributes': {
+                        default: null,
+                      parseHTML: element => {
+                            const dataAttrs = {};
+                            Array.from(element.attributes).forEach(attr => {
+                                if (attr.name.startsWith('data-')) {
+                                    dataAttrs[attr.name] = attr.value;
+                                }
+                            });
+                            return Object.keys(dataAttrs).length ? dataAttrs : null;
+                        },
+                    }
+                };
+            },
+
+            parseHTML() {
+                return [{ tag: 'div' }];
+            },
+
+            renderHTML({ node, HTMLAttributes }) {
+                const attrs = { ...node.attrs };
+
+                // Merge data attributes
+                if (attrs['data-attributes']) {
+                    Object.assign(attrs, attrs['data-attributes']);
+                    delete attrs['data-attributes'];
+                }
+
+                // Remove null/undefined attributes
+                Object.keys(attrs).forEach(key => {
+                    if (attrs[key] === null || attrs[key] === undefined) {
+                        delete attrs[key];
+                    }
+                });
+
+                return ['div', { ...attrs, ...HTMLAttributes }, 0];
+            },
+        });
+
+
+
         if (properties.preserve_attributes) {
             extensions.push(PreserveAttributes);
+
+            if (properties.preserve_unknown_tags) {
+                // Add custom div support
+                extensions.push(CustomDivExtension);
+            }
         }
-        
+
 
 
         function handleUpload(file, editor, pos) {
@@ -384,12 +465,12 @@ function(instance, properties, context) {
         if (properties.allowedMimeTypes) {
             allowedMimeTypes = properties.allowedMimeTypes.get(0, properties.allowedMimeTypes.length());
         };
-        
+
         extensions.push(FileHandler.configure({
             onDrop: async (editor, files, pos) => {
                 instance.data.fileUploadUrls = [];
                 try {
-                    const uploadPromises = Array.from(files).map(file => 
+                    const uploadPromises = Array.from(files).map(file =>
                                                                  handleUpload(file, editor, pos)
                                                                 );
 
@@ -409,7 +490,7 @@ function(instance, properties, context) {
                 instance.data.fileUploadUrls = [];
                 if (htmlContent) return
                 try {
-                    const uploadPromises = Array.from(files).map(file => 
+                    const uploadPromises = Array.from(files).map(file =>
                                                                  handleUpload(file, editor)
                                                                 );
 
@@ -425,6 +506,30 @@ function(instance, properties, context) {
             },
             allowedMimeTypes: allowedMimeTypes,
         }));
+        
+        const parseOptions = {
+            preserveWhitespace: preserveWhitespace,
+        };
+        
+        // If attribute preservation is enabled, add custom parsing
+        if (properties.preserve_html_attributes) {
+            parseOptions.transformPastedHTML = (html) => {
+                // Pre-process HTML to ensure better attribute preservation
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Find all div elements and ensure they're properly structured
+                const divs = doc.querySelectorAll('div');
+                divs.forEach(div => {
+                    // Mark divs for preservation
+                    if (div.hasAttribute('style') || div.hasAttribute('class')) {
+                        div.setAttribute('data-preserve-div', 'true');
+                    }
+                });
+                
+                return doc.body.innerHTML;
+            };
+        }
 
         let options = {};
         options = {
@@ -432,9 +537,7 @@ function(instance, properties, context) {
             editable: properties.isEditable,
             content: content,
             extensions: extensions,
-            parseOptions: {
-                preserveWhitespace: preserveWhitespace,
-            },
+            parseOptions: parseOptions,
             injectCSS: true,
             onCreate({ editor }) {
                 instance.data.editor_is_ready = true;
@@ -739,11 +842,11 @@ function(instance, properties, context) {
         }
     }
     /*
-    
+
     END OF INITIAL LOAD
-    
+
     */
-    
+
 
 
     if (
@@ -1151,96 +1254,6 @@ function(instance, properties, context) {
 }
 `;
 
-    function getConfiguredExtensions(properties) {
-        // pull the libraries that were loaded on Header
-        const Document = window.tiptapDocument;
-        const HardBreak = window.tiptapHardBreak;
-        const Heading = window.tiptapHeading;
-        const Paragraph = window.tiptapParagraph;
-        const Text = window.tiptapText;
-        const Bold = window.tiptapBold;
-        const Code = window.tiptapCode;
-        const Italic = window.tiptapItalic;
-        const Strike = window.tiptapStrike;
-        const Dropcursor = window.tiptapDropcursor;
-        const Gapcursor = window.tiptapGapcursor;
-        const History = window.tiptapHistory;
-        const Blockquote = window.tiptapBlockquote;
-        const BulletList = window.tiptapBulletList;
-        const CodeBlock = window.tiptapCodeBlock;
-        const HorizontalRule = window.tiptapHorizontalRule;
-        const ListItem = window.tiptapListItem;
-        const OrderedList = window.tiptapOrderedList;
-
-        const FontFamily = window.tiptap.FontFamily;
-        const TextStyle = window.tiptap.TextStyle;
-        const Color = window.tiptap.Color;
-
-        const Editor = window.tiptapEditor;
-        const TaskList = window.tiptapTaskList;
-        const TaskItem = window.tiptapTaskItem;
-        const Placeholder = window.tiptapPlaceholder;
-        const CharacterCount = window.tiptapCharacterCount;
-        const Image = window.tiptapImage;
-        const BubbleMenu = window.tiptapBubbleMenu;
-        const FloatingMenu = window.tiptapFloatingMenu;
-        const Link = window.tiptapLink;
-        const TextAlign = window.tiptapTextAlign;
-        const Highlight = window.tiptapHighlight;
-        const Table = window.tiptapTable;
-        const TableCell = window.tiptapTableCell;
-        const TableHeader = window.tiptapTableHeader;
-        const TableRow = window.tiptapTableRow;
-        const Underline = window.tiptapUnderline;
-        const Youtube = window.tiptapYoutube;
-        const generateHTML = window.tiptap.generateHTML;
-
-
-        const Mention = window.tiptapMention;
-        const mergeAttributes = window.tiptapMergeAttributes;
-
-        const extensions = [
-            Document,
-            Paragraph,
-            Text,
-            ListItem,
-            TextStyle,
-            CharacterCount,
-        ];
-
-        if (instance.data.active_nodes.includes("Dropcursor")) extensions.push(Dropcursor);
-        if (instance.data.active_nodes.includes("Gapcursor")) extensions.push(Gapcursor);
-        if (instance.data.active_nodes.includes("HardBreak")) extensions.push(HardBreak);
-        if (instance.data.active_nodes.includes("History")) extensions.push(History);
-        if (instance.data.active_nodes.includes("Bold")) extensions.push(Bold);
-        if (instance.data.active_nodes.includes("Italic")) extensions.push(Italic);
-        if (instance.data.active_nodes.includes("Strike")) extensions.push(Strike);
-        if (instance.data.active_nodes.includes("FontFamily")) extensions.push(FontFamily);
-        if (instance.data.active_nodes.includes("Color")) extensions.push(Color);
-        if (instance.data.active_nodes.includes("Heading")) extensions.push(Heading);
-        if (instance.data.active_nodes.includes("BulletList")) extensions.push(BulletList);
-        if (instance.data.active_nodes.includes("OrderedList")) extensions.push(OrderedList);
-        if (instance.data.active_nodes.includes("TaskList")) {
-            extensions.push(TaskList, TaskItem);
-        }
-        if (instance.data.active_nodes.includes("Highlight")) extensions.push(Highlight);
-        if (instance.data.active_nodes.includes("Underline")) extensions.push(Underline);
-        if (instance.data.active_nodes.includes("CodeBlock")) extensions.push(CodeBlock);
-        if (instance.data.active_nodes.includes("Code")) extensions.push(Code);
-        if (instance.data.active_nodes.includes("Blockquote")) extensions.push(Blockquote);
-        if (instance.data.active_nodes.includes("HorizontalRule")) extensions.push(HorizontalRule);
-        if (instance.data.active_nodes.includes("Youtube")) extensions.push(Youtube);
-        if (instance.data.active_nodes.includes("Table")) {
-            extensions.push(Table, TableRow, TableHeader, TableCell);
-        }
-        if (instance.data.active_nodes.includes("Image")) extensions.push(Image);
-        if (instance.data.active_nodes.includes("Link")) extensions.push(Link);
-        if (instance.data.active_nodes.includes("Placeholder")) extensions.push(Placeholder);
-        if (instance.data.active_nodes.includes("TextAlign")) extensions.push(TextAlign);
-
-        return extensions;
-    }
-    instance.data.getConfiguredExtensions = getConfiguredExtensions;
 
 
 }
